@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.nftf.tradingbox.TradingBoxMapper">
+		<resultMap id="tradingboxResultMap"
+	type="kr.co.nftf.tradingbox.TradingBox">
+		<result column="BRANCH_CODE" property="branchCode" />
+		<result column="NO" property="no" />
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="STATUS" property="status" />
+		<result column="AD_WORD" property="adWord" />
+		<result column="AUTH_KEY" property="authKey" />
+		<result column="AUTH_KEY_DATE" property="authKeyDate" />
+	</resultMap>
+</mapper>

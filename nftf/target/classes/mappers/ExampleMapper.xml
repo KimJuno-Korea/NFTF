@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.ExampleMapper">
+		<resultMap id="exampleResultMap"
+	type="kr.co.nftf.user.User">
+		<result column="ID" property="id" />
+		<result column="PW" property="pw" />
+		<result column="EMAIL" property="email" />
+		<result column="PHONE" property="phone" />
+		<result column="DIVISION" property="division" />
+	</resultMap>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="id != null and id != ''">
+				AND ID = #{id}
+			</if>
+			<if test="pw != null and pw != ''">
+				AND PW = #{pw}
+			</if>
+			<if test="email != null and email != ''">
+				AND EMAIL = #{email}
+			</if>
+			<if test="phone != null and phone != ''">
+				AND PHONE = #{phone}
+			</if>
+			<if test="division != null and division != ''">
+				AND DIVISION = #{division}
+			</if>
+		</where>
+	</sql>
+	
+	<insert id="insert" parameterType="kr.co.nftf.user.User">
+		INSERT INTO USER (
+		ID,
+		PW,
+		EMAIL,
+		PHONE,
+		DIVISION
+		) VALUES (
+		#{id},
+		#{pw},
+		#{email},
+		#{phone},
+		#{division}
+		)
+	</insert>
+</mapper>

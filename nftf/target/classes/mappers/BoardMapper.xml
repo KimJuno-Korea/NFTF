@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.nftf.board.BoardMapper">
+	<resultMap id="boardResultMap"
+	type="kr.co.nftf.board.Board">
+		<result column="NO" property="no" />
+		<result column="USER_ID" property="userId" />
+		<result column="TITLE" property="title" />
+		<result column="CONTENT" property="content" />
+		<result column="PRICE" property="price" />
+		<result column="DIVISION" property="division" />
+		<result column="TRADE_WAY" property="tradeWay" />
+		<result column="STATUS" property="status" />
+		<result column="REGISTRATE_DATE" property="registrateDate" />
+	</resultMap>
+</mapper>

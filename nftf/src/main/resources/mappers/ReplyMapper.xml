@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.nftf.reply.ReplyMapper">
+		<resultMap id="replyResultMap"
+	type="kr.co.nftf.reply.Reply">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="NO" property="no" />
+		<result column="USER_ID" property="userId" />
+		<result column="CONTENT" property="content" />
+		<result column="REGISTRATE" property="registRate" />
+		<result column="EDIT_STATUS" property="editStatus" />
+	</resultMap>
+</mapper>
