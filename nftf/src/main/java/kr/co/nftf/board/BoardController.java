@@ -13,7 +13,7 @@ public class BoardController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("board\n\n");
 		
-		
+		System.out.println("test");
 		
 		return modelAndView;
 	}
