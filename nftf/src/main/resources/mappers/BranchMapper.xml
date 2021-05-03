@@ -11,4 +11,83 @@
 		<result column="LONGITUDE" property="logtitude" />
 		<result column="STATUS" property="status" />
 	</resultMap>
+	
+	<sql id="whereSql">  
+			<where>
+			<if test="code != null and code != ''">
+				AND CODE = #{code}
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME = #{name}
+			</if>
+			<if test="latitude != null and latitude != ''">
+				AND LATITUDE = #{latitude}
+			</if>
+			<if test="logtitude != null and logtitude != ''">
+				AND LONGITUDE = #{logtitude}
+			</if>
+			<if test="status != null and status != ''">
+				AND STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<insert id="insert" parameterType="kr.co.nftf.branch.Branch">
+		INSERT INTO BRANCH (
+		CODE,
+		NAME,
+		LATITUDE,
+		LONGITUDE,
+		STATUS
+		) VALUES (
+		#{code},
+		#{name},
+		#{latitude},
+		#{logtitude},
+		#{status}
+		)
+	</insert>
+	
+	<update id="update" parameterType="kr.co.nftf.branch.Branch">
+		UPDATE BRANCH
+		<set>
+			<if test="code != null">
+				ID = #{code},
+			</if>
+			<if test="name != null">
+				ID = #{name},
+			</if>
+			<if test="latitude != null">
+				ID = #{latitude},
+			</if>
+			<if test="logtitude != null">
+				ID = #{logtitude},
+			</if>
+			<if test="status != null">
+				ID = #{status},
+			</if>
+		</set>
+	</update>
+	
+	<select	id="select" parameterType="kr.co.nftf.branch.Branch" resultMap="branchResultMap">
+		SELECT
+			CODE,
+			NAME,
+			LATITUDE,
+			LONGITUDE,
+			STATUS
+		FROM BRANCH
+		<include refid="whereSql" />
+	</select>
+	
+	<select	id="selectAll" parameterType="kr.co.nftf.branch.Branch" resultMap="branchResultMap">
+		SELECT *
+		FROM BRANCH
+		<include refid="whereSql" />
+	</select>
+	
+	<delete id="delete" parameterType="kr.co.nftf.branch.Branch">
+		DELETE FROM BRANCH
+		<include refid="whereSql" />
+	</delete>
 </mapper>
