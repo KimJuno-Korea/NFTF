@@ -7,7 +7,7 @@ import kr.co.nftf.branch.Branch;
 public interface TradingBoxService {
 	public void registerTradingBox (TradingBox tradingBox);
 	
-	public List<Branch> selectTradingBoxList (TradingBox tradingBox);
+	public List<Branch> selectTradingBoxList (Branch branch);
 	
 	public Branch selectTradingBox (TradingBox tradingBox);
 	
