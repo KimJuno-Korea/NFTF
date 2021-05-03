@@ -3,12 +3,69 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.nftf.photo.PhotoMapper">
-		<resultMap id="photoResultMap"
-	type="kr.co.nftf.photo.Photo">
+	<resultMap id="photoResultMap" type="kr.co.nftf.photo.Photo">
 		<result column="BOARD_NO" property="boardNo" />
 		<result column="NO" property="no" />
 		<result column="PATH" property="path" />
 		<result column="LOGICAL_NAME" property="logicalName" />
 		<result column="PHYSICAL_NAME" property="physicalName" />
 	</resultMap>
+	
+	<select id="count" parameterType="kr.co.nftf.board.Board" resultType="int">
+        SELECT COUNT(*)
+        FROM photo
+        <include refid="whereSql" />
+    </select>
+	
+	<select id="list" parameterType="kr.co.nftf.photo.Photo" resultMap="boardResultMap">
+        SELECT
+            BOARD_NO,
+            NO,
+            PATH,
+            LOGICAL_NAME,
+            PHYSICAL_NAME,
+        FROM photo
+            <include refid="whereSql" />
+    </select>
+	
+	<select id="select" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
+        SELECT 
+        	BOARD_NO,
+            NO,
+            PATH,
+            LOGICAL_NAME,
+            PHYSICAL_NAME,
+        FROM photo
+        <include refid="whereSql" />
+    </select>
+        
+    <insert id="insert" parameterType="kr.co.nftf.photo.Photo">
+        INSERT INTO ingredient (
+        	BOARD_NO,
+        	NO,
+            PATH,
+            LOGICAL_NAME,
+            PHYSICAL_NAME
+        ) VALUES (
+            #{boardNo}
+            , #{no}
+            , #{path}
+            , #{logicalName}
+            , #{physicalName}
+        )
+    </insert>
+    
+    <!-- update는 구현할 때 좀 더 생각해야할 듯(사진 파트는 수정이 없을 것 같음 - 프로세스 설계상 insert, delete밖에 없음 -->
+    
+    <update id="update" parameterType="kr.co.nftf.photo.Photo">
+        UPDATE photo
+        <set>
+        </set>
+        <include refid="whereSql" />
+    </update>
+
+    <delete id="delete" parameterType="kr.co.nftf.photo.Photo">
+        DELETE FROM board
+        <include refid="whereSql" />
+    </delete>
 </mapper>
