@@ -16,7 +16,7 @@ public class TradingBoxServiceImpl implements TradingBoxService {
 	}
 
 	@Override
-	public List<Branch> selectTradingBoxList(TradingBox tradingBox) {
+	public List<Branch> selectTradingBoxList(Branch branch) {
 		// TODO Auto-generated method stub
 		return null;
 	}
