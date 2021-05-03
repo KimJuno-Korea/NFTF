@@ -31,13 +31,13 @@
         </where>
     </sql>
 	
-	<select id="count" parameterType="kr.co.nftf.board.Board" resultType="int">
+	<select id="count" parameterType="kr.co.nftf.photo.Photo" resultType="int">
         SELECT COUNT(*)
         FROM photo
         <include refid="whereSql" />
     </select>
 	
-	<select id="list" parameterType="kr.co.nftf.photo.Photo" resultMap="boardResultMap">
+	<select id="list" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
         SELECT
             BOARD_NO,
             NO,
