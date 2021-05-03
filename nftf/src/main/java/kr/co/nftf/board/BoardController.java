@@ -12,10 +12,7 @@ public class BoardController {
 	public ModelAndView boardTest() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("board\n\n");
-		
-		System.out.println("test");
-		
+
 		return modelAndView;
 	}
-
 }
