@@ -11,6 +11,26 @@
 		<result column="PHYSICAL_NAME" property="physicalName" />
 	</resultMap>
 	
+	<sql id="whereSql">
+        <where>
+            <if test="boardNo != null and boardNo != ''">
+                AND BOARD_NO = #{boardNo}
+            </if>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="path != null and path != ''">
+                AND PATH = #{path}
+            </if>
+            <if test="logicalName != null and logicalName != ''">
+                AND LOGICAL_NAME = #{logicalName}
+            </if>
+            <if test="physicalName != null and physicalName != ''">
+                AND PHYSICAL_NAME = #{physicalName}
+            </if>
+        </where>
+    </sql>
+	
 	<select id="count" parameterType="kr.co.nftf.board.Board" resultType="int">
         SELECT COUNT(*)
         FROM photo

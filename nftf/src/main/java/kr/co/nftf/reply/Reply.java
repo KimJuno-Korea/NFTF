@@ -8,7 +8,7 @@ public class Reply implements Serializable {
 	private int no;
 	private String userId;
 	private String content;
-	private LocalDate registRate;
+	private LocalDate registrateDate;
 	private char editStatus;
 	
 	public Reply() {
@@ -46,12 +46,12 @@ public class Reply implements Serializable {
 		this.content = content;
 	}
 
-	public LocalDate getRegistRate() {
-		return registRate;
+	public LocalDate getRegistrateDate() {
+		return registrateDate;
 	}
 
-	public void setRegistRate(LocalDate registRate) {
-		this.registRate = registRate;
+	public void setRegistrateDate(LocalDate registrateDate) {
+		this.registrateDate = registrateDate;
 	}
 
 	public char getEditStatus() {
