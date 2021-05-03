@@ -11,7 +11,7 @@ public class BoardController {
 	@GetMapping("/test")
 	public ModelAndView boardTest() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board");
+		modelAndView.setViewName("board\n\n");
 		
 		return modelAndView;
 	}
