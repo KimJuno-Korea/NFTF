@@ -12,4 +12,83 @@
 		<result column="STATUS" property="status" />
 		<result column="TRADE_DATE" property="tradeDate" />
 	</resultMap>
+	
+	<sql id="whereSql">
+        <where>
+            <if test="boardNo != null and boardNo != ''">
+                AND BOARD_NO = #{boardNo}
+            </if>
+            <if test="price != null and price != ''">
+                AND PRICE = #{price}
+            </if>
+            <if test="buyerId != null and buyerId != ''">
+                AND BUYER_ID = #{buyerId}
+            </if>
+            <if test="sellerId != null and sellerId != ''">
+                AND SELLER_ID = #{sellerId}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status}
+            </if>
+            <if test="tradeDate != null and tradeDate != ''">
+                AND TRADE_DATE = #{tradeDate}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="select" parameterType="kr.co.nftf.trading.Trading" resultMap="tradingResultMap">
+        SELECT
+           	BOARD_NO,
+            PRICE,
+            BUYER_ID,
+            SELLER_ID,
+			STATUS,
+			TRADE_DATE
+        FROM user
+        <include refid="whereSql" />
+    </select>
+    
+    <insert id="insert" parameterType="kr.co.nftf.trading.Trading">
+    	INSERT INTO user (
+            BOARD_NO,
+            PRICE,
+            BUYER_ID,
+            SELLER_ID,
+			STATUS,
+			TRADE_DATE
+        ) VALUES (
+            #{boardNo},
+            #{price},
+            #{buyerId},
+            #{sellerId},
+            #{status},
+            #{tradeDate}
+        )
+    </insert>
+    
+    <update id="update" parameterType="kr.co.nftf.trading.Trading">
+        UPDATE cat
+        <set>
+            <if test="price != null">
+                PRICE = #{price},
+            </if>
+            <if test="price != ''">
+                PRICE = #{price},
+            </if>
+            <if test="buyerId != ''">
+                BUYER_ID = #{buyerId},
+            </if>
+            <if test="sellerId != ''">
+                SELLER_ID = #{sellerId},
+            </if>
+            <if test="status != ''">
+                STATUS = #{status},
+            </if>
+            <if test="tradeDate != ''">
+                TRADE_DATE = #{tradeDate},
+            </if>
+        </set>
+        WHERE
+        	BOARD_ID = #{boardNo}
+    </update>
 </mapper>

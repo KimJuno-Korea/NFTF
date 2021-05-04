@@ -1,5 +1,8 @@
 package kr.co.nftf.common;
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,34 +11,58 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import kr.co.nftf.user.User;
-import kr.co.nftf.user.UserServiceImpl;
 
 @RestController
 public class CommonController {
 	@Autowired
-	private UserServiceImpl userService;
+	private CommonServiceImpl commonService;
 	
-	@GetMapping("/common/index")
+	@Autowired
+	private HttpSession httpSession;
+	
+	@GetMapping("/index")
 	public ModelAndView index() {
-		return new ModelAndView("/index");
+		return new ModelAndView("/common/index");
 	}
 	
-	@GetMapping("/common/login")
+	@GetMapping("/login")
 	public ModelAndView loginForm() {
-		return new ModelAndView("/login");
+		
+		if (httpSession != null) {
+			
+			if (httpSession.getAttribute("id") != null) {
+				return new ModelAndView(new RedirectView("/nftf/index"));
+			}
+			
+		}
+		return new ModelAndView("/common/login");
 	}
 	
-	@PostMapping("/common/login")
+	@PostMapping("/login")
 	public ModelAndView login(User user) {
-		ModelAndView modelAndView = new ModelAndView(new RedirectView("/index"));
-		//todo
-		return modelAndView;
+		
+		if (httpSession.getAttribute("id") == null) {
+			
+			if (commonService.login(user)) {
+				return new ModelAndView(new RedirectView("/nftf/index"));
+			}
+			return new ModelAndView(new RedirectView("/nftf/login"));
+		} 
+		return new ModelAndView(new RedirectView("/nftf/index"));
 	}
 	
-	@GetMapping("/common/logout")
+	@GetMapping("/logout")
 	public ModelAndView logout() {
-		ModelAndView modelAndView = new ModelAndView(new RedirectView("/index"));
-		//todo
-		return modelAndView;
+		
+		if (httpSession != null) {
+		
+			if (httpSession.getAttribute("id") != null) {
+				if (commonService.logout()) {
+					return new ModelAndView(new RedirectView("/nftf/index"));
+				}
+			}
+		}
+		
+		return new ModelAndView(new RedirectView("/nftf/login"));
 	}
 }
