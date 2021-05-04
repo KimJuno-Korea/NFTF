@@ -17,23 +17,25 @@ public class CommonController {
 	
 	@GetMapping("/common/index")
 	public ModelAndView index() {
-		return new ModelAndView("/common/index");
+		return new ModelAndView("/index");
 	}
 	
 	@GetMapping("/common/login")
 	public ModelAndView loginForm() {
-		return new ModelAndView("/common/login");
+		return new ModelAndView("/login");
 	}
 	
 	@PostMapping("/common/login")
 	public ModelAndView login(User user) {
-		
-		return new ModelAndView(new RedirectView("/nftf/common/index"));
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/index"));
+		//todo
+		return modelAndView;
 	}
 	
 	@GetMapping("/common/logout")
 	public ModelAndView logout() {
-		
-		return new ModelAndView(new RedirectView("/nftf/common/index"));
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/index"));
+		//todo
+		return modelAndView;
 	}
 }
