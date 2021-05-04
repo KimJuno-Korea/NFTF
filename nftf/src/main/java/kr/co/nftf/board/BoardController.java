@@ -1,5 +1,8 @@
 package kr.co.nftf.board;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,17 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 /* @RequestMapping("/board") */
 public class BoardController {
-	@GetMapping("/board/test")
-	public ModelAndView boardTest() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/test");
-		
-		return modelAndView;
-	}
+	@Autowired
+	private BoardServiceImpl boardServiceImpl;
 	
 	@GetMapping("/board")
 	public ModelAndView getBoardList() {
-		ModelAndView modelAndView = new ModelAndView("/list");
+		ModelAndView modelAndView = new ModelAndView("/board/list");
+		List<Board> listBoard = boardServiceImpl.boardList();
+		System.out.println("board");
+		modelAndView.addObject(listBoard);
 		
 		return modelAndView;
 	}

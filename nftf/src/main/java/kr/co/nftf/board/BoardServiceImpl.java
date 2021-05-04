@@ -1,22 +1,34 @@
 package kr.co.nftf.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 
+	@Autowired
+	private BoardMapper boardMapper;
+	
 	@Override
 	public void boardRegist(Board board) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<Board> boardList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Board> listBoard = new ArrayList<>();
+		Board board = new Board();
+		
+		try {
+			listBoard = boardMapper.list(board);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listBoard;
 	}
 
 	@Override
