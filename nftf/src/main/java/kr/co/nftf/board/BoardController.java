@@ -69,7 +69,7 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@DeleteMapping("/board")
+	@DeleteMapping("/board/{no}")
 	public ModelAndView deleteBoard(String boardNo) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/board");
 		
