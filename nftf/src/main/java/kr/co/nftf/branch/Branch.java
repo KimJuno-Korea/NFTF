@@ -6,9 +6,10 @@ public class Branch implements Serializable {
 	private String code;
 	private String name;
 	private String latitude;
-	private String logtitude;
+	private String longtitude;
 	private String status;
-	
+	private int tradingBoxCount;
+
 	public Branch() {	
 	}
 
@@ -36,12 +37,12 @@ public class Branch implements Serializable {
 		this.latitude = latitude;
 	}
 
-	public String getLogtitude() {
-		return logtitude;
+	public String getLongtitude() {
+		return longtitude;
 	}
 
-	public void setLogtitude(String logtitude) {
-		this.logtitude = logtitude;
+	public void setLongtitude(String longtitude) {
+		this.longtitude = longtitude;
 	}
 
 	public String getStatus() {
@@ -50,5 +51,13 @@ public class Branch implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public int getTradingBoxCount() {
+		return tradingBoxCount;
+	}
+
+	public void setTradingBoxCount(int tradingBoxCount) {
+		this.tradingBoxCount = tradingBoxCount;
 	}
 }

@@ -14,29 +14,29 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/")
 public class BranchController {
 	@Autowired
-	BranchServiceImpl branchServiceImpl;
+	private BranchService branchServiceImpl;
 	
-	@GetMapping("/branch")
-	public ModelAndView getBranch () {
+	@GetMapping("branch")
+	public ModelAndView getBranch () throws Exception {
 		ModelAndView mav;
 		
-		mav = new ModelAndView("list");
+		mav = new ModelAndView("/branch/list");
 		mav.addObject("branchList", branchServiceImpl.selectBranchList(new Branch()));
 		
 		return mav;
 	}
 	
-	@GetMapping("/branch/form")
+	@GetMapping("branch/form")
 	public ModelAndView createBranchFrom () {
 		ModelAndView mav;
 		
-		mav = new ModelAndView("add");
+		mav = new ModelAndView("/branch/add");
 		
 		return mav;	
 	}
 	
-	@PostMapping("/branch")
-	public ModelAndView createBranch (Branch branch) {
+	@PostMapping("branch")
+	public ModelAndView createBranch (Branch branch) throws Exception {
 		ModelAndView mav;
 		
 		mav = new ModelAndView(new RedirectView("/branch"));
@@ -45,8 +45,8 @@ public class BranchController {
 		return mav;	
 	}
 	
-	@GetMapping("/branch/{name}/form")
-	public ModelAndView editBranchForm (Branch branch) {
+	@GetMapping("branch/{name}/form")
+	public ModelAndView editBranchForm (Branch branch) throws Exception {
 		ModelAndView mav;
 		
 		mav = new ModelAndView("edit");
@@ -55,8 +55,8 @@ public class BranchController {
 		return mav;
 	}
 	
-	@PutMapping("/branch/{name}")
-	public ModelAndView editBranch (Branch branch) {
+	@PutMapping("branch/{name}")
+	public ModelAndView editBranch (Branch branch) throws Exception {
 		ModelAndView mav;
 		
 		mav = new ModelAndView(new RedirectView("/branch"));
@@ -66,10 +66,10 @@ public class BranchController {
 	}
 	
 	@DeleteMapping("/branch/{name}")
-	public ModelAndView deleteBranch (Branch branch) {
+	public ModelAndView deleteBranch (Branch branch) throws Exception {
 		ModelAndView mav;
 		
-		mav = new ModelAndView("list");
+		mav = new ModelAndView(new RedirectView("/branch"));
 		branchServiceImpl.deleteBranch(branch);
 		
 		return mav;
