@@ -1,7 +1,6 @@
 package kr.co.nftf.common;
 
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +16,6 @@ public class CommonController {
 	@Autowired
 	private CommonServiceImpl commonService;
 	
-	@Autowired
-	private HttpSession httpSession;
-	
 	@GetMapping("/index")
 	public ModelAndView index() {
 		return new ModelAndView("/common/index");
@@ -27,49 +23,30 @@ public class CommonController {
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm() {
-		
-		if (httpSession != null) {
-			
-			if (httpSession.getAttribute("id") != null) {
-				return new ModelAndView(new RedirectView("/nftf/index"));
-			}
-			
-		}
 		return new ModelAndView("/common/login");
 	}
 	
 	@PostMapping("/login")
 	public ModelAndView login(User user) {
 		try {
-			if (httpSession.getAttribute("id") == null) {
-				
-				if (commonService.login(user)) {
-					return new ModelAndView(new RedirectView("/nftf/index"));
-				}
-				return new ModelAndView(new RedirectView("/nftf/login"));
-			} 
-			return new ModelAndView(new RedirectView("/nftf/index"));
+			if (commonService.login(user)) {
+				return new ModelAndView(new RedirectView("/nftf/index"));
+			}
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return null;
+		return new ModelAndView(new RedirectView("/nftf/login"));
 	}
 	
 	@GetMapping("/logout")
 	public ModelAndView logout() {
 		try {
-			if (httpSession != null) {
-				
-				if (httpSession.getAttribute("id") != null) {
-					if (commonService.logout()) {
-						return new ModelAndView(new RedirectView("/nftf/index"));
-					}
-				}
+			if (commonService.logout()) {
+				return new ModelAndView(new RedirectView("/nftf/index"));
 			}
-			return new ModelAndView(new RedirectView("/nftf/login"));
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return null;
+		return new ModelAndView(new RedirectView("/nftf/login"));
 	}
 }

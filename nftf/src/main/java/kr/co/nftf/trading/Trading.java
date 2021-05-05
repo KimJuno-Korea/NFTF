@@ -2,6 +2,7 @@ package kr.co.nftf.trading;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Trading implements Serializable {
 	private int boardNo;
@@ -11,8 +12,23 @@ public class Trading implements Serializable {
 	private char status;
 	private LocalDate tradeDate;
 	
+    private List<Trading> tradingList;
+
 	public Trading() {
-		
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Trading(int boardNo, int price, String buyerId, String sellerId, char status, LocalDate tradeDate,
+			List<Trading> tradingList) {
+		super();
+		this.boardNo = boardNo;
+		this.price = price;
+		this.buyerId = buyerId;
+		this.sellerId = sellerId;
+		this.status = status;
+		this.tradeDate = tradeDate;
+		this.tradingList = tradingList;
 	}
 
 	public int getBoardNo() {
@@ -55,11 +71,25 @@ public class Trading implements Serializable {
 		this.status = status;
 	}
 
-	public LocalDate getDate() {
+	public LocalDate getTradeDate() {
 		return tradeDate;
 	}
 
-	public void setDate(LocalDate date) {
-		this.tradeDate = date;
+	public void setTradeDate(LocalDate tradeDate) {
+		this.tradeDate = tradeDate;
+	}
+
+	public List<Trading> getTradingList() {
+		return tradingList;
+	}
+
+	public void setTradingList(List<Trading> tradingList) {
+		this.tradingList = tradingList;
+	}
+
+	@Override
+	public String toString() {
+		return "Trading [boardNo=" + boardNo + ", price=" + price + ", buyerId=" + buyerId + ", sellerId=" + sellerId
+				+ ", status=" + status + ", tradeDate=" + tradeDate + ", tradingList=" + tradingList + "]";
 	}
 }

@@ -31,7 +31,7 @@
                 AND STATUS = #{status}
             </if>
             <if test="tradeDate != null and tradeDate != ''">
-                AND TRADE_DATE = #{tradeDate}
+                AND DATE_FORMAT(TRADE_DATE, '%Y-%m-%d') = DATE_FORMAT(#{tradeDate}, '%Y-%m-%d')
             </if>
         </where>
     </sql>
@@ -43,9 +43,21 @@
             BUYER_ID,
             SELLER_ID,
 			STATUS,
-			TRADE_DATE
-        FROM user
-        <include refid="whereSql" />
+			DATE_FORMAT(TRADE_DATE, '%Y-%m-%d') AS TRADE_DATE
+        FROM trading
+        <include refid="whereSql"/>
+    </select>
+    
+        <select id="selectList" parameterType="kr.co.nftf.trading.Trading" resultMap="tradingResultMap">
+        SELECT
+           	BOARD_NO,
+            PRICE,
+            BUYER_ID,
+            SELLER_ID,
+			STATUS,
+			DATE_FORMAT(TRADE_DATE, '%Y-%m-%d') AS TRADE_DATE
+        FROM trading
+        <include refid="whereSql"/>
     </select>
     
     <insert id="insert" parameterType="kr.co.nftf.trading.Trading">
