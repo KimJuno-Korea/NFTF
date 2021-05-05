@@ -62,7 +62,7 @@
             CONTENT,
             PRICE,
             DIVISION,
-            TARDE_WAY,
+            TRADE_WAY,
             STATUS,
             REGISTRATE_DATE
         FROM board
@@ -84,7 +84,7 @@
             CONTENT,
             PRICE,
             DIVISION,
-            TARDE_WAY,
+            TRADE_WAY,
             STATUS,
             REGISTRATE_DATE
         FROM board
@@ -99,7 +99,7 @@
             					,CONTENT
             					,PRICE
             					,DIVISION
-            					,TARDE_WAY
+            					,TRADE_WAY
             					,STATUS
             					,REGISTRATE_DATE
         ) VALUES (
