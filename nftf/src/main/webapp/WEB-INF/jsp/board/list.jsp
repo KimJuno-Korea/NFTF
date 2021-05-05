@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
+<h1>게시글 목록 조회 페이지</h1>
+	<table border="1">
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -27,7 +28,7 @@
 				<tr>
 					<td>${board.count }</td>
 					<td>${list.userId }</td>
-					<td>${list.title }</td>
+					<td><a href="<%=request.getContextPath() %>/nftf/board/${list.no}">${list.title }</a></td>
 					<td>${list.content }</td>
 					<td>${list.price }</td>
 					<td>${list.division }</td>
@@ -38,6 +39,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<button onclick="location.href='<%=request.getContextPath()%>/nftf/board/form'">등록하기</button>
 
 </body>
 </html>

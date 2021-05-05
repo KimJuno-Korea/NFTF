@@ -1,5 +1,6 @@
 package kr.co.nftf.board;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void boardRegist(Board board) {
-		
+		board.setUserId("test");
+		board.setStatus('M');
+		board.setRegistrateDate(LocalDate.now());
+		try {
+			boardMapper.insert(board);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -39,8 +48,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board boardSelect(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			board = boardMapper.select(board);	
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return board;
 	}
 
 	@Override
