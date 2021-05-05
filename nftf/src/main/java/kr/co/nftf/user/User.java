@@ -42,4 +42,10 @@ public class User implements Serializable {
 	public void setDivision(char division) {
 		this.division = division;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", pw=" + pw + ", email=" + email + ", phone=" + phone + ", division=" + division
+				+ "]";
+	}
 }
