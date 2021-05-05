@@ -10,7 +10,7 @@ public interface TradingBoxMapper {
 	
 	public List<TradingBox> selectAll (TradingBox trading);
 	
-	public void select (TradingBox trading);
+	public TradingBox select (TradingBox trading);
 	
 	public void update (TradingBox trading);
 	
