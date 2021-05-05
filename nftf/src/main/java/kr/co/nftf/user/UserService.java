@@ -1,9 +1,9 @@
 package kr.co.nftf.user;
 
 public interface UserService {
-	public boolean registUser(User user);
+	public boolean registUser(User user) throws Exception;
 	
-	public User selectUser(User user);
+	public User selectUser(User user) throws Exception;
 	
-	public boolean editUser(User user);
+	public boolean editUser(User user) throws Exception;
 }

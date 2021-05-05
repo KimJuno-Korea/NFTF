@@ -22,12 +22,17 @@ public class UserController {
 	
 	@PostMapping("/user")
 	public ModelAndView signup(User user) {
-		ModelAndView modelAndView = new ModelAndView(new RedirectView("/nftf/login"));
-		
-		if (userService.registUser(user)) {
-			return modelAndView;
-		}
-		return new ModelAndView(new RedirectView("/nftf/user/form"));
+		 try {
+			 ModelAndView modelAndView = new ModelAndView(new RedirectView("/nftf/login"));
+				
+				if (userService.registUser(user)) {
+					return modelAndView;
+				}
+				return new ModelAndView(new RedirectView("/nftf/user/form"));
+		 } catch (Exception exception) {
+			 exception.printStackTrace();
+		 }
+		return null;
 	}
 	
 	@GetMapping("/id/form")
@@ -38,12 +43,16 @@ public class UserController {
 	//아이디 찾기 결과 화면 필요 
 	@PostMapping(value="/id", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public User findId(User user) {
-		
-		if (user != null) {
-			
-			if (user.getPhone() != null) {
-				return userService.selectUser(user);
+		try {
+			if (user != null) {
+				
+				if (user.getPhone() != null) {
+					return userService.selectUser(user);
+				}
 			}
+			return null;
+		} catch (Exception exception) {
+			 exception.printStackTrace();
 		}
 		return null;
 	}
