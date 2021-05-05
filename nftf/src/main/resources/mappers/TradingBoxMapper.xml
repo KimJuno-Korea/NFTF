@@ -42,14 +42,7 @@
 	
 	<insert id="insert" parameterType="kr.co.nftf.tradingbox.TradingBox">
 		INSERT INTO TRADING_BOX (
-		BRANCH_CODE,
-		NO,
-		BOARD_NO,
-		STATUS,
-		AD_WORD,
-		AUTH_KEY,
-		AUTH_KEY_DATE,
-		) VALUES (
+		VALUES (
 		#{branchCode},
 		#{no},
 		#{boardNo},
@@ -98,13 +91,20 @@
 			STATUS,
 			AD_WORD,
 			AUTH_KEY,
-			AUTH_KEY_DATE,
+			AUTH_KEY_DATE
 		FROM TRADING_BOX
 		<include refid="whereSql" />
 	</select>
 	
 	<select	id="selectAll" parameterType="kr.co.nftf.tradingbox.TradingBox" resultMap="tradingBoxResultMap">
-		SELECT *
+		SELECT 			
+			BRANCH_CODE,
+			NO,
+			BOARD_NO,
+			STATUS,
+			AD_WORD,
+			AUTH_KEY,
+			AUTH_KEY_DATE
 		FROM TRADING_BOX
 		<include refid="whereSql" />
 	</select>
