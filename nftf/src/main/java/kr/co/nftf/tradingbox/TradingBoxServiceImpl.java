@@ -2,40 +2,47 @@ package kr.co.nftf.tradingbox;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nftf.branch.Branch;
+import kr.co.nftf.branch.BranchMapper;
 
 @Service
 public class TradingBoxServiceImpl implements TradingBoxService {
-
+	@Autowired
+	TradingBoxMapper tradingBoxMapper;
+	
+	@Autowired
+	BranchMapper branchMapper;
+	
 	@Override
 	public void registerTradingBox(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
+		tradingBoxMapper.insert(tradingBox);
+	}
+
+	@Override
+	public List<TradingBox> selectTradingBoxList(Branch branch) throws Exception {
+		TradingBox tradingBox;
 		
+		tradingBox= new TradingBox();
+		tradingBox.setBranchCode(branchMapper.select(branch).getCode());
+		
+		return tradingBoxMapper.selectAll(tradingBox);
 	}
 
 	@Override
-	public List<Branch> selectTradingBoxList(Branch branch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Branch selectTradingBox(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
-		return null;
+	public TradingBox selectTradingBox(TradingBox tradingBox) {
+		return tradingBoxMapper.select(tradingBox);
 	}
 
 	@Override
 	public void editTradingBox(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
-		
+		tradingBoxMapper.update(tradingBox);
 	}
 
 	@Override
 	public void deleteTradingBox(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
-		
+		tradingBoxMapper.delete(tradingBox);
 	}
 }

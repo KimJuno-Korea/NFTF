@@ -28,7 +28,7 @@
 				<tr>
 					<td>${board.count }</td>
 					<td>${list.userId }</td>
-					<td><a href="<%=request.getContextPath() %>/nftf/board/${list.no}">${list.title }</a></td>
+					<td><a href="/nftf/board/${list.no}">${list.title }</a></td>
 					<td>${list.content }</td>
 					<td>${list.price }</td>
 					<td>${list.division }</td>
@@ -40,6 +40,8 @@
 		</tbody>
 	</table>
 	<button onclick="location.href='<%=request.getContextPath()%>/nftf/board/form'">등록하기</button>
-
+	
+	<h1>test</h1>
+	
 </body>
 </html>

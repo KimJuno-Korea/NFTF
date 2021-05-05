@@ -7,9 +7,9 @@ import kr.co.nftf.branch.Branch;
 public interface TradingBoxService {
 	public void registerTradingBox (TradingBox tradingBox);
 	
-	public List<Branch> selectTradingBoxList (Branch branch);
+	public List<TradingBox> selectTradingBoxList (Branch branch) throws Exception;
 	
-	public Branch selectTradingBox (TradingBox tradingBox);
+	public TradingBox selectTradingBox (TradingBox tradingBox);
 	
 	public void editTradingBox (TradingBox tradingBox);
 	

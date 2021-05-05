@@ -8,7 +8,7 @@
 		<result column="CODE" property="code" />
 		<result column="NAME" property="name" />
 		<result column="LATITUDE" property="latitude" />
-		<result column="LONGITUDE" property="logtitude" />
+		<result column="LONGITUDE" property="longtitude" />
 		<result column="STATUS" property="status" />
 	</resultMap>
 	
@@ -23,8 +23,8 @@
 			<if test="latitude != null and latitude != ''">
 				AND LATITUDE = #{latitude}
 			</if>
-			<if test="logtitude != null and logtitude != ''">
-				AND LONGITUDE = #{logtitude}
+			<if test="longtitude != null and longtitude != ''">
+				AND LONGITUDE = #{longtitude}
 			</if>
 			<if test="status != null and status != ''">
 				AND STATUS = #{status}
@@ -43,7 +43,7 @@
 		#{code},
 		#{name},
 		#{latitude},
-		#{logtitude},
+		#{longtitude},
 		#{status}
 		)
 	</insert>
@@ -60,8 +60,8 @@
 			<if test="latitude != null">
 				ID = #{latitude},
 			</if>
-			<if test="logtitude != null">
-				ID = #{logtitude},
+			<if test="longtitude != null">
+				ID = #{longtitude},
 			</if>
 			<if test="status != null">
 				ID = #{status},
