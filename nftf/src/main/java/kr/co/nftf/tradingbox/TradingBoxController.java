@@ -15,7 +15,7 @@ public class TradingBoxController {
 	TradingBoxServiceImpl tradingBoxServiceImpl;
 
 	@GetMapping("/tradingbox/{name}")
-	public ModelAndView getTradingBoxList(Branch branch) {
+	public ModelAndView getTradingBoxList(Branch branch) throws Exception {
 		ModelAndView mav;
 		
 		mav = new ModelAndView("tradingbox/list");
