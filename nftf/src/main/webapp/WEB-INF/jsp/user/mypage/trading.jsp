@@ -14,25 +14,43 @@
 		<h2>거래 정보 조회</h2>
 		<div class="col-lg-4 col-sm-7 col-mt-5">
 			<div class="row">
-				<h4>판매 거래 정보 목록</h4>
+				<h4>구매 거래 정보 목록</h4>
 				<table border="1">
 					<tr>
-						<th>번호</th>
 						<th>관련 게시글</th>
 						<th>판매자 아이디</th>
 						<th>구매자 아이디</th>
 						<th>상태</th>
-						<th>기타</th>
+						<th>거래일자</th>
 					</tr>
 					<c:choose>
 						<c:when test="${buyerList ne null}">
 							<c:forEach var="buy" items="${buyerList}">
 								<tr>
-									<th>${buy.boardNo}</th>
-									<th>${buy.price}</th>
+									<th><a href="/nftf/board/${buy.boardNo}">게시글 제목</a></th>
 									<th>${buy.buyerId}</th>
 									<th>${buy.sellerId}</th>
-									<th>${buy.status}</th>
+									<c:choose>
+										<c:when test="${fn:contains(buy.status, 'S')}">
+											<th>거래 완료</th>
+										</c:when>
+										<c:when test="${fn:contains(buy.status, 'M')}">
+											<th>거래 진행중</th>
+										</c:when>
+										<c:when test="${fn:contains(buy.status, 'C')}">
+											<th>거래 취소</th>
+										</c:when>
+										<!-- 에러가 뜬다.. 어째서? -->
+								<%--   <c:when test="${sell.status == 'S'}">
+											<th>거래 완료</th>
+										</c:when>
+										<c:when test="${sell.status == 'M'}">
+											<th>거래 진행중</th>
+										</c:when>
+										<c:when test="${sell.status == 'C'}">
+											<th>거래 취소</th>
+										</c:when> --%>
+									</c:choose>
 									<th>${buy.tradeDate}</th>
 								</tr>
 							</c:forEach>
@@ -42,25 +60,33 @@
 		 	</div>
 		 	
 		 	<div class="row">
-				<h4>구매 거래 정보 목록</h4>
+				<h4>판매 거래 정보 목록</h4>
 				<table border="1">
 					<tr>
-						<th>번호</th>
 						<th>관련 게시글</th>
 						<th>판매자 아이디</th>
 						<th>구매자 아이디</th>
 						<th>상태</th>
-						<th>기타</th>
+						<th>거래일자</th>
 					</tr>
 					<c:choose>
 						<c:when test="${sellerList ne null}">
 							<c:forEach var="sell" items="${sellerList}">
 								<tr>
-									<th>${sell.boardNo}</th>
-									<th>${sell.price}</th>
+									<th><a href="/nftf/board/${sell.boardNo}">게시글 제목</a></th>
 									<th>${sell.buyerId}</th>
 									<th>${sell.sellerId}</th>
-									<th>${sell.status}</th>
+									<c:choose>
+										<c:when test="${fn:contains(sell.status, 'S')}">
+											<th>거래 완료</th>
+										</c:when>
+										<c:when test="${fn:contains(sell.status, 'M')}">
+											<th>거래 진행중</th>
+										</c:when>
+										<c:when test="${fn:contains(sell.status, 'C')}">
+											<th>거래 취소</th>
+										</c:when>
+									</c:choose>
 									<th>${sell.tradeDate}</th>
 								</tr>
 							</c:forEach>

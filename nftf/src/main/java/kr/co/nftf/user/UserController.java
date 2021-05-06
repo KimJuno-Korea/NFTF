@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.nftf.board.BoardServiceImpl;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingServiceImpl;
 
@@ -24,6 +25,10 @@ public class UserController {
 	
 	@Autowired
 	private TradingServiceImpl tradingService;
+	
+	//관련 게시글 제목 가져와야됨
+	@Autowired
+	private BoardServiceImpl boardService;
 	
 	@Autowired
 	private HttpSession httpSession;
@@ -36,6 +41,7 @@ public class UserController {
 
 	@GetMapping("/user/form")
 	public ModelAndView signupForm() {
+		
 		return new ModelAndView("/user/signup");
 	}
 
@@ -181,9 +187,10 @@ public class UserController {
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
+			
 			if (user != null) {
 				ModelAndView modelAndView = new ModelAndView("/user/mypage/trading");
-				
+				 
 				Trading trading = new Trading();
 				trading.setBuyerId(user.getId());
 				List<Trading> tradingListBuyer = 
@@ -199,7 +206,7 @@ public class UserController {
 				
 				modelAndView = tradingListSeller != null 
 						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject(null);
-				
+						
 				return modelAndView;
 			}
 		} catch(Exception exception) {
