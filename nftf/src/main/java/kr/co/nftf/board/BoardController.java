@@ -26,7 +26,6 @@ public class BoardController {
 		System.out.println("board");
 		modelAndView.addObject(listBoard);
 		
-		
 		return modelAndView;
 	}
 	
@@ -44,22 +43,26 @@ public class BoardController {
 	}
 	
 	@PostMapping(value = "/boardsearch", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ModelAndView searchBoard() {
-		ModelAndView modelAndView = new ModelAndView();
-		
-		return modelAndView;
+	public List<Board> searchBoard(String keyword) {
+		return boardServiceImpl.boardSearch(keyword);
 	}
 	
 	@GetMapping("/board/{no}/form")
-	public ModelAndView editBoardForm(@PathVariable String boardNo) {
-		ModelAndView modelAndView = new ModelAndView("/edit");
+	public ModelAndView editBoardForm(@PathVariable String no) {
+		ModelAndView modelAndView = new ModelAndView("/board/edit");
+		Board board = new Board();
+		board.setNo(Integer.valueOf(no));
+		board = boardServiceImpl.boardSelect(board);
+		
+		modelAndView.addObject("board", board);
 		
 		return modelAndView;
 	}
 	
 	@PutMapping("/board/{no}")
 	public ModelAndView editBoard(Board board) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board");
+		ModelAndView modelAndView = new ModelAndView("redirect:/nftf/board");
+		boardServiceImpl.boardEdit(board);
 		
 		return modelAndView;
 	}
@@ -83,7 +86,7 @@ public class BoardController {
 	@DeleteMapping("/board/{no}")
 	public ModelAndView deleteBoard(String boardNo) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/board");
-		
+		System.out.println("삭제 수행해야함");
 		return modelAndView;
 	}
 }
