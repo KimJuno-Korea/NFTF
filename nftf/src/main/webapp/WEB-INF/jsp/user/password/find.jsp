@@ -11,7 +11,7 @@
 	<div class="row">
 		<h2>비밀번호 찾기</h2>
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
-			<form action="/nftf/password" method="post" >
+			<form action="${pageContext.request.contextPath}/password" method="post" >
 				<div class="row">
 					<input id="inputId" type="text" name="id" placeholder="아이디"><br>
 					<input id="inputPhone" type="text" name="phone" placeholder="전화번호"> <button id="responseKey">인증번호 발송</button><br>

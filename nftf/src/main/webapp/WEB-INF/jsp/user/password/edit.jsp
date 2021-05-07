@@ -11,7 +11,7 @@
 	<div class="row">
 		<h2>비밀번호 변경</h2>
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
-			<form action="/nftf/password/${id}" method="post" >
+			<form action="${pageContext.request.contextPath}/password/${id}" method="post" >
 				<div class="row">
 					<input id="inputPw" type="text" name="pw" placeholder="비밀번호"><input id="checkPw" type="text" disabled="disabled"></input><br>
 					<input id="inputCheckPw" type="text" name="pwCheck" placeholder="비밀번호 확인"><br>

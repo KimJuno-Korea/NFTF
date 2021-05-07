@@ -40,16 +40,6 @@
 										<c:when test="${fn:contains(buy.status, 'C')}">
 											<th>거래 취소</th>
 										</c:when>
-										<!-- 에러가 뜬다.. 어째서? -->
-								<%--   <c:when test="${sell.status == 'S'}">
-											<th>거래 완료</th>
-										</c:when>
-										<c:when test="${sell.status == 'M'}">
-											<th>거래 진행중</th>
-										</c:when>
-										<c:when test="${sell.status == 'C'}">
-											<th>거래 취소</th>
-										</c:when> --%>
 									</c:choose>
 									<th>${buy.tradeDate}</th>
 								</tr>

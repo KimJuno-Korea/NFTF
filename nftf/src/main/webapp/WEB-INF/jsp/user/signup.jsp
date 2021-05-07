@@ -11,7 +11,7 @@
 	<div class="row">
 		<h2>회원 가입</h2>
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
-			<form action="/nftf/user" method="post" >
+			<form action="${pageContext.request.contextPath}/user" method="post" >
 				<div class="row">
 					<!-- 중복확인 url 필요 -->
 					<input id="inputId" type="text" name="id" placeholder="아이디"> <button id="checkId">중복 확인</button> <br>

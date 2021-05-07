@@ -13,6 +13,10 @@ import kr.co.nftf.user.User;
 
 @RestController
 public class CommonController {
+	private static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
+	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
+	private static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
+	
 	@Autowired
 	private CommonServiceImpl commonService;
 	
@@ -30,23 +34,23 @@ public class CommonController {
 	public ModelAndView login(User user) {
 		try {
 			if (commonService.login(user)) {
-				return new ModelAndView(new RedirectView("/nftf/index"));
+				return REDIRECT_MAIN;
 			}
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return new ModelAndView(new RedirectView("/nftf/login"));
+		return REDIRECT_LOGIN;
 	}
 	
 	@GetMapping("/logout")
 	public ModelAndView logout() {
 		try {
 			if (commonService.logout()) {
-				return new ModelAndView(new RedirectView("/nftf/index"));
+				return REDIRECT_MAIN;
 			}
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return new ModelAndView(new RedirectView("/nftf/login"));
+		return REDIRECT_LOGIN;
 	}
 }

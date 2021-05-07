@@ -36,8 +36,9 @@ public class UserController {
 	// 컨트롤러에서 가져와도 되는지? 그리고 컨트롤러에서 로직처리말고 서비스에서 해야되는거 아닌가?
 	// 애초에 세션체크는 다른걸로한다 필터?? 였나 인터셉터로 한다
 	
-	private static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/nftf/index"));
-	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/nftf/login"));
+	private static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
+	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
+	private static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
 
 	@GetMapping("/user/form")
 	public ModelAndView signupForm() {
@@ -49,18 +50,19 @@ public class UserController {
 	public ModelAndView signup(User user) {
 		try {
 			return userService.registUser(user) ? REDIRECT_LOGIN
-					: new ModelAndView(new RedirectView("/nftf/user/form"));
+					: new ModelAndView(new RedirectView("/user/form"));
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 		return null;
 	}
 
+	
 	@GetMapping("/id/form")
 	public ModelAndView findIdForm() {
 		return new ModelAndView("/user/id/find");
 	}
-
+ 
 	// 아이디 찾기 결과 화면 필요
 	@PostMapping(value = "/id", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User findId(User user) {
@@ -103,7 +105,7 @@ public class UserController {
 	@PostMapping("/password/{id}")
 	public ModelAndView editPassword(User user) {
 		try {
-			ModelAndView modelAndView = new ModelAndView(new RedirectView("/nftf/login"));
+			ModelAndView modelAndView = REDIRECT_LOGIN;
 
 			if (user != null) {
 				return userService.editUser(user) == true ? modelAndView : REDIRECT_MAIN;
@@ -124,22 +126,23 @@ public class UserController {
 			if (user != null) {
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				return httpSession.getAttribute("id").toString().equals(user.getId())
-						? new ModelAndView("/user/mypage/form") : REDIRECT_MAIN;
+						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 		return REDIRECT_LOGIN;
 	}
-
+//////////////////////////////////////////////////////////////////////////////////여기서부터
 	//비번 입력 화면에서 확인 들어가는거 눌렀을때
 	//이게 마이 페이지 메인 화면 가는 메소드
-	@PostMapping("/user/form/{id}")				//user 는 입력한 pw를 받아와야됨 이게 pathVal이랑 같이 받아지나?
+	@PostMapping("/user/form/{id}")				
 	public ModelAndView myPageMain(User user) {
 		try {
 			
 			if (user != null) {
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
+				//이것도 그냥 인터셉터로 해도됨
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/form") : REDIRECT_MAIN;
 				
@@ -224,7 +227,7 @@ public class UserController {
 
 	@DeleteMapping("/user/{id}")
 	public ModelAndView withdrawal(User user) {
-		ModelAndView modelAndView = new ModelAndView(new RedirectView("/nftf/logout"));
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/logout"));
 		return modelAndView;
 	}
 }

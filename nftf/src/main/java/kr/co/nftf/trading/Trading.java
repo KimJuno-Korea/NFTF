@@ -16,7 +16,6 @@ public class Trading implements Serializable {
 
 	public Trading() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Trading(int boardNo, int price, String buyerId, String sellerId, char status, LocalDate tradeDate,
