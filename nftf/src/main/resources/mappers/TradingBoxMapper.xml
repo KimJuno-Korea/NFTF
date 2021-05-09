@@ -42,7 +42,7 @@
 	
 	<insert id="insert" parameterType="kr.co.nftf.tradingbox.TradingBox">
 		INSERT INTO TRADING_BOX (
-		VALUES (
+		VALUES
 		#{branchCode},
 		#{no},
 		#{boardNo},
