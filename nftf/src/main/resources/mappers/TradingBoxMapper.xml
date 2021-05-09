@@ -41,8 +41,8 @@
 	</sql>
 	
 	<insert id="insert" parameterType="kr.co.nftf.tradingbox.TradingBox">
-		INSERT INTO TRADING_BOX (
-		VALUES
+		INSERT INTO TRADING_BOX
+		VALUES (
 		#{branchCode},
 		#{no},
 		#{boardNo},
@@ -64,9 +64,6 @@
 			</if>
 			<if test="boardNo != null">
 				ID = #{boardNo},
-			</if>
-			<if test="logtitude != null">
-				ID = #{logtitude},
 			</if>
 			<if test="status != null">
 				ID = #{status},
