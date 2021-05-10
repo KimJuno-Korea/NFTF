@@ -20,7 +20,11 @@ public class CommonServiceImpl implements CommonService {
 	public boolean login(User user) throws Exception {
 		if (user != null) {
 			User dbUser = userMapper.select(user);
-			if (user.getId().equals(dbUser.getId()) && user.getPw().equals(dbUser.getPw())) {
+			if (user.getId().equals(dbUser.getId()) 
+					&& user.getPw().equals(dbUser.getPw())
+					&& user.getDivision() != 'D') {
+				System.out.println("로그인 성공");
+				
 				httpSession.setAttribute("id", user.getId());
 				return true;
 			}

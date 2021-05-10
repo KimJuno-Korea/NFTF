@@ -124,6 +124,7 @@ public class UserController {
 		try {
 			
 			if (user != null) {
+				
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				return httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : REDIRECT_MAIN;
@@ -144,8 +145,10 @@ public class UserController {
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				//이것도 그냥 인터셉터로 해도됨
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
-						? new ModelAndView("/user/mypage/form") : REDIRECT_MAIN;
+						? new ModelAndView("/user/mypage/index") : REDIRECT_MAIN;
 				
+//						modelAndView.addObject("id", user.getId());
+//						어차피 jsp의 내장객체인 세션에서 아이디 가져오면됨
 				return user.getPw().equals(userService.selectUser(user).getPw())
 						? modelAndView : REDIRECT_MAIN;
 			}
@@ -180,11 +183,17 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/user/{id}/qr")
 	public ModelAndView createLoginQR(User user) {
-		ModelAndView modelAndView = new ModelAndView("/user/mypage/qr");
-		// todo
-		return modelAndView;
+		try {
+			if (user != null) {
+				ModelAndView modelAndView = new ModelAndView("/user/mypage/qr");
+				return modelAndView;
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return REDIRECT_MAIN;
 	}
 
 	@GetMapping("/user/trading/{id}")
@@ -220,14 +229,66 @@ public class UserController {
 
 	@GetMapping("/user/withdrawal/{id}")
 	public ModelAndView withdrawalForm(User user) {
-		// todo
-		ModelAndView modelAndView = new ModelAndView("/user/mypage/withdrawal");
-		return modelAndView;
+		try {
+			if (user != null) {
+				ModelAndView modelAndView = new ModelAndView("/user/mypage/withdrawal");
+				return modelAndView;
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return REDIRECT_MAIN;
 	}
 
 	@DeleteMapping("/user/{id}")
 	public ModelAndView withdrawal(User user) {
-		ModelAndView modelAndView = new ModelAndView(new RedirectView("/logout"));
-		return modelAndView;
+		try {
+			if (user != null) {
+				user.setDivision('D');
+				userService.editUser(user);
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return REDIRECT_MAIN;
+	}
+	
+	//아이디 중복 확인
+	@GetMapping("/user/check/{id}")
+	public boolean checkId(User user) {
+		try {
+			if (user != null) {
+				return userService.selectUser(user) == null ? true : false;
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return false;
+	}
+	
+	//인증번호 전송
+	@PostMapping("/user/key/{id}")
+	public boolean sendKey(User user) {// 입력 받은 전화번호로 전송
+		try {
+			if (user != null) {
+				//user 의 전화번호로 메시지 전송
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return false;
+	}
+	
+	//인증번호 확인
+	@PostMapping("/user/key")
+	public boolean checkKey(User user) {// 메시지 전송
+		try {
+			if (user != null) {
+				//user 의 전화번호로 메시지 전송
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return false;
 	}
 }

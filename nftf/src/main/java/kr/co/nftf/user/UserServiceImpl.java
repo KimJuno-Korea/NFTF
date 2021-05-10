@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 
 			if (user.getId() != null) {
+				userMapper.update(user);
 				return true;
 			} else {
 				return false;

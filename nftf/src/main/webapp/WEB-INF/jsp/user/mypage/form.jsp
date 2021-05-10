@@ -14,10 +14,11 @@
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
 			<form action="${pageContext.request.contextPath}/user/form/${id}" method="post" >
 				<div class="row">
-					
+					<input type="text" name="pw" placeholder="비밀번호">
+					<input type="text" name="pwCheck" placeholder="비밀번호 확인">
 			 	</div>
 				<div class="row">
-					<button id="signupBtn" type="submit">가입 하기</button>
+					<button id="signupBtn" type="submit">확인</button>
 				</div>
 			</form>
 		</div>
