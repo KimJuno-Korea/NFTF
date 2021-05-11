@@ -1,11 +1,15 @@
 package kr.co.nftf.reply;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
+	@Autowired
+	private ReplyMapper replyMapper;
 
 	@Override
 	public void replyRegist(Reply reply) {
@@ -20,9 +24,11 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<Reply> replyList(Reply reply) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reply> replyList(Reply reply) throws Exception{
+		List<Reply> replyList = new ArrayList<>();
+		replyList = replyMapper.selectList(reply);
+		
+		return replyList;
 	}
 
 	@Override

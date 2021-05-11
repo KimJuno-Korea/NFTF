@@ -20,18 +20,45 @@
 		상태 : ${board.status }<br>
 		작성일자 : ${board.registrateDate }<br>
 	
-	<c:if test="${sessionScope.userId == board.userId }">	
-		<button onClick="location.href='/nftf/board/${board.no}/form'">수정</button>
-		<form action="<%=request.getContextPath()%>/nftf/board/${board.no}" method="post" id="deleteAction">
-			<input type="hidden" name="_method" value="DELETE" />
-			<button onClick="del(${board.no})">삭제</button>
-          </form>
-	</c:if>
-	<button onClick="location.href='/nftf/board'">목록으로</button>
+	<form action="<%=request.getContextPath()%>/nftf/board/${board.no}" method="post" id="deleteAction">
+		<input type="hidden" name="_method" value="DELETE" />
+		<input type="button" onClick="location.href='/nftf/board'" value="목록으로" />
+		<c:if test="${sessionScope.userId == board.userId }">
+		<input type="button" onClick="location.href='/nftf/board/${board.no}/form'" value="수정" />
+		<button onClick="del()">삭제</button>
+		</c:if>
+	</form>
+	<!-- 댓글 -->
+	<table>
+		<c:if test="${replyList != null }">
+			<c:forEach var="reply" items="${replyList }">
+				<tr>
+					<!-- 아이디 및 작성 날짜 -->
+					<td> 
+						${reply.userId }<br>
+						${reply.registrateDate }
+					</td>
+					
+					<!-- 댓글 내용 -->
+					<td>
+						${reply.content }
+					</td>
+					
+					<!-- 옵션 -->
+					<td>
+						<c:if test="${reply.userId == sessionScope.userId }">
+							<a href="">수정</a><br>
+							<a href="">삭제</a>
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+	</table>
 
 </body>
 <script>
-	function del(no) {
+	function del() {
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if (chk) {
 			document.deleteAction.submit;

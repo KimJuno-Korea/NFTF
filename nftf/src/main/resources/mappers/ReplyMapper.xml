@@ -41,7 +41,7 @@
         <include refid="whereSql" />
     </select>
 	
-	<select id="list" parameterType="kr.co.nftf.reply.Reply" resultMap="replyResultMap">
+	<select id="selectList" parameterType="kr.co.nftf.reply.Reply" resultMap="replyResultMap">
         SELECT
             BOARD_NO,
             NO,
