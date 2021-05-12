@@ -2,6 +2,7 @@ package kr.co.nftf.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardServiceImpl;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingServiceImpl;
@@ -40,12 +43,14 @@ public class UserController {
 	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
 	private static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
 
+	//회원가입 폼 *
 	@GetMapping("/user/form")
 	public ModelAndView signupForm() {
 		
 		return new ModelAndView("/user/signup");
 	}
 
+	//회원가입 *
 	@PostMapping("/user")
 	public ModelAndView signup(User user) {
 		try {
@@ -54,16 +59,16 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return null;
+		return REDIRECT_LOGIN;
 	}
 
-	
+	//아이디 찾기 폼 *
 	@GetMapping("/id/form")
 	public ModelAndView findIdForm() {
 		return new ModelAndView("/user/id/find");
 	}
  
-	// 아이디 찾기 결과 화면 필요
+	// 아이디 찾기 는 결과를 어떻게할지? ~
 	@PostMapping(value = "/id", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User findId(User user) {
 		try {
@@ -77,11 +82,13 @@ public class UserController {
 		return null;
 	}
 
+	//비밀번호 찾기 폼 ~
 	@GetMapping("/password/form")
 	public ModelAndView findPasswordForm() {
 		return new ModelAndView("/user/password/find");
 	}
 
+	//비밀번호 찾기
 	@PostMapping("/password")
 	public ModelAndView findPassword(User user) {
 		try {
@@ -102,6 +109,7 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
+	//비밀번호 수정
 	@PostMapping("/password/{id}")
 	public ModelAndView editPassword(User user) {
 		try {
@@ -134,7 +142,7 @@ public class UserController {
 		}
 		return REDIRECT_LOGIN;
 	}
-//////////////////////////////////////////////////////////////////////////////////여기서부터
+	
 	//비번 입력 화면에서 확인 들어가는거 눌렀을때
 	//이게 마이 페이지 메인 화면 가는 메소드
 	@PostMapping("/user/form/{id}")				
@@ -157,7 +165,8 @@ public class UserController {
 		}
 		return REDIRECT_LOGIN;
 	}
-
+	
+	//회원정보 수정 폼
 	@GetMapping("/user/{id}/form")
 	public ModelAndView editUserForm(User user) {
 		try {
@@ -169,6 +178,7 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
+	//회원정보 수정
 	@PutMapping("/user/{id}")
 	public ModelAndView editUser(User user) {
 		try {
@@ -183,8 +193,9 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
+	//로그인 QR 생성 폼
 	@GetMapping("/user/{id}/qr")
-	public ModelAndView createLoginQR(User user) {
+	public ModelAndView createLoginQRForm(User user) {
 		try {
 			if (user != null) {
 				ModelAndView modelAndView = new ModelAndView("/user/mypage/qr");
@@ -196,6 +207,7 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
+	//거래 정보 목록 조회
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
@@ -219,6 +231,8 @@ public class UserController {
 				modelAndView = tradingListSeller != null 
 						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject(null);
 						
+						//수정
+						
 				return modelAndView;
 			}
 		} catch(Exception exception) {
@@ -230,6 +244,7 @@ public class UserController {
 	@GetMapping("/user/withdrawal/{id}")
 	public ModelAndView withdrawalForm(User user) {
 		try {
+			
 			if (user != null) {
 				ModelAndView modelAndView = new ModelAndView("/user/mypage/withdrawal");
 				return modelAndView;
@@ -243,6 +258,7 @@ public class UserController {
 	@DeleteMapping("/user/{id}")
 	public ModelAndView withdrawal(User user) {
 		try {
+			
 			if (user != null) {
 				user.setDivision('D');
 				userService.editUser(user);
@@ -254,9 +270,10 @@ public class UserController {
 	}
 	
 	//아이디 중복 확인
-	@GetMapping("/user/check/{id}")
-	public boolean checkId(User user) {
+	@PostMapping(value="/user/check", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public boolean checkId(@RequestBody User user) {
 		try {
+			
 			if (user != null) {
 				return userService.selectUser(user) == null ? true : false;
 			}
@@ -267,11 +284,15 @@ public class UserController {
 	}
 	
 	//인증번호 전송
-	@PostMapping("/user/key/{id}")
-	public boolean sendKey(User user) {// 입력 받은 전화번호로 전송
+	@PostMapping(value="/user/key", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public boolean responseKey(@RequestBody User user) {// RequestBody를 적어야 Jackson이 json을 변환함
 		try {
 			if (user != null) {
-				//user 의 전화번호로 메시지 전송
+//				httpSession.setAttribute("key", "");
+				System.out.println(user.getPhone());
+//				String key = userService.sendKey(user.getPhone());
+//				httpSession.setAttribute("key", key);
+				return true;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -279,16 +300,34 @@ public class UserController {
 		return false;
 	}
 	
-	//인증번호 확인
-	@PostMapping("/user/key")
-	public boolean checkKey(User user) {// 메시지 전송
+	//인증번호 확인 
+	@PostMapping(value="/user/key/check", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public boolean checkKey(@RequestBody String key) {
 		try {
-			if (user != null) {
-				//user 의 전화번호로 메시지 전송
+			
+			if (key != null) {
+				System.out.println(key);
+				return key == httpSession.getAttribute("key") ? true : false;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 		return false;
+	}
+	
+	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
+	//여기서 생성된 qr을 쏴줌
+	@GetMapping("/user/qr/{id}")
+	public void createLoginQR(User user, HttpServletResponse response) {
+		try {
+			user = userService.selectUser(user);
+			byte[] file = this.userService.createLoginQR(""+user.getId()+user.getPw());
+			if (file != null) {
+				response.setContentType("image/png");
+				response.getOutputStream().write(file);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

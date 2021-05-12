@@ -13,12 +13,15 @@
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
 			<form action="${pageContext.request.contextPath}/password" method="post" >
 				<div class="row">
-					<input id="inputId" type="text" name="id" placeholder="아이디"><br>
-					<input id="inputPhone" type="text" name="phone" placeholder="전화번호"> <button id="responseKey">인증번호 발송</button><br>
-					<input id="inputKey" type="text" name="key" placeholder="인증번호"> <button id="checkKey">인증번호 확인</button><br>
+					<input id="inputId" type="text" name="id" placeholder="아이디"> <div id="viewCheckId"></div>
+					<input id="inputPhone" type="text" name="phone" placeholder="전화번호"> <input id="receiveKeyBtn" value="인증번호 전송"> <br>
+					<input id="inputKey" type="text" name="key" placeholder="인증번호"> <div id="viewCheckKey"></div>
 			 	</div>
+			 	
+			 	
+			 	
 				<div class="row">
-					<button id="findPwBtn" type="submit">다음</button>
+					<input id="findPwBtn" value="확인" type="submit">
 				</div>
 			</form>
 		</div>
@@ -26,5 +29,30 @@
 </body>
 
 <script>
+	function receiveKey() {
+		 var phoneData = {
+				 "phone" : $("#inputPhone").val()
+		 }
+		 
+		$("#responseKeyBtn").attr("disabled", true);
+		$("#inputPhone").attr("disabled", true);
+	   $("#inputKey").attr("disabled", false);
+		$.ajax({
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8;',
+			url : '${pageContext.request.contextPath}/user/key',
+			type : 'POST',
+			data : JSON.stringify(phoneData),
+			success : function(result) {
+				if (result == true) {
+					$('#data').data('checkPhone', true);
+				} else {
+					$('#data').data('checkPhone', false);
+				}
+			}, error : function() {
+				console.log("에러");
+			}
+		});
+	} 
 </script>
 </html>

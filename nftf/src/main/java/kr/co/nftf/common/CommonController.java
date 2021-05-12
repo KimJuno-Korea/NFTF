@@ -20,16 +20,19 @@ public class CommonController {
 	@Autowired
 	private CommonServiceImpl commonService;
 	
+	//메인메뉴 폼
 	@GetMapping("/index")
 	public ModelAndView index() {
 		return new ModelAndView("/common/index");
 	}
 	
+	//로그인 폼
 	@GetMapping("/login")
 	public ModelAndView loginForm() {
 		return new ModelAndView("/common/login");
 	}
 	
+	//로그인
 	@PostMapping("/login")
 	public ModelAndView login(User user) {
 		try {
@@ -42,6 +45,7 @@ public class CommonController {
 		return REDIRECT_LOGIN;
 	}
 	
+	//로그아웃
 	@GetMapping("/logout")
 	public ModelAndView logout() {
 		try {

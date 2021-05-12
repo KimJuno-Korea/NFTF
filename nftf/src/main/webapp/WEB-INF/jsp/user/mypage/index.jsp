@@ -40,7 +40,7 @@
 		}
 		
 		function createLoginQR(){
-			location.href=id;
+			location.href="/user/"+id"/qr;
 		}
 		
 		function getTradingList(){
