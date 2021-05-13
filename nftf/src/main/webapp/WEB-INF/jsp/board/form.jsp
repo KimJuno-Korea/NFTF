@@ -9,7 +9,7 @@
 <body>
 <h1>게시글 등록 페이지</h1>
 	<form action="<%=request.getContextPath()%>/nftf/board" method="post">
-		아이디 : <input type="text" name="userId" value="세션에 사용자 아이디 저장 예정" readonly/><br>
+		아이디 : <input type="text" name="userId" value="${sessionScope.userId }" readonly/><br>
 		<select name="division">
 			<option value="">구분</option>
 			<option value="S">판매자</option>

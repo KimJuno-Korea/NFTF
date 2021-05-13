@@ -3,13 +3,13 @@ package kr.co.nftf.reply;
 import java.util.List;
 
 public interface ReplyService {
-	public void replyRegist (Reply reply);
+	public int replyRegist (Reply reply) throws Exception;
 	
-	public Reply replySelect (Reply reply);
+	public Reply replySelect (Reply reply) throws Exception;
 	
-	public List<Reply> replyList (Reply reply);
+	public List<Reply> replyList (Reply reply) throws Exception;
 	
-	public void replyEdit (Reply reply);
+	public int replyEdit (Reply reply) throws Exception;
 	
-	public void replyDelete (Reply reply);
+	public int replyDelete (Reply reply) throws Exception;
 }

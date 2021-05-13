@@ -18,7 +18,7 @@ public class TradingBoxController {
 	public ModelAndView getTradingBoxList(Branch branch) throws Exception {
 		ModelAndView mav;
 		
-		mav = new ModelAndView("tradingbox/list");
+		mav = new ModelAndView("/tradingbox/list");
 		mav.addObject("tradingBoxList", tradingBoxServiceImpl.selectTradingBoxList(branch));
 		 
 		return mav;

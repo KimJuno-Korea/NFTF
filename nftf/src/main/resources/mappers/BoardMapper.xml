@@ -88,7 +88,7 @@
             STATUS,
             REGISTRATE_DATE
         FROM board
-            <include refid="whereSql" />
+        WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')
     </select>
     
     <insert id="insert" parameterType="kr.co.nftf.board.Board">
@@ -124,7 +124,7 @@
                 CONTENT = #{content},
             </if>
         </set>
-        <include refid="whereSql" />
+        WHERE NO = #{no}
     </update>
 
     <delete id="delete" parameterType="kr.co.nftf.board.Board">
