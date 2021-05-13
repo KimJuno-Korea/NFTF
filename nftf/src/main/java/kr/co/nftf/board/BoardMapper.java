@@ -12,7 +12,7 @@ public interface BoardMapper {
 	
 	public List<Board> list (Board board) throws Exception;
 	
-	public List<Board> searchResult (Board board) throws Exception;
+	public List<Board> searchResult (String keyword) throws Exception;
 	
 	public Board select (Board board) throws Exception;
 	
