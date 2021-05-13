@@ -45,12 +45,8 @@ public class UserServiceImpl implements UserService {
 	public User selectUser(User user) throws Exception {
 		if (user != null) {
 
-			if (user.getId() != null) {
-				user = userMapper.select(user);
-				return user;
-			} else {
-				return null;
-			}
+			user = userMapper.select(user);
+			return user;
 		} else {
 			return null;
 		}
@@ -92,7 +88,13 @@ public class UserServiceImpl implements UserService {
 	public String sendKey(String phone) throws Exception {
 		String apiKey = "NCSFUMYWVVTJRAC4";
 		String secretKey = "WDPETWBH38WOVCUCQEEVFV33ORTX1VL4";
-		String key = (100000 + (int)(Math.random()*1000000))+"";
+		int no1 = ((int)(Math.random()*10));
+		int no2 = ((int)(Math.random()*10));
+		int no3 = ((int)(Math.random()*10));
+		int no4 = ((int)(Math.random()*10));
+		int no5 = ((int)(Math.random()*10));
+		int no6 = ((int)(Math.random()*10));
+		String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardServiceImpl;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingServiceImpl;
@@ -68,13 +68,16 @@ public class UserController {
 		return new ModelAndView("/user/id/find");
 	}
  
-	// 아이디 찾기 는 결과를 어떻게할지? ~
+	// 아이디 찾기 *
 	@PostMapping(value = "/id", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User findId(User user) {
+	public User findId(@RequestBody User user) {
 		try {
 
 			if (user != null) {
-				return user.getPhone() != null ? userService.selectUser(user) : null;
+				System.out.println(user.toString());
+				User dbUser = userService.selectUser(user);
+				System.out.println(dbUser.toString());
+				return user.getPhone() != null ? dbUser : null;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -82,25 +85,26 @@ public class UserController {
 		return null;
 	}
 
-	//비밀번호 찾기 폼 ~
+	//비밀번호 찾기 폼 *
 	@GetMapping("/password/form")
 	public ModelAndView findPasswordForm() {
 		return new ModelAndView("/user/password/find");
 	}
 
-	//비밀번호 찾기
+	//비밀번호 찾기 *
 	@PostMapping("/password")
 	public ModelAndView findPassword(User user) {
 		try {
 			ModelAndView modelAndView = new ModelAndView("/user/password/edit");
-
+			User dbUser = userService.selectUser(user);
+			System.out.println("비밀번호 찾기 정보비교 : "+dbUser.toString() +"\n" + user.toString());
+			
 			if (user != null) {
-
+				
+				
 				if (user.getId() != null && user.getPhone() != null) {
-					User dbUser = userService.selectUser(user);
-
-					// toString 메소드를 재정의 했기 때문에 모든 값이 같아야 성립된다.
-					return dbUser.toString().equals(user.toString()) ? modelAndView : REDIRECT_MAIN;
+					return dbUser.getId().equals(user.getId().toString()) ?
+							modelAndView.addObject("id", dbUser.getId()).addObject("pw", dbUser.getPw()) : REDIRECT_MAIN;
 				}
 			}
 		} catch (Exception exception) {
@@ -109,7 +113,7 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
-	//비밀번호 수정
+	//비밀번호 수정 *
 	@PostMapping("/password/{id}")
 	public ModelAndView editPassword(User user) {
 		try {
@@ -124,15 +128,12 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
-	//세션체크는 인터셉터로
-	//TODO:이거Get 말고 post로 하는게 보안상 맞는듯?
-	//마이페이지 비번 다시치는 화면 가는거
+	//마이페이지 비번 다시치는 화면 가는거 *
 	@GetMapping("/user/form/{id}")
 	public ModelAndView myPageCheckPwForm(User user) {
 		try {
 			
 			if (user != null) {
-				
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				return httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : REDIRECT_MAIN;
@@ -143,8 +144,7 @@ public class UserController {
 		return REDIRECT_LOGIN;
 	}
 	
-	//비번 입력 화면에서 확인 들어가는거 눌렀을때
-	//이게 마이 페이지 메인 화면 가는 메소드
+	//이게 마이 페이지 메인 화면 가는 메소드 *
 	@PostMapping("/user/form/{id}")				
 	public ModelAndView myPageMain(User user) {
 		try {
@@ -155,8 +155,6 @@ public class UserController {
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/index") : REDIRECT_MAIN;
 				
-//						modelAndView.addObject("id", user.getId());
-//						어차피 jsp의 내장객체인 세션에서 아이디 가져오면됨
 				return user.getPw().equals(userService.selectUser(user).getPw())
 						? modelAndView : REDIRECT_MAIN;
 			}
@@ -166,19 +164,20 @@ public class UserController {
 		return REDIRECT_LOGIN;
 	}
 	
-	//회원정보 수정 폼
+	//회원정보 수정 폼 *
 	@GetMapping("/user/{id}/form")
 	public ModelAndView editUserForm(User user) {
 		try {
+			User dbUser = userService.selectUser(user);
 			return httpSession.getAttribute("id").toString().equals(user.getId())
-					? new ModelAndView("/user/mypage/edit") : REDIRECT_MAIN;
+					? new ModelAndView("/user/mypage/edit").addObject("user", dbUser) : REDIRECT_MAIN;
 		} catch (Exception exception){
 			exception.printStackTrace();
 		}
 		return REDIRECT_MAIN;
 	}
 
-	//회원정보 수정
+	//회원정보 수정 *
 	@PutMapping("/user/{id}")
 	public ModelAndView editUser(User user) {
 		try {
@@ -193,7 +192,7 @@ public class UserController {
 		return REDIRECT_MAIN;
 	}
 
-	//로그인 QR 생성 폼
+	//로그인 QR 생성 폼 *
 	@GetMapping("/user/{id}/qr")
 	public ModelAndView createLoginQRForm(User user) {
 		try {
@@ -206,8 +205,24 @@ public class UserController {
 		}
 		return REDIRECT_MAIN;
 	}
+	
+	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
+	//여기서 생성된 qr을 쏴줌 *
+	@GetMapping("/user/qr/{id}")
+	public void createLoginQR(User user, HttpServletResponse response) {
+		try {
+			user = userService.selectUser(user);
+			byte[] file = this.userService.createLoginQR(""+user.getId()+user.getPw());
+			if (file != null) {
+				response.setContentType("image/png");
+				response.getOutputStream().write(file);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	//거래 정보 목록 조회
+	//거래 정보 목록 조회 ~
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
@@ -284,20 +299,52 @@ public class UserController {
 	}
 	
 	//인증번호 전송
+	@ResponseBody
 	@PostMapping(value="/user/key", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public boolean responseKey(@RequestBody User user) {// RequestBody를 적어야 Jackson이 json을 변환함
+	public int responseKey(@RequestBody User user) {// RequestBody를 적어야 Jackson이 json을 변환함
 		try {
+			
 			if (user != null) {
-//				httpSession.setAttribute("key", "");
-				System.out.println(user.getPhone());
-//				String key = userService.sendKey(user.getPhone());
-//				httpSession.setAttribute("key", key);
-				return true;
+				//회원가입시 아이디랑 폰번호 없으니 이걸로 실행되야함
+				if (user.getId() == null) {
+					httpSession.setAttribute("key", "");
+					System.out.println(user.getPhone());
+//						String key = userService.sendKey(user.getPhone());
+					int no1 = ((int)(Math.random()*10));
+					int no2 = ((int)(Math.random()*10));
+					int no3 = ((int)(Math.random()*10));
+					int no4 = ((int)(Math.random()*10));
+					int no5 = ((int)(Math.random()*10));
+					int no6 = ((int)(Math.random()*10));
+					String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
+					System.out.println("인증키"+key);
+					httpSession.setAttribute("key", key);
+					return 1;
+				}
+				
+				if (userService.selectUser(user) != null) {
+					httpSession.setAttribute("key", "");
+					System.out.println(user.getPhone());
+//					String key = userService.sendKey(user.getPhone());
+					int no1 = ((int)(Math.random()*10));
+					int no2 = ((int)(Math.random()*10));
+					int no3 = ((int)(Math.random()*10));
+					int no4 = ((int)(Math.random()*10));
+					int no5 = ((int)(Math.random()*10));
+					int no6 = ((int)(Math.random()*10));
+					String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
+					System.out.println("인증키"+key);
+					httpSession.setAttribute("key", key);
+					return 1;
+				} else {
+					System.out.println("아이디와 전화번호가 일치하지 않음");
+					return 0;
+				}
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return false;
+		return -1;
 	}
 	
 	//인증번호 확인 
@@ -306,28 +353,13 @@ public class UserController {
 		try {
 			
 			if (key != null) {
+				key = key.replaceAll("\"", "");
 				System.out.println(key);
-				return key == httpSession.getAttribute("key") ? true : false;
+				return key.equals(httpSession.getAttribute("key")) ? true : false;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 		return false;
-	}
-	
-	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
-	//여기서 생성된 qr을 쏴줌
-	@GetMapping("/user/qr/{id}")
-	public void createLoginQR(User user, HttpServletResponse response) {
-		try {
-			user = userService.selectUser(user);
-			byte[] file = this.userService.createLoginQR(""+user.getId()+user.getPw());
-			if (file != null) {
-				response.setContentType("image/png");
-				response.getOutputStream().write(file);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

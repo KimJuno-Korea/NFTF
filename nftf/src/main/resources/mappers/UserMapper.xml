@@ -60,18 +60,18 @@
     </insert>
     
     <update id="update" parameterType="kr.co.nftf.user.User">
-        UPDATE cat
+        UPDATE user
         <set>
-            <if test="pw != null">
+            <if test="pw != null and pw !=''">
                 PW = #{pw},
             </if>
-            <if test="email != ''">
+            <if test="email != null and email != ''">
                 EMAIL = #{email},
             </if>
-            <if test="phone != ''">
+            <if test="phone != null and phone != ''">
                 PHONE = #{phone},
             </if>
-            <if test="division != ''">
+            <if test="division != null and division != ''">
                 DIVISION = #{division},
             </if>
         </set>

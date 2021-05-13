@@ -15,8 +15,18 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<button onclick="back();">뒤로</button>
+				<input onclick="back()" type="button" value="뒤로">
 			</div>
 		</div>
 	</body>
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<script>
+		function back()	{
+			history.go(-1);
+		}
+		
+	</script>
 </html>

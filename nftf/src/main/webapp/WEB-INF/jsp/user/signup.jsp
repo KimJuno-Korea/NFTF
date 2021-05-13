@@ -17,8 +17,8 @@
 					<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" > <div id="viewCheckId" class="checkFont"></div>
 					<input id="inputPw" type="text" name="pw" placeholder="비밀번호" maxlength="30"> <br>
 					<input id="inputCheckPw" type="text" name="pwCheck" placeholder="비밀번호 확인" maxlength="30"> <div id="viewCheckPw" class="checkFont"></div>
-					<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="30" > <input type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송"><br>
-					<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="30" required> <div id="viewCheckKey" class="checkFont"></div>
+					<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14" > <input type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송"><br>
+					<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required> <div id="viewCheckKey" class="checkFont"></div>
 					<input id="division" type="hidden" name="division" value="M">
 					<input id="email" type="hidden" name="email" value="">
 					<div id="data"></div>
@@ -37,7 +37,9 @@
 
 <script>
 //검증 , 정규식 사용해야됨
-
+$(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
+	
+	
 	$("#inputCheckPw").blur(function() {
 		if ($('#inputPw').val() != '') {
 			if ($('#inputPw').val() != $(this).val()){
@@ -85,6 +87,7 @@
 	
 	 function receiveKey() {
 		 var phoneData = {
+				 "id" : $("#inputId").val(),
 				 "phone" : $("#inputPhone").val()
 		 }
 		 
@@ -98,10 +101,14 @@
 			type : 'POST',
 			data : JSON.stringify(phoneData),
 			success : function(result) {
-				if (result == true) {
+				if (result == 1) {
 					$('#data').data('checkPhone', true);
+				} else if (result == 0){
+					$('#data').data('checkPhone', false);
+					alert("아이디와 전화번호가 불일치 합니다.");
 				} else {
 					$('#data').data('checkPhone', false);
+					alert("알 수 없는 오류");
 				}
 			}, error : function() {
 				console.log("에러");
@@ -162,8 +169,6 @@
 		} else {
 			alert('아이디 중복확인을 해주세요.');
 		}
-		
-		
 	} 
 </script>
 </html>
