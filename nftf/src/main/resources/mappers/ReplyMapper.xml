@@ -90,12 +90,15 @@
             <if test="content != ''">
                 CONTENT = #{content},
             </if>
+            <if test="editStatus != ''">
+            	EDIT_STATUS = #{editStatus},
+            </if>
         </set>
-        <include refid="whereSql" />
+        WHERE NO = #{no}
     </update>
 
     <delete id="delete" parameterType="kr.co.nftf.reply.Reply">
         DELETE FROM reply
-        <include refid="whereSql" />
+        WHERE NO = #{no}
     </delete>
 </mapper>

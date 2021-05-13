@@ -12,13 +12,12 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper replyMapper;
 
 	@Override
-	public void replyRegist(Reply reply) {
-		// TODO Auto-generated method stub
-		
+	public int replyRegist(Reply reply) throws Exception{
+		return replyMapper.insert(reply);
 	}
 
 	@Override
-	public Reply replySelect(Reply reply) {
+	public Reply replySelect(Reply reply) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,14 +31,12 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void replyEdit(Reply reply) {
-		// TODO Auto-generated method stub
-		
+	public int replyEdit(Reply reply) throws Exception{
+		return replyMapper.update(reply);
 	}
 
 	@Override
-	public void replyDelete(Reply reply) {
-		// TODO Auto-generated method stub
-		
+	public int replyDelete(Reply reply) throws Exception{
+		return replyMapper.delete(reply);
 	}
 }

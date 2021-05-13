@@ -34,9 +34,39 @@
 						<td><a href="/nftf/board/${list.no}">${list.title }</a></td>
 						<td>${list.content }</td>
 						<td>${list.price }</td>
-						<td>${list.division }</td>
-						<td>${list.tradeWay }</td>
-						<td>${list.status }</td>
+						<td>
+							<c:choose>
+								<c:when test="${list.division eq 'S'}">
+									구매
+								</c:when>
+								<c:when test="${list.division eq 'B'}">
+									판매
+								</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${list.tradeWay eq 'D'}">
+									직거래
+								</c:when>
+								<c:when test="${list.tradeWay eq 'P'}">
+									택배
+								</c:when>
+								<c:when test="${list.tradeWay eq 'T'}">
+									거래함
+								</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${list.status eq 'S'}">
+									거래완료
+								</c:when>
+								<c:when test="${list.status eq 'M'}">
+									거래중
+								</c:when>
+							</c:choose>
+						</td>
 						<td>${list.registrateDate }</td>
 					</tr>
 				</c:forEach>
