@@ -11,7 +11,7 @@
 	<div class="row">
 		<h2>로그인</h2>
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
-			<form action="/nftf/login" method="post" >
+			<form action="/login" method="post" >
 				<div class="row">
 					<input id="inputId" type="text" name="id" placeholder="아이디"> <button type="submit" id="loginBtn">로그인</button> <br>
 					<input id="inputPw" type="text" name="pw" placeholder="비밀번호"> <br>

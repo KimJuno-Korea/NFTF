@@ -15,7 +15,7 @@ public class TradingServiceImpl implements TradingService {
 		
 		try {
 			if (trading != null) {
-				tradingMapper.insertTrading(trading);
+				tradingMapper.insert(trading);
 				return true;
 			} else {
 				return false;
@@ -31,7 +31,7 @@ public class TradingServiceImpl implements TradingService {
 		
 		try {
 			if (trading != null) {
-				return tradingMapper.selectTradingList(trading);
+				return tradingMapper.selectList(trading);
 			} else {
 				return null;
 			}

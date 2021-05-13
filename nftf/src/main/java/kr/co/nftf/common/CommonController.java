@@ -1,7 +1,6 @@
 package kr.co.nftf.common;
 
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,55 +13,47 @@ import kr.co.nftf.user.User;
 
 @RestController
 public class CommonController {
+	private static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
+	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
+	
 	@Autowired
 	private CommonServiceImpl commonService;
 	
-	@Autowired
-	private HttpSession httpSession;
-	
+	//메인메뉴 폼
 	@GetMapping("/index")
 	public ModelAndView index() {
 		return new ModelAndView("/common/index");
 	}
 	
+	//로그인 폼
 	@GetMapping("/login")
 	public ModelAndView loginForm() {
-		
-		if (httpSession != null) {
-			
-			if (httpSession.getAttribute("id") != null) {
-				return new ModelAndView(new RedirectView("/nftf/index"));
-			}
-			
-		}
 		return new ModelAndView("/common/login");
 	}
 	
+	//로그인
 	@PostMapping("/login")
 	public ModelAndView login(User user) {
-		
-		if (httpSession.getAttribute("id") == null) {
-			
+		try {
 			if (commonService.login(user)) {
-				return new ModelAndView(new RedirectView("/nftf/index"));
+				return REDIRECT_MAIN;
 			}
-			return new ModelAndView(new RedirectView("/nftf/login"));
-		} 
-		return new ModelAndView(new RedirectView("/nftf/index"));
+		} catch(Exception exception) {
+			exception.printStackTrace();
+		}
+		return REDIRECT_LOGIN;
 	}
 	
+	//로그아웃
 	@GetMapping("/logout")
 	public ModelAndView logout() {
-		
-		if (httpSession != null) {
-		
-			if (httpSession.getAttribute("id") != null) {
-				if (commonService.logout()) {
-					return new ModelAndView(new RedirectView("/nftf/index"));
-				}
+		try {
+			if (commonService.logout()) {
+				return REDIRECT_MAIN;
 			}
+		} catch(Exception exception) {
+			exception.printStackTrace();
 		}
-		
-		return new ModelAndView(new RedirectView("/nftf/login"));
+		return REDIRECT_LOGIN;
 	}
 }

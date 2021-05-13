@@ -44,8 +44,20 @@
             SELLER_ID,
 			STATUS,
 			TRADE_DATE
-        FROM user
-        <include refid="whereSql" />
+        FROM trading
+        <include refid="whereSql"/>
+    </select>
+    
+        <select id="selectList" parameterType="kr.co.nftf.trading.Trading" resultMap="tradingResultMap">
+        SELECT
+           	BOARD_NO,
+            PRICE,
+            BUYER_ID,
+            SELLER_ID,
+			STATUS,
+			TRADE_DATE
+        FROM trading
+        <include refid="whereSql"/>
     </select>
     
     <insert id="insert" parameterType="kr.co.nftf.trading.Trading">
