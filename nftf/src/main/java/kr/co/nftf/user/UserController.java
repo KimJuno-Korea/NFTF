@@ -210,7 +210,7 @@ public class UserController {
 	//여기서 생성된 qr을 쏴줌 *
 	@GetMapping("/user/qr/{id}")
 	public void createLoginQR(User user, HttpServletResponse response) {
-		try {
+		try { 
 			user = userService.selectUser(user);
 			byte[] file = this.userService.createLoginQR(""+user.getId()+user.getPw());
 			if (file != null) {

@@ -1,0 +1,32 @@
+.title h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+	color: #1666ba;
+}
+
+a.id {
+	color: #1666ba !important;
+    margin-right: 20px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    background : none !important;
+}
+
+a.id::before{
+	float:left;
+	margin-right: 10px;
+ 	content:"";
+ 	background-image: url('../../customimages/off.png');
+ 	background-size:20px 20px;
+    width:20px;
+    height:20px;
+}
+
+/* a.id::before{
+	float:left;
+	margin-left: 10px;
+ 	content:"";
+ 	background-image: url('../../customimages/on.png');
+ 	background-size:20px 20px;
+    width:20px;
+    height:20px;
+} */
