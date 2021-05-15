@@ -6,18 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 </head>
 <body>
-	<div class="row">
-		<h2>로그인</h2>
-		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
+	<div class="account-popup">
+		<h2 class="title">로그인</h2>
 			<form action="/login" method="post" >
-				<div class="row">
-					<input id="inputId" type="text" name="id" placeholder="아이디"> <button type="submit" id="loginBtn">로그인</button> <br>
-					<input id="inputPw" type="text" name="pw" placeholder="비밀번호"> <br>
+				<div class="cfield">
+					<input id="inputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
 			 	</div>
+			 	<div class="cfield">
+			 		<input id="inputPw" type="text" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+				</div>
+				<input type="submit" id="loginBtn" value="로그인">
 			</form>
-		</div>
 	</div>
 </body>
 
