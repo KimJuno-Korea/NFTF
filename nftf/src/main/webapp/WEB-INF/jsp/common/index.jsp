@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
 	<h2>메인화면</h2>
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 </body>
 </html>
