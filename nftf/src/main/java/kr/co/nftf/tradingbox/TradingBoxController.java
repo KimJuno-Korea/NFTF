@@ -12,7 +12,7 @@ import kr.co.nftf.branch.Branch;
 @RequestMapping("/")
 public class TradingBoxController {
 	@Autowired
-	TradingBoxServiceImpl tradingBoxServiceImpl;
+	TradingBoxService tradingBoxServiceImpl;
 
 	@GetMapping("/tradingbox/{name}")
 	public ModelAndView getTradingBoxList(Branch branch) throws Exception {
