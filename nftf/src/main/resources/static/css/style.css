@@ -173,7 +173,7 @@ header {
 }
 .block {
     float: left;
-    padding: 60px 0;
+    padding: 20px 0;
     position: relative;
     width: 100%;
     z-index: 1;
@@ -267,7 +267,7 @@ iframe{
     border:0;
 }
 i{font-style:italic}
-{/*! float:left; *//*! height:auto */}
+/* {! float:left; ! height:auto } */
 :-webkit-input-placeholder{opacity:1}
 :-moz-placeholder{opacity:1}
 :-ms-input-placeholder{opacity:1}
@@ -846,7 +846,7 @@ label::after {
     left: 50%;
     margin-left: -230px;
     margin-top: 140px;
-    margin-bottom: 60px;
+    margin-bottom: 111px;
     text-align: center;
     padding: 40px 60px;
 }
@@ -2882,8 +2882,7 @@ header.style2 nav {
     text-align: center;
 }
 .mega-widget .logo {
-    float: none;
-    display: inline-block;
+    float: left;
     margin: 0;
         margin-bottom: 0px;
     margin-bottom: 20px;
@@ -2901,12 +2900,14 @@ header.style2 nav {
     margin: 6px 17px;
 }
 .mega-widget span {
-    float: left;
+	float: left;
     width: 100%;
-    font-family: Open Sans;
     font-size: 13px;
     color: #888888;
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    margin-left: 60px;
 }
 .bottom-line.style2 span {
     color: #ffffff;
