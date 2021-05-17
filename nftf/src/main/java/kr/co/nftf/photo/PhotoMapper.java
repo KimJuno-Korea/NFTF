@@ -10,7 +10,7 @@ public interface PhotoMapper {
 	
 	public void insert (Photo photo) throws Exception;
 	
-	public List<Photo> select (Photo photo) throws Exception;
+	public Photo select (Photo photo) throws Exception;
 	
 	public List<Photo> list (Photo photo) throws Exception;
 	

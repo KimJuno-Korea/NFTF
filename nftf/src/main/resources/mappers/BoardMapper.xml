@@ -42,7 +42,7 @@
             <if test="status != null and status != ''">
                 AND STATUS = #{status}
             </if>
-            <if test="registrateDate != null and registrateDate != ''">
+            <if test="registrateDate != null">
                 AND REGISTRATE_DATE = #{registrateDate}
             </if>
         </where>

@@ -3,11 +3,13 @@ package kr.co.nftf.photo;
 import java.util.List;
 
 public interface PhotoService {
-	public void photoRegist (List<Photo> photos);
+	public void photoRegist (Photo photo) throws Exception;
 	
-	public List<Photo> photoSelect (Photo photo);
+	public List<Photo> photoList (Photo photo) throws Exception;
 	
-	public void photoEdit (Photo photo);
+	public Photo photoSelect (Photo photo) throws Exception;
 	
-	public void photoDelete (Photo photo);
+	public void photoEdit (Photo photo) throws Exception;
+	
+	public void photoDelete (Photo photo) throws Exception;
 }

@@ -31,7 +31,7 @@
 					<tr>
 						<td>${board.count }</td>
 						<td>${list.userId }</td>
-						<td><a href="/nftf/board/${list.no}">${list.title }</a></td>
+						<td><a href="/board/${list.no}">${list.title }</a></td>
 						<td>${list.content }</td>
 						<td>${list.price }</td>
 						<td>
@@ -74,7 +74,7 @@
 		</table>
 	</div>
 	<c:if test="${sessionScope.userId != null }">
-		<button onclick="location.href='/nftf/board/form'">등록하기</button>
+		<button onclick="location.href='/board/form'">등록하기</button>
 	</c:if>
 	<h1>test</h1>
 </body>
@@ -107,7 +107,7 @@
 						var no = msg[i].no;
 						html += "<tr>";
 						html += "<td>" + (i + 1) + "</td>";
-						html += "<td><a href=\"/nftf/board/" + no + "\">"
+						html += "<td><a href=\"/board/" + no + "\">"
 								+ msg[i].userId + "</a></td>";
 						html += "<td>" + msg[i].title + "</td>";
 						html += "<td>" + msg[i].content + "</td>";
@@ -125,7 +125,7 @@
 					}
 				}
 			};
-			xhr.open("POST", "http://localhost/nftf/boardsearch", true);
+			xhr.open("POST", "http://localhost/boardsearch", true);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.send(data);
 		};

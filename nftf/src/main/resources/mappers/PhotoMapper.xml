@@ -37,30 +37,30 @@
         <include refid="whereSql" />
     </select>
 	
-	<select id="list" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
-        SELECT
-            BOARD_NO,
-            NO,
-            PATH,
-            LOGICAL_NAME,
-            PHYSICAL_NAME,
-        FROM photo
-            <include refid="whereSql" />
-    </select>
-	
 	<select id="select" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
         SELECT 
         	BOARD_NO,
             NO,
             PATH,
             LOGICAL_NAME,
-            PHYSICAL_NAME,
+            PHYSICAL_NAME
+        FROM photo
+        <include refid="whereSql" />
+    </select>
+    
+    <select id="list" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
+        SELECT 
+        	BOARD_NO,
+            NO,
+            PATH,
+            LOGICAL_NAME,
+            PHYSICAL_NAME
         FROM photo
         <include refid="whereSql" />
     </select>
         
     <insert id="insert" parameterType="kr.co.nftf.photo.Photo">
-        INSERT INTO ingredient (
+        INSERT INTO photo (
         	BOARD_NO,
         	NO,
             PATH,
@@ -85,7 +85,7 @@
     </update>
 
     <delete id="delete" parameterType="kr.co.nftf.photo.Photo">
-        DELETE FROM board
+        DELETE FROM photo
         <include refid="whereSql" />
     </delete>
 </mapper>

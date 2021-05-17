@@ -10,7 +10,7 @@
 <body>
 <c:set var="board" value="${board }" />
 <h1>게시글 수정 페이지</h1>
-	<form action="<%=request.getContextPath() %>/nftf/board/${board.no }" method="post">
+	<form action="<%=request.getContextPath() %>/board/${board.no }" method="post">
 		<input type="hidden" name="_method" value="PUT" />
 		아이디 : <input type="text" name="userId" value="${sessionScope.userId }" readonly/><br>
 		<select name="division">

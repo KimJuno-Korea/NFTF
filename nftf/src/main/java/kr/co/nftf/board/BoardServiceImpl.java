@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board boardSelect(Board board) throws Exception{
-		board = boardMapper.select(board);	
+		board = boardMapper.select(board);
 		return board;
 	}
 
