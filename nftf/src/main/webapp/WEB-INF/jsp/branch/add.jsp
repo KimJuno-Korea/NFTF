@@ -1,50 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-<body>
-	<h1> 지점 등록 화면 </h1>
-	<form action="/branch" method="post">
-		
-		<div class="title">
-			<label>지점 코드
-				<input type="text" name="code" placeholder="TEST_XX_0X"/>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+		<form action="/branch" method="post">
+			<div class="title">
+				<label>지점 코드
+					<input type="text" name="code" placeholder="TEST_XX_0X"/>
+				</label>
+			</div>
+			<div>
+				<label>지점 명
+					<input type="text" name="name" placeholder="제주 ㅁㅁ점"/>
+				</label>
+			</div>
+			<div>
+				<label>지점 위도
+					<input type="text" name="latitude" id="input_latitude" placeholder="xxx.xxx"/>
+				</label>
+				<label>지점 경도
+					<input type="text" name="longtitude" id="input_longtitude" placeholder="xxx.xxx"/>
+				</label>
+				<input type="button" value="지도로 조회" onClick="panTo()"/>
+			</div>
+			<div>
+				<label>거래함 갯수
+					<input type="number" name="tradingBoxCount" placeholder="1"/>
+				</label>
+			</div>
+			<div>
+			<label>지점 상태
+				<select name="status" >
+					<option value="Y" selected> Y </option>
+					<option value="N"> N </option>
+				</select>
 			</label>
-		</div>
-		<div>
-			<label>지점 명
-				<input type="text" name="name" placeholder="제주 ㅁㅁ점"/>
-			</label>
-		</div>
-		<div>
-			<label>지점 위도
-				<input type="text" name="latitude" id="input_latitude" placeholder="xxx.xxx"/>
-			</label>
-			<label>지점 경도
-				<input type="text" name="longtitude" id="input_longtitude" placeholder="xxx.xxx"/>
-			</label>
-			<input type="button" value="지도로 조회" onClick="panTo()"/>
-		</div>
-		<div>
-			<label>거래함 갯수
-				<input type="number" name="tradingBoxCount" placeholder="1"/>
-			</label>
-		</div>
-		<div>
-		<label>지점 상태
-			<select name="status" >
-				<option value="Y" selected> Y </option>
-				<option value="N"> N </option>
-			</select>
-		</label>
-		</div>
-		<input type="submit" value="지점 등록">
-	</form>
-<body>
+			</div>
+			<input type="submit" value="지점 등록">
+		</form>
 	<div id="map" style="width:100%;height:350px;"></div>
 	<div id="clickLatlng"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9318f30131f6fa4339b2a5103c22a5c&libraries=services"></script>
@@ -123,5 +114,4 @@
 		    setMarker (latitude, longtitude);
 		};
 	</script>
-</body>
-</html>
+<<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
