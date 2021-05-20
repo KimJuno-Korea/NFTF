@@ -1,28 +1,67 @@
 package kr.co.nftf.security;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
 import kr.co.nftf.tradingbox.TradingBox;
-import kr.co.nftf.user.User;
+import kr.co.nftf.tradingbox.TradingBoxMapper;
 
 @Service
 public class SecurityServiceImpl implements SecurityService{
+	@Autowired
+	TradingBoxMapper tradingBoxMapper;
 
+	//인증키 대조 (물품 수령시 필요한 인증키를 대조함)
 	@Override
-	public boolean contrastKey(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
+	public boolean contrastKey(String key) {
+		
+		if (key != null) {
+			TradingBox tradingBox = new TradingBox();
+			tradingBox.setAuthKey(key);
+			
+			if (tradingBoxMapper.select(tradingBox) != null) {
+				return true;
+			}
+		}
 		return false;
 	}
 
+	//인증키 QR 생성 (구매누르고 결제 완료시 실행)
 	@Override
-	public String createKeyQR(TradingBox tradingBox) {
-		// TODO Auto-generated method stub
-		return null;
+	public byte[] createKeyQR(String key)	
+			throws WriterException, IOException  {
+		BitMatrix bitMatrix = new QRCodeWriter().encode(key, BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
+		BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(qrImage, "png", baos);
+		
+		byte[] file = baos.toByteArray();
+		return file;
 	}
 
+	//로그인 QR 생성
 	@Override
-	public String createAccountQR(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public byte[] createAccountQR(String loginInfo)	
+				throws WriterException, IOException {
+		BitMatrix bitMatrix = new QRCodeWriter().encode(loginInfo, BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
+		BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(qrImage, "png", baos);
+		
+		byte[] file = baos.toByteArray();
+		return file;
 	}
 }
