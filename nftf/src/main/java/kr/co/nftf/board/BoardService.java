@@ -14,4 +14,8 @@ public interface BoardService {
 	public void boardEdit (Board board) throws Exception;
 	
 	public void boardDelete (Board board) throws Exception;
+	
+	public int boardCount() throws Exception;
+	
+	public List<Board> listPage (int displayPost, int postNum) throws Exception;
 }

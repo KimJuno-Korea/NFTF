@@ -42,7 +42,7 @@
             <if test="status != null and status != ''">
                 AND STATUS = #{status}
             </if>
-            <if test="registrateDate != null and registrateDate != ''">
+            <if test="registrateDate != null">
                 AND REGISTRATE_DATE = #{registrateDate}
             </if>
         </where>
@@ -132,4 +132,19 @@
         <include refid="whereSql" />
     </delete>
     
+    <select id="listPage" parameterType="int" resultType="kr.co.nftf.board.Board">
+		SELECT
+			NO
+            ,USER_ID
+            ,TITLE
+            ,CONTENT
+            ,PRICE
+            ,DIVISION
+            ,TRADE_WAY
+            ,STATUS
+            ,REGISTRATE_DATE
+		FROM BOARD
+		ORDER BY NO DESC
+		LIMIT #{displayPost}, #{postNum}
+	</select>
 </mapper>
