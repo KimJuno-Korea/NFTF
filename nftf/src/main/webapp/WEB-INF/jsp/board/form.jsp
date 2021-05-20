@@ -34,11 +34,11 @@
 				<img src="" />
 			</div>
 			<div>
-				<label for="gdsImg2">이미지-2</label> <input type="file" 	name="file" accept="image/gif,image/jpeg,image/png" />
+				이미지-2<input type="file" name="file" accept="image/gif,image/jpeg,image/png" />
 			</div>
 			<br>
 			<div>
-				<label for="gdsImg3">이미지-3</label> <input type="file" 	name="file" accept="image/gif,image/jpeg,image/png" />
+				이미지-3<input type="file" name="file" accept="image/gif,image/jpeg,image/png" />
 			</div>
 	</div>
 	</form>

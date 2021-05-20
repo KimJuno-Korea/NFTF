@@ -15,6 +15,7 @@
 		<table border="1">
 			<thead>
 				<tr>
+					<td>사진</td>
 					<td>번호</td>
 					<td>아이디</td>
 					<td>제목</td>
@@ -29,7 +30,8 @@
 			<tbody>
 				<c:forEach var="list" items="${boardList }" varStatus="board">
 					<tr>
-						<td>${board.count }</td>
+						<td><img src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}"></td>
+						<td>${count - board.index }</td>
 						<td>${list.userId }</td>
 						<td><a href="/board/${list.no}">${list.title }</a></td>
 						<td>${list.content }</td>
@@ -72,6 +74,30 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:if test="${paging.prev}">
+			<span>[ <a href="<%=request.getContextPath() %>/board?num=1">처음</a>
+				]
+			</span>
+			<span>[ <a href="<%=request.getContextPath() %>/board?num=${paging.startPageNum - 1}">이전</a>
+				]
+			</span>
+		</c:if>
+		<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="num">
+			<span> 
+				<c:if test="${select != num}">
+					<a href="<%=request.getContextPath() %>/board?num=${num}">${num}</a>
+				</c:if> <c:if test="${select == num}">
+					<b>${num}</b>
+				</c:if>
+
+			</span>
+		</c:forEach>
+
+		<c:if test="${paging.next}">
+			<span>[ <a href="<%=request.getContextPath() %>/board?num=${paging.endPageNum + 1}">다음</a>
+				]
+			</span>
+		</c:if>
 	</div>
 	<c:if test="${sessionScope.userId != null }">
 		<button onclick="location.href='/board/form'">등록하기</button>

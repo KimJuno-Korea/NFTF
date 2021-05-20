@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
- div.goods div.goodsImg { float:left; width:350px; }
+ div.goods div.goodsImg { float:auto; width:350px; }
  div.goods div.goodsImg img { width:350px; height:auto; }
  
  div.goods div.goodsInfo { float:right; width:330px; font-size:22px; }
@@ -69,7 +69,7 @@
 	
 	<form action="<%=request.getContextPath()%>/board/${board.no}" method="post" id="deleteAction">
 		<input type="hidden" name="_method" value="DELETE" />
-		<input type="button" onClick="location.href='/board'" value="목록으로" />
+		<input type="button" onClick="location.href='/board?num=1'" value="목록으로" />
 		<c:if test="${sessionScope.userId == board.userId }">
 			<input type="button" onClick="location.href='/board/${board.no}/form'" value="수정" />
 			<button onClick="del()">삭제</button>

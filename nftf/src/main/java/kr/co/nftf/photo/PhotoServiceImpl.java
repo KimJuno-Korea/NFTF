@@ -24,6 +24,11 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> photoList(Photo photo) throws Exception{
 		return photoMapper.list(photo);
 	}
+	
+	@Override
+	public Photo photoThumbnail(Photo photo) throws Exception{
+		return photoMapper.selectThumb(photo);
+	}
 
 	@Override
 	public void photoEdit(Photo photo) throws Exception{

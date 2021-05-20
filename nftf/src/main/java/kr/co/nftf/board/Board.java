@@ -3,7 +3,7 @@ package kr.co.nftf.board;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Board implements Serializable {
+public class Board implements Serializable{
 	private int no;
 	private String userId;
 	private String title;

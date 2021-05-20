@@ -2,6 +2,7 @@ package kr.co.nftf.board;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,13 +35,6 @@ public class BoardServiceImpl implements BoardService {
 		List<Board> listBoard = new ArrayList<>();
 		Board board = new Board();
 
-		//현재 로그인 기능과 연동하지 않아 게시글 목록 조회 시 세션 저장
-		if(httpSession.getAttribute("userId") == null) {
-			httpSession.setAttribute("userId", "test1");
-			System.out.println(httpSession.getAttribute("userId"));
-		}
-		//추후 삭제 예정
-		
 		listBoard = boardMapper.list(board);
 
 		return listBoard;
@@ -68,5 +62,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void boardDelete(Board board) throws Exception{
 		boardMapper.delete(board);
+	}
+	
+	@Override
+	public int boardCount() throws Exception {
+		return boardMapper.count();
+	}
+
+	@Override
+	public List<Board> listPage(int displayPost, int postNum) throws Exception {
+		//현재 로그인 기능과 연동하지 않아 게시글 목록 조회 시 세션 저장
+		if(httpSession.getAttribute("userId") == null) {
+			httpSession.setAttribute("userId", "test1");
+			System.out.println(httpSession.getAttribute("userId"));
+		}
+		//추후 삭제 예정
+		return boardMapper.listPage(displayPost, postNum);
 	}
 }

@@ -9,6 +9,8 @@ public interface PhotoService {
 	
 	public Photo photoSelect (Photo photo) throws Exception;
 	
+	public Photo photoThumbnail (Photo photo) throws Exception;
+	
 	public void photoEdit (Photo photo) throws Exception;
 	
 	public void photoDelete (Photo photo) throws Exception;

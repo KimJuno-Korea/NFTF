@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nftf.photo.Photo;
-import kr.co.nftf.photo.PhotoMapper;
 import kr.co.nftf.photo.PhotoService;
 import kr.co.nftf.photo.PhotoUtil;
 
@@ -34,37 +33,43 @@ public class BoardController {
 	private String uploadPath;
 	
 	@GetMapping("/board")
-	public ModelAndView getBoardList() {
+	public ModelAndView getBoardList(@RequestParam(value = "num",required = false) String num) {
 		ModelAndView modelAndView = new ModelAndView("/board/list");
-		List<Board> listBoard = new ArrayList<>();
+		List<Board> boardList = new ArrayList<>();
+		Paging paging = new Paging();
+		int count = 0;
+
 		try {
-			listBoard = boardServiceImpl.boardList();
-		} catch(Exception e) {
+			count = boardServiceImpl.boardCount();
+
+			paging.setNum(Integer.valueOf(num));
+			paging.setCount(boardServiceImpl.boardCount());
+
+			boardList = boardServiceImpl.listPage(paging.getDisplayPost(), paging.getPostNum());
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("board");
-		modelAndView.addObject(listBoard);
 
+		modelAndView.addObject("boardList", boardList);
+		modelAndView.addObject("count", count);
+		modelAndView.addObject("paging", paging);
+		modelAndView.addObject("select", num);
 		return modelAndView;
 	}
-
+	
 	@GetMapping("/board/{no}")
 	public ModelAndView getBoard(@PathVariable String no) {
 		ModelAndView modelAndView = new ModelAndView("/board/detail");
-		Board board = new Board();
 		List<Photo> photoList = new ArrayList<>();
 		Photo photo = new Photo();
+		Board board = new Board();
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
-		
 		try {
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
-			for(int i = 0; i < photoList.size(); i ++) {
-				System.out.println(photoList.get(i).getBoardNo());
-			}
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -73,6 +78,7 @@ public class BoardController {
 
 		return modelAndView;
 	}
+	
 
 	@PostMapping(value = "/boardsearch", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public List<Board> searchBoard(String keyword) {
@@ -92,57 +98,52 @@ public class BoardController {
 		Board board = new Board();
 		board.setNo(Integer.valueOf(no));
 		
+		List<Photo> photoList = new ArrayList<>();
+		Photo photo = new Photo();
+		photo.setBoardNo(board.getNo());
+		
 		try {
 			board = boardServiceImpl.boardSelect(board);
+			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < photoList.size(); i ++) {
+			System.out.println(photoList.get(i).getLogicalName());
 		}
 
 		modelAndView.addObject("board", board);
-
+		modelAndView.addObject("photoList", photoList);
+		modelAndView.addObject("size", photoList.size());
+		
 		return modelAndView;
 	}
-
-	@PutMapping("/board/{no}")
-	public ModelAndView editBoard(Board board) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board");
-		try {
-			boardServiceImpl.boardEdit(board);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		return modelAndView;
-	}
-
-	@GetMapping("/board/form")
-	public ModelAndView registBoardForm() {
-		ModelAndView modelAndView = new ModelAndView("/board/form");
-
-		return modelAndView;
-	}
-
+	
 	@PostMapping("/board")
 	public ModelAndView registBoard(Board board, @RequestParam("file") MultipartFile[] file) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board"); //게시글 목록으로
+		ModelAndView modelAndView = new ModelAndView("redirect:/board?num=1"); //게시글 목록으로
 		PhotoUtil photoUtil = new PhotoUtil();
 		
 		try {
 			boardServiceImpl.boardRegist(board);
 			board = boardServiceImpl.boardSelect(board);
-			Photo photo = new Photo();
 			
 			for (int i = 0; i < file.length; i ++) {
 				String fileName = null;
-
+				
 				if(!file[i].getOriginalFilename().equals("") && !file[i].getOriginalFilename().equals(null)) {
-					fileName =  photoUtil.fileUpload(uploadPath, file[i].getOriginalFilename(), file[i].getBytes()); 
-					
+					Photo photo = new Photo();
+					fileName =  photoUtil.fileUpload(uploadPath, file[i].getOriginalFilename(), file[i].getBytes());
 					photo.setBoardNo(board.getNo());
 					photo.setPath(uploadPath + File.separator);
 					photo.setLogicalName(file[i].getOriginalFilename());
 					photo.setPhysicalName(fileName);
-
+					
+					if(i == 0) {
+						photo.setThumbnail("s_" + fileName);
+					}
+					System.out.println("썸네일 : " + photo.getThumbnail());
 					photoServiceImpl.photoRegist(photo);
 				} else {
 					fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
@@ -151,13 +152,66 @@ public class BoardController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return modelAndView;
+	}
 
+
+	@GetMapping("/board/form")
+	public ModelAndView registBoardForm() {
+		ModelAndView modelAndView = new ModelAndView("/board/form");
+
+		return modelAndView;
+	}
+	
+	@PutMapping("/board/{no}")
+	public ModelAndView editBoard(Board board,@RequestParam("file") MultipartFile[] file) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/board?num=1");
+		Photo photo = new Photo();
+		List<Photo> photoList = new ArrayList<>();
+		
+		PhotoUtil photoUtil = new PhotoUtil();
+		photo.setBoardNo(board.getNo());
+		try {
+			photoList = photoServiceImpl.photoList(photo);
+			System.out.println("photoList size : " + photoList.size());
+			for (int i = 0; i < photoList.size(); i ++) {
+				photoUtil.deleteFile(photoList.get(i));				
+			}
+			photoServiceImpl.photoDelete(photo);
+			
+			for (int i = 0; i < file.length; i ++) {
+				String fileName = null;
+				
+				if(!file[i].getOriginalFilename().equals("") && !file[i].getOriginalFilename().equals(null)) {
+					photo = new Photo();
+					fileName =  photoUtil.fileUpload(uploadPath, file[i].getOriginalFilename(), file[i].getBytes());
+					photo.setBoardNo(board.getNo());
+					photo.setPath(uploadPath + File.separator);
+					photo.setLogicalName(file[i].getOriginalFilename());
+					photo.setPhysicalName(fileName);
+					
+					if(i == 0) {
+						photo.setThumbnail("s_" + fileName);
+					}
+					
+					photoServiceImpl.photoRegist(photo);
+				} else {
+					fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+				}
+			}
+			boardServiceImpl.boardEdit(board);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return modelAndView;
 	}
 
 	@DeleteMapping("/board/{no}")
 	public ModelAndView deleteBoard(Board board) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board");
+		ModelAndView modelAndView = new ModelAndView("redirect:/board?num=1");
 		Photo photo = new Photo();
 		List<Photo> photoList = new ArrayList<>();
 		

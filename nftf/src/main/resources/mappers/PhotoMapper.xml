@@ -7,6 +7,7 @@
 		<result column="BOARD_NO" property="boardNo" />
 		<result column="NO" property="no" />
 		<result column="PATH" property="path" />
+		<result column="THUMBNAIL" property="thumbnail" />
 		<result column="LOGICAL_NAME" property="logicalName" />
 		<result column="PHYSICAL_NAME" property="physicalName" />
 	</resultMap>
@@ -21,6 +22,9 @@
             </if>
             <if test="path != null and path != ''">
                 AND PATH = #{path}
+            </if>
+            <if test="thumbnail != null and thumbnail != ''">
+                AND THUMBNAIL = #{thumbnail}
             </if>
             <if test="logicalName != null and logicalName != ''">
                 AND LOGICAL_NAME = #{logicalName}
@@ -42,6 +46,7 @@
         	BOARD_NO,
             NO,
             PATH,
+            THUMBNAIL,
             LOGICAL_NAME,
             PHYSICAL_NAME
         FROM photo
@@ -53,10 +58,19 @@
         	BOARD_NO,
             NO,
             PATH,
+            THUMBNAIL,
             LOGICAL_NAME,
             PHYSICAL_NAME
         FROM photo
         <include refid="whereSql" />
+    </select>
+    
+    <select id="selectThumb" parameterType="kr.co.nftf.photo.Photo" resultMap="photoResultMap">
+    	SELECT
+    		THUMBNAIL
+    	FROM photo
+    	WHERE BOARD_NO = ${boardNo}
+    		AND THUMBNAIL IS NOT NULL
     </select>
         
     <insert id="insert" parameterType="kr.co.nftf.photo.Photo">
@@ -64,12 +78,14 @@
         	BOARD_NO,
         	NO,
             PATH,
+            THUMBNAIL,
             LOGICAL_NAME,
             PHYSICAL_NAME
         ) VALUES (
             #{boardNo}
             , #{no}
             , #{path}
+            , #{thumbnail}
             , #{logicalName}
             , #{physicalName}
         )

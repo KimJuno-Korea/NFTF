@@ -52,39 +52,31 @@ public class PhotoUtil {
 		return null;
 	}
 	
+	//썸네일 가져오기
+	public byte[] getThumbnail(Photo photo) {
+		String thumbNailFolder = "\\s\\";
+		try {
+			if (photo != null) {
+				File file =  new File(photo.getPath() + thumbNailFolder + photo.getThumbnail());
+				
+				return Files.readAllBytes(file.toPath());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	//사진 파일 삭제
 	public boolean deleteFile(Photo photo) {
-		String thumbNailFolder = "\\s\\s_";
+		String thumbNailFolder = "\\s\\";
 		if (photo != null) {
 			if(new File(photo.getPath() + photo.getPhysicalName()).delete()) {
-				return new File(photo.getPath() + thumbNailFolder + photo.getPhysicalName()).delete();
+				return new File(photo.getPath() + thumbNailFolder + photo.getThumbnail()).delete();
 			}
 		}
 
 		return false;
 	}
-
-	/*
-	 * public static String calcPath(String uploadPath) { Calendar cal =
-	 * Calendar.getInstance(); String yearPath = File.separator +
-	 * cal.get(Calendar.YEAR); String monthPath = yearPath + File.separator + new
-	 * DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1); String datePath =
-	 * monthPath + File.separator + new
-	 * DecimalFormat("00").format(cal.get(Calendar.DATE));
-	 * 
-	 * makeDir(uploadPath, yearPath, monthPath, datePath); makeDir(uploadPath,
-	 * yearPath, monthPath, datePath + "\\s");
-	 * 
-	 * return datePath; }
-	 */
-
-	/*
-	 * private static void makeDir(String uploadPath, String... paths) {
-	 * 
-	 * if (new File(paths[paths.length - 1]).exists()) { return; }
-	 * 
-	 * for (String path : paths) { File dirPath = new File(uploadPath + path);
-	 * 
-	 * if (!dirPath.exists()) { dirPath.mkdir(); } } }
-	 */
 }
