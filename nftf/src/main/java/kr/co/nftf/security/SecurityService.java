@@ -1,12 +1,16 @@
 package kr.co.nftf.security;
 
+import java.io.IOException;
+
+import com.google.zxing.WriterException;
+
 import kr.co.nftf.tradingbox.TradingBox;
 import kr.co.nftf.user.User;
 
 public interface SecurityService {
-	public boolean contrastKey (TradingBox tradingBox);
+	public boolean contrastKey (String key);
 	
-	public String createKeyQR (TradingBox tradingBox);
+	public byte[] createKeyQR (String key) throws WriterException, IOException;
 	
-	public String createAccountQR (User user);
+	public byte[] createAccountQR (String loginInfo) throws WriterException, IOException;
 }

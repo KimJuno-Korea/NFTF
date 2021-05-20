@@ -10,6 +10,9 @@
 		<result column="EMAIL" property="email" />
 		<result column="PHONE" property="phone" />
 		<result column="DIVISION" property="division" />
+		<result column="ACCOUNT_NO" property="accountNo" />
+		<result column="BANK_NO" property="bankNo" />
+		<result column="PIN_ACCOUNT" property="pinAccount" />
 	</resultMap>
 	
 	<sql id="whereSql">
@@ -29,6 +32,15 @@
             <if test="division != null and division != ''">
                 AND DIVISION = #{division}
             </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo}
+            </if>
+            <if test="bankNo != null and bankNo != ''">
+                AND BANK_NO = #{bankNo}
+            </if>
+            <if test="pinAccount != null and pinAccount != ''">
+                AND PIN_ACCOUNT = #{pinAccount}
+            </if>
         </where>
     </sql>
     
@@ -38,7 +50,10 @@
             PW,
             EMAIL,
             PHONE,
-			DIVISION
+			DIVISION,
+			ACCOUNT_NO,
+			BANK_NO,
+			PIN_ACCOUNT
         FROM user
         <include refid="whereSql" />
     </select>
@@ -49,13 +64,19 @@
             PW,
             EMAIL,
             PHONE,
-			DIVISION
+			DIVISION,
+			ACCOUNT_NO,
+			BANK_NO,
+			PIN_ACCOUNT
         ) VALUES (
             #{id},
             #{pw},
             #{email},
             #{phone},
-            #{division}
+            #{division},
+            #{accountNo},
+            #{bankNo},
+            #{pinAccount}
         )
     </insert>
     
@@ -73,6 +94,15 @@
             </if>
             <if test="division != null and division != ''">
                 DIVISION = #{division},
+            </if>
+             <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo}
+            </if>
+            <if test="bankNo != null and bankNo != ''">
+                AND BANK_NO = #{bankNo}
+            </if>
+            <if test="pinAccount != null and pinAccount != ''">
+                AND PIN_ACCOUNT = #{pinAccount}
             </if>
         </set>
         WHERE
