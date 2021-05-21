@@ -57,25 +57,25 @@
 		UPDATE TRADING_BOX
 		<set>
 			<if test="branchCode != null">
-				ID = #{branchCode},
+				BRANCH_CODE = #{branchCode},
 			</if>
 			<if test="no != null">
-				ID = #{no},
+				NO = #{no},
 			</if>
 			<if test="boardNo != null">
-				ID = #{boardNo},
+				BOARD_NO = #{boardNo},
 			</if>
 			<if test="status != null">
-				ID = #{status},
+				STATUS = #{status},
 			</if>
 			<if test="adWord != null">
-				ID = #{adWord},
+				AD_WORD = #{adWord},
 			</if>
 			<if test="authKey != null">
-				ID = #{authKey},
+				AUTH_KEY = #{authKey},
 			</if>
 			<if test="authKeyDate != null">
-				ID = #{authKeyDate},
+				AUTH_KEY_DATE = #{authKeyDate},
 			</if>
 		</set>
 	</update>

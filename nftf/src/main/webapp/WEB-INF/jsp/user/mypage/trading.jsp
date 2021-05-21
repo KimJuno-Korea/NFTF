@@ -18,8 +18,8 @@
 				<table border="1">
 					<tr>
 						<th>관련 게시글</th>
-						<th>판매자 아이디</th>
 						<th>구매자 아이디</th>
+						<th>판매자 아이디</th>
 						<th>상태</th>
 						<th>거래일자</th>
 						<th>인증 QR 발급</th>
@@ -28,21 +28,25 @@
 						<c:when test="${buyerList ne null}">
 							<c:forEach var="buy" items="${buyerList}">
 								<tr>
-									<th><a href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></th>
-									<th>${buy.buyerId}</th>
-									<th>${buy.sellerId}</th>
+									<td><a href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></td>
+									<td>${buy.buyerId}</td>
+									<td>${buy.sellerId}</td>
 									<c:choose>
 										<c:when test="${fn:contains(buy.status, 'S')}">
-											<th>거래 완료</th>
+											<td>거래 완료</td>
 										</c:when>
 										<c:when test="${fn:contains(buy.status, 'M')}">
-											<th>거래 진행중</th>
+											<td>거래 진행중</td>
 										</c:when>
 										<c:when test="${fn:contains(buy.status, 'C')}">
-											<th>거래 취소</th>
+											<td>거래 취소</td>
 										</c:when>
 									</c:choose>
-									<th>${buy.tradeDate}</th>
+									<td>${buy.tradeDate}</td>
+									<c:if test="${fn:contains(buy.status, 'M')}">
+										<td><img src='${pageContext.request.contextPath}/payment/qr?no=${buy.boardNo}'></td>
+										<!-- <td><input type="button" value="인증키 QR 발급" onclick="sellQR()"><div id="html"></div></td> -->
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -55,30 +59,35 @@
 				<table border="1">
 					<tr>
 						<th>관련 게시글</th>
-						<th>판매자 아이디</th>
 						<th>구매자 아이디</th>
+						<th>판매자 아이디</th>
 						<th>상태</th>
 						<th>거래일자</th>
+						<th>인증 QR 발급</th>
 					</tr>
 					<c:choose>
 						<c:when test="${sellerList ne null}">
 							<c:forEach var="sell" items="${sellerList}">
 								<tr>
-									<th><a href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></th>
-									<th>${sell.buyerId}</th>
-									<th>${sell.sellerId}</th>
+									<td><a href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></td>
+									<td>${sell.buyerId}</td>
+									<td>${sell.sellerId}</td>
 									<c:choose>
 										<c:when test="${fn:contains(sell.status, 'S')}">
-											<th>거래 완료</th>
+											<td>거래 완료</td>
 										</c:when>
 										<c:when test="${fn:contains(sell.status, 'M')}">
-											<th>거래 진행중</th>
+											<td>거래 진행중</td>
 										</c:when>
 										<c:when test="${fn:contains(sell.status, 'C')}">
-											<th>거래 취소</th>
+											<td>거래 취소</td>
 										</c:when>
 									</c:choose>
-									<th>${sell.tradeDate}</th>
+									<td>${sell.tradeDate}</td>
+									<c:if test="${fn:contains(sell.status, 'M')}">
+										<td><img src='${pageContext.request.contextPath}/payment/qr?no=${sell.boardNo}'></td>
+										<!-- <td><input type="button" value="인증키 QR 발급" onclick="sellQR()"><div id="html"></div></td> -->
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -93,5 +102,11 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
+
+	function sellQR(no) {
+		var html = "<img src='${pageContext.request.contextPath}/payment/qr?no=${sell.boardNo}'>"
+		$('#html').html(html);
+	}
+
 </script>
 </html>

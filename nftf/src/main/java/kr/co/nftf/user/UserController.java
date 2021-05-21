@@ -2,7 +2,6 @@ package kr.co.nftf.user;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,11 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardServiceImpl;
 import kr.co.nftf.common.CommonController;
 import kr.co.nftf.security.SecurityServiceImpl;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingServiceImpl;
+import kr.co.nftf.tradingbox.TradingBox;
+import kr.co.nftf.tradingbox.TradingBoxService;
 
 @RestController
 public class UserController {
@@ -34,6 +36,9 @@ public class UserController {
 	
 	@Autowired
 	private SecurityServiceImpl securityService;
+	
+	@Autowired
+	private TradingBoxService tradingBoxServiceImpl;
 	
 	//관련 게시글 제목 가져와야됨
 	@Autowired
@@ -240,6 +245,7 @@ public class UserController {
 				
 				modelAndView = tradingListBuyer != null 
 						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject(null);
+						
 				
 				trading.setBuyerId(null);
 				trading.setSellerId(user.getId());
@@ -248,9 +254,7 @@ public class UserController {
 				
 				modelAndView = tradingListSeller != null 
 						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject(null);
-						
-						//수정
-						
+				
 				return modelAndView;
 			}
 		} catch(Exception exception) {

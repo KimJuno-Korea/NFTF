@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardService;
@@ -64,28 +65,28 @@ public class PaymentController {
 	
 	@GetMapping("/payment/qr")
 	public void createKeyQR(@RequestParam int no, HttpServletResponse response) throws Exception{
-		TradingBox tradingBox = new TradingBox();
-		tradingBox.setNo(no);
-		tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
 		
-		
+		System.out.println(no);
 		Board board = new Board();
-		board.setNo(tradingBox.getBoardNo());
+		board.setNo(no);
 		board = boardServiceImpl.boardSelect(board);
+		
+		TradingBox tradingBox = new TradingBox();
+		tradingBox.setBoardNo(no);
+		tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
 		
 		Trading trading = new Trading();
 		trading.setBoardNo(board.getNo());
 		trading = tradingServiceImpl.selectTrading(trading);
+		System.out.println(trading.toString());
 		
 		if (session.getAttribute("id") != null) {
 			
-			if (session.getAttribute("id").toString().equals(trading.getBuyerId())) {
-				byte[] file = this.securityServiceImpl.createKeyQR(tradingBox);
-				
-				if (file != null) {
-					response.setContentType("image/png");
-					response.getOutputStream().write(file);
-				}
+			byte[] file = this.securityServiceImpl.createKeyQR(tradingBox);
+			System.out.println("성공??");
+			if (file != null) {
+				response.setContentType("image/png");
+				response.getOutputStream().write(file);
 			}
 		}
 	}
