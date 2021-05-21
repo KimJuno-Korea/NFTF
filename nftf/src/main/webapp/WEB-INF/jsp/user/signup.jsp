@@ -56,6 +56,20 @@
 //검증 , 정규식 사용해야됨
 $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
 	
+	function getNow() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var month;
+		var day = now.getDate().toString();
+		
+		if (now.getMonth() < 9) {
+			month = "0" + (now.getMonth() + 1);
+		} else {
+			month = now.getMonth() + 1;
+		}
+		
+		return year + month + day;
+	}
 	
 	$("#inputCheckPw").blur(function() {
 		if ($('#inputPw').val() != '') {
@@ -176,7 +190,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		var data = {
 			    "Header": {
 			        "ApiNm": "OpenFinAccountDirect",
-			        "Tsymd": "20210520",
+			        "Tsymd": getNow(),
 			        "Trtm": "000000",
 			        "Iscd": "000964",
 			        "FintechApsno": "001",
@@ -218,7 +232,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 			var data = {
 				    "Header": {
 				        "ApiNm": "CheckOpenFinAccountDirect",
-				        "Tsymd": "20210520",
+				        "Tsymd": getNow(),
 				        "Trtm": "000000",
 				        "Iscd": "000964",
 				        "FintechApsno": "001",
