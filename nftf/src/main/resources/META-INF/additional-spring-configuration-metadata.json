@@ -1,5 +1,47 @@
-{"properties": [{
-  "name": "photo.path",
-  "type": "java.lang.String",
-  "description": "A description for 'photo.path'"
-}]}
+{"properties": [
+  {
+    "name": "photo.path",
+    "type": "java.lang.String",
+    "description": "A description for 'photo.path'"
+  },
+  {
+    "name": "servlet.session.timeout",
+    "type": "java.lang.String",
+    "description": "A description for 'servlet.session.timeout'"
+  },
+  {
+    "name": "ssl.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.enabled'"
+  },
+  {
+    "name": "ssl.key-alias",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.key-alias'"
+  },
+  {
+    "name": "ssl.key-store-password",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.key-store-password'"
+  },
+  {
+    "name": "ssl.key-password",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.key-password'"
+  },
+  {
+    "name": "ssl.key-store",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.key-store'"
+  },
+  {
+    "name": "ssl.trust-store-password",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.trust-store-password'"
+  },
+  {
+    "name": "ssl.trust-store",
+    "type": "java.lang.String",
+    "description": "A description for 'ssl.trust-store'"
+  }
+]}
