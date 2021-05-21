@@ -19,8 +19,25 @@
 					<input id="inputCheckPw" type="text" name="pwCheck" placeholder="비밀번호 확인" maxlength="30"> <div id="viewCheckPw" class="checkFont"></div>
 					<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14" > <input type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송"><br>
 					<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required> <div id="viewCheckKey" class="checkFont"></div>
+					<select id="inputBankNo" name="bankNo">
+						<option value="011" selected="selected">농협은행</option>
+						<option value="012">농협상호금융</option>
+						<option value="002">산업은행</option>
+						<option value="003">기업은행</option>
+						<option value="004">국민은행</option>
+						<option value="081">KEB하나은행</option>
+						<option value="020">우리은행</option>
+						<option value="023">SC제일은행</option>
+						<option value="045">새마을금고</option>
+						<option value="088">신한은행</option>
+						<option value="090">카카오뱅크</option>
+					</select>
+					<input id="inputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)"> <input id="checkAccountNo" type="button" onclick="getPinAccount()" value="계좌인증">
+					<div id="viewCheckAccountNo" class="checkFont"></div>
+					<input id="inputPinAccount" type="hidden" name="pinAccount">
 					<input id="division" type="hidden" name="division" value="M">
 					<input id="email" type="hidden" name="email" value="">
+					<input id="rgno" type="hidden">
 					<div id="data"></div>
 			 	</div>
 				<div class="row">
@@ -39,6 +56,20 @@
 //검증 , 정규식 사용해야됨
 $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
 	
+	function getNow() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var month;
+		var day = now.getDate().toString();
+		
+		if (now.getMonth() < 9) {
+			month = "0" + (now.getMonth() + 1);
+		} else {
+			month = now.getMonth() + 1;
+		}
+		
+		return year + month + day;
+	}
 	
 	$("#inputCheckPw").blur(function() {
 		if ($('#inputPw').val() != '') {
@@ -146,17 +177,113 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		}
 	});
 	 
+	function guid() {
+		  function _s4() {
+		    return ((1 + Math.random()) * 0x10000 | 0).toString().substring(1);
+		  }
+		  return _s4() + _s4()  + _s4();
+	}
+	
+	
+	
+	function getPinAccount() {
+		var data = {
+			    "Header": {
+			        "ApiNm": "OpenFinAccountDirect",
+			        "Tsymd": getNow(),
+			        "Trtm": "000000",
+			        "Iscd": "000964",
+			        "FintechApsno": "001",
+			        "ApiSvcCd": "DrawingTransferA",
+			        "IsTuno": guid(),
+			        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+			    },
+			    "DrtrRgyn" : "N",
+			    "BrdtBrno" : "20210520",
+			    "Bncd" : $("#inputBankNo").val(),
+			    "Acno" : $("#inputAccountNo").val()
+			}
+		
+		$.ajax({
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8;',
+			url : 'https://developers.nonghyup.com/OpenFinAccountDirect.nh',
+			type : 'POST',
+			data : JSON.stringify(data),
+			success : function(result) {
+				if (result.Rgno != null) {
+					$("#rgno").text(result.Rgno);
+					$("#viewCheckAccountNo").text('인증성공');
+					$('#viewCheckAccountNo').css('color', 'green');
+					$('#data').data("checkAccountNo", true);
+					checkPinAccount();
+				}
+			}, error : function() {
+				console.log("에러");
+				$("#viewCheckAccountNo").text('인증실패');
+				$('#viewCheckAccountNo').css('color', 'red');
+				$('#data').data("checkAccountNo", false);
+			}
+		});
+	}
+	
+	
+	function checkPinAccount() {
+			var data = {
+				    "Header": {
+				        "ApiNm": "CheckOpenFinAccountDirect",
+				        "Tsymd": getNow(),
+				        "Trtm": "000000",
+				        "Iscd": "000964",
+				        "FintechApsno": "001",
+				        "ApiSvcCd": "DrawingTransferA",
+				        "IsTuno": guid(),
+				        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+				    },
+				    "Rgno" : $("#rgno").text(),
+				    "BrdtBrno" : "20210520"
+				}
+			
+			$.ajax({
+				dataType : 'json',
+				contentType : 'application/json; charset=utf-8;',
+				url : 'https://developers.nonghyup.com/CheckOpenFinAccountDirect.nh',
+				type : 'POST',
+				data : JSON.stringify(data),
+				success : function(result) {
+					if (result.FinAcno != null) {
+						$("#inputPinAccount").val(result.FinAcno);
+						$('#data').data('checkPinAccount', true);
+					}
+				}, error : function() {
+					console.log("에러");
+					$('#data').data('checkPinAccount', false);
+				}
+			});
+	}
+	 
 	function signupSubmit() {
 		var phone = $('#data').data('checkPhone');
 		var key = $('#data').data('checkKey');
 		var id = $('#data').data('checkId');
 		var pw = $('#data').data('checkPw');
+		var no = $('#data').data('checkAccountNo');
+		var pin = $('#data').data('checkPinAccount');
 		
 		if (id) {
 			if (pw) {
 				if (phone) {
 					if (key) {
-						$('#form').submit();
+						if (no) {
+							if (pin) {
+								$("#inputPhone").attr("disabled", false);
+								$('#form').submit();
+							} else {
+								alert('핀 어카운트 생성 실패');
+							}
+						} else {
+							alert('계좌 인증을 해주세요');
+						}
 					} else {
 						alert('인증번호를 입력해 주세요.');
 					}

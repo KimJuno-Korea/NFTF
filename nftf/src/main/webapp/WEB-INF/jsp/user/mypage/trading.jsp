@@ -22,12 +22,13 @@
 						<th>구매자 아이디</th>
 						<th>상태</th>
 						<th>거래일자</th>
+						<th>인증 QR 발급</th>
 					</tr>
 					<c:choose>
 						<c:when test="${buyerList ne null}">
 							<c:forEach var="buy" items="${buyerList}">
 								<tr>
-									<th><a href="/nftf/board/${buy.boardNo}">게시글 제목</a></th>
+									<th><a href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></th>
 									<th>${buy.buyerId}</th>
 									<th>${buy.sellerId}</th>
 									<c:choose>
@@ -63,7 +64,7 @@
 						<c:when test="${sellerList ne null}">
 							<c:forEach var="sell" items="${sellerList}">
 								<tr>
-									<th><a href="/nftf/board/${sell.boardNo}">게시글 제목</a></th>
+									<th><a href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></th>
 									<th>${sell.buyerId}</th>
 									<th>${sell.sellerId}</th>
 									<c:choose>

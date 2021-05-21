@@ -1,22 +1,10 @@
 package kr.co.nftf.user;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
-
-import javax.imageio.ImageIO;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageConfig;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 import net.nurigo.java_sdk.api.Message;
 
@@ -32,6 +20,7 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 
 			if (user.getId() != null) {
+				userMapper.insert(user);
 				return true;
 			} else {
 				return false;
@@ -67,21 +56,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	
-	//QR몇초간 유지할건지?
-	//qr찍었을때 나올 url
-	
-	@Override
-	public byte[] createLoginQR(String loginInfo)
-			throws WriterException, IOException {
-		BitMatrix bitMatrix = new QRCodeWriter().encode(loginInfo, BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
-		BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(qrImage, "png", baos);
-		
-		byte[] file = baos.toByteArray();
-		return file;
-	}
+
 	
 	//문자전송 api는 뭘로해야할지 최대싼게 알리고꺼 회의해보자 카카오 알림으로할지
 	@Override

@@ -7,7 +7,7 @@ public interface TradingService {
 	
 	public List<Trading> selectTradingList (Trading trading);
 	
-	public boolean selectTrading (Trading trading);
+	public Trading selectTrading (Trading trading) throws Exception;
 	
 	public boolean editTrading (Trading trading);
 }

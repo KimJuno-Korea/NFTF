@@ -42,9 +42,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public boolean selectTrading(Trading trading) {
-		// TODO Auto-generated method stub
-		return false;
+	public Trading selectTrading(Trading trading) throws Exception{
+		if (trading != null) {
+			return tradingMapper.select(trading);
+		}
+		return null;
 	}
 
 	@Override
