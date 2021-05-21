@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.nftf.photo.Photo;
 import kr.co.nftf.photo.PhotoService;
 import kr.co.nftf.photo.PhotoUtil;
+import kr.co.nftf.user.User;
+import kr.co.nftf.user.UserService;
 
 @RestController
 public class BoardController {
@@ -28,6 +32,12 @@ public class BoardController {
 	
 	@Autowired
 	private PhotoService photoServiceImpl;
+	
+	@Autowired
+	private UserService userServiceImpl;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Value("${photo.path}")
 	private String uploadPath;
@@ -64,10 +74,13 @@ public class BoardController {
 		List<Photo> photoList = new ArrayList<>();
 		Photo photo = new Photo();
 		Board board = new Board();
+		User user = new User();
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
+		user.setId(session.getAttribute("id").toString());
 		try {
+			user = userServiceImpl.selectUser(user);
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {
@@ -75,6 +88,7 @@ public class BoardController {
 		}
 		modelAndView.addObject("board", board);
 		modelAndView.addObject("photoList", photoList);
+		modelAndView.addObject("pin", user.getPinAccount());
 
 		return modelAndView;
 	}

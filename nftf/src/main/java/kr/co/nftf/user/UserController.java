@@ -2,6 +2,7 @@ package kr.co.nftf.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import kr.co.nftf.board.BoardServiceImpl;
+import kr.co.nftf.common.CommonController;
+import kr.co.nftf.security.SecurityServiceImpl;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingServiceImpl;
 
@@ -29,6 +32,9 @@ public class UserController {
 	@Autowired
 	private TradingServiceImpl tradingService;
 	
+	@Autowired
+	private SecurityServiceImpl securityService;
+	
 	//관련 게시글 제목 가져와야됨
 	@Autowired
 	private BoardServiceImpl boardService;
@@ -38,10 +44,7 @@ public class UserController {
 
 	// 컨트롤러에서 가져와도 되는지? 그리고 컨트롤러에서 로직처리말고 서비스에서 해야되는거 아닌가?
 	// 애초에 세션체크는 다른걸로한다 필터?? 였나 인터셉터로 한다
-	
-	private static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
-	private static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
-	private static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
+
 
 	//회원가입 폼 *
 	@GetMapping("/user/form")
@@ -54,12 +57,12 @@ public class UserController {
 	@PostMapping("/user")
 	public ModelAndView signup(User user) {
 		try {
-			return userService.registUser(user) ? REDIRECT_LOGIN
+			return userService.registUser(user) ? CommonController.REDIRECT_LOGIN
 					: new ModelAndView(new RedirectView("/user/form"));
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_LOGIN;
+		return CommonController.REDIRECT_LOGIN;
 	}
 
 	//아이디 찾기 폼 *
@@ -104,28 +107,28 @@ public class UserController {
 				
 				if (user.getId() != null && user.getPhone() != null) {
 					return dbUser.getId().equals(user.getId().toString()) ?
-							modelAndView.addObject("id", dbUser.getId()).addObject("pw", dbUser.getPw()) : REDIRECT_MAIN;
+							modelAndView.addObject("id", dbUser.getId()).addObject("pw", dbUser.getPw()) : CommonController.REDIRECT_MAIN;
 				}
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	//비밀번호 수정 *
 	@PostMapping("/password/{id}")
 	public ModelAndView editPassword(User user) {
 		try {
-			ModelAndView modelAndView = REDIRECT_LOGIN;
+			ModelAndView modelAndView = CommonController.REDIRECT_LOGIN;
 
 			if (user != null) {
-				return userService.editUser(user) == true ? modelAndView : REDIRECT_MAIN;
+				return userService.editUser(user) == true ? modelAndView : CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	//마이페이지 비번 다시치는 화면 가는거 *
@@ -136,12 +139,12 @@ public class UserController {
 			if (user != null) {
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				return httpSession.getAttribute("id").toString().equals(user.getId())
-						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : REDIRECT_MAIN;
+						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_LOGIN;
+		return CommonController.REDIRECT_LOGIN;
 	}
 	
 	//이게 마이 페이지 메인 화면 가는 메소드 *
@@ -153,15 +156,15 @@ public class UserController {
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				//이것도 그냥 인터셉터로 해도됨
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
-						? new ModelAndView("/user/mypage/index") : REDIRECT_MAIN;
+						? new ModelAndView("/user/mypage/index") : CommonController.REDIRECT_MAIN;
 				
 				return user.getPw().equals(userService.selectUser(user).getPw())
-						? modelAndView : REDIRECT_MAIN;
+						? modelAndView : CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_LOGIN;
+		return CommonController.REDIRECT_LOGIN;
 	}
 	
 	//회원정보 수정 폼 *
@@ -170,11 +173,11 @@ public class UserController {
 		try {
 			User dbUser = userService.selectUser(user);
 			return httpSession.getAttribute("id").toString().equals(user.getId())
-					? new ModelAndView("/user/mypage/edit").addObject("user", dbUser) : REDIRECT_MAIN;
+					? new ModelAndView("/user/mypage/edit").addObject("user", dbUser) : CommonController.REDIRECT_MAIN;
 		} catch (Exception exception){
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	//회원정보 수정 *
@@ -184,12 +187,12 @@ public class UserController {
 			
 			if (user != null) {
 				return userService.editUser(user)
-						? REDIRECT_LOGIN : REDIRECT_MAIN;
+						? CommonController.REDIRECT_LOGIN : CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception){
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	//로그인 QR 생성 폼 *
@@ -203,7 +206,7 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 	
 	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
@@ -212,7 +215,7 @@ public class UserController {
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try { 
 			user = userService.selectUser(user);
-			byte[] file = this.userService.createLoginQR(""+user.getId()+user.getPw());
+			byte[] file = this.securityService.createAccountQR(""+user.getId()+user.getPw());
 			if (file != null) {
 				response.setContentType("image/png");
 				response.getOutputStream().write(file);
@@ -253,7 +256,7 @@ public class UserController {
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	@GetMapping("/user/withdrawal/{id}")
@@ -267,7 +270,7 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	@DeleteMapping("/user/{id}")
@@ -281,7 +284,7 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_MAIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 	
 	//아이디 중복 확인
@@ -306,7 +309,7 @@ public class UserController {
 			
 			if (user != null) {
 				//회원가입시 아이디랑 폰번호 없으니 이걸로 실행되야함
-				if (user.getId() == null) {
+				if (userService.selectUser(user) == null) {
 					httpSession.setAttribute("key", "");
 					System.out.println(user.getPhone());
 //						String key = userService.sendKey(user.getPhone());
@@ -317,7 +320,7 @@ public class UserController {
 					int no5 = ((int)(Math.random()*10));
 					int no6 = ((int)(Math.random()*10));
 					String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
-					System.out.println("인증키"+key);
+					System.out.println("회원가입 인증키"+key);
 					httpSession.setAttribute("key", key);
 					return 1;
 				}
