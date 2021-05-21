@@ -63,6 +63,9 @@
 				<c:when test="${board.status eq 'M'}">
 					거래중
 				</c:when>
+				<c:when test="${board.status eq 'W'}">
+					결제 후 수령 대기중
+				</c:when>
 			  </c:choose><br>
 		작성일자 : ${board.registrateDate }<br>
 		</div>
@@ -93,15 +96,98 @@
 	<div class="container">
         <div class="replyList"></div>
     </div>
+    <div class="row">
+    	<c:if test="${board.status ne 'W'}">
+	    	<input type="button" value="구매" onclick="buy()">
+    	</c:if>
+    </div>
 	
 	<%@ include file="../board/reply.jsp" %>
-	
 </body>
 <script>
 	function del() {
 		var chk = confirm("해당 게시글을 삭제하시겠습니까?");
 		if (chk) {
 			document.deleteAction.submit;
+		}
+	}
+
+	function guid() {
+		  function _s4() {
+		    return ((1 + Math.random()) * 0x10000 | 0).toString().substring(1);
+		  }
+		  return _s4() + _s4()  + _s4();
+	}
+	
+	function setting() {
+		var data = {
+				"no" : "${board.no}"
+		}
+		
+		$.ajax({
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8;',
+			url : 'http://localhost/payment',
+			type : 'PUT',
+			data : JSON.stringify(data),
+			success : function(result) {
+				if (result) {
+					console.log("성공");
+				}
+			}, error : function() {
+				console.log("에러");
+			}
+		});
+	}
+
+	function getNow() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var month;
+		var day = now.getDate().toString();
+		
+		if (now.getMonth() < 9) {
+			month = "0" + (now.getMonth() + 1);
+		} else {
+			month = now.getMonth() + 1;
+		}
+		
+		return year + month + day;
+	}
+	
+	function buy() {
+		if (confirm("환불이 불가능합니다. 구매 하시겠습니까?")) {
+			var data = {
+				    "Header": {
+				        "ApiNm": "DrawingTransfer",
+				        "Tsymd": getNow(),
+				        "Trtm": "000000",
+				        "Iscd": "000964",
+				        "FintechApsno": "001",
+				        "ApiSvcCd": "DrawingTransferA",
+				        "IsTuno": guid(),
+				        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+				    },
+				    "FinAcno" : "${pin}",
+				    "Tram":"${board.price}"
+			}
+			
+			$.ajax({
+				dataType : 'json',
+				contentType : 'application/json; charset=utf-8;',
+				url : 'https://developers.nonghyup.com/DrawingTransfer.nh',
+				type : 'POST',
+				data : JSON.stringify(data),
+				success : function(result) {
+					setting();
+					console.log(result);
+					alert("구매 성공 : 마이페이지에서 인증키 QR을 발급 받으세요");
+				}, error : function() {
+					console.log("에러");
+				}
+			});
+		} else {
+			alert("취소됨");
 		}
 	}
 </script>

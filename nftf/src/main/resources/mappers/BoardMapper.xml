@@ -123,6 +123,9 @@
             <if test="content != ''">
                 CONTENT = #{content},
             </if>
+            <if test="status != '' and status != null">
+                STATUS = #{status},
+            </if>
         </set>
         WHERE NO = #{no}
     </update>
