@@ -1,5 +1,6 @@
 package kr.co.nftf.tradingbox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,18 @@ public class TradingBoxServiceImpl implements TradingBoxService {
 	@Override
 	public List<TradingBox> selectTradingBoxList(Branch branch) throws Exception {
 		TradingBox tradingBox;
-		
 		tradingBox= new TradingBox();
-		tradingBox.setBranchCode(branchMapper.select(branch).getCode());
 		
-		return tradingBoxMapper.selectAll(tradingBox);
+		List<TradingBox> tradingBoxList = new ArrayList<TradingBox>();
+		
+		if (branch.getCode() == null && branch.getName() != null) {
+			tradingBox.setBranchCode(branchMapper.select(branch).getCode());
+			tradingBoxList = tradingBoxMapper.selectAll(tradingBox);
+		} else if (branch.getCode() != null) {
+			tradingBox.setBranchCode(branch.getCode());
+			tradingBoxList = tradingBoxMapper.selectAll(tradingBox);
+		}
+		return tradingBoxList;
 	}
 
 	@Override
