@@ -1,18 +1,18 @@
 package kr.co.nftf.tradingbox;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nftf.branch.Branch;
 
 @RestController
-@RequestMapping("/")
 public class TradingBoxController {
 	@Autowired
-	TradingBoxServiceImpl tradingBoxServiceImpl;
+	TradingBoxService tradingBoxServiceImpl;
 
 	@GetMapping("/tradingbox/{name}")
 	public ModelAndView getTradingBoxList(Branch branch) throws Exception {
@@ -22,5 +22,11 @@ public class TradingBoxController {
 		mav.addObject("tradingBoxList", tradingBoxServiceImpl.selectTradingBoxList(branch));
 		 
 		return mav;
+	}
+	
+	@GetMapping(value = "/{code}/tradingbox")
+	public List<TradingBox> getTradingBoxListToJson(Branch branch) throws Exception {
+		
+		return tradingBoxServiceImpl.selectTradingBoxList(branch);
 	}
 }

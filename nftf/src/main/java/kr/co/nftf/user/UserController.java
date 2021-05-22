@@ -1,6 +1,8 @@
 package kr.co.nftf.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -368,5 +372,22 @@ public class UserController {
 			exception.printStackTrace();
 		}
 		return false;
+	}
+	
+	//회원 검증
+	@PostMapping(value="/user/authetication", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Boolean> userAuthentication (@RequestBody User user) throws Exception {
+		Map<String, Boolean> authResult = new HashMap<String, Boolean>();
+		
+		if (user.getId() != null && user.getPw() != null) {
+			if (userService.selectUser(user) != null) {
+				authResult.put("result", true);
+			
+				return authResult;
+			}
+		}
+		
+		authResult.put("result", false);
+		return authResult;
 	}
 }
