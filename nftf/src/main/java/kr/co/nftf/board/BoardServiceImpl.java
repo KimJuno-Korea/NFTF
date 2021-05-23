@@ -79,4 +79,13 @@ public class BoardServiceImpl implements BoardService {
 		//추후 삭제 예정
 		return boardMapper.listPage(displayPost, postNum);
 	}
+	
+	@Override
+	public List<Board> boardList(Board board) throws Exception{
+		List<Board> listBoard = new ArrayList<>();
+
+		listBoard = boardMapper.list(board);
+
+		return listBoard;
+	}
 }
