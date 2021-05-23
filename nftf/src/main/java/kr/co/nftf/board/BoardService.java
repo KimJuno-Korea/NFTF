@@ -18,4 +18,6 @@ public interface BoardService {
 	public int boardCount() throws Exception;
 	
 	public List<Board> listPage (int displayPost, int postNum) throws Exception;
+
+	public List<Board> boardList(Board board) throws Exception;
 }
