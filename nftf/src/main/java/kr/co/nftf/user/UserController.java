@@ -373,21 +373,4 @@ public class UserController {
 		}
 		return false;
 	}
-	
-	//회원 검증
-	@PostMapping(value="/user/authetication", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Map<String, Boolean> userAuthentication (@RequestBody User user) throws Exception {
-		Map<String, Boolean> authResult = new HashMap<String, Boolean>();
-		
-		if (user.getId() != null && user.getPw() != null) {
-			if (userService.selectUser(user) != null) {
-				authResult.put("result", true);
-			
-				return authResult;
-			}
-		}
-		
-		authResult.put("result", false);
-		return authResult;
-	}
 }
