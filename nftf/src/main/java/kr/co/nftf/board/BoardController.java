@@ -100,6 +100,7 @@ public class BoardController {
 		
 		try {
 			listBoard = boardServiceImpl.boardSearch(keyword);
+			System.out.println("boardsearch");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

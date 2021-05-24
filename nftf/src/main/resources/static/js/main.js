@@ -40,12 +40,12 @@ jQuery(document).ready(function($){
 		$(this).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
 	});
 
-	//update category sidebar while scrolling
-	$(window).on('scroll', function(){
+	//update category sidebar while scrolling(2021.05.25 박주현 수정)
+	/*$(window).on('scroll', function(){
 		if ( $(window).width() > MqL ) {
 			(!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory); 
 		}
-	});
+	});*/
 
 	$(window).on('resize', function(){
 		if($(window).width() <= MqL) {

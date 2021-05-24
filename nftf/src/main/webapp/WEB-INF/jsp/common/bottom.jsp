@@ -9,7 +9,7 @@
 							<div class="row">
 								<div class="col-lg-2" style="vertical-align: middle;">
 									<div class="image-area">
-									<a href="/index" title=""><img src="http://placehold.it/93x40" alt="" style="width: 150px; height: 100px"></a>
+									<a href="/index" title=""><img src="https://placehold.it/93x40" alt="" style="width: 150px; height: 100px"></a>
 									</div>
 								</div>
 								<div class="col-lg-4">

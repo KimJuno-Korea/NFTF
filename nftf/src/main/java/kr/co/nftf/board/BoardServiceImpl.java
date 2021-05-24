@@ -77,6 +77,8 @@ public class BoardServiceImpl implements BoardService {
 			System.out.println(httpSession.getAttribute("userId"));
 		}
 		//추후 삭제 예정
+		
+		System.out.println(httpSession.getAttribute("userId"));
 		return boardMapper.listPage(displayPost, postNum);
 	}
 	

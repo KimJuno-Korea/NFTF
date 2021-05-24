@@ -1,16 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>게시글 목록 조회 페이지</h1>
+
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+<section class="overlape">
+		<div class="block no-padding">
+			<div data-velocity="-.1" style="background: url(&quot;https://placehold.it/1600x800&quot;) 50% -97.9px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+			<div class="container fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner-header">
+							<h3>Employer</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+	<div class="block less-top">
+		<div class="container">
+		<aside class="col-lg-3 column margin_widget">
+				 		<div class="widget">
+				 			<div class="search_widget_job">
+				 				<div class="field_w_search">
+				 					<input type="text" placeholder="게시글 제목을 입력하세요." id="keyword">
+				 					<button id="searchBtn" style="padding:0px 0px;"><i class="la la-search"></i></button>
+				 				</div><!-- Search Widget -->
+				 			</div>
+				 		</div>
+				 		<div class="widget border">
+				 			<h3 class="sb-title open">구분</h3>
+				 			<div class="specialism_widget" style="">
+				 				<div class="simple-checkbox">
+									<p><input type="checkbox" name="spealism" id="as"><label for="as">팝니다 </label></p>
+									<p><input type="checkbox" name="spealism" id="asd"><label for="asd">삽니다 </label></p>
+								</div>
+				 			</div>
+				 		</div>
+				 		<div class="widget border">
+				 			<h3 class="sb-title open">거래방식</h3>
+				 			<div class="specialism_widget" style="">
+				 				<div class="simple-checkbox">
+									<p><input type="checkbox" name="spealism" id="as"><label for="as">직거래 </label></p>
+									<p><input type="checkbox" name="spealism" id="asd"><label for="asd">택배 거래 </label></p>
+									<p><input type="checkbox" name="spealism" id="errwe"><label for="errwe">거래함</label></p>
+				 				</div>
+				 			</div>
+				 		</div>
+				 	</aside>
 	<input type="text" placeholder="게시글 제목을 입력하세요." id="keyword">
-	<button id="searchBtn">검색</button>
+	<!-- <button id="searchBtn">검색</button> -->
 	<div id="display">
 		<table border="1">
 			<thead>
@@ -102,8 +142,15 @@
 	<c:if test="${sessionScope.userId != null }">
 		<button onclick="location.href='/board/form'">등록하기</button>
 	</c:if>
-	<h1>test</h1>
-</body>
+	
+	
+	
+	
+	
+	</div>
+</div>
+</section>
+
 <script>
 	document.getElementById('searchBtn').addEventListener('click', ajax_call);
 	
@@ -151,9 +198,11 @@
 					}
 				}
 			};
-			xhr.open("POST", "http://localhost/boardsearch", true);
+			xhr.open("POST", "https://localhost/boardsearch", true);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.send(data);
 		};
 </script>
+
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 </html>
