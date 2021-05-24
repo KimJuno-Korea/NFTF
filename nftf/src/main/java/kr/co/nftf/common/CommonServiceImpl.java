@@ -28,6 +28,7 @@ public class CommonServiceImpl implements CommonService {
 				System.out.println("로그인 성공");
 				
 				httpSession.setAttribute("id", user.getId());
+				httpSession.setMaxInactiveInterval(1800);
 				return true;
 			}
 		}

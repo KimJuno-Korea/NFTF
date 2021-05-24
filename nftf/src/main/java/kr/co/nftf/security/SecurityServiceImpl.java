@@ -3,6 +3,7 @@ package kr.co.nftf.security;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.imageio.ImageIO;
 
@@ -16,7 +17,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import kr.co.nftf.trading.Trading;
 import kr.co.nftf.tradingbox.TradingBox;
 import kr.co.nftf.tradingbox.TradingBoxMapper;
 
@@ -24,7 +24,6 @@ import kr.co.nftf.tradingbox.TradingBoxMapper;
 public class SecurityServiceImpl implements SecurityService{
 	@Autowired
 	TradingBoxMapper tradingBoxMapper;
-
 	//인증키 대조 (물품 수령시 필요한 인증키를 대조함)
 	@Override
 	public boolean contrastKey(String key) {
@@ -48,19 +47,27 @@ public class SecurityServiceImpl implements SecurityService{
 		for (int i = 0 ; i < 10 ; i++) {
 			key.append(((int)(Math.random()*10))+"");
 		}
+		
 		if (tradingBox != null) {
 			tradingBox = tradingBoxMapper.select(tradingBox);
+			
+			tradingBox.setAuthKeyDate(LocalDateTime.now());
 			tradingBox.setAuthKey(key.toString());
 			tradingBoxMapper.update(tradingBox);
-			BitMatrix bitMatrix = new QRCodeWriter().encode(key.toString(), BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
-			BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(qrImage, "png", baos);
 			
-			byte[] file = baos.toByteArray();
+			byte[] file = getQR(key.toString());
 			return file;
 		}
 		return null;
+	}
+	
+	private byte[] getQR(String key) throws WriterException, IOException {
+		BitMatrix bitMatrix = new QRCodeWriter().encode(key, BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
+		BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
+		ImageIO.write(qrImage, "png", baos);
+		return baos.toByteArray();
 	}
 
 	//로그인 QR 생성
