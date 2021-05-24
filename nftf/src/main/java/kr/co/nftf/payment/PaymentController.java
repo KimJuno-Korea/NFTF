@@ -3,14 +3,14 @@ package kr.co.nftf.payment;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardService;
@@ -47,13 +47,11 @@ public class PaymentController {
 			
 			if (board.getStatus() != 'W') {
 				board.setStatus('W');
-				System.out.println(board.getStatus());
 				boardServiceImpl.boardEdit(board);
 				
 				Trading trading = new Trading();
 				trading.setBoardNo(board.getNo());
 				//어차피 로그인 관련은 인터셉터에서 처리함
-				System.out.println(session.getAttribute("id").toString());
 				trading.setBuyerId(session.getAttribute("id").toString());
 				tradingServiceImpl.editTrading(trading);
 				return true;
@@ -63,16 +61,13 @@ public class PaymentController {
 		return false;
 	}
 	
-	@GetMapping("/payment/qr")
-	public void createKeyQR(@RequestParam int no, HttpServletResponse response) throws Exception{
-		
-		System.out.println(no);
-		Board board = new Board();
-		board.setNo(no);
+	@PostMapping("/payment/qr")
+	public String createKeyQR(Board board, HttpServletResponse response) throws Exception{
+	
 		board = boardServiceImpl.boardSelect(board);
 		
 		TradingBox tradingBox = new TradingBox();
-		tradingBox.setBoardNo(no);
+		tradingBox.setBoardNo(board.getNo());
 		tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
 		
 		Trading trading = new Trading();
@@ -83,11 +78,14 @@ public class PaymentController {
 		if (session.getAttribute("id") != null) {
 			
 			byte[] file = this.securityServiceImpl.createKeyQR(tradingBox);
-			System.out.println("성공??");
 			if (file != null) {
+				System.out.println(board.toString());
 				response.setContentType("image/png");
-				response.getOutputStream().write(file);
+				byte[] encodeBase64 = Base64.encodeBase64(file);
+				String stringImg = new String(encodeBase64, "utf-8");
+				return stringImg;
 			}
 		}
+		return null;
 	}
 }

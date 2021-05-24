@@ -1,7 +1,7 @@
 package kr.co.nftf.tradingbox;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TradingBox implements Serializable {
 	private String branchCode;
@@ -10,7 +10,7 @@ public class TradingBox implements Serializable {
 	private char status;
 	private String adWord;
 	private String authKey;
-	private LocalDate authKeyDate;
+	private LocalDateTime authKeyDate;
 	
 	public TradingBox() {
 	
@@ -64,11 +64,11 @@ public class TradingBox implements Serializable {
 		this.authKey = authKey;
 	}
 
-	public LocalDate getAuthKeyDate() {
+	public LocalDateTime getAuthKeyDate() {
 		return authKeyDate;
 	}
 
-	public void setAuthKeyDate(LocalDate authKeyDate) {
+	public void setAuthKeyDate(LocalDateTime authKeyDate) {
 		this.authKeyDate = authKeyDate;
 	}
 }

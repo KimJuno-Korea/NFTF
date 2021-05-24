@@ -14,8 +14,8 @@
 		<result column="AUTH_KEY_DATE" property="authKeyDate" />
 	</resultMap>
 	
-		<sql id="whereSql">  
-			<where>
+	<sql id="whereSql">  
+		<where>
 			<if test="branchCode != null and branchCode != ''">
 				AND BRANCH_CODE = #{branchCode}
 			</if>
@@ -34,7 +34,7 @@
 			<if test="authKey != null and authKey != ''">
 				AND AUTH_KEY = #{authKey}
 			</if>
-			<if test="authKeyDate != null and authKeyDate != ''">
+			<if test="authKeyDate != null">
 				AND AUTH_KEY_DATE = #{authKeyDate}
 			</if>
 		</where>
@@ -56,12 +56,6 @@
 	<update id="update" parameterType="kr.co.nftf.tradingbox.TradingBox">
 		UPDATE TRADING_BOX
 		<set>
-			<if test="branchCode != null">
-				BRANCH_CODE = #{branchCode},
-			</if>
-			<if test="no != null">
-				NO = #{no},
-			</if>
 			<if test="boardNo != null">
 				BOARD_NO = #{boardNo},
 			</if>
@@ -78,6 +72,14 @@
 				AUTH_KEY_DATE = #{authKeyDate},
 			</if>
 		</set>
+		<where>
+			<if test="branchCode != null and branchCode != ''">
+				AND BRANCH_CODE = #{branchCode}
+			</if>
+			<if test="no != 0">
+				AND NO = #{no}
+			</if>
+		</where>
 	</update>
 	
 	<select	id="select" parameterType="kr.co.nftf.tradingbox.TradingBox" resultMap="tradingBoxResultMap">

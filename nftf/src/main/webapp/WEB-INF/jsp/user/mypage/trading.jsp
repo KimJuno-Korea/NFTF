@@ -43,9 +43,8 @@
 										</c:when>
 									</c:choose>
 									<td>${buy.tradeDate}</td>
-									<c:if test="${fn:contains(buy.status, 'M')}">
-										<td><img src='${pageContext.request.contextPath}/payment/qr?no=${buy.boardNo}'></td>
-										<!-- <td><input type="button" value="인증키 QR 발급" onclick="sellQR()"><div id="html"></div></td> -->
+									<c:if test="${fn:contains(buy.status, 'M')}">sellQR(${buy.boardNo})
+										<td><img id="buyQR" src=''><input type='button' value="buyQR" onclick="buyQR(${buy.boardNo})"></td>
 									</c:if>
 								</tr>
 							</c:forEach>
@@ -85,8 +84,11 @@
 									</c:choose>
 									<td>${sell.tradeDate}</td>
 									<c:if test="${fn:contains(sell.status, 'M')}">
-										<td><img src='${pageContext.request.contextPath}/payment/qr?no=${sell.boardNo}'></td>
-										<!-- <td><input type="button" value="인증키 QR 발급" onclick="sellQR()"><div id="html"></div></td> -->
+										<td>
+											<div id="timer${sell.boardNo}"></div>
+											<img id="sellQR${sell.boardNo}" src=''>
+											<input id="sellQRBtn${sell.boardNo}" type='button' value="QR인증키 발급" onclick="sellQR(${sell.boardNo})">
+										</td>
 									</c:if>
 								</tr>
 							</c:forEach>
@@ -102,10 +104,49 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-
+	
+	function sellTimer(sec, no) {
+		$("#timer"+no).text(sec);
+		for (var i = 0 ; i < sec ; i++) {
+			setTimeout(function() {
+				$("#timer"+no).text(--sec);
+				if (sec <= 0) {
+					$('#sellQRBtn'+no).val("재발급");
+					$("#sellQRBtn"+no).show();
+					$('#sellQR'+no).hide();
+				}
+			}, 1000+(i*1000));
+		}
+	}
+	
 	function sellQR(no) {
-		var html = "<img src='${pageContext.request.contextPath}/payment/qr?no=${sell.boardNo}'>"
-		$('#html').html(html);
+		$.ajax({
+			url : '${pageContext.request.contextPath}/payment/qr',
+			type : 'POST',
+			data : "no="+no,
+			success : function(result) {
+				$('#sellQR'+no).attr('src', 'data:image/png;base64, ' + result);
+				sellTimer(30, no);
+				$('#sellQRBtn'+no).hide();
+				$('#sellQR'+no).show();
+				//서버에서 DB의 시간이랑 현재 시간 비교해서 30초뒤면 안되도록 구현
+			}, error : function() {
+				console.log("error");
+			}
+		});
+	}
+	
+	function buyQR(no) {
+		$.ajax({
+			url : '${pageContext.request.contextPath}/payment/qr',
+			type : 'POST',
+			data : "no="+no,
+			success : function(result) {
+				$('#buyQR').attr('src', 'data:image/png;base64, ' + result);
+			}, error : function() {
+				console.log("error");
+			}
+		});
 	}
 
 </script>

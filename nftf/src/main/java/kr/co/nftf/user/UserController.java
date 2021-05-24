@@ -316,14 +316,10 @@ public class UserController {
 				if (userService.selectUser(user) == null) {
 					httpSession.setAttribute("key", "");
 					System.out.println(user.getPhone());
-//						String key = userService.sendKey(user.getPhone());
-					int no1 = ((int)(Math.random()*10));
-					int no2 = ((int)(Math.random()*10));
-					int no3 = ((int)(Math.random()*10));
-					int no4 = ((int)(Math.random()*10));
-					int no5 = ((int)(Math.random()*10));
-					int no6 = ((int)(Math.random()*10));
-					String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
+					StringBuilder key = new StringBuilder();
+					for (int i = 0 ; i < 6 ; i++) {
+						key.append(((int)(Math.random()*10))+"");
+					}
 					System.out.println("회원가입 인증키"+key);
 					httpSession.setAttribute("key", key);
 					return 1;
@@ -332,16 +328,12 @@ public class UserController {
 				if (userService.selectUser(user) != null) {
 					httpSession.setAttribute("key", "");
 					System.out.println(user.getPhone());
-//					String key = userService.sendKey(user.getPhone());
-					int no1 = ((int)(Math.random()*10));
-					int no2 = ((int)(Math.random()*10));
-					int no3 = ((int)(Math.random()*10));
-					int no4 = ((int)(Math.random()*10));
-					int no5 = ((int)(Math.random()*10));
-					int no6 = ((int)(Math.random()*10));
-					String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
+					StringBuilder key = new StringBuilder();
+					for (int i = 0 ; i < 6 ; i++) {
+						key.append(((int)(Math.random()*10))+"");
+					}
 					System.out.println("인증키"+key);
-					httpSession.setAttribute("key", key);
+					httpSession.setAttribute("key", key.toString());
 					return 1;
 				} else {
 					System.out.println("아이디와 전화번호가 일치하지 않음");
