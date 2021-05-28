@@ -37,11 +37,21 @@
  <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <!-- Bootstrap Js -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <!-- Slick Js -->
 <script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 <!-- Main Js -->
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
- 
+<!-- Add Main JS -주현 -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/modernizr.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/wow.min.js" type="text/javascript"></script>
+<script src="js/slick.min.js" type="text/javascript"></script>
+<script src="js/parallax.js" type="text/javascript"></script>
+<script src="js/select-chosen.js" type="text/javascript"></script>
+<script src="js/jquery.scrollbar.min.js" type="text/javascript"></script>
 </html>

@@ -99,6 +99,6 @@
 
     <delete id="delete" parameterType="kr.co.nftf.reply.Reply">
         DELETE FROM reply
-        WHERE NO = #{no}
+        <include refid="whereSql" />
     </delete>
 </mapper>

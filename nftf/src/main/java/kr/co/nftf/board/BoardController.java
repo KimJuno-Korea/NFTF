@@ -22,6 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.nftf.photo.Photo;
 import kr.co.nftf.photo.PhotoService;
 import kr.co.nftf.photo.PhotoUtil;
+import kr.co.nftf.reply.Reply;
+import kr.co.nftf.reply.ReplyService;
+import kr.co.nftf.reply.ReplyServiceImpl;
 import kr.co.nftf.user.User;
 import kr.co.nftf.user.UserService;
 
@@ -35,6 +38,9 @@ public class BoardController {
 	
 	@Autowired
 	private UserService userServiceImpl;
+	
+	@Autowired
+	private ReplyService replyServiceImpl;
 	
 	@Autowired
 	private HttpSession session;
@@ -78,9 +84,9 @@ public class BoardController {
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
-		user.setId(session.getAttribute("id").toString());
+		/* user.setId(session.getAttribute("id").toString()); 아직 로그인 하지 않음 */
 		try {
-			user = userServiceImpl.selectUser(user);
+			/* user = userServiceImpl.selectUser(user); */
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {
@@ -100,6 +106,9 @@ public class BoardController {
 		
 		try {
 			listBoard = boardServiceImpl.boardSearch(keyword);
+			for (int i = 0; i < listBoard.size(); i ++) {
+				System.out.println(listBoard.get(i).getTitle());
+			}
 			System.out.println("boardsearch");
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -228,16 +237,19 @@ public class BoardController {
 	public ModelAndView deleteBoard(Board board) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/board?num=1");
 		Photo photo = new Photo();
+		Reply reply = new Reply();
 		List<Photo> photoList = new ArrayList<>();
 		
 		PhotoUtil photoUtil = new PhotoUtil();
 		photo.setBoardNo(board.getNo());
+		reply.setBoardNo(board.getNo());
 		try {
 			photoList = photoServiceImpl.photoList(photo);
 			for (int i = 0; i < photoList.size(); i ++) {
 				photoUtil.deleteFile(photoList.get(i));				
 			}
 			
+			replyServiceImpl.replyDelete(reply);
 			photoServiceImpl.photoDelete(photo);
 			boardServiceImpl.boardDelete(board);
 		} catch(Exception e) {

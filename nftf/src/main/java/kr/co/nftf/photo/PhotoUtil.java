@@ -10,8 +10,8 @@ import net.coobird.thumbnailator.Thumbnails;
 
 public class PhotoUtil {
 
-	static final int THUMB_WIDTH = 300;
-	static final int THUMB_HEIGHT = 300;
+	static final int THUMB_WIDTH = 150;
+	static final int THUMB_HEIGHT = 150;
 
 	public String fileUpload(String uploadPath, String fileName, byte[] fileData) 
 			throws Exception {
