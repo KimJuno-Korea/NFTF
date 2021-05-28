@@ -128,7 +128,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		$.ajax({
 			dataType : 'json',
 			contentType : 'application/json; charset=utf-8;',
-			url : '${pageContext.request.contextPath}/user/key',
+			url : '${pageContext.request.contextPath}/user/key/signup',
 			type : 'POST',
 			data : JSON.stringify(phoneData),
 			success : function(result) {

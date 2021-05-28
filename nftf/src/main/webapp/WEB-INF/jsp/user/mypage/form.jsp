@@ -1,32 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>비밀번호 확인</title>
-</head>
-<body>
-	<div class="row">
-		<h2>마이 페이지</h2><br>
-		<h4>비밀번호 확인</h4>
-		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
-			<form id="form" action="${pageContext.request.contextPath}/user/form/${id}" method="post" >
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
 				<div class="row">
-					<input id="inputPw" type="text" name="pw" placeholder="비밀번호"> <br>
-			 	</div>
-				<div class="row">
-					<input id="signupBtn" type="button" onclick="pwSubmit()" value="확인">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>마이페이지</h3>
+								<span>마이페이지 접속을 위해 비밀번호를 입력해 주세요</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-</body>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="account-popup">
+					<form id="form" action="${pageContext.request.contextPath}/user/form/${id}" method="post" >
+						<div class="cfield">
+							<input id="inputPw" type="password" name="pw" placeholder="비밀번호">
+					 	</div>
+							<input type="button" class="onclick" onclick="pwSubmit()" value="확인">
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
 	function pwSubmit() {
 
@@ -38,4 +52,3 @@
 		}
 	}
 </script>
-</html>

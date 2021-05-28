@@ -13,9 +13,9 @@
 						<input id="inputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
 				 	</div>
 				 	<div class="cfield">
-				 		<input id="inputPw" type="text" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+				 		<input id="inputPw" type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
 					</div>
-					<input type="submit" id="loginBtn" value="로그인">
+					<input class="submit" type="submit" id="loginBtn" value="로그인">
 				</form>
 			</div>
 		</div>
