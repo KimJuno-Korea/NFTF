@@ -51,13 +51,11 @@ public class PaymentController {
 				
 				Trading trading = new Trading();
 				trading.setBoardNo(board.getNo());
-				//어차피 로그인 관련은 인터셉터에서 처리함
 				trading.setBuyerId(session.getAttribute("id").toString());
 				tradingServiceImpl.editTrading(trading);
 				return true;
 			}
 		}
-		System.out.println("실패");
 		return false;
 	}
 	

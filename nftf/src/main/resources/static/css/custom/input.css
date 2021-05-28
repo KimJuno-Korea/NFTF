@@ -1,8 +1,9 @@
-.cfield input[type="button"], [type="submit"] {
+.onclick, .submit {
 	float: left;
     width: 100%;
     background-color: #1666ba;
     margin: auto;
+	margin-bottom: 30px;
     font-size: 18px;
     font-weight: 700;
     color: #ffffff;
@@ -10,19 +11,86 @@
 	border-radius: 20px;
 	padding-top: 16px;
 	padding-bottom: 16px;
-	
 	text-align: center;
-	
-
 }
 
-.cfield input[type="button"]:hover, [type="submit"]:hover{
+.onclick:hover, .submit:hover{
     background-color: #0053e3;
 	border-radius: 0px;
-	
 	-webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
     -ms-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;
     transition: all 0.5s ease 0s;
 }
+
+.ajax {
+	float: none;
+    width: 100%;
+    background-color: #42d7f5;
+    margin: auto;
+	margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+	border: none;
+	border-radius: 20px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	text-align: center;
+}
+
+.ajax:hover{
+    background-color: #00c8ff;
+	border-radius: 0px;
+	-webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+.ajax:visited{
+    background-color: #00c8ff;
+	border-radius: 0px;
+	-webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+}
+
+.ajax:disabled{
+	background-color: #00a1b3;
+    border-radius: 0px;
+	-webkit-transition: all 1.0s ease 0s;
+    -moz-transition: all 1.0s ease 0s;
+    -ms-transition: all 1.0s ease 0s;
+    -o-transition: all 1.0s ease 0s;
+    transition: all 1.0s ease 0s;
+}
+
+.account-popup > form .cfield input:disabled{
+    background-color: #dbdbdb;
+    border-radius: 0px;
+	-webkit-transition: all 1.0s ease 0s;
+    -moz-transition: all 1.0s ease 0s;
+    -ms-transition: all 1.0s ease 0s;
+    -o-transition: all 1.0s ease 0s;
+    transition: all 1.0s ease 0s;
+}
+
+.checkInput {
+	font-weight: 600;
+	margin-bottom: 20px;
+	-webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -ms-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
+
+/* transition: <property> <duration> <timing-function> <delay>; */
+
+
+
