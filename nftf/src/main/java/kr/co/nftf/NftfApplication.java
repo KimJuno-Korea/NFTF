@@ -22,9 +22,9 @@ public class NftfApplication implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//board
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/**/form");
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/form");
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/*");
+		//registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/**/form");
+		//registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/form");
+		//registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/*");
 		
 		//branch
 		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/branch/**");

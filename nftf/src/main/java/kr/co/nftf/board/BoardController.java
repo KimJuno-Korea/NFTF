@@ -84,9 +84,9 @@ public class BoardController {
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
-		/* user.setId(session.getAttribute("id").toString()); 아직 로그인 하지 않음 */
+		user.setId(session.getAttribute("id").toString());
 		try {
-			/* user = userServiceImpl.selectUser(user); */
+			user = userServiceImpl.selectUser(user);
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {

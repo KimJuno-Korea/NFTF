@@ -10,7 +10,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <h1>게시글 등록 페이지</h1>
 	<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data">
-		아이디 : <input type="text" name="userId" value="${sessionScope.userId }" readonly/><br>
+		아이디 : <input type="text" name="userId" value="${sessionScope.id }" readonly/><br>
 		<select name="division">
 			<option value="">구분</option>
 			<option value="S">판매자</option>
