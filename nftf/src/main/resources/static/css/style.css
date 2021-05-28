@@ -4535,8 +4535,8 @@ section.overlape {
 }
 .pagination li.active a, .pagination li a:hover {
     color: #ffffff;
-    background-color: #8b91dd;
-    border-color: #8b91dd;
+    background-color: #579bd4;
+    border-color: #579bd4;
 }
 .pagination li .delimeter {
     display: block;
@@ -5331,9 +5331,9 @@ aside .widget.border:first-child {
 .apply-thisjob {
     float: left;
     width: 100%;
-    border: 2px solid #8b91dd;
+    border: 2px solid #579bd4;
     text-align: center;
-    color: #8b91dd;
+    color: #579bd4;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -10837,13 +10837,13 @@ header.style5 .post-job-btn:hover {
 }
 .job-head-wide .apply-thisjob:hover {
     background: transparent;
-    border-color: #9fa4e1;
-    color: #9fa4e1;
+    border-color: #579bd4;
+    color: #579bd4;
 }
 
 .apply-thisjob:hover {
-    background: #9fa4e1;
-    border-color: #9fa4e1;
+    background: #579bd4;
+    border-color: #579bd4;
     color: #FFF;
 }
 
