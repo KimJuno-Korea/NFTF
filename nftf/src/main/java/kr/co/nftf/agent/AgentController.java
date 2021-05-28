@@ -60,4 +60,17 @@ public class AgentController {
 		
 		return boardServiceImpl.boardList(board);
 	}
+	
+	// 물품 등록
+	@PostMapping(value="/agent/registGoods", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Boolean> registGoods (@RequestBody TradingBox tradingBox) {
+		Map<String, Boolean> result = new HashMap<String, Boolean>();	
+		try {
+				tradingBoxServiceImpl.editTradingBox(tradingBox);
+				result.put("result", true);
+		} catch (Exception e) {
+				result.put("result", false);
+		}
+		return result;
+	}
 }

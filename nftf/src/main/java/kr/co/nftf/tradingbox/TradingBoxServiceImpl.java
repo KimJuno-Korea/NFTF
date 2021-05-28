@@ -18,7 +18,7 @@ public class TradingBoxServiceImpl implements TradingBoxService {
 	BranchMapper branchMapper;
 	
 	@Override
-	public void registerTradingBox(TradingBox tradingBox) {
+	public void registerTradingBox(TradingBox tradingBox) throws Exception {
 		tradingBoxMapper.insert(tradingBox);
 	}
 
@@ -40,17 +40,17 @@ public class TradingBoxServiceImpl implements TradingBoxService {
 	}
 
 	@Override
-	public TradingBox selectTradingBox(TradingBox tradingBox) {
+	public TradingBox selectTradingBox(TradingBox tradingBox) throws Exception {
 		return tradingBoxMapper.select(tradingBox);
 	}
 
 	@Override
-	public void editTradingBox(TradingBox tradingBox) {
+	public void editTradingBox(TradingBox tradingBox) throws Exception {
 		tradingBoxMapper.update(tradingBox);
 	}
 
 	@Override
-	public void deleteTradingBox(TradingBox tradingBox) {
+	public void deleteTradingBox(TradingBox tradingBox) throws Exception {
 		tradingBoxMapper.delete(tradingBox);
 	}
 }
