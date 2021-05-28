@@ -1,45 +1,189 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>게시글 목록 조회 페이지</h1>
-	<table border="1">
-		<thead>
-			<tr>
-				<td>번호</td>
-				<td>아이디</td>
-				<td>제목</td>
-				<td>내용</td>
-				<td>가격</td>
-				<td>구분</td>
-				<td>거래방식</td>
-				<td>상태</td>
-				<td>작성일자</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="list" items="${boardList }" varStatus="board">
-				<tr>
-					<td>${board.count }</td>
-					<td>${list.userId }</td>
-					<td><a href="<%=request.getContextPath() %>/nftf/board/${list.no}">${list.title }</a></td>
-					<td>${list.content }</td>
-					<td>${list.price }</td>
-					<td>${list.division }</td>
-					<td>${list.tradeWay }</td>
-					<td>${list.status }</td>
-					<td>${registrateDate }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<button onclick="location.href='<%=request.getContextPath()%>/nftf/board/form'">등록하기</button>
 
-</body>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+	<section>
+	<div class="block less-top">
+		<div class="container">
+			<div class="row">
+				<aside class="col-lg-3 column margin_widget">
+					<div class="widget">
+						<h3 class="sb-title open">구분</h3>
+						<div class="posted_widget">
+							<input type="radio" name="division" id="232" checked><label for="232">전체</label><br>
+							<input type="radio" name="division" id="wwqe"><label for="wwqe">판매</label><br>
+							<input type="radio" name="division" id="all"><label for="all">구매</label><br>
+						</div>
+					</div>
+					<div class="widget">
+						<h3 class="sb-title open">거래방식</h3>
+						<div class="posted_widget">
+							<input type="radio" name="tradeWay" value="" id="all2" checked><label for="all2">전체</label><br>
+							<input type="radio" name="tradeWay" value="D" id="qwe"><label for="qwe">직거래</label><br>
+							<input type="radio" name="tradeWay" value="P" id="wqe"><label for="wqe">택배 거래</label><br>
+							<input type="radio"	name="tradeWay" value="T" id="qweqw"><label class="nm" for="qweqw">거래함</label><br>
+						</div>
+					</div>
+					<div class="widget">
+						<div class="search_widget_job">
+							<div class="field_w_search">
+								<input type="text" placeholder="검색할 제목을 입력하세요." id="keyword">
+								<button id="searchBtn" style="padding: 0px 0px;">
+									<i class="la la-search"></i>
+								</button>
+							</div>
+							<!-- Search Widget -->
+							<c:if test="${sessionScope.id != null }">
+			 					<a class="apply-thisjob" onclick="location.href='/board/form'" style="padding:10px 30px;">등록하기</a>
+			 				</c:if>
+						</div>
+					</div>
+				</aside>
+				<div class="col-lg-9 column">
+					<div class="emply-list-sec style2">
+						<!-- Employe List -->
+						<c:forEach var="list" items="${boardList }" varStatus="board">
+							<div class="emply-list">
+								<div class="emply-list-thumb">
+									<img src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}">
+								</div>
+								<div class="emply-list-info">
+									<div class="emply-pstn">
+										<c:choose>
+											<c:when test="${list.division eq 'S'}">
+												<b style="color: blue;">구매</b>
+											</c:when>
+											<c:when test="${list.division eq 'B'}">
+												<b style="color: red;">판매</b>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${list.tradeWay eq 'D'}">
+												<b style="color: black;">&nbsp;직거래</b>
+											</c:when>
+											<c:when test="${list.tradeWay eq 'P'}">
+												<b style="color: black;">&nbsp;택배</b>
+											</c:when>
+											<c:when test="${list.tradeWay eq 'T'}">
+												<b style="color: black;">&nbsp;거래함</b>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${list.status eq 'S'}">
+												<b style="color: red;">&nbsp;거래완료</b>
+											</c:when>
+											<c:when test="${list.status eq 'M'}">
+												<b style="color: green;">&nbsp;거래가능</b>
+											</c:when>
+										</c:choose>
+									</div>
+									<h3>
+										<a href="/board/${list.no}">${list.title }</a>
+									</h3>
+									<span>가격 : ${list.price }</span>
+									<h6>
+										<i class="la la-map-marker"></i> 천안지점
+									</h6>
+									<p>${list.content }</p>
+								</div>
+							</div>
+						</c:forEach>
+						<!-- Pagination -->
+					</div>
+
+				<div id="search"></div>
+
+				<div class="pagination">
+					<ul>
+					<c:if test="${paging.prev}">
+						<li class="prev">
+							<a href="<%=request.getContextPath() %>/board?num=${paging.startPageNum - 1}">
+								<i class="la la-long-arrow-left"></i>이전
+							</a>
+						</li>
+					</c:if>
+
+					<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="num">
+						<c:if test="${select != num}">
+							<li><a href="<%=request.getContextPath() %>/board?num=${num}">${num}</a></li>
+						</c:if>
+						<c:if test="${select == num}">
+							<li class="active">
+								<a style="font:bold;">${num}</a>
+							</li>
+						</c:if>
+					</c:forEach>
+
+					<c:if test="${paging.next}">
+						<li class="next">
+							<a href="<%=request.getContextPath() %>/board?num=${paging.endPageNum + 1}">다음
+								<i class="la la-long-arrow-right"></i>
+							</a>
+						</li>
+					</c:if>
+					</ul>
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
+
+<script>
+	document.getElementById('searchBtn').addEventListener('click', ajax_call);
+
+	function ajax_call() {
+		var xhr = new XMLHttpRequest();
+		var data = "keyword=" + document.getElementById('keyword').value;
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === xhr.DONE) {
+				if (xhr.status === 200 || xhr.status === 201) {
+					var html = "<table border=\"1\">"
+							+ "<thead>"
+							+ "<tr>"
+							+ "<td>번호</td>"
+							+ "<td>아이디</td>"
+							+ "<td>제목</td>"
+							+ "<td>내용</td>"
+							+ "<td>가격</td>"
+							+ "<td>구분</td>"
+							+ "<td>거래방식</td>"
+							+ "<td>상태</td>"
+							+ "<td>작성일자</td>"
+							+ "</tr>"
+							+ "</thead>"
+					var msg = JSON.parse(xhr.responseText);
+					html += "<tbody>";
+					for (var i = 0; i < msg.length; i ++) {
+						var no = msg[i].no;
+						html += "<tr>";
+						html += "<td>" + (i + 1) + "</td>";
+						html += "<td><a href=\"/board/" + no + "\">"
+								+ msg[i].userId + "</a></td>";
+						html += "<td>" + msg[i].title + "</td>";
+						html += "<td>" + msg[i].content + "</td>";
+						html += "<td>" + msg[i].price + "</td>";
+						html += "<td>" + msg[i].division + "</td>";
+						html += "<td>" + msg[i].tradeWay + "</td>";
+						html += "<td>" + msg[i].status + "</td>";
+						html += "<td>" + msg[i].registrateDate + "</td>";
+						html += "</tr>";
+					}
+					html += "</tbody>";
+					document.getElementById('search').innerHTML = html;
+					} else {
+						console.error(xhr.responseText);
+					}
+				}
+			};
+			xhr.open("POST", "https://localhost/boardsearch", true);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.send(data);
+		};
+</script>
+
 </html>

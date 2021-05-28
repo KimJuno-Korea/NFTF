@@ -6,8 +6,9 @@ public class Photo implements Serializable {
 	private int boardNo;
 	private int no;
 	private String path;
+	private String thumbnail;
 	private String logicalName;
-	private String physicalName;
+	private String PhysicalName;
 	
 	public Photo() {
 	}
@@ -36,6 +37,14 @@ public class Photo implements Serializable {
 		this.path = path;
 	}
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
 	public String getLogicalName() {
 		return logicalName;
 	}
@@ -45,10 +54,10 @@ public class Photo implements Serializable {
 	}
 
 	public String getPhysicalName() {
-		return physicalName;
+		return PhysicalName;
 	}
 
 	public void setPhysicalName(String physicalName) {
-		this.physicalName = physicalName;
+		PhysicalName = physicalName;
 	}
 }

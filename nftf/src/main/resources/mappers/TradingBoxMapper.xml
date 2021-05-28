@@ -14,8 +14,8 @@
 		<result column="AUTH_KEY_DATE" property="authKeyDate" />
 	</resultMap>
 	
-		<sql id="whereSql">  
-			<where>
+	<sql id="whereSql">  
+		<where>
 			<if test="branchCode != null and branchCode != ''">
 				AND BRANCH_CODE = #{branchCode}
 			</if>
@@ -34,22 +34,15 @@
 			<if test="authKey != null and authKey != ''">
 				AND AUTH_KEY = #{authKey}
 			</if>
-			<if test="authKeyDate != null and authKeyDate != ''">
+			<if test="authKeyDate != null">
 				AND AUTH_KEY_DATE = #{authKeyDate}
 			</if>
 		</where>
 	</sql>
 	
 	<insert id="insert" parameterType="kr.co.nftf.tradingbox.TradingBox">
-		INSERT INTO TRADING_BOX (
-		BRANCH_CODE,
-		NO,
-		BOARD_NO,
-		STATUS,
-		AD_WORD,
-		AUTH_KEY,
-		AUTH_KEY_DATE,
-		) VALUES (
+		INSERT INTO TRADING_BOX
+		VALUES (
 		#{branchCode},
 		#{no},
 		#{boardNo},
@@ -63,31 +56,30 @@
 	<update id="update" parameterType="kr.co.nftf.tradingbox.TradingBox">
 		UPDATE TRADING_BOX
 		<set>
-			<if test="branchCode != null">
-				ID = #{branchCode},
-			</if>
-			<if test="no != null">
-				ID = #{no},
-			</if>
 			<if test="boardNo != null">
-				ID = #{boardNo},
-			</if>
-			<if test="logtitude != null">
-				ID = #{logtitude},
+				BOARD_NO = #{boardNo},
 			</if>
 			<if test="status != null">
-				ID = #{status},
+				STATUS = #{status},
 			</if>
 			<if test="adWord != null">
-				ID = #{adWord},
+				AD_WORD = #{adWord},
 			</if>
 			<if test="authKey != null">
-				ID = #{authKey},
+				AUTH_KEY = #{authKey},
 			</if>
 			<if test="authKeyDate != null">
-				ID = #{authKeyDate},
+				AUTH_KEY_DATE = #{authKeyDate},
 			</if>
 		</set>
+		<where>
+			<if test="branchCode != null and branchCode != ''">
+				AND BRANCH_CODE = #{branchCode}
+			</if>
+			<if test="no != 0">
+				AND NO = #{no}
+			</if>
+		</where>
 	</update>
 	
 	<select	id="select" parameterType="kr.co.nftf.tradingbox.TradingBox" resultMap="tradingBoxResultMap">
@@ -98,13 +90,20 @@
 			STATUS,
 			AD_WORD,
 			AUTH_KEY,
-			AUTH_KEY_DATE,
+			AUTH_KEY_DATE
 		FROM TRADING_BOX
 		<include refid="whereSql" />
 	</select>
 	
 	<select	id="selectAll" parameterType="kr.co.nftf.tradingbox.TradingBox" resultMap="tradingBoxResultMap">
-		SELECT *
+		SELECT 			
+			BRANCH_CODE,
+			NO,
+			BOARD_NO,
+			STATUS,
+			AD_WORD,
+			AUTH_KEY,
+			AUTH_KEY_DATE
 		FROM TRADING_BOX
 		<include refid="whereSql" />
 	</select>

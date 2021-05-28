@@ -10,5 +10,105 @@
 		<result column="EMAIL" property="email" />
 		<result column="PHONE" property="phone" />
 		<result column="DIVISION" property="division" />
+		<result column="ACCOUNT_NO" property="accountNo" />
+		<result column="BANK_NO" property="bankNo" />
+		<result column="PIN_ACCOUNT" property="pinAccount" />
 	</resultMap>
+	
+	<sql id="whereSql">
+        <where>
+            <if test="id != null and id != ''">
+                AND ID = #{id}
+            </if>
+            <if test="pw != null and pw != ''">
+                AND PW = #{pw}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                AND PHONE = #{phone}
+            </if>
+            <if test="division != null and division != ''">
+                AND DIVISION = #{division}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo}
+            </if>
+            <if test="bankNo != null and bankNo != ''">
+                AND BANK_NO = #{bankNo}
+            </if>
+            <if test="pinAccount != null and pinAccount != ''">
+                AND PIN_ACCOUNT = #{pinAccount}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="select" parameterType="kr.co.nftf.user.User" resultMap="userResultMap">
+        SELECT
+           	ID,
+            PW,
+            EMAIL,
+            PHONE,
+			DIVISION,
+			ACCOUNT_NO,
+			BANK_NO,
+			PIN_ACCOUNT
+        FROM user
+        <include refid="whereSql" />
+    </select>
+    
+    <insert id="insert" parameterType="kr.co.nftf.user.User">
+    	INSERT INTO user (
+            ID,
+            PW,
+            EMAIL,
+            PHONE,
+			DIVISION,
+			ACCOUNT_NO,
+			BANK_NO,
+			PIN_ACCOUNT
+        ) VALUES (
+            #{id},
+            #{pw},
+            #{email},
+            #{phone},
+            #{division},
+            #{accountNo},
+            #{bankNo},
+            #{pinAccount}
+        )
+    </insert>
+    
+    <update id="update" parameterType="kr.co.nftf.user.User">
+        UPDATE user
+        <set>
+            <if test="pw != null and pw !=''">
+                PW = #{pw},
+            </if>
+            <if test="email != null and email != ''">
+                EMAIL = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                PHONE = #{phone},
+            </if>
+            <if test="division != null and division != ''">
+                DIVISION = #{division},
+            </if>
+             <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo}
+            </if>
+            <if test="bankNo != null and bankNo != ''">
+                AND BANK_NO = #{bankNo}
+            </if>
+            <if test="pinAccount != null and pinAccount != ''">
+                AND PIN_ACCOUNT = #{pinAccount}
+            </if>
+        </set>
+        <where>
+			 <if test="id != null and id != ''">
+                AND ID = #{id}
+            </if>
+		</where>
+    </update>
 </mapper>

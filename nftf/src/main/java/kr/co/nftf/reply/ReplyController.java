@@ -1,33 +1,74 @@
 package kr.co.nftf.reply;
 
-import org.springframework.stereotype.Controller;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-/* @RequestMapping("/reply") */
 public class ReplyController {
-	@PostMapping("/reply/{no}")
-	public ModelAndView registReply(Reply reply) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board/{boardNo}"); //redirect할 때 게시글번호 담아야함
+	@Autowired
+	private ReplyService replyServiceImpl;
+	
+	@GetMapping("/reply")
+	public List<Reply> replyList(Reply reply) {
+		List<Reply> replyList = new ArrayList<>();
 		
-		return modelAndView;
+		try {
+			replyList = replyServiceImpl.replyList(reply);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return replyList;
 	}
 	
-	@PutMapping("/reply/{no}")
-	public ModelAndView editReply(Reply reply) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board/{boardNo}"); //redirect할 때 게시글번호 담아야함
+	//등록
+	@PostMapping("/reply")
+	public int registReply(Reply reply) {
+		int registStatus = 0;
 		
-		return modelAndView;
+		reply.setRegistrateDate(LocalDate.now());
+		reply.setEditStatus('N');
+		
+		try {
+			registStatus = replyServiceImpl.replyRegist(reply);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return registStatus;
 	}
 	
-	@DeleteMapping("/reply/{no}")
-	public ModelAndView deleteReply(Reply reply) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/board/{boardNo}"); //redirect할 때 게시글번호 담아야함
+	@PutMapping("/reply")
+	public int editReply(Reply reply) {
+		int editResult = 0;
+		reply.setEditStatus('Y');
 		
-		return modelAndView;
+		try {
+			editResult = replyServiceImpl.replyEdit(reply);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return editResult;
+	}
+	
+	@DeleteMapping("/reply")
+	public int deleteReply(Reply reply) {
+		int deleteResult = 0;
+		
+		try {
+			deleteResult = replyServiceImpl.replyDelete(reply);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return deleteResult;
 	}
 }
