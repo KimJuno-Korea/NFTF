@@ -26,7 +26,7 @@ public class SecurityServiceImpl implements SecurityService{
 	TradingBoxMapper tradingBoxMapper;
 	//인증키 대조 (물품 수령시 필요한 인증키를 대조함)
 	@Override
-	public boolean contrastKey(String key) {
+	public boolean contrastKey(String key) throws Exception {
 		
 		if (key != null) {
 			TradingBox tradingBox = new TradingBox();
@@ -42,7 +42,7 @@ public class SecurityServiceImpl implements SecurityService{
 	//인증키 QR 생성 (구매누르고 결제 완료시 실행)
 	@Override
 	public byte[] createKeyQR(TradingBox tradingBox)	
-			throws WriterException, IOException  {
+			throws Exception  {
 		StringBuilder key = new StringBuilder();
 		for (int i = 0 ; i < 10 ; i++) {
 			key.append(((int)(Math.random()*10))+"");
