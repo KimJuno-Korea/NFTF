@@ -3,20 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
-<section class="overlape">
-		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(&quot;https://placehold.it/1600x800&quot;) 50% -97.9px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Employer</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<section>
 	<div class="block less-top">
 		<div class="container">
@@ -60,8 +46,7 @@
 						<c:forEach var="list" items="${boardList }" varStatus="board">
 							<div class="emply-list">
 								<div class="emply-list-thumb">
-									<img
-										src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}">
+									<img src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}">
 								</div>
 								<div class="emply-list-info">
 									<div class="emply-pstn">

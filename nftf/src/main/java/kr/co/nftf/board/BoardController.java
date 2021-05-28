@@ -81,14 +81,19 @@ public class BoardController {
 		Photo photo = new Photo();
 		Board board = new Board();
 		User user = new User();
+		Reply reply = new Reply();
+		int replyCount = 0;
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
 		user.setId(session.getAttribute("id").toString());
+		reply.setBoardNo(board.getNo());
+		
 		try {
 			user = userServiceImpl.selectUser(user);
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
+			replyCount = replyServiceImpl.replyList(reply).size();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

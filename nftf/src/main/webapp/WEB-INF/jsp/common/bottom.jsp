@@ -44,7 +44,9 @@
 <script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 <!-- Main Js -->
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 <!-- Add Main JS -주현 -->
+<script src="${pageContext.request.contextPath}/js/album.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/modernizr.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/script.js" type="text/javascript"></script>
