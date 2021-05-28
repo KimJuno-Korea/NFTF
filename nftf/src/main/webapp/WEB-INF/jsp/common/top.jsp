@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
  <!-- HTTP에서 HTTPS로 마이그레이션하려는 도메인 example.com에 위의 헤더가 설정되어 있으면 비 탐색적인 안전하지 않은 리소스 요청이 자동으로 업그레이드됩니다 (타사 및 타사 요청). -->
+<meta charset="UTF-8">
 <title>Trading 365</title>  
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +15,17 @@
 	<meta name="author" content="CreativeLayers">
 
 	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/bootstrap-grid.css" />
-	<link rel="stylesheet" href="https://localhost/css/icons.css">
-	<link rel="stylesheet" href="https://localhost/css/animate.min.css">
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/responsive.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/chosen.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/colors/colors.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/icons.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/responsive.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chosen.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/colors/colors.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/custom/top.css" />
-	<link rel="stylesheet" type="text/css" href="https://localhost/css/custom/input.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/input.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
 </head>
 <body>
 

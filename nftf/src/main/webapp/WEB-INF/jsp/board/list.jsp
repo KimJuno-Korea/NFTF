@@ -48,7 +48,7 @@
 								</button>
 							</div>
 							<!-- Search Widget -->
-							<c:if test="${sessionScope.userId != null }">
+							<c:if test="${sessionScope.id != null }">
 			 					<a class="apply-thisjob" onclick="location.href='/board/form'" style="padding:10px 30px;">등록하기</a>
 			 				</c:if>
 						</div>
