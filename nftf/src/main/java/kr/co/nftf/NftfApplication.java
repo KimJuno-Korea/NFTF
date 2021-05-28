@@ -26,14 +26,14 @@ public class NftfApplication implements WebMvcConfigurer {
 		//registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/form");
 		//registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/board/*");
 		
-		//branch
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/branch/**");
-		
-		//payment
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/payment");
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/payment/**");
-		
-		//photo
-		registry.addInterceptor(new AuthCheckInterceptor()).addPathPatterns("/photo/**");
+		/*
+		 * registry.addInterceptor(new
+		 * AuthCheckInterceptor()).addPathPatterns("/branch/**");
+		 * 
+		 * //payment registry.addInterceptor(new
+		 * AuthCheckInterceptor()).addPathPatterns("/payment");
+		 * registry.addInterceptor(new
+		 * AuthCheckInterceptor()).addPathPatterns("/payment/**");
+		 */
 	}
 }

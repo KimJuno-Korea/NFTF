@@ -4,7 +4,7 @@
 }
 
 a.id {
-	color: #1666ba !important;
+	color: #ffffff !important;
     margin-right: 20px !important;
     font-weight: 600 !important;
     font-size: 16px !important;
@@ -19,6 +19,12 @@ a.id::before{
  	background-size:20px 20px;
     width:20px;
     height:20px;
+}
+
+.la{
+	color: #ffffff;
+    font-size: 20px;
+    line-height: 2;
 }
 
 /* a.id::before{
