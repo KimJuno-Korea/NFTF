@@ -31,6 +31,7 @@ public class PhotoController {
 	
 	@GetMapping("/photo/thumbnail/{no}")
 	public void getThumbnail(@PathVariable String no, HttpServletResponse response) {
+		System.out.println("/photo/thumbnail/{no} 접근");
 		PhotoUtil photoUtil = new PhotoUtil();
 		Photo photo = new Photo();
 		try { 

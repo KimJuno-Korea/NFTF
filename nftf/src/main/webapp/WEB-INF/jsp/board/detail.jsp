@@ -3,8 +3,146 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
-
 <c:set var="board" value="${board }" />
+
+<section>
+		<div class="block">
+			<div class="container">
+				 <div class="row">
+				 	<div class="col-lg-9 column">
+				 		<div class="blog-single">
+						<div class="bs-thumb">
+							<c:forEach var="photo" items="${photoList }">
+								<img src="<%=request.getContextPath() %>/photo/${photo.no}" />
+							</c:forEach>
+						</div>
+						
+						
+						<ul class="post-metas">
+				 				<li>
+				 					<a style="cursor: default">
+				 					${board.userId }
+				 					</a>
+				 				</li>
+				 				<li>
+				 					<a>
+				 					<i class="la la-calendar-o">
+				 					</i>${board.registrateDate }</a>
+				 				</li>
+				 			</ul>
+
+						<h2>${board.title }</h2>
+						
+						<p>${board.content }</p>
+						<div class="tags-share">
+						 			<div class="tags_widget">
+						 				<c:choose>
+											<c:when test="${board.division eq 'S'}">
+							 					<a style="cursor: default; background: blue">
+												<b style="color: white">구매</b>
+												</a>
+											</c:when>
+											<c:when test="${board.division eq 'B'}">
+												<a style="cursor: default; background: red">
+												<b style="color: white;">판매</b>
+								 				</a>
+											</c:when>
+										</c:choose>
+						 				<c:choose>
+											<c:when test="${board.tradeWay eq 'D'}">
+							 					<a style="cursor: default;">
+												<b style="color:black">직거래</b>
+												</a>
+											</c:when>
+											<c:when test="${board.tradeWay eq 'P'}">
+												<a style="cursor: default;">
+												<b>택배</b>
+								 				</a>
+											</c:when>
+											<c:when test="${board.tradeWay eq 'T'}">
+												<a style="cursor: default">
+												<b>거래함</b>
+								 				</a>
+											</c:when>
+										</c:choose>
+						 				<a style="cursor: default">Travel</a>
+						 				<c:choose>
+											<c:when test="${list.status eq 'S'}">
+												<b style="color: red;">&nbsp;거래완료</b>
+											</c:when>
+											<c:when test="${list.status eq 'M'}">
+												<b style="color: green;">&nbsp;거래가능</b>
+											</c:when>
+										</c:choose>
+						 			</div>
+				 			</div>
+				 			<div class="comment-sec">
+				 				<h3>댓글</h3>
+				 				<ul>
+				 					<li>
+				 						<div class="comment">
+				 							<div class="comment-detail">
+				 								<h3>Ali TUFAN</h3>
+				 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
+				 								<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement tantaneously eel valiantly petted this along across highhandedly much. </p>
+				 							</div>
+				 						</div>
+				 					</li>
+				 					<li>
+				 						<div class="comment">
+				 							<div class="comment-detail">
+				 								<h3>Kate ROSELINE</h3>
+				 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
+				 								<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement tantaneously eel valiantly petted this along across highhandedly much. </p>
+				 							</div>
+				 						</div>
+				 					</li>
+				 					<li>
+				 						<div class="comment">
+				 							<div class="comment-detail">
+				 								<h3>Luis DANIEL</h3>
+				 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
+				 								<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement tantaneously eel valiantly petted this along across highhandedly much. </p>
+				 							</div>
+				 						</div>
+				 					</li>
+				 				</ul>
+				 			</div>
+				 			<div class="commentform-sec">
+				 				<h3>댓글 작성</h3>
+				 				<form>
+				 					<div class="row">
+				 						<div class="col-lg-12">
+					 						<div class="pf-field">
+					 							<textarea></textarea>
+					 						</div>
+					 					</div>
+					 					<div class="col-lg-12">
+					 						<button type="submit">Post Comment</button>
+					 					</div>
+				 					</div>
+				 				</form>
+				 			</div>
+				 		</div>
+					</div>
+					<aside class="col-lg-3 column">
+						<div class="widget">
+				 			<div class="search_widget_job no-margin">
+				 				<div class="field_w_search">
+				 					<input placeholder="Search Keywords" type="text">
+				 					<i class="la la-search"></i>
+				 				</div><!-- Search Widget -->
+				 			</div>
+				 		</div>
+					</aside>
+				 </div>
+			</div>
+		</div>
+	</section>
+
+
+
+
 <h1>게시글 상세 페이지</h1>
 
 	<div class="goods">
@@ -56,7 +194,7 @@
 	<form action="<%=request.getContextPath()%>/board/${board.no}" method="post" id="deleteAction">
 		<input type="hidden" name="_method" value="DELETE" />
 		<input type="button" onClick="location.href='/board?num=1'" value="목록으로" />
-		<c:if test="${sessionScope.userId == board.userId }">
+		<c:if test="${sessionScope.id == board.userId }">
 			<input type="button" onClick="location.href='/board/${board.no}/form'" value="수정" />
 			<button onClick="del()">삭제</button>
 		</c:if>
@@ -67,7 +205,7 @@
         <form name="replyInsertForm">
             <div class="input-group">
                <input type="hidden" name="boardNo" value="${board.no}"/>
-               <input type="hidden" name="userId" value="${sessionScope.userId}"/>
+               <input type="hidden" name="userId" value="${sessionScope.id}"/>
                <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
                <span class="input-group-btn">
                     <button type="button" name="replyInsertBtn">등록</button>
@@ -174,5 +312,20 @@
 			alert("취소됨");
 		}
 	}
+</script>
+<script>
+	var myImage = document.getElementById("mainImage");
+	var imageArray = [ "/blog/resource/img/m1.jpg",
+			"/blog/resource/img/m2.jpg", "/blog/resource/img/m3.jpg" ];
+	var imageIndex = 0;
+
+	function changeImage() {
+		myImage.setAttribute("src", imageArray[imageIndex]);
+		imageIndex++;
+		if (imageIndex >= imageArray.length) {
+			imageIndex = 0;
+		}
+	}
+	setInterval(changeImage, 3000);
 </script>
 </html>
