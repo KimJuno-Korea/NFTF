@@ -153,7 +153,6 @@ header {
 .theme-layout{
     float:left;
     overflow:hidden;
-    position:relative;
     width:100%;
 }
 .theme-layout.boxed{
@@ -3422,12 +3421,16 @@ header.style4 {
     margin-right: 10px;
 }
 header.style4 .menu-sec nav > ul > li > a {
-    color: #1666ba;
+    color: #ffffff;
     padding-top: 17px;
     padding-bottom: 42px;
 	margin-right: 50px;
     font-weight: 600;
     font-size: 18px;
+}
+header.style4 .menu-sec nav > ul > li > a:hover{
+    font-size: 21px;
+    font-weight: 800px;
 }
 header.style4 .menu-sec {
     margin-top: 20px;
@@ -3439,18 +3442,18 @@ header.style4 .account-btns > li a {
     color: #ffffff;
     font-size: 18px;
     font-weight: 600;
-    background-color: #1666ba;
     padding: 11px 20px;
     margin: 0;
-    
     border-radius: 9px;
 }
 
+header.style4 .account-btns > li a:hover {
+    font-size: 21px;
+    font-weight: 800px;
+}
+
 header.style4 .signin-popup a:hover {
-    background: #0053e3 !important;
-    border-color: #0053e3 !important;
-    color: #ffffff !important;
-    border-radius: 0px;
+	font-weight: 700px;
 }
 
 
@@ -4364,14 +4367,17 @@ footer.style3 span, footer.style3 a {
     height: 100%;
     content: "";
     z-index: -1;
-    
     background: rgb(139,145,221);
-    background: -moz-linear-gradient(45deg,  rgba(139,145,221,1) 0%, rgba(16,25,93,1) 71%, rgba(16,25,93,1) 100%);
+    background: -moz-linear-gradient(45deg, rgba(139,145,221,1) 0%, rgba(16,25,93,1) 71%, rgba(16,25,93,1) 100%);
     background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(139,145,221,1)), color-stop(71%,rgba(16,25,93,1)), color-stop(100%,rgba(16,25,93,1)));
-    background: -webkit-linear-gradient(45deg,  rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
-    background: -o-linear-gradient(45deg,  rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
-    background: -ms-linear-gradient(45deg,  rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
-    background: linear-gradient(45deg,  rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
+    background: -webkit-linear-gradient(
+45deg
+, rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(139,145,221,1) 0%,rgba(16,25,93,1) 71%,rgba(16,25,93,1) 100%);
+    background: linear-gradient(
+45deg
+, rgb(115 204 255) 0%,rgb(0 67 255) 71%,rgb(0 22 184) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b91dd', endColorstr='#10195d',GradientType=1 );
     opacity: 0.8;
 }
@@ -4390,7 +4396,7 @@ footer.style3 span, footer.style3 a {
     float: left;
     width: 100%;
     position: relative;
-    padding-top: 240px; padding-bottom: 15px;
+    padding-top: 110px;
     z-index: 0;
 }
 .inner-header.wform .job-search-sec {
@@ -4586,7 +4592,6 @@ section.overlape {
     font-size: 30px;
     text-align: center;
     margin: 0;
-    margin-bottom: 50px;
 }
 .search_widget_job {
     float: left;
@@ -10772,11 +10777,6 @@ header.style3 .post-job-btn:hover {
 }
 footer.ft .social a:hover {
     color: #333333;
-}
-header.style4 .account-btns > li a:hover {
-    background: #0053e3;
-    border-color: #0053e3;
-    color: #ffffff;
 }
 .job-search form button:hover {
     background: #fb236a;
