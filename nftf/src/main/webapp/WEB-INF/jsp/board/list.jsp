@@ -16,6 +16,7 @@
 							<input type="radio" name="division" id="all"><label for="all">구매</label><br>
 						</div>
 					</div>
+					
 					<div class="widget">
 						<h3 class="sb-title open">거래방식</h3>
 						<div class="posted_widget">
