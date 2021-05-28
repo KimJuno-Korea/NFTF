@@ -2,10 +2,7 @@ package kr.co.nftf.board;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +13,8 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 
-	//추후 삭제 예정
-	@Autowired
-	HttpSession httpSession;
-
-
 	@Override
 	public void boardRegist(Board board) throws Exception{
-		board.setUserId((String)httpSession.getAttribute("userId"));
 		board.setStatus('M');
 		board.setRegistrateDate(LocalDate.now());
 		boardMapper.insert(board);
@@ -71,14 +62,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Board> listPage(int displayPost, int postNum) throws Exception {
-		//현재 로그인 기능과 연동하지 않아 게시글 목록 조회 시 세션 저장
-		if(httpSession.getAttribute("userId") == null) {
-			httpSession.setAttribute("userId", "test1");
-			System.out.println(httpSession.getAttribute("userId"));
-		}
-		//추후 삭제 예정
-		
-		System.out.println(httpSession.getAttribute("userId"));
 		return boardMapper.listPage(displayPost, postNum);
 	}
 	
