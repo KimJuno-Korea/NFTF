@@ -17,7 +17,6 @@
 							</c:forEach>
 						</div>
 						
-						
 						<ul class="post-metas">
 				 				<li>
 				 					<a style="cursor: default">

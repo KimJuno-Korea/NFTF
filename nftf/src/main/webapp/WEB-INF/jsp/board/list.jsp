@@ -92,9 +92,9 @@
 						</c:forEach>
 						<!-- Pagination -->
 					</div>
-					
+
 				<div id="search"></div>
-				
+
 				<div class="pagination">
 					<ul>
 					<c:if test="${paging.prev}">
@@ -104,18 +104,18 @@
 							</a>
 						</li>
 					</c:if>
-						
+
 					<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="num">
 						<c:if test="${select != num}">
 							<li><a href="<%=request.getContextPath() %>/board?num=${num}">${num}</a></li>
-						</c:if> 
+						</c:if>
 						<c:if test="${select == num}">
 							<li class="active">
 								<a style="font:bold;">${num}</a>
 							</li>
 						</c:if>
 					</c:forEach>
-					
+
 					<c:if test="${paging.next}">
 						<li class="next">
 							<a href="<%=request.getContextPath() %>/board?num=${paging.endPageNum + 1}">다음
@@ -136,7 +136,7 @@
 
 <script>
 	document.getElementById('searchBtn').addEventListener('click', ajax_call);
-	
+
 	function ajax_call() {
 		var xhr = new XMLHttpRequest();
 		var data = "keyword=" + document.getElementById('keyword').value;
