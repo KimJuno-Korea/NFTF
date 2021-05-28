@@ -16,9 +16,8 @@ public class AuthCheckInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		if (session != null) {
-			Object authInfo = session.getAttribute("id");
 			
-			if (authInfo != null) {
+			if (session.getAttribute("id") != null) {
 				return true;
 			}
 		}
