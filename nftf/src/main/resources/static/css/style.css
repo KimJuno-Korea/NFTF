@@ -5346,7 +5346,7 @@ aside .widget.border:first-child {
     -o-border-radius: 8px;
     border-radius: 8px;
 
-    padding: 20px 20px;
+    padding: 10px 20px;
     font-size: 15px;
     font-family: Open Sans;
     font-weight: bold;
@@ -10842,8 +10842,8 @@ header.style5 .post-job-btn:hover {
 }
 
 .apply-thisjob:hover {
-    background: #579bd4;
-    border-color: #579bd4;
+    background: #96d0e3;
+    border-color: #96d0e3;
     color: #FFF;
 }
 

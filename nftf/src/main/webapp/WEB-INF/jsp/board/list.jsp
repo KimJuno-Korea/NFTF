@@ -31,7 +31,7 @@
 							<div class="field_w_search">
 								<input type="text" placeholder="검색할 제목을 입력하세요." id="keyword">
 								<button id="searchBtn" style="padding: 0px 0px;">
-									<i class="la la-search"></i>
+									<i class="la la-search" style="top:2px"></i>
 								</button>
 							</div>
 							<!-- Search Widget -->
