@@ -16,6 +16,8 @@
 	<meta name="author" content="CreativeLayers">
 
 	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom-park.css" />
+	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/icons.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.min.css">
@@ -27,7 +29,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/input.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/album.css" />
+
+
 </head>
 <body>
 <div class="theme-layout">

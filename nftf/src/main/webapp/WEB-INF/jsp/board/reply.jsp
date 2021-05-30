@@ -3,15 +3,13 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 var boardNo = '${board.no}'; //게시글 번호
-var sessionUserId = '${sessionScope.userId}'; //세션에 저장된 사용자 아이디
+var sessionUserId = '${sessionScope.id}'; //세션에 저장된 사용자 아이디
  
 $('[name=replyInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
     var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
     replyInsert(insertData); //Insert 함수호출(아래)
 });
- 
- 
- 
+
 //댓글 목록 
 function replyList(){
     $.ajax({
@@ -21,20 +19,20 @@ function replyList(){
         success : function(data){
             var a =''; 
             $.each(data, function(key, value){
-                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                a += '<div class="commentInfo'+value.no+'">'+'댓글번호 : '+value.no+' / 작성자 : '+value.userId;
+                a += '<li><div class="comment" style="border-bottom: 1px solid #e8ecec;"><div class="comment-detail">';
+                a += '<h3>' + value.userId + '</h3><div class="date-comment">';
                 if(value.userId == sessionUserId) {
-                	a += '<div id="bt_event" style="display:block">'
-                	a += '<button onclick="replyUpdateForm('+value.no+',\''+value.content+'\');"> 수정 </button>';
-                	a += '<button onclick="deleteConfirm('+value.no+');"> 삭제 </button> </div>';
-                	a += '</div>';
+                	a += '<div id="bt_event_'+value.no+'" style="display:block">'
+                	a += '<a onclick="deleteConfirm('+value.no+');"><i class="la la-calendar-o"></i>삭제</a>';
+                	a += '<a onclick="replyUpdateForm('+value.no+',\''+value.content+'\');"><i class="la la-calendar-o"></i>';
+                	a += '수정 </a></div>';
                 }
-                a += '<div class="commentContent'+value.no+'"> <p> 내용 : '+value.content;
+                a += '<a style="cursor: default;"><i class="la la-calendar-o"></i>'+value.registrateDate+'</a>';
                 if(value.editStatus == 'Y') {
-                	a += ' (수정됨)'
+                	a += '<a style="cursor: default;"><i class="la la-calendar-o"></i>(수정됨)</a>';
                 }
-                a += '</p></div><div class="commentDate"> <p> 작성날짜 : '+value.registrateDate +'</p></div>';
-                a += '</div></div>';
+                a += '</div><div class="commentContent'+value.no+'"> <p> 내용 : '+value.content;+'</p></div>';
+                a += '</div></div></li>';
             });
             
             $(".replyList").html(a);
@@ -59,13 +57,14 @@ function replyInsert(insertData){
  
 //댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 function replyUpdateForm(no, content){
-	document.getElementById("bt_event").style.display="none";
+	document.getElementById("bt_event_" + no).style.display="none";
     var update ='';
     
-    update += '<div class="input-group">';
-    update += '수정 내용 : <input type="text" class="form-control" name="content_'+no+'" value="'+content+'"/>';
-    update += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="replyUpdate('+no+');">수정</button> </span>';
+    update += '<div class="pf-field">';
+    update += '<textarea name="content_'+no+'">'+content+'</textarea>';
+    update += '<button class="button-custom2" type="button" onclick="replyUpdate('+no+')"name="replyInsertBtn">댓글 수정</button>';
     update += '</div>';
+    
     
     $('.commentContent'+no).html(update);
     
@@ -83,7 +82,7 @@ function replyUpdate(no){
             if(data == 1) replyList(boardNo); //댓글 수정후 목록 출력
         }
     });
-    document.getElementById("bt_event").style.display="block";
+    document.getElementById("bt_event_" + no).style.display="block";
 }
 
 function deleteConfirm(no) {
