@@ -257,7 +257,7 @@ public class UserController {
 		}
 	}
 
-	//거래 정보 목록 조회 *~
+	//거래 정보 목록 조회 **
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
@@ -271,7 +271,7 @@ public class UserController {
 						tradingService.selectTradingList(trading);
 				
 				modelAndView = tradingListBuyer != null 
-						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject(null);
+						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject("buyerList", null);
 						
 				
 				trading.setBuyerId(null);
@@ -280,7 +280,7 @@ public class UserController {
 						tradingService.selectTradingList(trading);
 				
 				modelAndView = tradingListSeller != null 
-						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject(null);
+						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject("sellerList", null);
 				
 				return modelAndView;
 			}

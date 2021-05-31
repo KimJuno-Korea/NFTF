@@ -31,9 +31,10 @@ public class SecurityServiceImpl implements SecurityService{
 		if (key != null) {
 			TradingBox tradingBox = new TradingBox();
 			tradingBox.setAuthKey(key);
+			tradingBox = tradingBoxMapper.select(tradingBox);
 			
-			if (tradingBoxMapper.select(tradingBox) != null) {
-				return true;
+			if (tradingBox != null) {
+				return tradingBox.getAuthKeyDate().isAfter(LocalDateTime.now().minusSeconds(30));
 			}
 		}
 		return false;
