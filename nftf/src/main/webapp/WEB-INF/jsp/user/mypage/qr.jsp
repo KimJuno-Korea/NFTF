@@ -1,32 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 QR</title>
-</head>
-	<body>
-		<h3>로그인 QR 생성</h3>
-		<div class="row">
-			<div class="col-lg-12">
-				<img class='img-responsive' src="${pageContext.request.contextPath}/user/qr/${sessionScope.id}"  alt="1">
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>로그인 QR</h3>
+								<span>무인 거래함에서 로그인할 수 있는 QR코드 입니다.</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/form/${sessionScope.id}">MyPage</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<input onclick="back()" type="button" value="뒤로">
-			</div>
+	</section>
+	
+	<div class="row">
+		<div class="col-12">
+			<img class='login-qr' src="${pageContext.request.contextPath}/user/qr/${sessionScope.id}"
+					align="middle">
 		</div>
-	</body>
+	</div>
 	
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 	
-	<script>
-		function back()	{
-			history.go(-1);
-		}
-		
-	</script>
-</html>

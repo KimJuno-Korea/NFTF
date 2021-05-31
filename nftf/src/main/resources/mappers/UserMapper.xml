@@ -95,14 +95,14 @@
             <if test="division != null and division != ''">
                 DIVISION = #{division},
             </if>
-             <if test="accountNo != null and accountNo != ''">
-                AND ACCOUNT_NO = #{accountNo}
+             <if test="accountNo != null">
+                ACCOUNT_NO = #{accountNo},
             </if>
-            <if test="bankNo != null and bankNo != ''">
-                AND BANK_NO = #{bankNo}
+            <if test="bankNo != null">
+                BANK_NO = #{bankNo},
             </if>
-            <if test="pinAccount != null and pinAccount != ''">
-                AND PIN_ACCOUNT = #{pinAccount}
+            <if test="pinAccount != null">
+                PIN_ACCOUNT = #{pinAccount},
             </if>
         </set>
         <where>

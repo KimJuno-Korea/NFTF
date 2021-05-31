@@ -56,4 +56,27 @@
 <script src="${pageContext.request.contextPath}/js/parallax.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/select-chosen.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.scrollbar.min.js" type="text/javascript"></script>
+<script>
+	var openBtn = $('#openMenu');
+	var topMenu = $('#topMenu');
+	var topHidden = $('#topHidden');
+	var menuIcon = $('#menuIcon');
+
+	openBtn.click(function(){
+		if (topMenu.css('visibility') != 'hidden') {
+			topMenu.css('visibility', 'hidden');
+			topMenu.css('opacity', '0');
+			topMenu.css('height', '0');
+			topHidden.css('margin-bottom', '150px');
+			menuIcon.attr('src', '${pageContext.request.contextPath}/images/icon.png');
+			
+		} else {
+			topMenu.css('visibility', 'visible');
+			topMenu.css('opacity', '1');
+			topMenu.css('height', '300px');
+			topHidden.css('margin-bottom', '450px');
+			menuIcon.attr('src', '${pageContext.request.contextPath}/images/icon2.png');
+		}
+	});
+</script>
 </html>

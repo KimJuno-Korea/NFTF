@@ -3,13 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>거래 정보 조회</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>거래 정보 조회</h3>
+								<span>거래 정보를 조회합니다.</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/form/${sessionScope.id}" title="">MyPage</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 	<div class="row">
 		<h2>거래 정보 조회</h2>
 		<div class="col-lg-4 col-sm-7 col-mt-5">
@@ -98,10 +116,8 @@
 		 	</div>
 		</div>
 	</div>
-</body>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 
 <script>
 	

@@ -24,8 +24,7 @@ public class CommonServiceImpl implements CommonService {
 			
 			if (user.getId().equals(dbUser.getId()) 
 					&& user.getPw().equals(dbUser.getPw())
-					&& user.getDivision() != 'D') {
-				System.out.println("로그인 성공");
+					&& dbUser.getDivision() != 'D') {
 				
 				httpSession.setAttribute("id", user.getId());
 				httpSession.setMaxInactiveInterval(1800);
@@ -40,8 +39,10 @@ public class CommonServiceImpl implements CommonService {
 		
 		if (httpSession.getAttribute("id") != null) {
 			httpSession.invalidate();
+			System.out.println(httpSession.getAttribute("id")+"///////////////////////////");
 			return true;
 		}
+		System.out.println(httpSession.getAttribute("id")+"///////////////////////////");
 		return false;
 	}
 

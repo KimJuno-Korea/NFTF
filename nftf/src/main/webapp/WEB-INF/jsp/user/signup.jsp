@@ -122,9 +122,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 				 "phone" : $("#inputPhone").val()
 		 }
 		 
-		$("#responseKeyBtn").attr("disabled", true);
-		$("#inputPhone").attr("disabled", true);
-	    $("#inputKey").attr("disabled", false);
+
 		$.ajax({
 			dataType : 'json',
 			contentType : 'application/json; charset=utf-8;',
@@ -134,6 +132,9 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 			success : function(result) {
 				if (result == 1) {
 					$('#data').data('checkPhone', true);
+					$("#responseKeyBtn").attr("disabled", true);
+					$("#inputPhone").attr("disabled", true);
+				    $("#inputKey").attr("disabled", false);
 				} else if (result == 0){
 					$('#data').data('checkPhone', false);
 					alert("아이디와 전화번호가 불일치 합니다.");
