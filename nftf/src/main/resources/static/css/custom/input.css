@@ -50,15 +50,15 @@
     transition: all 0.5s ease 0s;
 }
 
-.ajax:visited{
-    background-color: #00c8ff;
-	border-radius: 0px;
-	-webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;
-    -ms-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    transition: all 1s ease 0s;
-}
+/* .ajax:visited{ */
+/*     background-color: #00c8ff; */
+/* 	border-radius: 0px; */
+/* 	-webkit-transition: all 1s ease 0s; */
+/*     -moz-transition: all 1s ease 0s; */
+/*     -ms-transition: all 1s ease 0s; */
+/*     -o-transition: all 1s ease 0s; */
+/*     transition: all 1s ease 0s; */
+/* } */
 
 .ajax:disabled{
 	background-color: #00a1b3;
@@ -88,6 +88,34 @@
     -ms-transition: all 0.7s ease 0s;
     -o-transition: all 0.7s ease 0s;
     transition: all 0.7s ease 0s;
+}
+
+.account-popup select {
+	float: left;
+    width: 100%;
+    height: 61px;
+    padding: 0 15px;
+    border: 2px solid #e8ecec;
+    font-size: 13px !important;
+    color: #888888;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.checkFont {
+	display: block;
+	margin: auto;
+	color: #ffffff;
+	height: 0px;
+	-webkit-transition: all 1.0s ease 0s;
+    -moz-transition: all 1.0s ease 0s;
+    -ms-transition: all 1.0s ease 0s;
+    -o-transition: all 1.0s ease 0s;
+    transition: all 1.0s ease 0s;
 }
 
 /* transition: <property> <duration> <timing-function> <delay>; */
