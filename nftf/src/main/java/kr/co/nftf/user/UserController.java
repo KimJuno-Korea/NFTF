@@ -355,9 +355,19 @@ public class UserController {
 		try {
 			
 			if (user != null && type != null) {
-					System.out.println("asd"+type);
 				//회원가입시 아이디랑 폰번호 없으니 이걸로 실행되야함
 				if (type.equals("signup")) {
+					User checkUser = new User();
+					System.out.println("//////////////////"+user.getPhone());
+					checkUser.setPhone(user.getPhone());
+					checkUser = userService.selectUser(checkUser);
+					
+					if (checkUser != null) {
+						
+						if (user.getPhone().equals(checkUser.getPhone())) {
+							return -2;
+						}
+					}
 					responseKey(user);
 					return 1;
 					
