@@ -30,7 +30,7 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="account-popup">
+				<div class="account-popup" style="margin-top: 0px;">
 					<form>
 						<div class="cfield">
 							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14">
@@ -88,30 +88,34 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 				 "phone" : $("#inputPhone").val()
 		 }
 		 
-		$("#receiveKeyBtn").attr("disabled", true);
-		$("#inputPhone").attr("disabled", true);
-	    $("#inputKey").attr("disabled", false);
-		$.ajax({
-			dataType : 'json',
-			contentType : 'application/json; charset=utf-8;',
-			url : '${pageContext.request.contextPath}/user/key/findId',
-			type : 'POST',
-			data : JSON.stringify(phoneData),
-			success : function(result) {
-				if (result == 1) {
-					$('#data').data('checkPhone', true);
-					$('#receiveKeyBtn').val('인증키가 전송 되었습니다.');
-				} else if (result == 0){
-					$('#data').data('checkPhone', false);
-					alert("존재하지 않는 전화번호 입니다.");
-				} else {
-					$('#data').data('checkPhone', false);
-					alert("알 수 없는 오류");
-				}
-			}, error : function() {
-				console.log("에러");
-			}
-		});
+		 if ($('#inputPhone').val() == '') {
+			 alert('전화번호를 입력해 주세요.')
+		 } else {
+			 $("#receiveKeyBtn").attr("disabled", true);
+				$("#inputPhone").attr("disabled", true);
+			    $("#inputKey").attr("disabled", false);
+				$.ajax({
+					dataType : 'json',
+					contentType : 'application/json; charset=utf-8;',
+					url : '${pageContext.request.contextPath}/user/key/findId',
+					type : 'POST',
+					data : JSON.stringify(phoneData),
+					success : function(result) {
+						if (result == 1) {
+							$('#data').data('checkPhone', true);
+							$('#receiveKeyBtn').val('인증키가 전송 되었습니다.');
+						} else if (result == 0){
+							$('#data').data('checkPhone', false);
+							alert("존재하지 않는 전화번호 입니다.");
+						} else {
+							$('#data').data('checkPhone', false);
+							alert("알 수 없는 오류");
+						}
+					}, error : function() {
+						console.log("에러");
+					}
+				});
+		 }
 	} 
 	
 	 $("#inputKey").blur(function() {

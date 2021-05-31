@@ -16,7 +16,6 @@
 							<div class="page-breacrumbs">
 								<ul class="breadcrumbs">
 									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
-									<li><a href="${pageContext.request.contextPath}/user/${sessionScope.id}" title="">My Page</a></li>
 								</ul>
 							</div>
 						</div>
@@ -60,39 +59,43 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 
 	//인증번호 전송 및 아이디와 전화번호 일치 테스트
 	function receiveKey() {
-		 var phoneData = {
-				 "id" : $("#inputId").val(),
-				 "phone" : $("#inputPhone").val()
-		 }
-		$.ajax({
-			dataType : 'json',
-			contentType : 'application/json; charset=utf-8;',
-			url : '${pageContext.request.contextPath}/user/key/findPw',
-			type : 'POST',
-			data : JSON.stringify(phoneData),
-			success : function(result) {
-				console.log(result);
-				if (result == 1) {
-					$('#data').data('checkPhone', true);
-					
-					$('#inputId').attr('disabled', true);
-					$("#receiveKeyBtn").attr("disabled", true);
-					$("#inputPhone").attr("disabled", true);
-				  	$("#inputKey").attr("disabled", false);
-				  	$("#receiveKeyBtn").val("전송 완료");
-				  	
-				} else if (result == 0){
-					$('#data').data('checkPhone', false);
-					alert("등록된 아이디 또는 전화번호가 아닙니다.");
-					
-				} else {
-					$('#data').data('checkPhone', false);
-					alert("알 수 없는 오류");
+		 if ($('#inputPhone').val() == '' || $('#inputId').val() == '') {
+			 alert('전화번호 또는 아이디를 입력해 주세요.')
+		 } else {
+			 var phoneData = {
+					 "id" : $("#inputId").val(),
+					 "phone" : $("#inputPhone").val()
+			 }
+			$.ajax({
+				dataType : 'json',
+				contentType : 'application/json; charset=utf-8;',
+				url : '${pageContext.request.contextPath}/user/key/findPw',
+				type : 'POST',
+				data : JSON.stringify(phoneData),
+				success : function(result) {
+					console.log(result);
+					if (result == 1) {
+						$('#data').data('checkPhone', true);
+						
+						$('#inputId').attr('disabled', true);
+						$("#receiveKeyBtn").attr("disabled", true);
+						$("#inputPhone").attr("disabled", true);
+					  	$("#inputKey").attr("disabled", false);
+					  	$("#receiveKeyBtn").val("전송 완료");
+					  	
+					} else if (result == 0){
+						$('#data').data('checkPhone', false);
+						alert("등록된 아이디 또는 전화번호가 아닙니다.");
+						
+					} else {
+						$('#data').data('checkPhone', false);
+						alert("알 수 없는 오류");
+					}
+				}, error : function() {
+					console.log("에러");
 				}
-			}, error : function() {
-				console.log("에러");
-			}
-		});
+			});
+		 }
 	} 
 	
 	//인증번호 체크
