@@ -16,8 +16,6 @@
 	<meta name="author" content="CreativeLayers">
 
 	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom-park.css" />
-	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/icons.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.min.css">
@@ -29,21 +27,32 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/input.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
-
-
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/table.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/album.css" />
 </head>
 <body>
 <div class="theme-layout">
-	<div class="responsive-header four">
-	</div>
-	<header class="style4" style="position:absolute; background-color:rgba(255, 255, 255, 0); z-index:11">
-		<div class="topbar">
+	<div class="top-hidden" id="topHidden" style="margin-bottom:150px"></div>
+	
+	<div class="simple-header" >
+		<div class="row">
+			<div class="col-9" style="text-align: left">
+				<a href="${pageContext.request.contextPath}/index">
+					<img src="http://placehold.it/112x31" alt=""  
+							style="width:93px;height:40px;margin:30px">
+				</a>
+			</div>
+			<div class="col-3">
+				<a class="open-menu" id="openMenu">
+					<img class="menu-icon" id="menuIcon" src="${pageContext.request.contextPath}/images/icon.png" style="margin-top:40px;">
+				</a>
+			</div>
 		</div>
+	</div>
+	
+	<header class="style4" >
 		<div class="menu-sec">
 			<div class="container">
-				<div class="logo"><!-- 로고 -->
-					<a href="${pageContext.request.contextPath}/index"><img src="" alt=""></a>
-				</div><!-- Logo -->
 				<div class="btn-extars">
 					<ul class="account-btns">
 						<c:if test="${sessionScope.id eq null}">
@@ -63,13 +72,16 @@
 							</li>
 							<li class="signin-popup">
 								<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+								<i class="la la-external-link-square"></i>
 							</li>
-							<i class="la la-external-link-square"></i>
 						</c:if>
 					</ul>
 				</div><!-- Btn Extras -->
 				<nav>
 					<ul>
+						<li class="menu-item-has-children">
+							<a href="${pageContext.request.contextPath}/index" ><img src="http://placehold.it/112x31" alt=""  style="width:93px;height:40px"></a>
+						</li>
 						<li class="menu-item-has-children">
 							<a href="#">서비스 소개</a>
 						</li>
@@ -84,16 +96,51 @@
 			</div>
 		</div>
 	</header>
-</div>
-	<section class="overlape">
-		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(&quot;https://placehold.it/1600x800&quot;) 50% -72.2px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header"></div>
-					</div>
-				</div>
+	
+	<div class="top-menu" id="topMenu">
+		<div class="row">
+		</div>
+		<div class="row">
+			<div class="col-7">
+				<nav>
+					<ul>
+						<li class="top-menu-children" style="boder-bottom: 1px solid #c0c0c0">
+							<a href="#">- 서비스 소개</a>
+						</li>
+						<li class="top-menu-children">
+							<a href="${pageContext.request.contextPath}/branch" >- 지점 조회</a>
+						</li>
+						<li class="top-menu-children">
+							<a href="${pageContext.request.contextPath}/board?num=1" >- 중고 거래</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-5">
+				<ul class="account-btns">
+					<c:if test="${sessionScope.id eq null}">
+						<li class="signin-popup" style="margin-right: 10px; margin-top: 20px">
+							<a href="${pageContext.request.contextPath}/user/form">회원가입</a>
+							<i class="la la-key"></i>
+						</li>
+						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
+							<a href="${pageContext.request.contextPath}/login">로그인</a>
+							<i class="la la-external-link-square"></i>
+						</li>
+					</c:if>
+					
+					<c:if test="${sessionScope.id ne null}">
+						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
+							<a  style="text-decoration: underline;" href="${pageContext.request.contextPath}/user/form/${sessionScope.id}"> ${sessionScope.id} 님</a>
+						</li>
+						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
+							<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+							<i class="la la-external-link-square"></i>
+						</li>
+					</c:if>
+				</ul>
 			</div>
 		</div>
-	</section>
+	</div>
+</div>
+
