@@ -2,13 +2,52 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 가입</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>회원 가입</h3>
+								<span>회원 가입을 위해 정보를 입력해 주세요.</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<!-- 	<section> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="account-popup" style="margin-top: 0px;"> -->
+<%-- 					<form id="form" action="${pageContext.request.contextPath}/user" method="post" > --%>
+<!-- 						<div class="cfield"> -->
+<!-- 							<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" > -->
+<!-- 					 	</div> -->
+<!-- 				 		<div id="viewCheckId" class="checkFont"></div> -->
+				 		
+<!-- 						 	<input id="receiveKeyBtn" class="ajax" type="button" value="인증번호 전송" onclick="receiveKey()"> <br> -->
+<!-- 						<div class="cfield"> -->
+<!-- 							<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength='6'> -->
+<!-- 					 	</div> -->
+<!-- 					 		<div id="viewCheckKey" class="checkInput"></div> -->
+<!-- 							<input id="findIdBtn" class="onclick" type="button" value="찾기" onclick="findId()"> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+
 	<div class="row">
 		<h2>회원 가입</h2>
 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5">
@@ -48,9 +87,7 @@
 	</div>
 </body>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 
 <script>
 //검증 , 정규식 사용해야됨
@@ -299,4 +336,3 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		}
 	} 
 </script>
-</html>
