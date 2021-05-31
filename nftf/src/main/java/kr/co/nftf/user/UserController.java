@@ -242,7 +242,7 @@ public class UserController {
 //	}
 	
 	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
-	//여기서 생성된 qr을 쏴줌 *
+	//여기서 생성된 qr을 쏴줌 **
 	@GetMapping("/user/qr/{id}")
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try { 
