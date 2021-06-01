@@ -31,7 +31,7 @@
 							<div class="field_w_search">
 								<input type="text" placeholder="검색할 제목을 입력하세요." id="keyword">
 								<button id="searchBtn" style="padding: 0px 0px;">
-									<i class="la la-search" style="top:2px"></i>
+									<i class="la la-search"></i>
 								</button>
 							</div>
 							<!-- Search Widget -->
@@ -84,7 +84,7 @@
 									</h3>
 									<span>가격 : ${list.price }</span>
 									<h6>
-										<i class="la la-map-marker"></i> 천안지점
+										<i class="la la-map-marker"></i> 천안지점 <!-- 아직 하드코딩 되어잇음 -->
 									</h6>
 									<p>${list.content }</p>
 								</div>
