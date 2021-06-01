@@ -9,7 +9,7 @@
 							<div class="row">
 								<div class="col-lg-2" style="vertical-align: middle;">
 									<div class="image-area">
-									<a href="/index" title=""><img src="https://placehold.it/93x40" alt="" style="width: 150px; height: 100px"></a>
+									<a class="logo" href="${pageContext.request.contextPath}/index" ><img class="logo-black" src="${pageContext.request.contextPath}/customimages/TRADING365__.png" alt=""></a>
 									</div>
 								</div>
 								<div class="col-lg-4">
@@ -68,14 +68,14 @@
 			topMenu.css('opacity', '0');
 			topMenu.css('height', '0');
 			topHidden.css('margin-bottom', '150px');
-			menuIcon.attr('src', '${pageContext.request.contextPath}/images/icon.png');
+			menuIcon.attr('src', '${pageContext.request.contextPath}/customimages/menu.png');
 			
 		} else {
 			topMenu.css('visibility', 'visible');
 			topMenu.css('opacity', '1');
 			topMenu.css('height', '300px');
 			topHidden.css('margin-bottom', '450px');
-			menuIcon.attr('src', '${pageContext.request.contextPath}/images/icon2.png');
+			menuIcon.attr('src', '${pageContext.request.contextPath}/customimages/menu-close.png');
 		}
 	});
 </script>
