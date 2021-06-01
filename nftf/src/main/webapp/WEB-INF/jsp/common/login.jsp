@@ -16,6 +16,9 @@
 				 		<input id="inputPw" type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
 					</div>
 					<input class="submit" type="submit" id="loginBtn" value="로그인">
+					<div class="find">
+						<a href="${pageContext.request.contextPath}/id/form">아이디 </a> - <a href="${pageContext.request.contextPath}/password/form">비밀번호 찾기</a>
+					</div>
 				</form>
 			</div>
 		</div>

@@ -3,15 +3,16 @@ package kr.co.nftf.common;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.nftf.board.Board;
+import kr.co.nftf.payment.PaymentService;
 import kr.co.nftf.user.User;
+import kr.co.nftf.user.UserService;
 
 @RestController
 public class CommonController {
@@ -21,6 +22,12 @@ public class CommonController {
 	
 	@Autowired
 	private CommonServiceImpl commonService;
+	
+	@Autowired
+	private PaymentService paymentServiceImpl;
+	
+	@Autowired
+	private UserService userServiceImpl;
 	
 	//메인메뉴 폼
 	@GetMapping("/index")
@@ -38,6 +45,7 @@ public class CommonController {
 	@PostMapping("/login")
 	public ModelAndView login(User user) {
 		try {
+			
 			if (commonService.login(user)) {
 				return REDIRECT_MAIN;
 			}

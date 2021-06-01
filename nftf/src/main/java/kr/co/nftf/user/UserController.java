@@ -1,22 +1,20 @@
 package kr.co.nftf.user;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -149,10 +147,18 @@ public class UserController {
 
 	//마이페이지 비번 다시치는 화면 가는거 **
 	@GetMapping("/user/form/{id}")
-	public ModelAndView myPageCheckPwForm(User user) {
+	public ModelAndView myPageCheckPwForm(User user,
+			@CookieValue(value="mypage", required=false) Cookie mypageCookie) {
 		try {
-			
 			if (user != null) {
+				
+				if (mypageCookie != null) {
+					
+					if (mypageCookie.getValue().toString().equals("true")) {
+						System.out.println("쿠키로 마이페이지감");
+						return new ModelAndView("/user/mypage/index");
+					}
+				}
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				return httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/form").addObject("id", user.getId()) : CommonController.REDIRECT_MAIN;
@@ -165,12 +171,21 @@ public class UserController {
 	
 	//이게 마이 페이지 메인 화면 가는 메소드 **
 	@PostMapping("/user/form/{id}")				
-	public ModelAndView myPageMain(User user) {
+	public ModelAndView myPageMain(User user,  HttpServletResponse response,
+			@CookieValue(value="mypage", required=false) Cookie mypageCookie) {
 		try {
-			
 			if (user != null) {
+				
+				if (mypageCookie == null 
+						|| mypageCookie.getValue().equals("false")) {
+					System.out.println("쿠키 없음");
+					Cookie cookie = new Cookie("mypage", "true");
+					cookie.setMaxAge(5*60);
+					response.addCookie(cookie);
+				}
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				//이것도 그냥 인터셉터로 해도됨
+				
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/index") : CommonController.REDIRECT_MAIN;
 				
@@ -183,7 +198,7 @@ public class UserController {
 		return CommonController.REDIRECT_MAIN;
 	}
 	
-	//회원정보 수정 폼 *~
+	//회원정보 수정 폼 **
 	@GetMapping("/user/{id}/form")
 	public ModelAndView editUserForm(User user) {
 		try {
@@ -196,7 +211,7 @@ public class UserController {
 		return CommonController.REDIRECT_MAIN;
 	}
 
-	//회원정보 수정 *
+	//회원정보 수정 **
 	@PutMapping("/user/{id}")
 	public ModelAndView editUser(User user) {
 		try {
@@ -211,22 +226,23 @@ public class UserController {
 		return CommonController.REDIRECT_MAIN;
 	}
 
-	//로그인 QR 생성 폼 *
-	@GetMapping("/user/{id}/qr")
-	public ModelAndView createLoginQRForm(User user) {
-		try {
-			if (user != null) {
-				ModelAndView modelAndView = new ModelAndView("/user/mypage/qr");
-				return modelAndView;
-			}
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-		return CommonController.REDIRECT_MAIN;
-	}
+	//모달로 대체함
+//	//로그인 QR 생성 폼 *~
+//	@GetMapping("/user/{id}/qr")
+//	public ModelAndView createLoginQRForm(User user) {
+//		try {
+//			if (user != null) {
+//				ModelAndView modelAndView = new ModelAndView("/user/mypage/qr");
+//				return modelAndView;
+//			}
+//		} catch (Exception exception) {
+//			exception.printStackTrace();
+//		}
+//		return CommonController.REDIRECT_MAIN;
+//	}
 	
 	//로그인qr생성 누르면 컨트롤러에서 이 매핑 실행하고 여기서 서비스 실행하면 서비스에서 qr생성해서 여기로 리턴함 그러면
-	//여기서 생성된 qr을 쏴줌 *
+	//여기서 생성된 qr을 쏴줌 **
 	@GetMapping("/user/qr/{id}")
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try { 
@@ -241,7 +257,7 @@ public class UserController {
 		}
 	}
 
-	//거래 정보 목록 조회 *
+	//거래 정보 목록 조회 **
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
@@ -255,7 +271,7 @@ public class UserController {
 						tradingService.selectTradingList(trading);
 				
 				modelAndView = tradingListBuyer != null 
-						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject(null);
+						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject("buyerList", null);
 						
 				
 				trading.setBuyerId(null);
@@ -264,7 +280,7 @@ public class UserController {
 						tradingService.selectTradingList(trading);
 				
 				modelAndView = tradingListSeller != null 
-						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject(null);
+						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject("sellerList", null);
 				
 				return modelAndView;
 			}
@@ -274,27 +290,31 @@ public class UserController {
 		return CommonController.REDIRECT_MAIN;
 	}
 
-	@GetMapping("/user/withdrawal/{id}")
-	public ModelAndView withdrawalForm(User user) {
-		try {
-			
-			if (user != null) {
-				ModelAndView modelAndView = new ModelAndView("/user/mypage/withdrawal");
-				return modelAndView;
-			}
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-		return CommonController.REDIRECT_MAIN;
-	}
+	/*
+	 * @GetMapping("/user/withdrawal/{id}") public ModelAndView withdrawalForm(User
+	 * user) { try {
+	 * 
+	 * if (user != null) { ModelAndView modelAndView = new
+	 * ModelAndView("/user/mypage/withdrawal"); return modelAndView; } } catch
+	 * (Exception exception) { exception.printStackTrace(); } return
+	 * CommonController.REDIRECT_MAIN; }
+	 */
 
 	@DeleteMapping("/user/{id}")
 	public ModelAndView withdrawal(User user) {
 		try {
 			
 			if (user != null) {
-				user.setDivision('D');
-				userService.editUser(user);
+				
+				User dbUser = userService.selectUser(user);
+				if (dbUser != null) {
+					dbUser.setDivision('D');
+					userService.editUser(dbUser);
+					commonServiceImpl.logout();
+					return CommonController.REDIRECT_LOGIN;
+				} else {
+					return new ModelAndView(new RedirectView("/user/form/"+user.getId())).addObject("result", "false");
+				}
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -335,9 +355,19 @@ public class UserController {
 		try {
 			
 			if (user != null && type != null) {
-					System.out.println("asd"+type);
 				//회원가입시 아이디랑 폰번호 없으니 이걸로 실행되야함
 				if (type.equals("signup")) {
+					User checkUser = new User();
+					System.out.println("//////////////////"+user.getPhone());
+					checkUser.setPhone(user.getPhone());
+					checkUser = userService.selectUser(checkUser);
+					
+					if (checkUser != null) {
+						
+						if (user.getPhone().equals(checkUser.getPhone())) {
+							return -2;
+						}
+					}
 					responseKey(user);
 					return 1;
 					
