@@ -1,43 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
-		<form action="/branch" method="post">
-			<div class="title">
-				<label>지점 코드
-					<input type="text" name="code" placeholder="TEST_XX_0X"/>
-				</label>
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>지점 등록</h3>
+								<span>관리자일 경우 지점을 등록할 수 있습니다.</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/branch" title="">Branch List</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-				<label>지점 명
-					<input type="text" name="name" placeholder="제주 ㅁㅁ점"/>
-				</label>
+		</div>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-5">
+					<div class="account-popup" style="padding:0px 40px 0px 0px;margin-top:0px!important;">
+						<form action="/branch" method="post">
+							<p>지점코드</p>
+							<div class="cfield">
+								<input type="text" name="code" placeholder="TEST_XX_0X"/>
+						 	</div>
+	
+							<p>지점 명</p>
+							<div class="cfield">
+								<input type="text" name="name" placeholder="제주 ㅁㅁ점"/>
+						 	</div>
+						 	
+						 	<p>지점 위도</p>
+							<div class="cfield">
+								<input type="text" name="latitude" id="input_latitude" placeholder="xxx.xxx"/>
+						 	</div>
+						 	
+	<!-- 					 	<div class="row"> -->
+	<!-- 					 		<p id="viewCheckPw" class="checkFont"></p> -->
+	<!-- 					 	</div> -->
+						 	
+						 	<p>지점 경도</p>
+							<div class="cfield">
+								<input type="text" name="longtitude" id="input_longtitude" placeholder="xxx.xxx"/>
+						 	</div>
+						 	
+						    <input class="ajax" type="button" value="지도로 조회" onClick="panTo()"/>
+						 	
+						 	<p>거래함 갯수</p>
+							<div class="cfield">
+								<input type="number" name="tradingBoxCount" placeholder="1"/>
+						 	</div>
+						 	
+						 	<p>지점 상태</p>
+						 	<select name="status" >
+								<option value="Y" selected> Y </option>
+								<option value="N"> N </option>
+							</select>
+							
+							<input class="submit" type="submit" value="지점 등록">
+						</form>
+					</div>
+				</div>
+				
+				<div class="col-7">
+					<div id="map" style="width:100%;height:500px;margin:70px 0px 0px 0px"></div>
+					<div id="clickLatlng"></div>
+				</div>
 			</div>
-			<div>
-				<label>지점 위도
-					<input type="text" name="latitude" id="input_latitude" placeholder="xxx.xxx"/>
-				</label>
-				<label>지점 경도
-					<input type="text" name="longtitude" id="input_longtitude" placeholder="xxx.xxx"/>
-				</label>
-				<input type="button" value="지도로 조회" onClick="panTo()"/>
-			</div>
-			<div>
-				<label>거래함 갯수
-					<input type="number" name="tradingBoxCount" placeholder="1"/>
-				</label>
-			</div>
-			<div>
-			<label>지점 상태
-				<select name="status" >
-					<option value="Y" selected> Y </option>
-					<option value="N"> N </option>
-				</select>
-			</label>
-			</div>
-			<input type="submit" value="지점 등록">
-		</form>
-	<div id="map" style="width:100%;height:350px;"></div>
-	<div id="clickLatlng"></div>
+		</div>
+	</section>
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9318f30131f6fa4339b2a5103c22a5c&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

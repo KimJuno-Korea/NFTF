@@ -14,7 +14,7 @@ header.style4 .menu-sec nav > ul > li > a {
 }
 
 header.style4 .account-btns > li a {
-    color: #0b93e2;
+    color: #0e6eb8;
     font-size: 18px;
     font-weight: 500;
     padding: 11px 20px;
@@ -57,6 +57,17 @@ a.id::before{
     font-size: 20px;
     line-height: 2;
     margin-top: 8px;
+}
+
+.account-btns .signin-popup .top-menu-la .la {
+	color: #0e6eb8;
+    font-size: 20px;
+    line-height: 2;
+    margin-top: 8px;
+}
+
+.account-btns .signin-popup .top-menu-la {
+	width: 145px;
 }
 
 
