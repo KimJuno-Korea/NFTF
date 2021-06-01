@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 <c:set var="board" value="${board }" />
 <section>
@@ -97,14 +96,25 @@
 									<input type="hidden" name="boardNo" value="${board.no}" />
 									<input type="hidden" name="userId" value="${sessionScope.id}" />
 									<div class="row">
-				 						<div class="col-lg-12">
-					 						<div class="pf-field">
-					 							<textarea name="content"></textarea>
-					 						</div>
-					 					</div>
-					 					<div class="col-lg-12">
-					 						<button type="button" name="replyInsertBtn">댓글 등록</button>
-					 					</div>
+										<c:choose>
+											<c:when test="${sessionScope.id eq null}">
+						 						<div class="col-lg-12">
+					 								<div class="pf-field">
+					 									<textarea name="content" readonly>로그인 이후 댓글을 작성할 수 있습니다.</textarea>
+					 								</div>
+					 							</div>
+											</c:when>
+											<c:otherwise>
+												<div class="col-lg-12">
+					 								<div class="pf-field">
+					 									<textarea name="content"></textarea>
+					 								</div>
+					 							</div>
+					 							<div class="col-lg-12">
+					 								<button type="button" onClick="replyClick()">댓글 등록</button>
+					 							</div>
+											</c:otherwise>
+										</c:choose>
 				 					</div>
 				 				</form>
 				 				
@@ -113,7 +123,7 @@
 					</div>
 					
 					<aside class="col-lg-2 column">
-						<form action="<%=request.getContextPath()%>/board/${board.no}" method="post" id="deleteAction">
+						<form name="boardInfo">
 							<input type="hidden" name="_method" value="DELETE" />
 							<div class="widget">
 				 				<div class="search_widget_job no-margin">
@@ -128,7 +138,7 @@
 				 				</div>
 				 				<div class="widget">
 				 					<div class="search_widget_job no-margin">
-			 							<a class="button-custom" onClick="del()">삭제</a>
+			 							<a class="button-custom" onClick="del(boardInfo,${board.no})">삭제</a>
 				 					</div>
 				 				</div>
 				 			</c:if>
@@ -147,12 +157,14 @@
 	</section>
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
-
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-	function del() {
+	function del(formName,boardNo) {
 		var chk = confirm("해당 게시글을 삭제하시겠습니까?");
 		if (chk) {
-			document.deleteAction.submit;
+			formName.action = "/board/" + boardNo;
+			formName.method = "post";
+			formName.submit();
 		}
 	}
 
@@ -235,4 +247,5 @@
 		}
 	}
 </script>
-</html>
+
+

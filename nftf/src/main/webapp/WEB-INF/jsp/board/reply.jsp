@@ -5,10 +5,16 @@
 var boardNo = '${board.no}'; //게시글 번호
 var sessionUserId = '${sessionScope.id}'; //세션에 저장된 사용자 아이디
  
-$('[name=replyInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
+/* $('[name=replyInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
     var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
+    console.log("click");
     replyInsert(insertData); //Insert 함수호출(아래)
-});
+}); */
+
+function replyClick() {
+	var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
+	replyInsert(insertData); //Insert 함수호출(아래)
+}
 
 //댓글 목록 
 function replyList(){

@@ -37,6 +37,7 @@
  <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <!-- Bootstrap Js -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
@@ -46,6 +47,7 @@
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 <!-- Add Main JS -주현 -->
+
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/modernizr.js" type="text/javascript"></script>
@@ -79,4 +81,3 @@
 		}
 	});
 </script>
-</html>

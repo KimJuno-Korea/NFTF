@@ -85,11 +85,14 @@ public class BoardController {
 		
 		board.setNo(Integer.valueOf(no));
 		photo.setBoardNo(board.getNo());
-		user.setId(session.getAttribute("id").toString());
+		
 		reply.setBoardNo(board.getNo());
 		
 		try {
-			user = userServiceImpl.selectUser(user);
+			if (session.getAttribute("id") != null) {
+				user.setId(session.getAttribute("id").toString());
+				user = userServiceImpl.selectUser(user);
+			}
 			board = boardServiceImpl.boardSelect(board);
 			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {
