@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.nftf.branch.BranchService;
 import kr.co.nftf.photo.Photo;
 import kr.co.nftf.photo.PhotoService;
 import kr.co.nftf.photo.PhotoUtil;
 import kr.co.nftf.reply.Reply;
 import kr.co.nftf.reply.ReplyService;
-import kr.co.nftf.reply.ReplyServiceImpl;
 import kr.co.nftf.user.User;
 import kr.co.nftf.user.UserService;
 

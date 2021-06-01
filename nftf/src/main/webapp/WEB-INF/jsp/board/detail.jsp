@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 <c:set var="board" value="${board }" />
@@ -64,6 +65,11 @@
 				 		
 				 		<ul class="post-metas">
 				 			<li style="float:right">
+				 				<h3 style="cursor:default"><fmt:formatNumber value="${board.price }" pattern="#,###,###"/> ￦</h3>
+				 			</li>
+				 		</ul>
+				 		<ul class="post-metas">
+				 			<li style="float:right">
 				 				<a style="cursor:default">
 				 				<i class="la la-calendar-o">
 				 				</i>${board.registrateDate }</a>
@@ -77,7 +83,7 @@
 				 		
 						<div class="board-photo">
 								<c:forEach var="photo" items="${photoList }">
-									<img src="<%=request.getContextPath() %>/photo/${photo.no}" style="width:32.5%; height:280px" />
+									<img src="<%=request.getContextPath() %>/photo/${photo.no}" style="width:32%; height:280px" />
 								</c:forEach>
 						</div>
 
@@ -142,7 +148,6 @@
 				 					</div>
 				 				</div>
 				 				<div class="widget">
-				 				<%-- <c:if test="${board.status ne 'W'}"> (기존) --%>
 				 	    		<c:if test="${board.status eq 'M'}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
 				 	    			<a class="payment-button" onclick="buy()">구매하기</a>
 				 	    		</c:if>
@@ -159,6 +164,11 @@
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
+	function boardPrice(price){
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return price.toString().replace(regexp, ',');
+	}
+	
 	function del(formName,boardNo) {
 		var chk = confirm("해당 게시글을 삭제하시겠습니까?");
 		if (chk) {

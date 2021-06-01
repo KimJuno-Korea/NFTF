@@ -27,23 +27,19 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<div class="col-lg-10 column">
+				 		<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data">
 				 		<div class="padding-left">
-					 		
 					 		<div class="manage-jobs-sec">
 						 		<div class="resumeadd-form">
 						 			<div class="row">
 						 				<div class="col-lg-12">
-					 						<span class="pf-title">Title</span>
+					 						<span class="pf-title">제목</span>
 					 						<div class="pf-field">
-					 							<input placeholder="제목을 입력해주세요" type="text">
+					 							<input type="text" name="title" placeholder="제목을 입력해주세요" />
 					 						</div>
 					 					</div>
-					 					<div class="col-lg-12">
-					 						<span class="pf-title">Writer</span>
-					 						<div class="pf-field">
-					 							<input type="text" name="userId" value="${sessionScope.id }" readonly/>
-					 						</div>
-					 					</div>
+					 					
+					 					<input type="hidden" name="userId" value="${sessionScope.id }" />
 					 					
 					 					<div class="col-lg-6">
 											<div class="dropdown-field">
@@ -69,39 +65,48 @@
 					 					</div>
 					 					
 					 					<div class="col-lg-6">
-					 						<span class="pf-title">Price</span>
+					 						<span class="pf-title">가격</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="가격을 입력해주세요.">
+					 							<input type="text" name="price" placeholder="가격을 입력해주세요.">
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
-					 						<span class="pf-title">Content</span>
+					 						<span class="pf-title">내용</span>
 					 						<div class="pf-field">
-					 							<textarea placeholder="내용을 입력해주세요"></textarea>
+					 							<textarea name="content" placeholder="내용을 입력해주세요"></textarea>
 					 						</div>
 					 					</div>
 						 			
 						 				<div class="col-lg-12">
-					 						<p>Max file size is 1MB, Minimum dimension: 270x210 And Suitable files are .jpg &amp; .png</p>
+						 					<p><b style="color: red;">주의! 일부 사진은 모바일 환경에서 다르게 보일 수 있습니다.</b></p>
+					 						<p>사진의 파일 크기는 10MB가 최대입니다.<b> 사진은 최소 1장, 최대 3장까지 등록이 가능합니다.</b></p>
+					 						<p>최적의 이미지는 320x280이며 .jpg 또는 .png 확장자명으로 등록이 가능합니다.</p>
 					 					</div>
 					 					<div class="col-lg-12">
 					 						<div class="upload-portfolio">
-					 							<div class="uploadbox">
-					 								<label for="file-upload" class="custom-file-upload">
-													    <i class="la la-cloud-upload"></i> <span>Upload Image</span>
-													</label>
-													<input id="file-upload" type="file" style="display: none;">
+					 							<div class="pf-field">
+					 								<div class="select_img1">
+															<img src="" style="border-radius: 8px"/>
+													</div>
+													<input type="file" id="upload1" name="file" accept="image/gif,image/jpeg,image/png" />
 					 							</div>
-					 							<div class="uploadfield">
-							 						<span class="pf-title">Title</span>
-							 						<div class="pf-field">
-							 							<input placeholder="Tooms.." type="text">
-							 						</div>
+					 							
+					 							<div class="pf-field">
+					 								<div class="select_img2">
+															<img src="" style="border-radius: 8px"/>
+													</div>
+													<input type="file" id="upload2" name="file" accept="image/gif,image/jpeg,image/png" />
+							 					</div>
+					 							<div class="pf-field">
+					 								<div class="select_img3">
+															<img src="" style="border-radius: 8px"/>
+													</div>
+													<input type="file" id="upload3" name="file" accept="image/gif,image/jpeg,image/png" />
 							 					</div>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
-					 						 <button type="submit">Save</button>
+					 						 <button type="submit">확인</button>
 					 					</div>
 					 				</div>
 						 		</div><!-- resumeadd-form -->
@@ -109,57 +114,51 @@
 					 		</div><!-- manage-jobs-sec -->
 					 		
 					 	</div>
+					 	</form>
 					</div>
 				 </div>
 			</div>
 		</div>
-
-
-
-<h1>게시글 등록 페이지</h1>
-	<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data">
-		아이디 : <input type="text" name="userId" value="${sessionScope.id }" readonly/><br>
-		<select name="division">
-			<option value="">구분</option>
-			<option value="S">판매자</option>
-			<option value="B">구매자</option>
-		</select>
-		<select name="tradeWay">
-			<option value="">거래방식</option>
-			<option value="T">거래함</option>
-			<option value="P">택배</option>
-			<option value="D">직거래</option>
-		</select><br>
-		제목 : <input type="text" name="title"/><br>
-		내용 : <input type="text" name="content"/><br>
-		가격 : <input type="text" name="price"/><br>
-
-        <input type="submit" value="전송">
-	<div class="inputArea">
-		<label for="gdsImg">기본이미지-(목록에 표시됨)</label><br>
-			<input type="file" id="gdsImg" name="file" accept="image/gif,image/jpeg,image/png" />
-			<div class="select_img">
-				<img src="" />
-			</div>
-			<div>
-				이미지-2<input type="file" name="file" accept="image/gif,image/jpeg,image/png" />
-			</div>
-			<br>
-			<div>
-				이미지-3<input type="file" name="file" accept="image/gif,image/jpeg,image/png" />
-			</div>
-	</div>
-	</form>
 </body>
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
-	$("#gdsImg").change(
+	$("#upload1").change(
 			function() {
 				if (this.files && this.files[0]) {
 					var reader = new FileReader;
 					reader.onload = function(data) {
-						$(".select_img img").attr("src", data.target.result)
+						$(".select_img1 img").attr("src", data.target.result)
 								.width(200);
+						$(".select_img1 img").attr("src", data.target.result)
+								.height(150);
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+	
+	$("#upload2").change(
+			function() {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						$(".select_img2 img").attr("src", data.target.result)
+								.width(200);
+						$(".select_img2 img").attr("src", data.target.result)
+								.height(150);
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+	
+	$("#upload3").change(
+			function() {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						$(".select_img3 img").attr("src", data.target.result)
+								.width(200);
+						$(".select_img3 img").attr("src", data.target.result)
+								.height(150);
 					}
 					reader.readAsDataURL(this.files[0]);
 				}
