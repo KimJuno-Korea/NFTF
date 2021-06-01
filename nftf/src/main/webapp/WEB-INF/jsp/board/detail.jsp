@@ -5,7 +5,6 @@
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 <c:set var="board" value="${board }" />
-
 <section>
 		<div class="block">
 			<div class="container">
