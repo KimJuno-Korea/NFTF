@@ -27,7 +27,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/input.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/table.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/album.css" />
 </head>
 <body>
@@ -37,14 +36,14 @@
 	<div class="simple-header" >
 		<div class="row">
 			<div class="col-9" style="text-align: left">
-				<a href="${pageContext.request.contextPath}/index">
-					<img src="http://placehold.it/112x31" alt=""  
-							style="width:93px;height:40px;margin:30px">
+				<a class="logo" href="${pageContext.request.contextPath}/index" >
+					<img class="logo-color" src="${pageContext.request.contextPath}/customimages/TRADING365_.png" alt=""
+							style="margin:20px 0px 0px 50px">
 				</a>
 			</div>
 			<div class="col-3">
 				<a class="open-menu" id="openMenu">
-					<img class="menu-icon" id="menuIcon" src="${pageContext.request.contextPath}/images/icon.png" style="margin-top:40px;">
+					<img class="menu-icon" id="menuIcon" src="${pageContext.request.contextPath}/customimages/menu.png" style="margin-top:40px;">
 				</a>
 			</div>
 		</div>
@@ -80,7 +79,7 @@
 				<nav>
 					<ul>
 						<li class="menu-item-has-children">
-							<a href="${pageContext.request.contextPath}/index" ><img src="http://placehold.it/112x31" alt=""  style="width:93px;height:40px"></a>
+							<a class="logo" href="${pageContext.request.contextPath}/index" ><img class="logo-color" src="${pageContext.request.contextPath}/customimages/TRADING365_.png" alt=""></a>
 						</li>
 						<li class="menu-item-has-children">
 							<a href="#">서비스 소개</a>
@@ -121,11 +120,11 @@
 					<c:if test="${sessionScope.id eq null}">
 						<li class="signin-popup" style="margin-right: 10px; margin-top: 20px">
 							<a href="${pageContext.request.contextPath}/user/form">회원가입</a>
-							<i class="la la-key"></i>
+							<i class="la la-key" style="color: #ffffff"></i>
 						</li>
 						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
 							<a href="${pageContext.request.contextPath}/login">로그인</a>
-							<i class="la la-external-link-square"></i>
+							<i class="la la-external-link-square" style="color: #ffffff"></i>
 						</li>
 					</c:if>
 					

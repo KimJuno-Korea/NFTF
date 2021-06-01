@@ -1,14 +1,45 @@
 .title h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
-	color: #1666ba;
+	color: #0b93e2;
+}
+
+header.style4 .menu-sec nav > ul > li > a {
+    color: #0b93e2;
+    padding-top: 17px;
+    padding-bottom: 42px;
+    margin-right: 50px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 8px;
+}
+
+header.style4 .account-btns > li a {
+    color: #0b93e2;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 11px 20px;
+    margin: 0;
+    border-radius: 9px;
+    margin-top: 8px;
+}
+
+header.style4 .menu-sec nav > ul > li > a:hover {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+header.style4 .account-btns > li a:hover {
+    font-size: 21px;
+    font-weight: 800;
 }
 
 a.id {
-	color: #ffffff !important;
+	color: #0b93e2 !important;
     margin-right: 20px !important;
     font-weight: 600 !important;
     font-size: 16px !important;
     background : none !important;
+    
 }
 
 a.id::before{
@@ -21,31 +52,39 @@ a.id::before{
     height:20px;
 }
 
-.la{
-	color: #ffffff;
+.account-btns .signin-popup .la {
+	color: #0b93e2;
     font-size: 20px;
     line-height: 2;
+    margin-top: 8px;
 }
+
 
 header.style4 {
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     top: 0 !important;
-    background: linear-gradient( 45deg, rgb(115 204 255) 0%,rgb(0 67 255) 71%,rgb(0 22 184) 100%)!important;
+	background: #ffffff;
 	z-index:11;
+	box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
+	height: 115.4px;
 }
+
+
 
 .simple-header {
  	position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     top: 0 !important;
-    background: linear-gradient( 45deg, rgb(115 204 255) 0%,rgb(0 67 255) 71%,rgb(0 22 184) 100%)!important;
+	background: #ffffff;
 	float: left;
     width: 100%;
-    height:115.4px;
     z-index: 10;
+   	box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
+   		height: 115.4px;
+   	
 }
 
 .simple-header .row {
@@ -55,7 +94,7 @@ header.style4 {
 }
 
 .open-menu {
-	color: #ffffff;
+	color: #0b93e2;
     padding-top: 17px;
     padding-bottom: 42px;
     margin-right: 50px;
@@ -64,23 +103,22 @@ header.style4 {
 }
 
 .open-menu:hover {
-	color: #ffffff;
+	color: #0b93e2;
 }
 
 .top-menu {
-	border-top: 1px solid #c0c0c0; 
-	border-bottom: 1px solid #c0c0c0; 
 	visibility: hidden;
 	opacity: 0;
  	position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     top: 115.4px !important;
-    background: #1666ba;
+    background: #0b93e2;
 	float: left;
     width: 100%;
     height:0px;
     z-index: 10;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
     
     -webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
@@ -97,17 +135,18 @@ header.style4 {
 }
 
 .top-menu-children {
-	color: #e0ecff;
+	color: #ffffff;
     font-weight: 500;
     font-size: 18px;
     padding-left: 100px;
     padding-top: 40px;
     padding-bottom: 25px;
     margin-bottom: 0px;
+    
 }
 
 .top-menu-children:hover {
-	font-weight: 900;
+	font-weight: 700;
 	color: #ffffff;
 	-webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
@@ -122,4 +161,46 @@ header.style4 {
     -ms-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;
     transition: all 0.5s ease 0s;
+}
+
+.logo-color {
+	width: 110px;
+}
+
+.menu-item-has-children .logo {
+	padding: 0px !important;
+	margin: 0px !important;
+	position: relative;
+	left: -120px;
+}
+
+.logo-black {
+	width: 110px;
+	position: relative;
+	left: 80px;
+}
+
+.menu-icon {
+	width: 30px;
+	margin: 30px 0px 20px 0px;
+}
+
+.account-btns > li a:hover {
+    font-size: 15px;
+    color: #ffffff;
+    float: left;
+    line-height: 22px;
+    font-weight: 800;
+}
+
+@media (min-width:1200px) {
+	.top-menu {
+	height: 0px !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	}
+	
+	.top-hidden {
+		margin-bottom: 115.4px !important;
+	}
 }
