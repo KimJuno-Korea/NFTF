@@ -47,9 +47,10 @@
 												<th>거래일자</th>
 												<th>인증 QR 발급</th>
 											</tr>
-									<c:forEach var="buy" items="${buyerList}">
+											
+									<c:forEach var="buy" items="${buyerList}" varStatus="status">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></td>
+											<td><a class="herf" href="${pageContext.request.contextPath}/board/${buy.boardNo}">${buyerBoardList[status.index].title}</a></td>
 											<td>${buy.buyerId}</td>
 											<td>${buy.sellerId}</td>
 											<c:choose>
@@ -113,9 +114,9 @@
 												<th>거래일자</th>
 												<th>인증 QR 발급</th>
 											</tr>
-									<c:forEach var="sell" items="${sellerList}">
+									<c:forEach var="sell" items="${sellerList}" varStatus="status">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></td>
+											<td><a class="herf" href="${pageContext.request.contextPath}/board/${sell.boardNo}">${sellerBoardList[status.index].title}</a></td>
 											<td>${sell.buyerId}</td>
 											<td>${sell.sellerId}</td>
 											<c:choose>
