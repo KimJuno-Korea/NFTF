@@ -2,7 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<spring:eval expression="@environment.getProperty('payment.accesstoken')" var="accesstoken" />
+<spring:eval expression="@environment.getProperty('payment.iscd')" var="iscd" />
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+
 
 	<section>
 		<div class="block no-padding  gray">
@@ -148,7 +153,13 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		var now = new Date();
 		var year = now.getFullYear();
 		var month;
-		var day = now.getDate().toString();
+		var day;
+		
+		if (now.getDate() < 10) {
+			day = "0" + (now.getDate());
+		} else {
+			day = now.getDate();
+		}
 		
 		if (now.getMonth() < 9) {
 			month = "0" + (now.getMonth() + 1);
@@ -313,11 +324,11 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 				        "ApiNm": "OpenFinAccountDirect",
 				        "Tsymd": getNow(),
 				        "Trtm": "000000",
-				        "Iscd": "000964",
+				        "Iscd": "${iscd}",
 				        "FintechApsno": "001",
 				        "ApiSvcCd": "DrawingTransferA",
 				        "IsTuno": guid(),
-				        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+				        "AccessToken": "${accesstoken}"
 				    },
 				    "DrtrRgyn" : "N",
 				    "BrdtBrno" : "20210520",
@@ -340,7 +351,6 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 						$('#data').data("checkAccountNo", true);
 						checkPinAccount();
 					} else {
-						console.log("에러");
 						$("#viewCheckAccountNo").text('인증실패');
 						$('#viewCheckAccountNo').css('height', '50px');
 						$('#viewCheckAccountNo').css('color', '#ff495a');
@@ -368,11 +378,11 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 				        "ApiNm": "CheckOpenFinAccountDirect",
 				        "Tsymd": getNow(),
 				        "Trtm": "000000",
-				        "Iscd": "000964",
+				        "Iscd": "${iscd}",
 				        "FintechApsno": "001",
 				        "ApiSvcCd": "DrawingTransferA",
 				        "IsTuno": guid(),
-				        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+				        "AccessToken": "${accesstoken}"
 				    },
 				    "Rgno" : $("#rgno").text(),
 				    "BrdtBrno" : "20210520"
@@ -413,6 +423,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 						if (no) {
 							if (pin) {
 								$("#inputPhone").attr("disabled", false);
+								getPinAccount();
 								$('#form').submit();
 							} else {
 								alert('핀 어카운트 생성 실패');

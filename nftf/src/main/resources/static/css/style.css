@@ -522,7 +522,7 @@ input[type=radio] + label::after {
   width: 6px !important;
   height: 6px !important;
   background: #fff;
-  border: 3px solid #fb236a;
+  border: 3px solid #57b3ff;
   
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -4628,7 +4628,7 @@ section.overlape {
     position: absolute;
     right: 15px;
     top: 12px;
-    color: #fb236a;
+    color: #589bd4;
     font-size: 24px;
 }
 .border-right {
@@ -6045,7 +6045,8 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #fb236a;
+    font-weight: 700;
+    color: #0168d3;
 }
 .emply-list-info > h6 {
     float: left;
@@ -9593,13 +9594,9 @@ input[type="file"] {
     font-size: 13px;
     color: #888888;
     border: 1px solid #e8ecec;
-    
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    border-radius: 8px;
 
+	text-align: center;
+	min-width: 80px;
     padding: 6px 14px;
     margin-right: 11px;
     margin-bottom: 11px;
@@ -9857,13 +9854,16 @@ blockquote > strong {
     width: 100%;
     font-size: 20px;
     font-family: Open Sans;
-    color: #202020;
+    color: #5e5e5e;
 }
 .comment-sec > ul {
     float: left;
     width: 100%;
     padding: 0;
     margin: 0;
+    
+    border-top: solid 2px #68666685;
+    border-bottom: solid 2px #68666685;
 }
 .comment-sec > ul > li {
     float: left;
@@ -9976,9 +9976,9 @@ blockquote > strong {
     margin-top: 0;
 }
 .commentform-sec > form button {
-    float: left;
+    float: right;
     font-size: 15px;
-    background: #fb236a;
+    background: #0e6eb8;
     color: #ffffff;
     padding: 15px 28px;
     

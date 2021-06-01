@@ -2,25 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<spring:eval expression="@environment.getProperty('payment.accesstoken')" var="accesstoken" />
+<spring:eval expression="@environment.getProperty('payment.iscd')" var="iscd" />
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 <c:set var="board" value="${board }" />
+
 <section>
 		<div class="block">
 			<div class="container">
 				 <div class="row">
-				 	<div class="col-lg-10 column">
+				 	<div class="col-lg-10 column" 
+				 			style="padding:30px 40px 30px 40px;
+				 			box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+				 			border-radius: 20px;">
 				 	<div class="tags-share" style="border-top: 0px; border-bottom:0px">
 						 			<div class="tags_widget">
 						 				<c:choose>
 											<c:when test="${board.division eq 'S'}">
-							 					<a style="cursor: default; background: blue">
-												<b style="color: white">구매</b>
+							 					<a style="cursor: default; background: #4381ff">
+												<b style="color: white">판매</b>
 												</a>
 											</c:when>
 											<c:when test="${board.division eq 'B'}">
-												<a style="cursor: default; background: red">
-												<b style="color: white;">판매</b>
+												<a style="cursor: default; background: #fb236a">
+												<b style="color: white;">구매</b>
 								 				</a>
 											</c:when>
 										</c:choose>
@@ -43,40 +51,40 @@
 										</c:choose>
 										<c:choose>
 											<c:when test="${board.status eq 'S'}">
-							 					<a style="cursor: default; background: red">
+							 					<a style="cursor: default; background: #fb236a">
 												<b style="color:white">거래완료</b>
 												</a>
 											</c:when>
 											<c:when test="${board.status eq 'M'}">
-												<a style="cursor: default; background: green">
+												<a style="cursor: default; background: #1ede3e">
 												<b style="color:white">거래가능</b>
 								 				</a>
 											</c:when>
 											<c:when test="${board.status eq 'W'}">
-												<a style="cursor: default; background: blue">
+												<a style="cursor: default; background: #4381ff">
 												<b style="color:white">결제대기</b>
 								 				</a>
 											</c:when>
 										</c:choose>
 						 		</div>
 				 		</div>
-				 		<div class="blog-single">
-				 		<h2>${board.title }</h2>
+				 		<div class="blog-single" style="border-top: solid 1px #6666;">
+				 		<h2 style="width:auto;font-size:30px;color:#5e5e5e">${board.title }</h2>
 				 		
-				 		<ul class="post-metas">
+				 		<ul class="post-metas" style="width:auto;float:right;">
 				 			<li style="float:right">
-				 				<h3 style="cursor:default"><fmt:formatNumber value="${board.price }" pattern="#,###,###"/> ￦</h3>
+				 				<h3 style="cursor:default;float:right;width:auto"><fmt:formatNumber value="${board.price}" pattern="#,###,###"/> ￦</h3>
 				 			</li>
 				 		</ul>
-				 		<ul class="post-metas">
+				 		<ul class="post-metas" style="border-bottom: solid 1px #6666; padding-bottom: 10px;">
 				 			<li style="float:right">
 				 				<a style="cursor:default">
 				 				<i class="la la-calendar-o">
-				 				</i>${board.registrateDate }</a>
+				 				</i>${board.registrateDate}</a>
 				 			</li>
 				 			<li style="float:right">
 				 				<a style="cursor:default">
-				 				${board.userId }
+				 				${board.userId}
 				 				</a>
 				 			</li>
 				 		</ul>
@@ -88,6 +96,7 @@
 						</div>
 
 						<p style="font-size: 15px;margin-top: 20px;font-weight: bold;">${board.content }</p>
+						
 				 			<div class="comment-sec">
 				 				<h3>댓글</h3>
 				 				<ul class="replyList">
@@ -96,7 +105,7 @@
 				 			</div>
 				 			
 				 			<div class="commentform-sec">
-				 				<h3>댓글 작성</h3>
+				 				<h3 style="color: #5e5e5e">댓글 작성</h3>
 				 				
 				 				<form style="padding-right: 0px;" name="replyInsertForm">
 									<input type="hidden" name="boardNo" value="${board.no}" />
@@ -210,7 +219,13 @@
 		var now = new Date();
 		var year = now.getFullYear();
 		var month;
-		var day = now.getDate().toString();
+		var day;
+		
+		if (now.getDate() < 10) {
+			day = "0" + (now.getDate());
+		} else {
+			day = now.getDate();
+		}
 		
 		if (now.getMonth() < 9) {
 			month = "0" + (now.getMonth() + 1);
@@ -228,11 +243,11 @@
 				        "ApiNm": "DrawingTransfer",
 				        "Tsymd": getNow(),
 				        "Trtm": "000000",
-				        "Iscd": "000964",
+				        "Iscd": "${iscd}",
 				        "FintechApsno": "001",
 				        "ApiSvcCd": "DrawingTransferA",
 				        "IsTuno": guid(),
-				        "AccessToken": "d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860"
+				        "AccessToken": "${accesstoken}"
 				    },
 				    "FinAcno" : "${pin}",
 				    "Tram":"${board.price}"

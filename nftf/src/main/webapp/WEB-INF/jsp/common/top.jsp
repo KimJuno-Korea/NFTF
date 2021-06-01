@@ -32,6 +32,8 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/index.css" />
 </head>
 <body>
+
+
 <div class="theme-layout">
 	<div class="top-hidden" id="topHidden" style="margin-bottom:150px"></div>
 	
@@ -101,7 +103,6 @@
 			</div>
 		</div>
 	</header>
-	
 	<div class="top-menu" id="topMenu">
 		<div class="row">
 		</div>
@@ -148,3 +149,5 @@
 		</div>
 	</div>
 </div>
+
+

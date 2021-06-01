@@ -77,7 +77,6 @@ public class PaymentController {
 			
 			byte[] file = this.securityServiceImpl.createKeyQR(tradingBox);
 			if (file != null) {
-				System.out.println(board.toString());
 				response.setContentType("image/png");
 				byte[] encodeBase64 = Base64.encodeBase64(file);
 				String stringImg = new String(encodeBase64, "utf-8");

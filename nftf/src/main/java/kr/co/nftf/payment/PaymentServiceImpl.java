@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -21,6 +22,12 @@ import okhttp3.Response;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 	private static final MediaType JSON = MediaType.parse("application/json; charset=UTF-8");
+	
+	@Value("${payment.iscd}")
+	private String iscd;
+	
+	@Value("${payment.accesstoken}")
+	private String accesstoken;
 	
 	@Override
 	public boolean pay(User user, Board board) throws IOException {
@@ -40,11 +47,11 @@ public class PaymentServiceImpl implements PaymentService {
 					+ " 	\"ApiNm\": \"ReceivedTransferAccountNumber\","
 					+ "		\"Tsymd\": \""+year+month+day+"\","
 					+ "		\"Trtm\" : \"000000\","
-					+ "		\"Iscd\": \"000964\","
+					+ "		\"Iscd\": \""+iscd+"\","
 					+ "		\"FintechApsno\": \"001\","
 					+ "		\"ApiSvcCd\": \"DrawingTransferA\","
 					+ "		\"IsTuno\": \""+random+"\","
-					+ "		\"AccessToken\": \"d75c7bca19d5354441a7b338903a60dcf7caad919f106fc3a004f8a67a5d6860\""
+					+ "		\"AccessToken\": \""+accesstoken+"\""
 					+ "},"
 					+ "\"Bncd\": \""+user.getBankNo()+"\","
 					+ "\"Acno\": \""+user.getAccountNo()+"\","
@@ -65,7 +72,6 @@ public class PaymentServiceImpl implements PaymentService {
 				
 			Map<String, String> responseResult = new HashMap<String, String>();
 			responseResult = gson.fromJson(response.body().string(), responseResult.getClass());
-			System.out.println(responseResult);
 			return true;
 		}
 		return false;
