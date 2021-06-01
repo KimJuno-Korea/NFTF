@@ -1,5 +1,6 @@
 package kr.co.nftf.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardServiceImpl;
 import kr.co.nftf.common.CommonController;
 import kr.co.nftf.common.CommonService;
@@ -257,7 +259,7 @@ public class UserController {
 		}
 	}
 
-	//거래 정보 목록 조회 **
+	//거래 정보 목록 조회 **~
 	@GetMapping("/user/trading/{id}")
 	public ModelAndView getTradingList(User user) {
 		try {
@@ -273,6 +275,15 @@ public class UserController {
 				modelAndView = tradingListBuyer != null 
 						? modelAndView.addObject("buyerList", tradingListBuyer) : modelAndView.addObject("buyerList", null);
 						
+				List<Board> buyerBoardList = new ArrayList<>();
+				
+				Board board = new Board();
+				for (Trading trade : tradingListBuyer) {
+					board.setNo(trade.getBoardNo());
+					buyerBoardList.add(boardService.boardSelect(board));
+				}
+				
+				modelAndView.addObject("buyerBoardList", buyerBoardList);
 				
 				trading.setBuyerId(null);
 				trading.setSellerId(user.getId());
@@ -282,6 +293,16 @@ public class UserController {
 				modelAndView = tradingListSeller != null 
 						? modelAndView.addObject("sellerList", tradingListSeller) : modelAndView.addObject("sellerList", null);
 				
+						
+				List<Board> sellerBoardList = new ArrayList<>();
+				
+				for (Trading trade : tradingListSeller) {
+					board.setNo(trade.getBoardNo());
+					sellerBoardList.add(boardService.boardSelect(board));
+				}
+				
+				modelAndView.addObject("sellerBoardList", sellerBoardList);
+						
 				return modelAndView;
 			}
 		} catch(Exception exception) {

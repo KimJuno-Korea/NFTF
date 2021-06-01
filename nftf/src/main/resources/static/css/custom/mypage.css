@@ -210,9 +210,12 @@
 }
  
 .modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
 }
 
+.account-popup {
+	margin-top: 60px !important;
+}
 
