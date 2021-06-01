@@ -29,6 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom-park.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/mypage.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/index.css" />
 </head>
 <body>
 <div class="theme-layout">
