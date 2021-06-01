@@ -28,6 +28,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/input.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/top.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom-park.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/custom/mypage.css" />
 </head>
 <body>
 <div class="theme-layout">
@@ -129,7 +130,7 @@
 					</c:if>
 					
 					<c:if test="${sessionScope.id ne null}">
-						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
+						<li class="signin-popup" style="margin-top: 20px">
 							<a  style="text-decoration: underline;" href="${pageContext.request.contextPath}/user/form/${sessionScope.id}"> ${sessionScope.id} 님</a>
 						</li>
 						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">

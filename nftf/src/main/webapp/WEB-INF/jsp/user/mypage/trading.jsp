@@ -49,7 +49,7 @@
 											</tr>
 									<c:forEach var="buy" items="${buyerList}">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></td>
+											<td><a class="herf" href="${pageContext.request.contextPath}/board/${buy.boardNo}">게시글 제목</a></td>
 											<td>${buy.buyerId}</td>
 											<td>${buy.sellerId}</td>
 											<c:choose>
@@ -115,7 +115,7 @@
 											</tr>
 									<c:forEach var="sell" items="${sellerList}">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></td>
+											<td><a class="herf" href="${pageContext.request.contextPath}/board/${sell.boardNo}">게시글 제목</a></td>
 											<td>${sell.buyerId}</td>
 											<td>${sell.sellerId}</td>
 											<c:choose>

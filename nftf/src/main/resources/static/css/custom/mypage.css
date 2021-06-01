@@ -1,0 +1,218 @@
+@media (max-width:550px) {
+	.trading-table table {
+		font-size: 5px;
+		margin-right: 20px;
+	}
+	
+	.trading-table .trading-qr-btn {
+		font-size: 6px;
+	}
+	
+	.top-menu-children {
+	    color: #ffffff;
+	    font-weight: 500;
+	    font-size: 14px;
+	    padding-left: 30px;
+	    padding-top: 40px;
+	    padding-bottom: 25px;
+	    margin-bottom: 0px;
+	}
+	
+	.account-btns > li a {
+	    font-size: 8px;
+	}
+	
+	.account-btns .la {
+		 font-size: 8px !important;
+		 line-height: 0 !important;
+	}
+	
+	.trading-qr {
+		width: 250px;
+		height: 250px;
+	}
+	
+	.login-qr {
+		width: 250px;
+		height: 250px;
+	}
+}
+
+.trading-table table {
+	width: 100%;
+	border: solid 2px #00a0e9 !important;
+}
+
+.trading-table tr, td {
+	text-align: center;
+	color: #005688;
+	border: solid 2px #00a0e9 !important;
+	padding: 6px 7px 6px 7px;
+	border-left: none;
+	border-right: none;
+}
+
+.trading-table th {
+	text-align: center;
+	background: #00a0e9;
+	color: #ffffff;
+	border: solid 2px #00a0e9 !important;
+	padding: 3px 5px 3px 5px;
+}
+
+.trading-row h4, h3 {
+	margin: 50px 0px 20px 0px;
+	color: #0e6eb8;
+}
+
+.trading-table .herf {
+	color: #0e6eb8;
+	text-decoration: underline;
+}
+
+.trading-qr-btn {
+	background-color: #0e6eb8;
+	color: #ffffff;
+	padding: 6px 13px 6px 13px;
+	border: 0;
+	border-radius: 8px;
+}
+
+.trading-qr-btn:hover {
+	background-color: #ffffff;
+	color: #0e6eb8;
+	padding: 6px 13px 6px 13px;
+	border: solid 2px #0e6eb8;
+	border-radius: 8px;
+	
+	-webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+.trading-qr-btn:active {
+	background-color: #ffffff;
+	color: #0e6eb8;
+	padding: 6px 13px 6px 13px;
+	border: solid 2px #0e6eb8;
+	border-radius: 8px;
+	
+	-webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+.mypage-row .box {
+	text-align: center;
+}
+
+.mypage-row .box p {
+	margin: 60px 0px 20px 0px;
+}
+
+.mypage-row .box .mypage-button {
+	background-color: #00a0e9;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+}
+
+.mypage-row .box .mypage-button:hover{
+	background-color: #0e6eb8;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+	
+	-webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+.mypage-row .box .mypage-button:active{
+	background-color: #0e6eb8;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+}
+
+.mypage-row .box .withdrawal-button {
+	background-color: #ff1818;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+}
+
+.mypage-row .box .withdrawal-button:hover {
+	background-color: #b90000;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+	
+	-webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+.mypage-row .box .withdrawal-button:avtive {
+	background-color: #b90000;
+	color: #ffffff;
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 15px 5px 15px;
+	margin: 0px 0px 60px 0px;
+}
+
+.login-qr {
+	display: block;
+	margin: auto;
+}
+
+.trading-qr {
+	display: block;
+	margin: auto;
+}
+
+.qr-timer {
+	font-size: 30px;
+	text-align: center;
+	color: #ff1818; 
+}
+
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+
+
