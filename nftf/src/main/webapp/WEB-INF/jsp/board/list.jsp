@@ -1,8 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
+<c:set var="list" value="${list }" />
+
+	<section>
+		<div class="block no-padding  gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>게시글 목록</h3>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<section>
 	<div class="block less-top">
 		<div class="container">
@@ -53,10 +77,10 @@
 									<div class="emply-pstn">
 										<c:choose>
 											<c:when test="${list.division eq 'S'}">
-												<b style="color: blue;">구매</b>
+												<b style="color: #4381ff;">판매</b>
 											</c:when>
 											<c:when test="${list.division eq 'B'}">
-												<b style="color: red;">판매</b>
+												<b style="color: #fb236a;">구매</b>
 											</c:when>
 										</c:choose>
 										<c:choose>
@@ -72,17 +96,17 @@
 										</c:choose>
 										<c:choose>
 											<c:when test="${list.status eq 'S'}">
-												<b style="color: red;">&nbsp;거래완료</b>
+												<b style="color: #fb236a;">&nbsp;거래완료</b>
 											</c:when>
 											<c:when test="${list.status eq 'M'}">
-												<b style="color: green;">&nbsp;거래가능</b>
+												<b style="color: #1ede3e;">&nbsp;거래가능</b>
 											</c:when>
 										</c:choose>
 									</div>
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
-									<span>가격 : ${list.price }</span>
+									<span><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
 									<h6>
 										<i class="la la-map-marker"></i> 천안지점 <!-- 아직 하드코딩 되어잇음 -->
 									</h6>
@@ -136,6 +160,11 @@
 
 <script>
 	document.getElementById('searchBtn').addEventListener('click', ajax_call);
+	
+	function boardPrice(price){
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return price.toString().replace(regexp, ',');
+	}
 
 	function ajax_call() {
 		var xhr = new XMLHttpRequest();

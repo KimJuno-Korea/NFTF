@@ -1,9 +1,10 @@
 .payment-button {
-    float: left;
+    float: right;
     width: 90%;
-    border: 2px solid #e81f15;
+    border: 2px solid #ffffff;
     text-align: center;
-    color: #e81f15;
+    color: #ffffff;
+    background: #e81f15;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -17,16 +18,17 @@
     font-weight: bold;
 }
 .payment-button:hover {
-    background: #e81f15;
-    border-color: #e81f15;
-    color: #FFF;
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #e81f15;
 }
 .button-custom {
-    float: left;
+    float: right;
     width: 90%;
-    border: 2px solid #579bd4;
+    border: 2px solid #ffffff;
     text-align: center;
-    color: #579bd4;
+    color: #ffffff;
+    background: #00a0e9;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -40,14 +42,14 @@
     font-weight: bold;
 }
 .button-custom:hover {
-    background: #579bd4;
-    border-color: #579bd4;
-    color: #FFF;
+    background: #ffffff;
+    border-color: #00a0e9;
+    color: #00a0e9;
 }
 .button-custom2 {
-    float: left;
+    float: right;
     font-size: 15px;
-    background: #4287f5;
+    background: #00a0e9;
     color: #ffffff;
     padding: 15px 28px;
     -webkit-border-radius: 8px;
@@ -58,13 +60,16 @@
     margin-top: 10px;
 }
 .button-custom2:hover{
-    background: #2c5dab;
+    background: #ffffff;
+    color: #00a0e9;
 }
 .board-photo > img {
     float: left;
     width: 100%;
-    margin: 2px;
-    margin-top:40px;
+    margin: 20px 0px 30px 0px;
+    
+    box-shadow: 0px 7px 15px 0px rgb(0 0 0 / 30%);
+    
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
