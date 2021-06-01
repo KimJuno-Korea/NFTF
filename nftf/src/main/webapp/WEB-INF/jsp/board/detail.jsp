@@ -141,13 +141,13 @@
 			 							<a class="button-custom" onClick="del(boardInfo,${board.no})">삭제</a>
 				 					</div>
 				 				</div>
-				 			</c:if>
 				 				<div class="widget">
 				 				<%-- <c:if test="${board.status ne 'W'}"> (기존) --%>
 				 	    		<c:if test="${board.status eq 'M'}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
 				 	    			<a class="payment-button" onclick="buy()">구매하기</a>
 				 	    		</c:if>
 				 	    		</div>
+				 			</c:if>
 				 		
 				 		</form>
 					</aside>
