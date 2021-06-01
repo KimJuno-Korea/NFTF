@@ -63,7 +63,9 @@
 							</li>
 							<li class="signin-popup">
 								<a href="${pageContext.request.contextPath}/login">로그인</a>
-								<i class="la la-external-link-square"></i>
+								<div class="top-menu-la">
+									<i class="la la-external-link-square"></i>
+								</div>
 							</li>
 						</c:if>
 						
@@ -73,7 +75,9 @@
 							</li>
 							<li class="signin-popup">
 								<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-								<i class="la la-external-link-square"></i>
+								<div class="top-menu-la">
+									<i class="la la-external-link-square"></i>
+								</div>
 							</li>
 						</c:if>
 					</ul>
@@ -84,7 +88,7 @@
 							<a class="logo" href="${pageContext.request.contextPath}/index" ><img class="logo-color" src="${pageContext.request.contextPath}/customimages/TRADING365_.png" alt=""></a>
 						</li>
 						<li class="menu-item-has-children">
-							<a href="#">서비스 소개</a>
+							<a href="${pageContext.request.contextPath}/index">서비스 소개</a>
 						</li>
 						<li class="menu-item-has-children">
 							<a href="${pageContext.request.contextPath}/branch" >지점 조회</a>

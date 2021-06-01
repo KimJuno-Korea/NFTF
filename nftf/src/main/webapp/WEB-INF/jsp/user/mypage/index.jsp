@@ -98,7 +98,7 @@
 									 	<div id="viewCheckPw"></div>
 									 	<input type="hidden" name='id' value='${sessionScope.id}'>
 										<input type='hidden' name='_method' value='delete'>
-										<input type='submit' value="탈퇴">
+										<input class="withdrawal-submit" type='submit' value="탈퇴">
 									</form>
 								</div>
 							</div>

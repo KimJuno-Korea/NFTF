@@ -118,7 +118,40 @@
     transition: all 1.0s ease 0s;
 }
 
-/* transition: <property> <duration> <timing-function> <delay>; */
+.account-popup p {
+	text-align: left;
+}
 
+.withdrawal-submit {
+    background-color: #ff1818;
+    color: #ffffff;
+    border: 0;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+}
 
+.withdrawal-submit:hover {
+    background-color: #ffffff;
+    color: #ff1818;
+    border: 2px solid #ff1818;
+    border-radius: 0px;
+    
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -ms-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
 
+.withdrawal-submit:active {
+    background-color: #ffffff;
+    color: #ff1818;
+    border: 2px solid #ff1818;
+    border-radius: 0px;
+    
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -ms-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
