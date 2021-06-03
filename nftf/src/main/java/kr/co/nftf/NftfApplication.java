@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import kr.co.nftf.Interceptor.AuthCheckInterceptor;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "kr.co.nftf" })
+@ComponentScan(basePackages = { "kr.co.nftf"})
 @MapperScan(basePackages = "kr.co.nftf")
 public class NftfApplication implements WebMvcConfigurer {
 

@@ -57,7 +57,9 @@
 					<div class="map_wrap" style="width:66%;">
 						<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 						<div class="shortlists" style="position:absolute;top:10px;left:20px;padding:7px 12px;z-index:1;">
+							<c:if test="${sessionScope.division eq 'A'}">
 						 		<a href="/branch/form" >지점 등록</a>
+						 	</c:if>
 						 </div>
 					</div>
 				 	<div class="padding-left" style="width:33%;">
