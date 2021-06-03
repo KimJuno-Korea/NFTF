@@ -157,7 +157,6 @@ public class UserController {
 				if (mypageCookie != null) {
 					
 					if (mypageCookie.getValue().toString().equals("true")) {
-						System.out.println("쿠키로 마이페이지감");
 						return new ModelAndView("/user/mypage/index");
 					}
 				}
@@ -178,21 +177,27 @@ public class UserController {
 		try {
 			if (user != null) {
 				
-				if (mypageCookie == null 
-						|| mypageCookie.getValue().equals("false")) {
-					System.out.println("쿠키 없음");
-					Cookie cookie = new Cookie("mypage", "true");
-					cookie.setMaxAge(5*60);
-					response.addCookie(cookie);
-				}
+				
 				//현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
 				//이것도 그냥 인터셉터로 해도됨
 				
 				ModelAndView modelAndView =  httpSession.getAttribute("id").toString().equals(user.getId())
 						? new ModelAndView("/user/mypage/index") : CommonController.REDIRECT_MAIN;
 				
-				return user.getPw().equals(userService.selectUser(user).getPw())
-						? modelAndView : CommonController.REDIRECT_MAIN;
+				if (user.getPw().equals(userService.selectUser(user).getPw())) {
+					
+					if (mypageCookie == null 
+							|| mypageCookie.getValue().equals("false")) {
+						System.out.println("쿠키 없음");
+						Cookie cookie = new Cookie("mypage", "true");
+						cookie.setMaxAge(5*60);
+						response.addCookie(cookie);
+					}
+					
+					return modelAndView;
+				} else {
+					return CommonController.REDIRECT_MAIN;
+				}
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -360,13 +365,12 @@ public class UserController {
 	private void responseKey(User user) {
 		httpSession.setAttribute("key", "");
 		System.out.println(user.getPhone());
-		StringBuilder key = new StringBuilder();
-		//api 써야됨??? 뭐였지 서비스ㅔ있다.
-		for (int i = 0 ; i < 6 ; i++) {
-			key.append(((int)(Math.random()*10))+"");
+		try {
+			System.out.println("인증키 "+ "533167");
+			httpSession.setAttribute("key", "533167");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println("인증키"+key);
-		httpSession.setAttribute("key", key.toString());
 	}
 	
 	//인증번호 전송

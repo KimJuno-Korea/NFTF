@@ -15,7 +15,7 @@
 								<span>1</span>
 								<i class="la la-user"></i>
 								<h3>빠르고 안전한 중고 거래</h3>
-								<p>블라 블라</p>
+								<p>무인 거래함을 이용해 안전한 비대면 중고거래를 할 수 있습니다.</p>
 							</div>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<div class="how-work-box">
 								<span>3</span>
 								<i class="la la-pencil"></i>
-								<h3>블라블라</h3>
+								<h3>무인 거래함을 이용해 안전한 비대면 중고거래를 할 수 있습니다.</h3>
 								<p>안녕하세요 안녕히가세요</p>
 							</div>
 						</div>

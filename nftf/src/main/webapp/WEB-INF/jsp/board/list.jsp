@@ -106,9 +106,17 @@
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
-									<span><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
+									<c:choose>
+											<c:when test="${list.division eq 'S'}">
+												<span  style="color:#4381ff"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
+
+											</c:when>
+											<c:when test="${list.division eq 'B'}">
+												<span  style="color:#fb236a"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
+											</c:when>
+										</c:choose>
 									<h6>
-										<i class="la la-map-marker"></i> 천안지점 <!-- 아직 하드코딩 되어잇음 -->
+<!-- 										<i class="la la-map-marker"></i> 천안지점 아직 하드코딩 되어잇음 -->
 									</h6>
 									<p>${list.content }</p>
 								</div>

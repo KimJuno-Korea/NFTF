@@ -46,11 +46,11 @@
 					 	</div>
 				 		
 						<div class="cfield">
-							<input id="inputPw" type="text" name="pw" placeholder="비밀번호" maxlength="30">
+							<input id="inputPw" type="password" name="pw" placeholder="비밀번호" maxlength="30">
 					 	</div>
 					 	
 						<div class="cfield">
-							<input id="inputCheckPw" type="text" placeholder="비밀번호 확인" maxlength="30">
+							<input id="inputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="30">
 					 	</div>
 					 	
 					 	<div class="row">
