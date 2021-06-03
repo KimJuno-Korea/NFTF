@@ -1,9 +1,14 @@
 package kr.co.nftf.common;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import kr.co.nftf.user.User;
 import kr.co.nftf.user.UserMapper;
@@ -36,9 +41,23 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public boolean logout() throws Exception {
-		
+
 		if (httpSession.getAttribute("id") != null) {
 			httpSession.invalidate();
+			
+			ServletWebRequest servletContainer = (ServletWebRequest)RequestContextHolder.getRequestAttributes();
+
+			HttpServletRequest request = servletContainer.getRequest();
+
+			HttpServletResponse response = servletContainer.getResponse();
+			
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for(Cookie cookie : cookies) {
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+				}
+			}
 			return true;
 		}
 		return false;

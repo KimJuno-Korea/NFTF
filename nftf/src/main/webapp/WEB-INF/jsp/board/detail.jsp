@@ -73,7 +73,16 @@
 				 		
 				 		<ul class="post-metas" style="width:auto;float:right;">
 				 			<li style="float:right">
-				 				<h3 style="cursor:default;float:right;width:auto"><fmt:formatNumber value="${board.price}" pattern="#,###,###"/> ￦</h3>
+					 			<c:choose>
+					 				<c:when test="${board.division eq 'S'}">
+						 				<h3 style="cursor:default;float:right;width:auto;color:#4381ff"><fmt:formatNumber value="${board.price}" pattern="#,###,###"/> ￦</h3>
+		 					
+									</c:when>
+									<c:when test="${board.division eq 'B'}">
+						 				<h3 style="cursor:default;float:right;width:auto;color:#fb236a"><fmt:formatNumber value="${board.price}" pattern="#,###,###"/> ￦</h3>
+									
+									</c:when>
+								</c:choose>
 				 			</li>
 				 		</ul>
 				 		<ul class="post-metas" style="border-bottom: solid 1px #6666; padding-bottom: 10px;">
@@ -157,11 +166,11 @@
 				 					</div>
 				 				</div>
 				 				<div class="widget">
-				 	    		<c:if test="${board.status eq 'M'}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
-				 	    			<a class="payment-button" onclick="buy()">구매하기</a>
-				 	    		</c:if>
 				 	    		</div>
 				 			</c:if>
+			 	    		<c:if test="${board.status eq 'M'}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
+			 	    			<a style="margin-top: 20px" class="payment-button" onclick="buy()">구매하기</a>
+			 	    		</c:if>
 				 		
 				 		</form>
 					</aside>
