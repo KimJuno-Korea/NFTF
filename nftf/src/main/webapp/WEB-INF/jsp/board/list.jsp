@@ -77,29 +77,29 @@
 									<div class="emply-pstn">
 										<c:choose>
 											<c:when test="${list.division eq 'S'}">
-												<b style="color: #4381ff;">판매</b>
+												<b style="color: #4381ff;">판매&nbsp;&nbsp;</b>
 											</c:when>
 											<c:when test="${list.division eq 'B'}">
-												<b style="color: #fb236a;">구매</b>
+												<b style="color: #fb236a;">구매&nbsp;&nbsp;</b>
 											</c:when>
 										</c:choose>
 										<c:choose>
 											<c:when test="${list.tradeWay eq 'D'}">
-												<b style="color: black;">&nbsp;직거래</b>
+												<b style="color: black;">&nbsp;&nbsp;직거래&nbsp;&nbsp;</b>
 											</c:when>
 											<c:when test="${list.tradeWay eq 'P'}">
-												<b style="color: black;">&nbsp;택배</b>
+												<b style="color: black;">&nbsp;&nbsp;택배&nbsp;&nbsp;</b>
 											</c:when>
 											<c:when test="${list.tradeWay eq 'T'}">
-												<b style="color: black;">&nbsp;거래함</b>
+												<b style="color: black;">&nbsp;&nbsp;거래함&nbsp;&nbsp;</b>
 											</c:when>
 										</c:choose>
 										<c:choose>
 											<c:when test="${list.status eq 'S'}">
-												<b style="color: #fb236a;">&nbsp;거래완료</b>
+												<b style="color: #fb236a;">&nbsp;&nbsp;거래완료&nbsp;&nbsp;</b>
 											</c:when>
 											<c:when test="${list.status eq 'M'}">
-												<b style="color: #1ede3e;">&nbsp;거래가능</b>
+												<b style="color: #1ede3e;">&nbsp;&nbsp;거래가능&nbsp;&nbsp;</b>
 											</c:when>
 										</c:choose>
 									</div>

@@ -168,7 +168,7 @@
 				 				<div class="widget">
 				 	    		</div>
 				 			</c:if>
-			 	    		<c:if test="${board.status eq 'M'}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
+			 	    		<c:if test="${board.status eq 'M' && sessionScope.id != null}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
 			 	    			<a style="margin-top: 20px" class="payment-button" onclick="buy()">구매하기</a>
 			 	    		</c:if>
 				 		
