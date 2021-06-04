@@ -65,30 +65,29 @@
 												</c:when>
 											</c:choose>
 											<td>${buy.tradeDate}</td>
-											<c:if test="${fn:contains(buy.status, 'M')}">
-												<td>
+										
+											<td>
+												<c:if test="${buy.status eq 'M'}">
 													<input class="trading-qr-btn"  type='button' onclick="buyQR(${buy.boardNo})" value="QR인증키 발급">
-												</td>
-												
-												<div class="modal qr" id="buyQrModal${buy.boardNo}" 
-														tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-											<!-- 				<div class="modal-header"> -->
-											<!-- 				</div> -->
-															<div class="modal-body">
-																<div class="col-12">
-																	<div class="qr-timer" id="buyTimer${buy.boardNo}"></div>
-																	<img class="trading-qr" id="buyQR${buy.boardNo}" src=''>
-																</div>
+												</c:if>
+											</td>
+											<div class="modal qr" id="buyQrModal${buy.boardNo}" 
+													tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+										<!-- 				<div class="modal-header"> -->
+										<!-- 				</div> -->
+														<div class="modal-body">
+															<div class="col-12">
+																<div class="qr-timer" id="buyTimer${buy.boardNo}"></div>
+																<img class="trading-qr" id="buyQR${buy.boardNo}" src=''>
 															</div>
-											<!-- 				<div class="modal-footer"> -->
-											<!-- 				</div> -->
 														</div>
+										<!-- 				<div class="modal-footer"> -->
+										<!-- 				</div> -->
 													</div>
 												</div>
-												
-											</c:if>
+											</div>
 										</tr>
 									</c:forEach>
 									</table>
