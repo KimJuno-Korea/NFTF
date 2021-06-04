@@ -168,15 +168,11 @@
 
 <script>
 	document.getElementById('searchBtn').addEventListener('click', ajax_call);
-	
-	function boardPrice(price){
-		var regexp = /\B(?=(\d{3})+(?!\d))/g;
-		return price.toString().replace(regexp, ',');
-	}
 
 	function ajax_call() {
 		var xhr = new XMLHttpRequest();
-		var data = "keyword=" + document.getElementById('keyword').value;
+		var data = "keyword=" + document.getElementById('keyword').value
+					+ ", division=" + ;
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === xhr.DONE) {
 				if (xhr.status === 200 || xhr.status === 201) {
