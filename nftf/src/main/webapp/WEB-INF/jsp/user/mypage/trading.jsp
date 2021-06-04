@@ -131,9 +131,11 @@
 												</c:when>
 											</c:choose>
 											<td>${sell.tradeDate}</td>
-											<c:if test="${fn:contains(sell.status, 'M')}">
+											<c:if test="${sell.status eq 'M'}">
 												<td>
-													<input class="trading-qr-btn" id="sellQRBtn${sell.boardNo}" type='button' value="QR인증키 발급" onclick="sellQR(${sell.boardNo})">
+													<c:if test="${sell.buyerId eq ''}">
+														<input class="trading-qr-btn" id="sellQRBtn${sell.boardNo}" type='button' value="QR인증키 발급" onclick="sellQR(${sell.boardNo})">
+													</c:if>
 												</td>
 												<div class="modal qr" id="sellQrModal${sell.boardNo}" 
 														tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
