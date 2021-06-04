@@ -424,3 +424,24 @@ header {
 		}
 	}
 }
+
+.ajax {
+	float: none;
+    width: 100%;
+    background-color: #42d7f5;
+    margin: auto;
+	margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+	border: none;
+	border-radius: 15px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	text-align: center;
+	
+	&:hover {
+		color: #000000;
+	}
+	
+}
