@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="account-popup">
-					<form id="form" action="${pageContext.request.contextPath}/password/${id}" method="post" >
+					<form id="form" action="${pageContext.request.contextPath}/password/${id}" method="post" autocomplete="off">
 						<div class="cfield">
 							<input id="inputPw" type="password" name="pw" placeholder="비밀번호">
 					 	</div>

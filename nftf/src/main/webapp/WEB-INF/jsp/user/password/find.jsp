@@ -30,7 +30,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="account-popup">
-					<form id="form" action="${pageContext.request.contextPath}/password" method="post" >
+					<form id="form" action="${pageContext.request.contextPath}/password" method="post" autocomplete="off">
 						<div class="cfield">
 							<input id="inputId" type="text" name="id" placeholder="아이디"> <br>
 						</div>

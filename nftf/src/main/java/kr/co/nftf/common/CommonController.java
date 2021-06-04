@@ -2,6 +2,9 @@ package kr.co.nftf.common;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import kr.co.nftf.board.Board;
-import kr.co.nftf.payment.PaymentService;
 import kr.co.nftf.user.User;
-import kr.co.nftf.user.UserService;
 
 @RestController
 public class CommonController {
@@ -21,13 +21,7 @@ public class CommonController {
 	public static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
 	
 	@Autowired
-	private CommonServiceImpl commonService;
-	
-	@Autowired
-	private PaymentService paymentServiceImpl;
-	
-	@Autowired
-	private UserService userServiceImpl;
+	private CommonService commonServiceImpl;
 	
 	//메인메뉴 폼
 	@GetMapping("/index")
@@ -46,7 +40,7 @@ public class CommonController {
 	public ModelAndView login(User user) {
 		try {
 			
-			if (commonService.login(user)) {
+			if (commonServiceImpl.login(user)) {
 				return REDIRECT_MAIN;
 			}
 		} catch(Exception exception) {
@@ -57,9 +51,9 @@ public class CommonController {
 	
 	//로그아웃
 	@GetMapping("/logout")
-	public ModelAndView logout() {
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			if (commonService.logout()) {
+			if (commonServiceImpl.logout(request, response)) {
 				return REDIRECT_MAIN;
 			}
 		} catch(Exception exception) {

@@ -51,13 +51,36 @@
 	</head>
 	<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 	<body>
+	<section>
 		<div class="block no-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>지점 조회</h3>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+		<div class="block" style="margin-top:0px !important">
 			<div class="container fluid">
 				<div class="row" style="height:100%">
 					<div class="map_wrap" style="width:66%;">
 						<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 						<div class="shortlists" style="position:absolute;top:10px;left:20px;padding:7px 12px;z-index:1;">
+							<c:if test="${sessionScope.division eq 'A'}">
 						 		<a href="/branch/form" >지점 등록</a>
+						 	</c:if>
 						 </div>
 					</div>
 				 	<div class="padding-left" style="width:33%;">

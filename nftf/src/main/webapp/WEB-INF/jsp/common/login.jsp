@@ -4,11 +4,31 @@
 
 <jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 
+<section>
+		<div class="block no-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>로그인</h3>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<div class="row">
 		<div class="col-12">
 			<div class="account-popup">
-				<h2 class="title">로그인</h2>
-				<form action="/login" method="post" >
+				<form action="/login" method="post" autocomplete="off">
 					<div class="cfield">
 						<input id="inputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
 				 	</div>

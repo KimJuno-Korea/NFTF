@@ -10,7 +10,7 @@
 
 
 	<section>
-		<div class="block no-padding  gray">
+		<div class="block no-padding">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -36,8 +36,8 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="account-popup" style="margin-top: 0px;">
-					<form id="form" action="${pageContext.request.contextPath}/user" method="post" >
+				<div class="account-popup" style="padding-top:20px !important">
+					<form id="form" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
 						<div class="cfield">
 							<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" >
 					 	</div>
@@ -61,7 +61,7 @@
 							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13" >
 					 	</div>
 					 	
-					 	<input class="ajax" type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송">
+					 	<input class="ajax" type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송" disabled>
 					 	
 						<div class="cfield">
 							<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required>
@@ -88,7 +88,6 @@
 					 		<input id="inputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)">
 					 	</div>
 					 	
-					 	<input class="ajax" id="checkAccountNo" type="button" onclick="getPinAccount()" value="계좌인증">
 					 	<div class="row">
 						 	<p id="viewCheckAccountNo" class="checkFont"></p>
 					 	</div>
@@ -98,56 +97,27 @@
 						<input id="email" type="hidden" name="email" value="">
 						<input id="rgno" type="hidden">
 					 	
-						<input class="submit" type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기">
+						<input class="submit" type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기"/>
+<!-- 						<i class="submitI"></i> -->
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 
-<!-- 	<div class="row"> -->
-<!-- 		<h2>회원 가입</h2> -->
-<!-- 		<div class="col-lg-4 col-sm-7 col-10 mt-sm-5"> -->
-<%-- 			<form id="form" action="${pageContext.request.contextPath}/user" method="post" > --%>
-<!-- 				<div class="row"> -->
-<!-- 					<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" > <div id="viewCheckId" class="checkFont"></div> -->
-<!-- 					<input id="inputPw" type="text" name="pw" placeholder="비밀번호" maxlength="30"> <br> -->
-<!-- 					<input id="inputCheckPw" type="text" name="pwCheck" placeholder="비밀번호 확인" maxlength="30"> <div id="viewCheckPw" class="checkFont"></div> -->
-<!-- 					<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14" > <input type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송"><br> -->
-<!-- 					<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required> <div id="viewCheckKey" class="checkFont"></div> -->
-<!-- 					<select id="inputBankNo" name="bankNo"> -->
-<!-- 						<option value="011" selected="selected">농협은행</option> -->
-<!-- 						<option value="012">농협상호금융</option> -->
-<!-- 						<option value="002">산업은행</option> -->
-<!-- 						<option value="003">기업은행</option> -->
-<!-- 						<option value="004">국민은행</option> -->
-<!-- 						<option value="081">KEB하나은행</option> -->
-<!-- 						<option value="020">우리은행</option> -->
-<!-- 						<option value="023">SC제일은행</option> -->
-<!-- 						<option value="045">새마을금고</option> -->
-<!-- 						<option value="088">신한은행</option> -->
-<!-- 						<option value="090">카카오뱅크</option> -->
-<!-- 					</select> -->
-<!-- 					<input id="inputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)"> <input id="checkAccountNo" type="button" onclick="getPinAccount()" value="계좌인증"> -->
-<!-- 					<div id="viewCheckAccountNo" class="checkFont"></div> -->
-<!-- 					<input id="inputPinAccount" type="hidden" name="pinAccount"> -->
-<!-- 					<input id="division" type="hidden" name="division" value="M"> -->
-<!-- 					<input id="email" type="hidden" name="email" value=""> -->
-<!-- 					<input id="rgno" type="hidden"> -->
-<!-- 					<div id="data"></div> -->
-<!-- 			 	</div> -->
-<!-- 				<div class="row"> -->
-<!-- 					<input type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기"> -->
-<!-- 				</div> -->
-<!-- 			</form> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 
 <script>
 //검증 , 정규식 사용해야됨
-$(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
+$(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	
+	if ($(this).val().length >= 13) {
+		 $('#responseKeyBtn').attr('disabled', false);
+		 
+	} else {
+		 $('#responseKeyBtn').attr('disabled', true);
+	}
+});
 	
 	function getNow() {
 		var now = new Date();
@@ -169,6 +139,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		
 		return year + month + day;
 	}
+	
 	
 	$("#inputCheckPw").on("keyup", function() {
 		if ($('#inputCheckPw').val() != '') {
@@ -231,7 +202,7 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		 
 		 if (inputId != '') {
 			 
-			 if (inputPhone != '') {
+			 if (inputPhone != '' && inputPhone.length >= 13) {
 				 var phoneData = {
 						 "id" : inputId,
 						 "phone" : inputPhone
@@ -314,8 +285,6 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		  return _s4() + _s4()  + _s4();
 	}
 	
-	
-	
 	function getPinAccount() {
 		
 		if ($('#inputAccountNo').val() != '') {
@@ -348,20 +317,17 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 						$("#viewCheckAccountNo").text('인증성공');
 						$('#viewCheckAccountNo').css('height', '50px');
 						$('#viewCheckAccountNo').css('color', '#02bb18');
-						$('#data').data("checkAccountNo", true);
 						checkPinAccount();
 					} else {
-						$("#viewCheckAccountNo").text('인증실패');
+						$("#viewCheckAccountNo").text('계좌 인증실패');
 						$('#viewCheckAccountNo').css('height', '50px');
 						$('#viewCheckAccountNo').css('color', '#ff495a');
-						$('#data').data("checkAccountNo", false);
 					}
 				}, error : function() {
 					console.log("에러");
-					$("#viewCheckAccountNo").text('인증실패');
+					$("#viewCheckAccountNo").text('계좌 인증실패');
 					$('#viewCheckAccountNo').css('height', '50px');
 					$('#viewCheckAccountNo').css('color', '#ff495a');
-					$('#data').data("checkAccountNo", false);
 				}
 			});
 		} else {
@@ -370,7 +336,6 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 			alert('계좌번호를 입력해 주세요.');
 		}
 	}
-	
 	
 	function checkPinAccount() {
 			var data = {
@@ -397,11 +362,17 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 				success : function(result) {
 					if (result.FinAcno != null) {
 						$("#inputPinAccount").val(result.FinAcno);
-						$('#data').data('checkPinAccount', true);
-					}
+						$('#form').submit();
+					} else {
+						$("#viewCheckAccountNo").text('핀 어카운트 발급 실패');
+						$('#viewCheckAccountNo').css('height', '50px');
+						$('#viewCheckAccountNo').css('color', '#ff495a');
+						}
+					
 				}, error : function() {
-					console.log("에러");
-					$('#data').data('checkPinAccount', false);
+					$("#viewCheckAccountNo").text('핀 어카운트 발급 실패');
+					$('#viewCheckAccountNo').css('height', '50px');
+					$('#viewCheckAccountNo').css('color', '#ff495a');
 				}
 			});
 	}
@@ -411,26 +382,17 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		var key = $('#data').data('checkKey');
 		var id = $('#data').data('checkId');
 		var pw = $('#data').data('checkPw');
+		
 		var no = $('#data').data('checkAccountNo');
 		var pin = $('#data').data('checkPinAccount');
 		
-		console.log(id);
-		console.log(pw);
 		if (id) {
 			if (pw) {
 				if (phone) {
 					if (key) {
-						if (no) {
-							if (pin) {
-								$("#inputPhone").attr("disabled", false);
-								getPinAccount();
-								$('#form').submit();
-							} else {
-								alert('핀 어카운트 생성 실패');
-							}
-						} else {
-							alert('계좌 인증을 해주세요');
-						}
+						/* 완료 누르면 계좌인증하고 핀어카운트받고 다 되면 서브밋 */
+						$("#inputPhone").attr("disabled", false);
+						getPinAccount();
 					} else {
 						alert('인증번호를 입력해 주세요.');
 					}

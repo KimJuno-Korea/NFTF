@@ -3452,14 +3452,14 @@ header.style4 .account-btns > li a {
     border-radius: 9px;
 }
 
-header.style4 .account-btns > li a:hover {
-    font-size: 21px;
-    font-weight: 800px;
-}
+/* header.style4 .account-btns > li a:hover { */
+/*     font-size: 21px; */
+/*     font-weight: 800px; */
+/* } */
 
-header.style4 .signin-popup a:hover {
-	font-weight: 700px;
-}
+/* header.style4 .signin-popup a:hover { */
+/* 	font-weight: 700px; */
+/* } */
 
 
 header.style4 .account-btns > li.signup-popup a {
@@ -10054,7 +10054,7 @@ header.white .menu-sec nav > ul > li > ul {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #808080;
+    color: #ffffff;
     margin-top: 7px;
 }
 .breadcrumbs {
@@ -10071,7 +10071,7 @@ header.white .menu-sec nav > ul > li > ul {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #808080;
+    color: #dcdcdc;
 }
 .breadcrumbs > li::before {
     position: absolute;

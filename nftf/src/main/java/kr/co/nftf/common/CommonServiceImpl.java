@@ -7,8 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletWebRequest;
 
 import kr.co.nftf.user.User;
 import kr.co.nftf.user.UserMapper;
@@ -32,6 +30,7 @@ public class CommonServiceImpl implements CommonService {
 					&& dbUser.getDivision() != 'D') {
 				
 				httpSession.setAttribute("id", user.getId());
+				httpSession.setAttribute("division", dbUser.getDivision());
 				httpSession.setMaxInactiveInterval(1800);
 				return true;
 			}
@@ -40,23 +39,19 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public boolean logout() throws Exception {
+	public boolean logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		if (httpSession.getAttribute("id") != null) {
 			httpSession.invalidate();
 			
-			ServletWebRequest servletContainer = (ServletWebRequest)RequestContextHolder.getRequestAttributes();
-
-			HttpServletRequest request = servletContainer.getRequest();
-
-			HttpServletResponse response = servletContainer.getResponse();
-			
 			Cookie[] cookies = request.getCookies();
+			
 			if (cookies != null) {
 				for(Cookie cookie : cookies) {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 				}
+				System.out.println(cookies);
 			}
 			return true;
 		}
