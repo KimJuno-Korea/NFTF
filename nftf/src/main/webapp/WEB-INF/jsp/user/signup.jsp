@@ -10,7 +10,7 @@
 
 
 	<section>
-		<div class="block no-padding  gray">
+		<div class="block no-padding">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">

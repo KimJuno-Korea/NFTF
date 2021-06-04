@@ -35,7 +35,7 @@
 
 
 <div class="theme-layout">
-	<div class="top-hidden" id="topHidden" style="margin-bottom:150px"></div>
+	<div class="top-hidden" id="topHidden" style="margin-bottom:115.4px;"></div>
 	
 	<div class="simple-header" >
 		<div class="row">

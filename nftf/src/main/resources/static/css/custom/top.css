@@ -9,16 +9,33 @@ header.style4 .account-btns > li a {
     font-size: 18px;
     font-weight: 500;
     padding: 11px 20px;
-    margin: 0;
     border-radius: 9px;
     margin-top: 8px;
+}
+
+header.style4 .account-btns > li a:before {
+	content:"";
+	float:right;
+    width: 0%;
+    height: 2px;
+    top: 10px;
+    margin-top: -5px;
+    display: block !important;
+    background-color: #0e6eb8;
+    
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
 }
 
 header.style4 .account-btns > li a:after {
 	content:"";
     width: 0%;
-    height: 2px;
+    height: 2.5px;
     display: block;
+    margin-top: 5px;
     background-color: #0e6eb8;
     
     -webkit-transition: all 0.5s ease 0s;
@@ -38,10 +55,29 @@ header.style4 .account-btns > li a:hover:after {
     transition: all 0.5s ease 0s;
 }
 
+header.style4 .account-btns > li a:hover:before {
+    width: 100%;
+    
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
 header.style4 .account-btns > li a:hover {
     font-size: 21px;
     font-weight: 800;
+    
+     -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
 }
+
+
+
 
 
 header.style4 .menu-sec nav > ul > li > a {
@@ -54,35 +90,69 @@ header.style4 .menu-sec nav > ul > li > a {
     margin-top: 8px;
 }
 
-header.style4 .menu-sec nav > ul > li > a:after {
-	content:"";
-    width: 0%;
-    height: 1px;
-    display: block;
-    background-color: #0b93e2;
-    -webkit-transition: all 0.5s ease 0s;
-    -moz-transition: all 0.5s ease 0s;
-    -ms-transition: all 0.5s ease 0s;
-    -o-transition: all 0.5s ease 0s;
-    transition: all 0.5s ease 0s;
+/* header.style4 .menu-sec nav > ul > li > a:after { */
+/* 	   content:""; */
+/*     width: 0%; */
+/*     height: 1px; */
+/*     display: block; */
+/*     background-color: #0b93e2; */
+/*     -webkit-transition: all 0.5s ease 0s; */
+/*     -moz-transition: all 0.5s ease 0s; */
+/*     -ms-transition: all 0.5s ease 0s; */
+/*     -o-transition: all 0.5s ease 0s; */
+/*     transition: all 0.5s ease 0s; */
+/* } */
+
+/* header.style4 .menu-sec nav > ul > li > a:hover:after { */
+/*     width: 100%; */
+    
+/*     -webkit-transition: all 0.5s ease 0s; */
+/*     -moz-transition: all 0.5s ease 0s; */
+/*     -ms-transition: all 0.5s ease 0s; */
+/*     -o-transition: all 0.5s ease 0s; */
+/*     transition: all 0.5s ease 0s; */
+/* } */
+
+
+header.style4 .menu-sec nav > ul > li > a:hover {
+    font-size: 21px;
+    font-weight: 800;
+    color: #ffffff;
+}
+header.style4 .menu-sec nav > ul > li > a:not(.logo):hover:before {
+	top: -24px !important;
+	z-index: -1;
 }
 
-header.style4 .menu-sec nav > ul > li > a:hover:after {
+/* header.style4 .menu-sec nav > ul > li > a:after { */
+/*     content:""; */
+/*     width: 100%; */
+/*     height: 115.4px; */
+/*     display: block; */
+/*     background-color: #0b93e2; */
+/*     margin-bottom: 100px; */
+    
+/*     -webkit-transition: all 0.5s ease 0s; */
+/*     -moz-transition: all 0.5s ease 0s; */
+/*     -ms-transition: all 0.5s ease 0s; */
+/*     -o-transition: all 0.5s ease 0s; */
+/*     transition: all 0.5s ease 0s; */
+/* } */
+
+header.style4 .menu-sec nav > ul > li > a:before {
+    content:"";
     width: 100%;
+    height: 115.4px;
+    display: block !important;
+    background-color: #0b93e2;
+    top: -300px !important;
     
     -webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
     -ms-transition: all 0.5s ease 0s;
     -o-transition: all 0.5s ease 0s;
-    transition: all 0.5s ease 0s;
+    transition: all 0.3s ease 0s;
 }
-
-header.style4 .menu-sec nav > ul > li > a:hover {
-    font-size: 21px;
-    font-weight: 800;
-}
-
-
 
 
 .account-btns .signin-popup .la {

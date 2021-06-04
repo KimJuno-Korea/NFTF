@@ -51,7 +51,28 @@
 	</head>
 	<jsp:include page="/WEB-INF/jsp/common/top.jsp" />
 	<body>
+	<section>
 		<div class="block no-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>지점 조회</h3>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+		<div class="block" style="margin-top:0px !important">
 			<div class="container fluid">
 				<div class="row" style="height:100%">
 					<div class="map_wrap" style="width:66%;">

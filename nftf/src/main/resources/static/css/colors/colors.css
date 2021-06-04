@@ -7,8 +7,24 @@ Background Color
 .pricetable > a,
 .pricetable.active,
 .bottom-line.style2{
-    background-color: #57b3ff ;
+   background: linear-gradient(45deg, rgb(20 200 255) 0%, rgb(0 160 233) 20%,rgb(11 147 226) 44%,rgba(20,31,114,1) 100%);
+    position: relative;
 }
+
+.bottom-line.style2:before{
+   content: "";
+	position: absolute;
+	top:0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+    background-image: url(../../customimages/top-bar6.jpg);
+    background-size: 25%;
+    background-position: 35% 40%;
+    opacity: 0.15;
+    filter: brightness(100%);
+}
+
 
 /*------------------------------------------------------------------
 Text Color
@@ -72,4 +88,5 @@ Border Color
 .browse-all-cat a{
     border-color: #0053e3 ;
 }
+
 

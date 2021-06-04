@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="account-popup" style="margin-top: 0px;">
-					<form>
+					<form autocomplete="off">
 						<div class="cfield">
 							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14">
 					 	</div>
