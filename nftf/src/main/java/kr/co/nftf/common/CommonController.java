@@ -19,7 +19,6 @@ import kr.co.nftf.user.User;
 @RestController
 public class CommonController {
 	public static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
-	public static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
 	public static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
 	
 	@Autowired

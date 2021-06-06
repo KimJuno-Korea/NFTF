@@ -63,13 +63,10 @@ public class UserServiceImpl implements UserService {
 	public String sendKey(String phone) throws Exception {
 		String apiKey = "NCSFUMYWVVTJRAC4";
 		String secretKey = "WDPETWBH38WOVCUCQEEVFV33ORTX1VL4";
-		int no1 = ((int)(Math.random()*10));
-		int no2 = ((int)(Math.random()*10));
-		int no3 = ((int)(Math.random()*10));
-		int no4 = ((int)(Math.random()*10));
-		int no5 = ((int)(Math.random()*10));
-		int no6 = ((int)(Math.random()*10));
-		String key = no1+""+no2+""+no3+""+no4+""+no5+""+no6;
+		StringBuilder key = new StringBuilder();
+		for (int i = 0 ; i < 6 ; i++) {
+			key.append(((int)(Math.random()*10))+"");
+		}
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -84,6 +81,6 @@ public class UserServiceImpl implements UserService {
 		
 		System.out.println(result.toString());
 		
-		return key;
+		return key.toString();
 	}
 }

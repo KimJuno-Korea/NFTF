@@ -38,7 +38,7 @@
 								<c:when test="${buyerList[0] ne null}">
 								<h4>구매 거래 정보 목록</h4>
 									<div class="trading-table">
-										<table border="1">
+										<table class="trading" border="1" style="width:100% !important">
 											<tr>
 												<th>관련 게시글</th>
 												<th>구매자 아이디</th>
@@ -104,7 +104,7 @@
 								<c:when test="${sellerList[0] ne null}">
 									<h4>판매 거래 정보 목록</h4>
 									<div class="trading-table">
-										<table border="1">
+										<table class="trading" border="1" style="width:100% !important">
 											<tr>
 												<th>관련 게시글</th>
 												<th>구매자 아이디</th>
@@ -172,24 +172,27 @@
 <script>
 	
 	function sellTimer(sec, no) {
-		$("#sellTimer"+no).text(sec);
+		$("#sellTimer"+no).text(sec + "초 뒤 창이 닫힙니다.");
 		for (var i = 0 ; i < sec ; i++) {
 			setTimeout(function() {
-				$("#sellTimer"+no).text(--sec);
+				$("#sellTimer"+no).text(--sec + "초 뒤 창이 닫힙니다.");
 				if (sec <= 0) {
 					$('#sellQrModal'+no).modal('hide');
+					$('#sellTimer'+no).text('');
 				}
 			}, 1000+(i*1000));
 		}
 	}
 	
 	function buyTimer(sec, no) {
-		$("#buyTimer"+no).text(sec);
+		$("#buyTimer"+no).text(sec + "초 뒤 창이 닫힙니다.");
 		for (var i = 0 ; i < sec ; i++) {
 			setTimeout(function() {
-				$("#buyTimer"+no).text(--sec);
+				$("#buyTimer"+no).text(--sec + "초 뒤 창이 닫힙니다.");
 				if (sec <= 0) {
+					alert(sec);
 					$('#buyQrModal'+no).modal('hide');
+					$('#buyTimer'+no).text('');
 				}
 			}, 1000+(i*1000));
 		}

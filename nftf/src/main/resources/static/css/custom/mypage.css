@@ -86,7 +86,7 @@
 /* 	} */
 
 .trading-table table {
-	width: 100%;
+	width: 100% !important;
 	border: solid 2px #00a0e9 !important;
 }
 
@@ -98,6 +98,7 @@
 	border-left: none;
 	border-right: none;
 	max-height: 100px;
+	vertical-align: middle !important;
 }
 
 .trading-table th {

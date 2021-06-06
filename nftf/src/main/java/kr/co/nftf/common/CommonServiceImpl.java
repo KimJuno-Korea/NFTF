@@ -25,15 +25,16 @@ public class CommonServiceImpl implements CommonService {
 		if (user != null) {
 			User dbUser = userMapper.select(user);
 			
-			if (user.getId().equals(dbUser.getId()) 
-					&& user.getPw().equals(dbUser.getPw())
-					&& dbUser.getDivision() != 'D') {
-				
-				httpSession.setAttribute("id", user.getId());
-				httpSession.setAttribute("division", dbUser.getDivision());
-				httpSession.setMaxInactiveInterval(1800);
-				return true;
-			}
+			if (dbUser != null)
+				if (user.getId().equals(dbUser.getId()) 
+						&& user.getPw().equals(dbUser.getPw())
+						&& dbUser.getDivision() != 'D') {
+					
+					httpSession.setAttribute("id", user.getId());
+					httpSession.setAttribute("division", dbUser.getDivision());
+					httpSession.setMaxInactiveInterval(1800);
+					return true;
+				}
 		}
 		return false;
 	}
