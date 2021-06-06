@@ -60,11 +60,13 @@
 					<ul class="account-btns">
 						<c:if test="${sessionScope.id eq null}">
 							<li class="signin-popup" style="margin-right: 10px">
-								<a href="${pageContext.request.contextPath}/user/form">회원가입</a>
+<%-- 							<a href="${pageContext.request.contextPath}/user/form">회원가입</a> --%>
+								<a id="showSignup">회원가입</a>
 								<i class="la la-key"></i>
 							</li>
 							<li class="signin-popup">
-								<a href="${pageContext.request.contextPath}/login">로그인</a>
+<%-- 								<a href="${pageContext.request.contextPath}/login">로그인</a> --%>
+								<a id="showLogin">로그인</a>
 								<div class="top-menu-la">
 									<i class="la la-external-link-square"></i>
 								</div>
@@ -126,11 +128,12 @@
 				<ul class="account-btns">
 					<c:if test="${sessionScope.id eq null}">
 						<li class="signin-popup" style="margin-right: 10px; margin-top: 20px">
-							<a href="${pageContext.request.contextPath}/user/form">회원가입</a>
+<%-- 							<a href="${pageContext.request.contextPath}/user/form">회원가입</a> --%>
+							<a id="showSignup2">회원가입</a>
 							<i class="la la-key" style="color: #ffffff"></i>
 						</li>
 						<li class="signin-popup" style="margin-right: 40px; margin-top: 20px">
-							<a href="${pageContext.request.contextPath}/login">로그인</a>
+							<a id="showLogin2">로그인</a>
 							<i class="la la-external-link-square" style="color: #ffffff"></i>
 						</li>
 					</c:if>
@@ -149,5 +152,136 @@
 		</div>
 	</div>
 </div>
+
+	<div class="modal signup" id="signupModal" 
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+<!-- 				<div class="modal-header"> -->
+<!-- 				</div> -->
+				<div class="modal-body">
+					<section>
+						<div id="data"></div>
+						<div class="container">
+							<div class="row">
+								<div class="account-popup">
+									<span class="close-popup"  id="closeSignupBtn">
+										<i class="la la-close"></i>
+									</span>
+									<h4>회원 가입</h4>
+									<form id="form" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
+										<div class="cfield">
+											<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" >
+									 	</div>
+									 	<div class='row'>
+									 		<p id="viewCheckId" class="checkFont"></p>
+									 	</div>
+								 		
+										<div class="cfield">
+											<input id="inputPw" type="password" name="pw" placeholder="비밀번호" maxlength="30">
+									 	</div>
+									 	
+										<div class="cfield">
+											<input id="inputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="30">
+									 	</div>
+									 	
+									 	<div class="row">
+									 		<p id="viewCheckPw" class="checkFont"></p>
+									 	</div>
+									 	
+										<div class="cfield">
+											<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13" >
+									 	</div>
+									 	
+									 	<input class="ajax" type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송" disabled>
+									 	
+										<div class="cfield">
+											<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required>
+									 	</div>
+								 		<div class="row">
+										 	<p id="viewCheckKey" class="checkFont"></p>
+									 	</div>
+									 	
+									 	<select id="inputBankNo" name="bankNo">
+											<option value="011" selected="selected">농협은행</option>
+											<option value="012">농협상호금융</option>
+											<option value="002">산업은행</option>
+											<option value="003">기업은행</option>
+											<option value="004">국민은행</option>
+											<option value="081">KEB하나은행</option>
+											<option value="020">우리은행</option>
+											<option value="023">SC제일은행</option>
+											<option value="045">새마을금고</option>
+											<option value="088">신한은행</option>
+											<option value="090">카카오뱅크</option>
+										</select>	
+										
+									 	<div class="cfield">
+									 		<input id="inputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)">
+									 	</div>
+									 	
+									 	<div class="row">
+										 	<p id="viewCheckAccountNo" class="checkFont"></p>
+									 	</div>
+									 	
+										<input id="inputPinAccount" type="hidden" name="pinAccount">
+										<input id="division" type="hidden" name="division" value="M">
+										<input id="email" type="hidden" name="email" value="">
+										<input id="rgno" type="hidden">
+									 	
+										<input class="submit" type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기"/>
+				<!-- 						<i class="submitI"></i> -->
+									</form>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+<!-- 				<div class="modal-footer"> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal login" id="loginModal" 
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+<!-- 				<div class="modal-header"> -->
+<!-- 				</div> -->
+				<div class="modal-body">
+					<section>
+					<div id="data"></div>
+					<div class="row">
+						<div class="col-12">
+							<div class="account-popup">
+								<span class="close-popup"  id="closeLoginBtn">
+									<i class="la la-close"></i>
+								</span>
+								<h4>로그인</h4>
+								<form action="/login" method="post" autocomplete="off">
+									<div class="cfield">
+										<input type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
+								 	</div>
+								 	<div class="cfield">
+								 		<input type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+									</div>
+									<input class="submit" type="submit" id="loginBtn" value="로그인">
+									<div class="find">
+										<a href="${pageContext.request.contextPath}/id/form">아이디 </a> - <a href="${pageContext.request.contextPath}/password/form">비밀번호 찾기</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					</section>
+				</div>
+<!-- 				<div class="modal-footer"> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+	</div>
+	
+	
 
 
