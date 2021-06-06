@@ -46,12 +46,12 @@ public class UserController {
 	@Autowired
 	private HttpSession httpSession;
 
-	// 회원가입 폼 **
-	@GetMapping("/user/form")
-	public ModelAndView signupForm() {
-
-		return new ModelAndView("/user/signup");
-	}
+//	// 회원가입 폼 **
+//	@GetMapping("/user/form")
+//	public ModelAndView signupForm() {
+//
+//		return new ModelAndView("/user/signup");
+//	}
 
 	// 회원가입 **
 	@PostMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -352,12 +352,15 @@ public class UserController {
 	private void responseKey(User user) {
 		httpSession.setAttribute("key", "");
 		try {
-			StringBuilder key = new StringBuilder();
-			for (int i = 0 ; i < 6 ; i++) {
-				key.append(((int)(Math.random()*10))+"");
-			}
-			System.out.println("인증키 " + key.toString());
-			httpSession.setAttribute("key", key.toString());
+//			StringBuilder key = new StringBuilder();
+//			for (int i = 0 ; i < 6 ; i++) {
+//				key.append(((int)(Math.random()*10))+"");
+//			}
+			String key = userServiceImpl.sendKey(user.getPhone());
+			
+			System.out.println("인증키 " + key);
+			
+			httpSession.setAttribute("key", key);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

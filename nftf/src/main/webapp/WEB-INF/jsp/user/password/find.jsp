@@ -37,13 +37,14 @@
 						<div class="cfield">
 							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength='13'> 
 						</div>
-							<input id="receiveKeyBtn" class="ajax" type="button" value="인증번호 전송" onclick="receiveKey()"> <br>
+							<input id="responseKeyBtn" class="ajax" type="button" value="인증번호 전송" onclick="receiveKey()" disabled> <br>
 						<div class="cfield">
 							<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength='6'> 
 					 	</div>
 					 	<div class="checkInput" id="viewCheckKey"></div>
 						<div class="row">
-							<input id="findPwBtn" class="onclick" value="확인" type="button" onclick="findPwSubmit()">
+							<input id="findPwBtn" class="onclick" value="확인" type="button" onclick="findPwSubmit()"
+									style="width: 91%">
 						</div>
 					</form>
 				</div>
@@ -55,7 +56,15 @@
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 
 <script>
-$(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
+$(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+
+if ($(this).val().length >= 13) {
+	 $('#responseKeyBtn').attr('disabled', false);
+	 
+} else {
+	 $('#responseKeyBtn').attr('disabled', true);
+}
+});
 
 	//인증번호 전송 및 아이디와 전화번호 일치 테스트
 	function receiveKey() {
