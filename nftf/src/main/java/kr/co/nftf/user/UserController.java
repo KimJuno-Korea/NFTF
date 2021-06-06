@@ -157,7 +157,7 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return CommonController.REDIRECT_LOGIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	// 이게 마이 페이지 메인 화면 가는 메소드 **
@@ -214,7 +214,7 @@ public class UserController {
 		try {
 
 			if (user != null) {
-				return userServiceImpl.editUser(user) ? CommonController.REDIRECT_LOGIN
+				return userServiceImpl.editUser(user) ? CommonController.REDIRECT_MAIN
 						: CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
