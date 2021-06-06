@@ -46,6 +46,7 @@
 		</div>
 	</div>
 </section>	
+
 	
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 </body>

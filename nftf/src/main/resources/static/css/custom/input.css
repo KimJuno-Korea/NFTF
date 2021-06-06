@@ -270,3 +270,16 @@ footer {
 	border-radius: 5px;
     border: 3px solid #61c1ff !important;
 }
+
+.close-popup {
+	top: -37px !important;
+	right: -37px !important;
+}
+
+.account-popup > h4 {
+	margin: 60px 0px 0px 0px;
+}
+
+.account-popup {
+	margin-bottom: 20px;
+}

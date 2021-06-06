@@ -52,7 +52,7 @@
 		width: 250px;
 		height: 250px;
 	}
-	
+}
 /* 		table, thead, tbody, th, td, tr {  */
 /* 		display: block;  */
 /* 	} */
@@ -84,7 +84,6 @@
 /* 		padding-right: 10px;  */
 /* 		white-space: nowrap; */
 /* 	} */
-}
 
 .trading-table table {
 	width: 100%;
@@ -247,27 +246,7 @@
 	color: #ff1818; 
 }
 
-.modal {
-       text-align: center;
-}
- 
-@media screen and (min-width: 768px) { 
-        .modal:before {
-                display: inline-block;
-                vertical-align: middle;
-                content: " ";
-                height: 100%;
-        }
-}
- 
-.modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-}
-
 .account-popup {
 	margin-top: 0px !important;
 	padding-top: 0px !important;
 }
-
