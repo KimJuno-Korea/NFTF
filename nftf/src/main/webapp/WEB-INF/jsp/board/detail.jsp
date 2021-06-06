@@ -35,20 +35,10 @@
 		<div class="block">
 			<div class="container">
 				 <div class="row">
-				 	<c:choose>
-				 		<c:when test="${board.status eq 'S'}">
-				 			<div class="col-lg-10 column" 
-				 				style="padding:30px 40px 30px 40px;
-				 				box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
-				 				border-radius: 20px;background:#f7f5f5;opacity:0.6;">
-				 		</c:when>
-				 		<c:otherwise>
-				 			<div class="col-lg-10 column" 
-				 				style="padding:30px 40px 30px 40px;
-				 				box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
-				 				border-radius: 20px;">
-				 		</c:otherwise>
-				 	</c:choose>
+				 	<div class="col-lg-10 column" 
+				 		style="padding:30px 40px 30px 40px;
+				 		box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+				 		border-radius: 20px;<c:if test="${board.status eq 'S'}">background:#f7f5f5;opacity:0.6;</c:if>">
 				 	<div class="tags-share" style="border-top: 0px; border-bottom:0px">
 				 		<c:if test="${sessionScope.id == board.userId && board.status ne 'M' }">
 				 			<b style="color:red;">결제 및 거래가 완료된 게시글은 수정, 삭제 할 수 없습니다.</b>
@@ -134,7 +124,9 @@
 				 		
 						<div class="board-photo">
 								<c:forEach var="photo" items="${photoList }">
-									<img src="<%=request.getContextPath() %>/photo/${photo.no}" style="width:32%; height:280px" />
+									<a href="<%=request.getContextPath() %>/photo/${photo.no}" target="_blank">
+										<img src="<%=request.getContextPath() %>/photo/${photo.no}" style="width:32%; height:280px" />
+									</a>
 								</c:forEach>
 						</div>
 
@@ -205,18 +197,43 @@
 			 	    			<a style="margin-top: 20px" class="payment-button" onclick="buy()">구매하기</a>
 			 	    		</c:if>
 			 	    	<form name="changeBoard">
-			 	    		<c:if test="${board.status eq 'M' && board.tradeWay ne 'T' }"> <!-- 직거래, 택배 거래에 대한 거래 완료 버튼 -->
+			 	    		<c:if test="${sessionScope.id != null && sessionScope.id == board.userId && board.status eq 'M' && board.tradeWay ne 'T' }"> <!-- 직거래, 택배 거래에 대한 거래 완료 버튼 -->
 			 	    			<a style="margin-top: 20px" class="payment-button" onclick="changeBoardStatus(changeBoard,${board.no})">거래완료</a>
 			 	    		</c:if>
 			 	    	</form>
 					</aside>
 				 </div>
+			</div>
 		</div>
 	</section>
+	<!-- <div class="modal login" id="imageModal" 
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body">
+					<section>
+					<div id="data"></div>
+					<div class="row">
+						<div class="col-12">
+							<div class="account-popup">
+								<span class="close-popup"  id="closeImageBtn">
+									<i class="la la-close"></i>
+								</span>
+								<h4>로그인</h4>
+							</div>
+						</div>
+					</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div> -->
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
+
 	function boardPrice(price){
 		var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		return price.toString().replace(regexp, ',');

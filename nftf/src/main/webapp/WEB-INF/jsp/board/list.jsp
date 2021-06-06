@@ -71,15 +71,7 @@
 					<div class="emply-list-sec style2">
 						<!-- Employe List -->
 						<c:forEach var="list" items="${boardList }" varStatus="board">
-						<c:choose>
-							<c:when test="${list.status eq 'S' }"> <!-- 거래 완료 -->
-								<div class="emply-list" style="background:#f7f5f5;opacity:0.6;">
-							</c:when>
-							<c:otherwise>
-								<div class="emply-list">
-							</c:otherwise>
-						</c:choose>
-						
+							<div class="emply-list" <c:if test="${list.status eq 'S' }">style="background:#f7f5f5;opacity:0.6;"</c:if>>
 								<div class="emply-list-thumb">
 									<img src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}">
 								</div>
@@ -132,8 +124,9 @@
 									</c:choose>
 									<p>${list.content }</p>
 								</div>
-							</div>
+								</div>
 						</c:forEach>
+						</div>
 						<!-- Pagination -->
 					</div>
 					
