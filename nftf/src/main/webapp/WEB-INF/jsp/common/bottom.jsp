@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<spring:eval expression="@environment.getProperty('payment.accesstoken')" var="accesstoken" />
+<spring:eval expression="@environment.getProperty('payment.iscd')" var="iscd" />   
 	<footer class="gray">
 		<div class="block">
 			<div class="row">
@@ -367,7 +371,7 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 				success : function(result) {
 					if (result.FinAcno != null) {
 						$("#inputPinAccount").val(result.FinAcno);
-						$('#form').submit();
+						signup();
 					} else {
 						$("#viewCheckAccountNo").text('핀 어카운트 발급 실패');
 						$('#viewCheckAccountNo').css('height', '50px');
@@ -411,6 +415,72 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 			alert('아이디 중복확인을 해주세요.');
 		}
 	} 
-</script>
 	
+	function signup() {
+		var data = {
+				"id" : $('#inputId').val(),
+				"pw" : $('#inputPw').val(),
+				"phone" : $('#inputPhone').val(),
+				"bankNo" : $('#inputBankNo').val(),
+				"accountNo" : $('#inputAccountNo').val(),
+				"pinAccount" : $('#inputPinAccount').val(),
+				"division" : "M",
+				"email" : ""
+		}
+		
+		$.ajax({
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8;',
+			url : '${pageContext.request.contextPath}/user',
+			type : 'POST',
+			data : JSON.stringify(data),
+			success : function(result) {
+				if (result) {
+					location.reload();
+					alert('회원가입을 성공했습니다.');
+				} else {
+					alert('회원가입에 실패하였습니다.');
+				}
+			}, error : function() {
+				console.log("에러");
+			}
+		});
+	}
+	
+	function login() {
+		var loginInputId = $('#loginInputId');
+		var loginInputPw = $('#loginInputPw');
+		
+		if (loginInputId.val() != '') {
+			if (loginInputPw.val() != '') {
+				
+				var data = {
+						"id" : loginInputId.val(),
+						"pw" : loginInputPw.val()
+				}
+				
+				$.ajax({
+					dataType : 'json',
+					contentType : 'application/json; charset=utf-8;',
+					url : '${pageContext.request.contextPath}/login',
+					type : 'POST',
+					data : JSON.stringify(data),
+					success : function(result) {
+						if (result) {
+							location.reload();
+						} else {
+							alert('로그인에 실패하였습니다.');
+						}
+					}, error : function() {
+						console.log("에러");
+					}
+				});
+				
+			} else {
+				alert('비밀번호를 입력해 주세요');
+			}
+		} else {
+			alert('아이디를 입력해 주세요');
+		}
+	}
 </script>

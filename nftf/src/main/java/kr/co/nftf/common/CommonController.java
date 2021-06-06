@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -29,24 +31,23 @@ public class CommonController {
 		return new ModelAndView("/common/index").addObject("code", code);
 	}
 	
-	//로그인 폼
-	@GetMapping("/login")
-	public ModelAndView loginForm() {
-		return new ModelAndView("/common/login");
-	}
+//	//로그인 폼
+//	@GetMapping("/login")
+//	public ModelAndView loginForm() {
+//		return new ModelAndView("/common/login");
+//	}
 	
 	//로그인
-	@PostMapping("/login")
-	public ModelAndView login(User user) {
+	@PostMapping(value="/login", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public boolean login(@RequestBody User user) {
 		try {
-			
 			if (commonServiceImpl.login(user)) {
-				return REDIRECT_MAIN;
+				return true;
 			}
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_LOGIN;
+		return false;
 	}
 	
 	//로그아웃
@@ -59,6 +60,6 @@ public class CommonController {
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
-		return REDIRECT_LOGIN;
+		return REDIRECT_MAIN;
 	}
 }
