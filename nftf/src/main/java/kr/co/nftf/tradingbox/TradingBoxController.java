@@ -1,7 +1,5 @@
 package kr.co.nftf.tradingbox;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +20,5 @@ public class TradingBoxController {
 		mav.addObject("tradingBoxList", tradingBoxServiceImpl.selectTradingBoxList(branch));
 		 
 		return mav;
-	}
-	
-	@GetMapping(value = "/{code}/tradingbox")
-	public List<TradingBox> getTradingBoxListToJson(Branch branch) throws Exception {
-		
-		return tradingBoxServiceImpl.selectTradingBoxList(branch);
 	}
 }
