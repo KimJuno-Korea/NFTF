@@ -131,6 +131,7 @@ public class AgentController {
 		} catch (Exception e) {
 				result.put("result", false);
 		}
+		
 		return result;
 	}
 }
