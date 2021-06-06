@@ -76,6 +76,54 @@
     -o-border-radius: 8px;
     border-radius: 8px;
 }
+.search_widget {
+    float: left;
+    width: 100%;
+}
+.search_widget .field_w_search:last-child {
+    margin: 0;
+}
+.field_search {
+    float: left;
+    width: 100%;
+    position: relative;
+    border: 2px solid #e8ecec;
+    
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+.field_search input {
+    float: left;
+    width: 100%;
+    background: none;
+    padding: 15px 25px;
+    font-size: 13px;
+    margin: 0;
+}
+.field_search i {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    color: #589bd4;
+    font-size: 24px;
+}
+.search_widget > .field_search input:focus {
+    border-radius: 5px;
+    border: 3px solid #61c1ff !important;
+}
+
+.search_widget > .field_search input:focus{
+    -webkit-transition: all 0.1s ease 0s;
+    -moz-transition: all 0.1s ease 0s;
+    -ms-transition: all 0.1s ease 0s;
+    -o-transition: all 0.1s ease 0s;
+    transition: all 0.1s ease 0s;
+}
 .button-custom2,
 .button-custom,
 .payment-button{

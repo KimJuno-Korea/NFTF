@@ -13,6 +13,7 @@ public class Board implements Serializable{
 	private char tradeWay;
 	private char status;
 	private LocalDate registrateDate;
+	private String keyword;
 	
 	public Board() {
 		
@@ -88,5 +89,13 @@ public class Board implements Serializable{
 
 	public void setRegistrateDate(LocalDate registrateDate) {
 		this.registrateDate = registrateDate;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 }

@@ -7,7 +7,7 @@ public interface BoardService {
 	
 	public List<Board> boardList () throws Exception;
 	
-	public List<Board> boardSearch (String message) throws Exception;
+	public List<Board> boardSearch (Board board) throws Exception;
 	
 	public Board boardSelect (Board board) throws Exception;
 	

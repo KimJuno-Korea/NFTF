@@ -11,14 +11,48 @@
 <c:set var="board" value="${board }" />
 
 <section>
+		<div class="block no-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="inner2">
+							<div class="inner-title2">
+								<h3>게시글 상세 정보</h3>
+								<span>${board.userId }님의 상품에 대한 상세 정보가 입력되어 있습니다.</span>
+							</div>
+							<div class="page-breacrumbs">
+								<ul class="breadcrumbs">
+									<li><a href="${pageContext.request.contextPath}/index" title="">Home</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<section>
 		<div class="block">
 			<div class="container">
 				 <div class="row">
-				 	<div class="col-lg-10 column" 
-				 			style="padding:30px 40px 30px 40px;
-				 			box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
-				 			border-radius: 20px;">
+				 	<c:choose>
+				 		<c:when test="${board.status eq 'S'}">
+				 			<div class="col-lg-10 column" 
+				 				style="padding:30px 40px 30px 40px;
+				 				box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+				 				border-radius: 20px;background:#f7f5f5;opacity:0.6;">
+				 		</c:when>
+				 		<c:otherwise>
+				 			<div class="col-lg-10 column" 
+				 				style="padding:30px 40px 30px 40px;
+				 				box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+				 				border-radius: 20px;">
+				 		</c:otherwise>
+				 	</c:choose>
 				 	<div class="tags-share" style="border-top: 0px; border-bottom:0px">
+				 		<c:if test="${sessionScope.id == board.userId && board.status ne 'M' }">
+				 			<b style="color:red;">결제 및 거래가 완료된 게시글은 수정, 삭제 할 수 없습니다.</b>
+				 		</c:if>
 						 			<div class="tags_widget">
 						 				<c:choose>
 											<c:when test="${board.division eq 'S'}">
@@ -62,7 +96,7 @@
 											</c:when>
 											<c:when test="${board.status eq 'W'}">
 												<a style="cursor: default; background: #4381ff">
-												<b style="color:white">결제대기</b>
+												<b style="color:white">거래중</b>
 								 				</a>
 											</c:when>
 										</c:choose>
@@ -154,7 +188,7 @@
 				 						<a class="button-custom" onClick="location.href='/board?num=1'">목록으로</a>
 				 				</div>
 				 			</div>
-				 			<c:if test="${sessionScope.id == board.userId }">
+				 			<c:if test="${sessionScope.id == board.userId && board.status eq 'M' }">
 				 				<div class="widget">
 				 					<div class="search_widget_job no-margin">
 				 						<a class="button-custom" onClick="location.href='/board/${board.no}/form'">수정</a>
@@ -165,17 +199,18 @@
 			 							<a class="button-custom" onClick="del(boardInfo,${board.no})">삭제</a>
 				 					</div>
 				 				</div>
-				 				<div class="widget">
-				 	    		</div>
 				 			</c:if>
+				 		</form>
 			 	    		<c:if test="${board.status eq 'M' && sessionScope.id != null && board.userId ne sessionScope.id}"> <!-- (변경) M:거래가능, W:결제대기(거래중), S:거래완료 -->
 			 	    			<a style="margin-top: 20px" class="payment-button" onclick="buy()">구매하기</a>
 			 	    		</c:if>
-				 		
-				 		</form>
+			 	    	<form name="changeBoard">
+			 	    		<c:if test="${board.status eq 'M' && board.tradeWay ne 'T' }"> <!-- 직거래, 택배 거래에 대한 거래 완료 버튼 -->
+			 	    			<a style="margin-top: 20px" class="payment-button" onclick="changeBoardStatus(changeBoard,${board.no})">거래완료</a>
+			 	    		</c:if>
+			 	    	</form>
 					</aside>
 				 </div>
-			</div>
 		</div>
 	</section>
 
@@ -191,6 +226,14 @@
 		var chk = confirm("해당 게시글을 삭제하시겠습니까?");
 		if (chk) {
 			formName.action = "/board/" + boardNo;
+			formName.method = "post";
+			formName.submit();
+		}
+	}
+	function changeBoardStatus(formName,boardNo) {
+		var chk = confirm("해당 거래를 완료하시겠습니까?");
+		if (chk) {
+			formName.action = "/changeboardstatus/" + boardNo;
 			formName.method = "post";
 			formName.submit();
 		}

@@ -88,7 +88,15 @@
             STATUS,
             REGISTRATE_DATE
         FROM board
-        WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')
+        <where>
+        	<if test="division != null and division != ''">
+                AND DIVISION = #{division}
+            </if>
+            <if test="tradeWay != null and tradeWay != ''">
+                AND TRADE_WAY = #{tradeWay}
+            </if>
+        	AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+        </where>
     </select>
     
     <insert id="insert" parameterType="kr.co.nftf.board.Board">
