@@ -243,7 +243,7 @@ public class UserController {
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try {
 			user = userServiceImpl.selectUser(user);
-			byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId() + user.getPw());
+			byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId()+ "/" + user.getPw());
 			if (file != null) {
 				response.setContentType("image/png");
 				response.getOutputStream().write(file);

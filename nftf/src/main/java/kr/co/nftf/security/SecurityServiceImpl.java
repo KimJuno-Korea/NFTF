@@ -41,6 +41,7 @@ public class SecurityServiceImpl implements SecurityService{
 	}
 
 	//인증키 QR 생성 (구매누르고 결제 완료시 실행)
+	//인증키, 거래함 번호
 	@Override
 	public byte[] createKeyQR(TradingBox tradingBox)	
 			throws Exception  {
@@ -55,6 +56,8 @@ public class SecurityServiceImpl implements SecurityService{
 			tradingBox.setAuthKeyDate(LocalDateTime.now());
 			tradingBox.setAuthKey(key.toString());
 			tradingBoxMapper.update(tradingBox);
+			
+			key.append("/"+tradingBox.getNo());
 			
 			byte[] file = getQR(key.toString());
 			return file;
