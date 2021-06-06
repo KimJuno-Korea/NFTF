@@ -4,12 +4,6 @@
 <script>
 var boardNo = '${board.no}'; //게시글 번호
 var sessionUserId = '${sessionScope.id}'; //세션에 저장된 사용자 아이디
- 
-/* $('[name=replyInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
-    var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
-    console.log("click");
-    replyInsert(insertData); //Insert 함수호출(아래)
-}); */
 
 function replyClick() {
 	var insertData = $('[name=replyInsertForm]').serialize(); //replyInsertForm의 내용을 가져옴
@@ -27,17 +21,19 @@ function replyList(){
             $.each(data, function(key, value){
                 a += '<li><div class="comment" style="border-bottom: 1px solid #e8ecec;"><div class="comment-detail">';
                 a += '<h3>' + value.userId + '</h3><div class="date-comment">';
+                a += '<a style="cursor: default;"><i class="la la-calendar-o"></i>'+value.registrateDate+'</a><br>';
+
                 if(value.userId == sessionUserId) {
                 	a += '<div id="bt_event_'+value.no+'" style="display:block">'
-                	a += '<a onclick="deleteConfirm('+value.no+');"><i class="la la-calendar-o"></i>삭제</a>';
-                	a += '<a onclick="replyUpdateForm('+value.no+',\''+value.content+'\');"><i class="la la-calendar-o"></i>';
+                	a += '<a onclick="deleteConfirm('+value.no+');"><i></i>삭제</a>';
+                	a += '<a onclick="replyUpdateForm('+value.no+',\''+value.content+'\');"><i></i>';
                 	a += '수정 </a></div>';
                 }
-                a += '<a style="cursor: default;"><i class="la la-calendar-o"></i>'+value.registrateDate+'</a>';
+                
                 if(value.editStatus == 'Y') {
-                	a += '<a style="cursor: default;"><i class="la la-calendar-o"></i>(수정됨)</a>';
+                	a += '<a style="cursor: default;"><i></i>(수정됨)</a>';
                 }
-                a += '</div><div class="commentContent'+value.no+'"> <p> 내용 : '+value.content;+'</p></div>';
+                a += '</div><div class="commentContent'+value.no+'"><p>'+value.content;+'</p></div>';
                 a += '</div></div></li>';
             });
             

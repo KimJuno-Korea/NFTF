@@ -54,10 +54,12 @@ public class BoardController {
 		List<Board> boardList = new ArrayList<>();
 		Paging paging = new Paging();
 		int count = 0;
-
+		System.out.println("게시글 목록 조회");
 		try {
 			count = boardServiceImpl.boardCount();
-
+			/*
+			 * if (num == null) { num = "1"; }
+			 */
 			paging.setNum(Integer.valueOf(num));
 			paging.setCount(boardServiceImpl.boardCount());
 
@@ -105,20 +107,48 @@ public class BoardController {
 		return modelAndView;
 	}
 	
+	@PostMapping("/changeboardstatus/{no}")
+	public ModelAndView changeBoardStatus(Board board) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/board?num=1");
+		Board newBoard = new Board();
+		
+		newBoard.setNo(board.getNo());
+		newBoard.setStatus('S');
+		
+		try {
+			boardServiceImpl.boardEdit(newBoard);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return modelAndView;
+	}
 
-	@PostMapping(value = "/boardsearch", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public List<Board> searchBoard(String keyword) {
+	@PostMapping("/boardsearch")
+	public List<Board> searchBoard(Board board) {
+		if (board.getDivision() == 'A') {
+			char charNull = 0;
+			board.setDivision(charNull);
+		}
+		if (board.getTradeWay() == 'A') {
+			char charNull = 0;
+			board.setTradeWay(charNull);
+		}
+		System.out.println("키워드 : " + board.getKeyword());
+		
 		List<Board> listBoard = new ArrayList<>();
 		
 		try {
-			listBoard = boardServiceImpl.boardSearch(keyword);
+			listBoard = boardServiceImpl.boardSearch(board);
 			for (int i = 0; i < listBoard.size(); i ++) {
 				System.out.println(listBoard.get(i).getTitle());
 			}
-			System.out.println("boardsearch");
+			System.out.println("검색 결과 :" + listBoard.size());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return listBoard;
 	}
 
@@ -137,10 +167,6 @@ public class BoardController {
 			photoList = photoServiceImpl.photoList(photo);
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		
-		for (int i = 0; i < photoList.size(); i ++) {
-			System.out.println(photoList.get(i).getLogicalName());
 		}
 
 		modelAndView.addObject("board", board);

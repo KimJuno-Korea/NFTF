@@ -32,9 +32,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> boardSearch(String keyword) throws Exception{
+	public List<Board> boardSearch(Board board) throws Exception{
 		List<Board> result = new ArrayList<>();
-		result = boardMapper.searchResult(keyword);
+		result = boardMapper.searchResult(board);
 		
 		return result;
 	}
