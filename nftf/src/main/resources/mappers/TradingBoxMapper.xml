@@ -79,6 +79,9 @@
 			<if test="no != 0">
 				AND NO = #{no}
 			</if>
+			<if test="boardNo != 0">
+				AND boardNo = #{boardNo}
+			</if>
 		</where>
 	</update>
 	
