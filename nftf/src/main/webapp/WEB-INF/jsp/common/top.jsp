@@ -172,6 +172,7 @@
 									<form id="form" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
 										<div class="cfield">
 											<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" >
+											<i class="la la-user"></i>
 									 	</div>
 									 	<div class='row'>
 									 		<p id="viewCheckId" class="checkFont"></p>
@@ -179,10 +180,12 @@
 								 		
 										<div class="cfield">
 											<input id="inputPw" type="password" name="pw" placeholder="비밀번호" maxlength="30">
+											<i class="la la-key"></i>
 									 	</div>
 									 	
 										<div class="cfield">
 											<input id="inputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="30">
+											<i class="la la-key"></i>
 									 	</div>
 									 	
 									 	<div class="row">
@@ -191,12 +194,13 @@
 									 	
 										<div class="cfield">
 											<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13" >
+											<i class="la la-phone"></i>
 									 	</div>
 									 	
 									 	<input class="ajax" type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송" disabled>
 									 	
 										<div class="cfield">
-											<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength="6" required>
+											<input id="inputKey" type="text" placeholder="인증번호" disabled="disabled" maxlength="6" required>
 									 	</div>
 								 		<div class="row">
 										 	<p id="viewCheckKey" class="checkFont"></p>
@@ -259,14 +263,14 @@
 									<i class="la la-close"></i>
 								</span>
 								<h4>로그인</h4>
-								<form action="/login" method="post" autocomplete="off">
+								<form id="loginForm" action="/login" method="post" autocomplete="off">
 									<div class="cfield">
-										<input type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
+										<input id="loginInputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
 								 	</div>
 								 	<div class="cfield">
-								 		<input type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+								 		<input id="loginInputPw" type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
 									</div>
-									<input class="submit" type="submit" id="loginBtn" value="로그인">
+									<input class="submit" type="button" onclick="login()" id="loginBtn" value="로그인">
 									<div class="find">
 										<a href="${pageContext.request.contextPath}/id/form">아이디 </a> - <a href="${pageContext.request.contextPath}/password/form">비밀번호 찾기</a>
 									</div>

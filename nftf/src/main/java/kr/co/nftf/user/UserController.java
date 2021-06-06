@@ -41,9 +41,6 @@ public class UserController {
 	private SecurityService securityServiceImpl;
 
 	@Autowired
-	private CommonService commonServiceImpl;
-
-	@Autowired
 	private BoardService boardServiceImpl;
 
 	@Autowired
@@ -57,15 +54,15 @@ public class UserController {
 	}
 
 	// 회원가입 **
-	@PostMapping("/user")
-	public ModelAndView signup(User user) {
+	@PostMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public boolean signup(@RequestBody User user) {
 		try {
-			return userServiceImpl.registUser(user) ? CommonController.REDIRECT_LOGIN
-					: new ModelAndView(new RedirectView("/user/form"));
+			return userServiceImpl.registUser(user) ? true
+					: false;
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return CommonController.REDIRECT_LOGIN;
+		return false;
 	}
 
 	// 아이디 찾기 폼 **
@@ -354,10 +351,13 @@ public class UserController {
 
 	private void responseKey(User user) {
 		httpSession.setAttribute("key", "");
-		System.out.println(user.getPhone());
 		try {
-			System.out.println("인증키 " + "533167");
-			httpSession.setAttribute("key", "533167");
+			StringBuilder key = new StringBuilder();
+			for (int i = 0 ; i < 6 ; i++) {
+				key.append(((int)(Math.random()*10))+"");
+			}
+			System.out.println("인증키 " + key.toString());
+			httpSession.setAttribute("key", key.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -373,7 +373,6 @@ public class UserController {
 				// 회원가입시 아이디랑 폰번호 없으니 이걸로 실행되야함
 				if (type.equals("signup")) {
 					User checkUser = new User();
-					System.out.println("//////////////////" + user.getPhone());
 					checkUser.setPhone(user.getPhone());
 					checkUser = userServiceImpl.selectUser(checkUser);
 
