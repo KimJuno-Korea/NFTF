@@ -27,7 +27,7 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<div class="col-lg-10 column">
-				 		<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data">
+				 		<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data" autocomplete="off">
 				 		<div class="padding-left">
 					 		<div class="manage-jobs-sec">
 						 		<div class="resumeadd-form">

@@ -80,7 +80,7 @@
 				AND NO = #{no}
 			</if>
 			<if test="boardNo != 0">
-				AND boardNo = #{boardNo}
+				AND BOARD_NO = #{boardNo}
 			</if>
 		</where>
 	</update>

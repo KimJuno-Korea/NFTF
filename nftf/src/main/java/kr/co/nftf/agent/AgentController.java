@@ -59,11 +59,11 @@ public class AgentController {
 	
 	// 인증키 대조
 	@PostMapping(value="/agent/contrastkey", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Map<String, Boolean> contrastKey (@RequestBody String authKey) throws Exception {
+	public Map<String, Boolean> contrastKey (@RequestBody TradingBox tradingBox) throws Exception {
 		Map<String, Boolean> authResult = new HashMap<String, Boolean>();
 		
-		if (authKey != null) {
-				authResult.put("result", securityServiceImpl.contrastKey(authKey));
+		if (tradingBox != null) {
+				authResult.put("result", securityServiceImpl.contrastKey(tradingBox.getAuthKey()));
 			
 				return authResult;
 			}

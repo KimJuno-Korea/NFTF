@@ -169,7 +169,7 @@
 										<i class="la la-close"></i>
 									</span>
 									<h4>회원 가입</h4>
-									<form id="form" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
+									<form id="signupForm" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
 										<div class="cfield">
 											<input id="signupInputId" type="text" name="id" placeholder="아이디" maxlength="30" >
 											<i class="la la-user"></i>
@@ -231,7 +231,7 @@
 										<input id="signupInputPinAccount" type="hidden" name="pinAccount">
 										<input id="signupDivision" type="hidden" name="division" value="M">
 										<input id="signupEmail" type="hidden" name="email" value="">
-										<input id="signupRgno" type="hidden">
+										<input id="rgno" type="hidden">
 									 	
 										<input class="submit" type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기"/>
 				<!-- 						<i class="submitI"></i> -->

@@ -433,7 +433,7 @@ public class UserController {
 
 			if (key != null) {
 				key = key.replaceAll("\"", "");
-				System.out.println(key);
+				System.out.println(key + "//" + httpSession.getAttribute("key"));
 				return key.equals(httpSession.getAttribute("key")) ? true : false;
 			}
 		} catch (Exception exception) {
