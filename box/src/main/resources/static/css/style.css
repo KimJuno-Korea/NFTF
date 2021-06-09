@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  text-decoration-line: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+  margin: 0;
+
+  flex-direction: column;
+  display: flex;
+}
+
+.common__top {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.common__top > img {
+  width: 15%;
+  height: 80%;
+}
+.common__center {
+  width: 100%;
+  height: 60%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.common__center > img {
+  width: 50%;
+  height: 90%;
+}
+.registauth__center {
+  width: 100%;
+  height: 60%;
+
+  display: flex;
+  align-items: left;
+  justify-content: center;
+}
+
+.index__bottom {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.common__bottom {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service__box {
+  width: 400px;
+  height: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 10%;
+
+  border-radius: 10%;
+}
+
+.service__box > a {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(81, 187, 236);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 8px 8px 8px gray;
+  border-radius: 10%;
+}
+
+.service__box > a:active {
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0, 0.5);
+  position: relative;
+  top: 4px;
+  left: 4px;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.service__box > a > p {
+  color: white;
+  font-size: 40pt;
+}
+
+.index__bottom > p {
+  color: rgb(48, 51, 58);
+  font-size: 26pt;
+}
+.common__bottom > p {
+  color: rgb(48, 51, 58);
+  font-size: 26pt;
+}
+.common__double {
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.common__double > img {
+  width: 100%;
+  height: 100%;
+}
+div#frame {
+  width: 80%;
+  height: 90%;
+}
+.button {
+  margin: 0px 30px 0px 30px;
+  width: 20%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 4px gray;
+  border-radius: 15px;
+  border: 0px;
+  font-size: 34pt;
+  color: white;
+}
+
+.button:active {
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0, 0.5);
+  position: relative;
+  top: 4px;
+  left: 4px;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.back__button {
+  background-color: orange;
+}
+.confirm__button {
+  background-color: rgb(81, 187, 236);
+}
+.left__side {
+  float: left;
+}
+.right__side {
+  float: right;
+}
+.tradingbox__frame {
+  width: 60%;
+  height: 100%;
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 5px;
+  border: rgb(233, 233, 233) solid 4px;
+}
+
+.tradingbox__row {
+  width: 100%;
+  height: 40%;
+
+  display: flex;
+  flex-direction: row;
+}
+.tradingbox {
+  padding: 2px;
+  width: 25%;
+  height: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tradingbox__number {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: rgb(17, 215, 250);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.tradingbox__discript {
+  width: 100%;
+  height: 40%;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tradingbox__available {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(74, 209, 142);
+  color: whitesmoke;
+  font-size: 16pt;
+  border-radius: 10pt;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tradingbox__disable {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(248, 105, 105);
+  color: rgb(255, 255, 255);
+  font-size: 16pt;
+  border-radius: 10pt;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tradingbox__button {
+  width: 100%;
+  height: 25%;
+  margin-bottom: 10px;
+
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.tradingbox__button > input {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(17, 215, 250);
+  color: white;
+  border: 0px;
+  border-radius: 15px;
+  font-size: 16pt;
+}
+
+.tradingbox__button:active {
+  box-shadow: none;
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+.selectbox {
+  margin-top: 20px;
+  width: 60%;
+  padding: 20px;
+  padding-right: 30px;
+  border: 1px solid #ddd;
+  background: url(../images/arrow_down.png) no-repeat 95% 50%; /* 화살표 위치 */
+  background-size: 40px; /* 화살표 크기 */
+  background-color: rgb(236, 238, 240);
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 40px;
+  color: rgba(51, 45, 45, 0.815);
+  outline: none;
+}
+
+.common__center__column {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.goodsinfo_type {
+  margin-left: 5%;
+  width: 20%;
+  height: 100%;
+  padding-left: 2%;
+  font-size: 20pt;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 83, 236, 0.863);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: solid rgb(255, 255, 255) 5px;
+}
+
+.goodsinfo_content {
+  margin-right: 5%;
+  width: 80%;
+  height: 100%;
+  padding-left: 2%;
+  font-size: 20pt;
+  color: rgb(12, 53, 80);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+
+  border: solid rgba(0, 83, 236, 0.336) 5px;
+}
+
+.regist-info__p {
+  font-size: 26pt;
+  height: 5%;
+}
+.info__center {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info__center > img {
+  width: 65%;
+  height: 100%;
+}
+.common__center__column > h1 {
+  font-size: 60pt;
+  color: rgb(81, 187, 236);
+}
+.common__center__column > h3 {
+  font-size: 30pt;
+  color: rgb(82, 82, 82);
+}
