@@ -113,6 +113,7 @@
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
+									<span><i class="la la-map-marker"></i>천안지점</span>
 									<c:choose>
 										<c:when test="${list.division eq 'S'}">
 											<span  style="color:#4381ff"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
@@ -170,7 +171,6 @@
 				
 			</div>
 		</div>
-	</div>
 </section>
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
