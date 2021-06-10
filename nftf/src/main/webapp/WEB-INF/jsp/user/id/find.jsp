@@ -49,16 +49,6 @@
 	
 	<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
-$(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
-
-	if ($(this).val().length >= 13) {
-		 $('#responseKeyBtn').attr('disabled', false);
-		 
-	} else {
-		 $('#responseKeyBtn').attr('disabled', true);
-	}
-});
-	
 	function findId() {
 		console.log($('#data').data('checkPhone'));
 		console.log($('#data').data("checkKey"));

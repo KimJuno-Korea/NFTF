@@ -116,17 +116,144 @@
 	showLogin2.click(function() {
 		loginModal.modal('show');
 	});
+	///////////////////////////////////////////////////////
 	
-	//검증 , 정규식 사용해야됨
-$(document).on("keyup", "#signupInputPhone", function() {$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	var idRegExp = /[^a-z|^0-9|^A-Z]/g;
+	var pwRegExp = /[^a-z|^0-9|^A-Z|^!@#$%^&*()_]/g;
 	
-	if ($(this).val().length >= 13) {
-		 $('#signupResponseKeyBtn').attr('disabled', false);
-		 
-	} else {
-		 $('#signupResponseKeyBtn').attr('disabled', true);
-	}
-});
+	var phoneRegExp = /[^0-9|-]/g;
+	var phoneRegExp2 = /(^02|^0505|^1[0-9]{2}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/;
+	
+	var accountRegExp = /[^0-9]/g;
+	
+	//회원가입-핸드폰번호 입력값 검증
+	$(document).on("keyup", "#signupInputPhone", function() {
+		
+		if (phoneRegExp.test($(this).val())) {
+			alert('숫자만 입력이 가능합니다.')
+		}
+		
+		$(this).val( $(this).val().replace(/[^0-9]/g, "")
+				.replace(phoneRegExp2, "$1-$2-$3")
+				.replace("--", "-"));
+				
+				if ($(this).val().length >= 13) {
+					 $('#signupResponseKeyBtn').attr('disabled', false);
+					 
+				} else {
+					 $('#signupResponseKeyBtn').attr('disabled', true);
+				}
+	});
+		
+	//회원가입-아이디 입력값 검증
+	$(document).on("keyup", "#signupInputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//회원가입-비밀번호 입력값 검증
+	$(document).on("keyup", "#signupInputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	//회원가입-계좌번호 입력값 검증
+	$(document).on("keyup", "#signupInputAccountNo", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	//회원가입-인증키 입력값 검증
+	$(document).on("keyup", "#signupInputKey", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	///////////////////////////////////////////////////////////////
+	
+	//로그인-아이디 입력값 검증
+	$(document).on("keyup", "#loginInputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//로그인-비밀번호 입력값 검증
+	$(document).on("keyup", "#loginInputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	////////////////////////////////////////////////////////////////
+	
+	//공통-아이디 입력값 검증
+	$(document).on("keyup", "#inputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//공통-비밀번호 입력값 검증
+	$(document).on("keyup", "#inputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	//공통-인증키 입력값 검증
+	$(document).on("keyup", "#inputKey", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	//공통-핸드폰번호 입력값 검증
+	$(document).on("keyup", "#inputPhone", function() {
+		
+		if (phoneRegExp.test($(this).val())) {
+			alert('숫자만 입력이 가능합니다.')
+		}
+		
+		$(this).val( $(this).val().replace(/[^0-9]/g, "")
+				.replace(phoneRegExp2, "$1-$2-$3")
+				.replace("--", "-"));
+				
+				if ($(this).val().length >= 13) {
+					 $('#responseKeyBtn').attr('disabled', false);
+					 
+				} else {
+					 $('#responseKeyBtn').attr('disabled', true);
+				}
+	});
 	
 	function getNow() {
 		var now = new Date();
@@ -149,62 +276,87 @@ $(document).on("keyup", "#signupInputPhone", function() {$(this).val( $(this).va
 		return year + month + day;
 	}
 	
-	
 	$("#signupInputCheckPw").on("keyup", function() {
+		
 		if ($('#signupInputCheckPw').val() != '') {
-			if ($('#signupInputPw').val() != $(this).val()){
-				$('#signupViewCheckPw').text('비밀번호가 일치하지 않습니다');
+			
+			if ($('#signupInputCheckPw').val().length >= 7) {
+				
+				if ($('#signupInputPw').val() != $(this).val()){
+					$('#signupViewCheckPw').text('비밀번호가 일치하지 않습니다');
+					$('#signupViewCheckPw').css('height', '50px');
+					$('#signupViewCheckPw').css('color', '#ff495a');
+					$('#signupData').data('signupCheckPw', false);
+					
+				} else {
+					$("#signupViewCheckPw").text('비밀번호가 일치합니다.');
+					$('#signupViewCheckPw').css('height', '50px');
+					$('#signupViewCheckPw').css('color', '#02bb18');
+					$('#signupData').data('signupCheckPw', true);
+				} 
+				
+			} else {
+				$('#signupViewCheckPw').text('비밀번호의 길이는 8자 이상이어야 합니다.');
 				$('#signupViewCheckPw').css('height', '50px');
 				$('#signupViewCheckPw').css('color', '#ff495a');
 				$('#signupData').data('signupCheckPw', false);
-			} else {
-				$("#signupViewCheckPw").text('비밀번호가 일치합니다.');
-				$('#signupViewCheckPw').css('height', '50px');
-				$('#signupViewCheckPw').css('color', '#02bb18');
-				$('#signupData').data('signupCheckPw', true);
-			} 
+			}
+			
 		} else {
 			$('#signupViewCheckPw').css('height', '0px');
 			$('#signupViewCheckPw').css('color', '#ffffff');
 		}
 	});
 	
+	//아이디 중복확인
 	$('#signupInputId').blur(function() {
 		
 		if ($('#signupInputId').val() != '') {
-			 var id = {
-					 "id" : $("#signupInputId").val()
-			 }
-			$.ajax({
-				dataType : 'json',
-				contentType : 'application/json; charset=utf-8;',
-				url : '${pageContext.request.contextPath}/user/check',
-				type : 'POST',
-				data : JSON.stringify(id),
-				success : function(result) {
-					if (result == true) {
-						$('#signupViewCheckId').css('height', '50px');
-						$("#signupViewCheckId").text('사용할 수 있는 아이디 입니다.');
-						$('#signupViewCheckId').css('color', '#02bb18');
-						$('#signupData').data("signupCheckId", true);
-						
-					} else {
-						$('#signupInputId').val('');
-						$('#signupViewCheckId').css('height', '50px');
-						$('#signupViewCheckId').text('사용할 수 없는 아이디 입니다.');
-						$('#signupViewCheckId').css('color', '#ff495a');
-						$('#signupData').data("signupCheckId", false);
-					}
-				}, error : function() {
-					console.log("에러");
+			
+			if ($('#signupInputId').val().length >= 7) {
+				
+				var id = {
+						"id" : $('#signupInputId').val()
 				}
-			});
+				
+				$.ajax({
+					dataType : 'json',
+					contentType : 'application/json; charset=utf-8;',
+					url : '${pageContext.request.contextPath}/user/check',
+					type : 'POST',
+					data : JSON.stringify(id),
+					success : function(result) {
+						if (result == true) {
+							$('#signupViewCheckId').css('height', '50px');
+							$("#signupViewCheckId").text('사용할 수 있는 아이디 입니다.');
+							$('#signupViewCheckId').css('color', '#02bb18');
+							$('#signupData').data("signupCheckId", true);
+							
+						} else {
+							$('#signupViewCheckId').css('height', '50px');
+							$('#signupViewCheckId').text('중복된 아이디 입니다.');
+							$('#signupViewCheckId').css('color', '#ff495a');
+							$('#signupData').data("signupCheckId", false);
+						}
+					}, error : function() {
+						console.log("에러");
+					}
+				});
+				
+			} else {
+				$('#signupViewCheckId').css('height', '50px');
+				$('#signupViewCheckId').text('아이디는 최소 8자이상만 가능합니다.');
+				$('#signupViewCheckId').css('color', '#ff495a');
+				$('#signupData').data("signupCheckId", false);
+			}
+			
 		} else {
 			$('#signupViewCheckId').css('height', '0px');
 			$('#signupViewCheckId').css('color', '#ffffff');
 		}
 	});
 	
+	//회원가입-인증키 전송
 	 function signupReceiveKey() {
 		 var signupInputPhone = $('#signupInputPhone').val();
 		 var signupInputId = $('#signupInputId').val();
@@ -252,6 +404,7 @@ $(document).on("keyup", "#signupInputPhone", function() {$(this).val( $(this).va
 		}
 	} 
 
+	//회언가입-인증키 인증
 	 $("#signupInputKey").blur(function() {
 		if ($("#signupInputKey").val() != '') {
 			$("#signupResponseKeyBtn").attr("disabled", true);

@@ -168,7 +168,6 @@
 						<%@ include file="../board/boardSearch.jsp" %>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 </section>

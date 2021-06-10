@@ -33,11 +33,11 @@
 				<div class="account-popup">
 					<form id="form" action="${pageContext.request.contextPath}/password/${id}" method="post" autocomplete="off">
 						<div class="cfield">
-							<input id="inputPw" type="password" name="pw" placeholder="비밀번호">
+							<input id="inputPw" type="password" name="pw" placeholder="비밀번호" maxlength="20">
 					 	</div>
 					 	<div class="checkInput" id="viewPw"></div>
 						<div class="cfield">
-							<input id="inputCheckPw" type="password" name="pwCheck" placeholder="비밀번호 확인">
+							<input id="inputCheckPw" type="password" name="pwCheck" placeholder="비밀번호 확인"  maxlength="20">
 					 	</div>
 					 	<div id="viewCheckPw" class="checkInput"></div>	
 				 		<input id="submitBtn" class="onclick" type="button" onclick="editPwSubmit()" value="확인">
@@ -51,7 +51,7 @@
 
 <script>
 	$("#inputPw").blur(function(){
-		if($("#inputPw").val() != '') {
+		if($("#inputPw").val() != '' && $('#inputPw').val.length >= 7) {
 			$('#inputCheckPw').val('');			
 			if ($('#inputPw').val() == '${pw}') {
 				$('#viewPw').text('기존의 비밀번호와 일치합니다.');
@@ -67,7 +67,7 @@
 	});
 	
 	$("#inputCheckPw").blur(function() {
-		if ($('#inputPw').val() != '') {
+		if ($('#inputPw').val() != '' && $('#inputPw').val.length >= 7) {
 			if ($('#inputPw').val() != $(this).val()){
 				$('#viewCheckPw').text('비밀번호가 일치하지 않습니다');
 				$('#viewCheckPw').css('color', 'red');
