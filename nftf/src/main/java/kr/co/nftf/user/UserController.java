@@ -57,8 +57,11 @@ public class UserController {
 	@PostMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public boolean signup(@RequestBody User user) {
 		try {
-			return userServiceImpl.registUser(user) ? true
-					: false;
+			
+			if (user != null) {
+				return userServiceImpl.registUser(user) ? true
+						: false;
+			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
@@ -141,6 +144,7 @@ public class UserController {
 	public ModelAndView myPageCheckPwForm(User user,
 			@CookieValue(value = "mypage", required = false) Cookie mypageCookie) {
 		try {
+			
 			if (user != null) {
 
 				if (mypageCookie != null) {
@@ -165,6 +169,7 @@ public class UserController {
 	public ModelAndView myPageMain(User user, HttpServletResponse response,
 			@CookieValue(value = "mypage", required = false) Cookie mypageCookie) {
 		try {
+			
 			if (user != null) {
 
 				// 현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
@@ -242,11 +247,14 @@ public class UserController {
 	@GetMapping("/user/qr/{id}")
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try {
-			user = userServiceImpl.selectUser(user);
-			byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId()+ "/" + user.getPw());
-			if (file != null) {
-				response.setContentType("image/png");
-				response.getOutputStream().write(file);
+			
+			if (user != null) {
+				user = userServiceImpl.selectUser(user);
+				byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId()+ "/" + user.getPw());
+				if (file != null) {
+					response.setContentType("image/png");
+					response.getOutputStream().write(file);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

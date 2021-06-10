@@ -171,7 +171,7 @@
 									<h4>회원 가입</h4>
 									<form id="signupForm" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
 										<div class="cfield">
-											<input id="signupInputId" type="text" name="id" placeholder="아이디" maxlength="30" >
+											<input id="signupInputId" type="text" name="id" placeholder="아이디" maxlength="20" >
 											<i class="la la-user"></i>
 									 	</div>
 									 	<div class='row'>
@@ -179,12 +179,12 @@
 									 	</div>
 								 		
 										<div class="cfield">
-											<input id="signupInputPw" type="password" name="pw" placeholder="비밀번호" maxlength="30">
+											<input id="signupInputPw" type="password" name="pw" placeholder="비밀번호" maxlength="20">
 											<i class="la la-key"></i>
 									 	</div>
 									 	
 										<div class="cfield">
-											<input id="signupInputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="30">
+											<input id="signupInputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="20">
 											<i class="la la-key"></i>
 									 	</div>
 									 	
@@ -193,7 +193,7 @@
 									 	</div>
 									 	
 										<div class="cfield">
-											<input id="signupInputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13" >
+											<input id="signupInputPhone" type="text" name="phone" placeholder="전화번호 (숫자만 입력)" maxlength="13" >
 											<i class="la la-phone"></i>
 									 	</div>
 									 	
@@ -264,10 +264,10 @@
 								<h4>로그인</h4>
 								<form id="loginForm" action="/login" method="post" autocomplete="off">
 									<div class="cfield">
-										<input id="loginInputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
+										<input id="loginInputId" type="text" name="id" placeholder="아이디" maxlength="20"> <i class="la la-user"></i> 
 								 	</div>
 								 	<div class="cfield">
-								 		<input id="loginInputPw" type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+								 		<input id="loginInputPw" type="password" name="pw" placeholder="비밀번호" maxlength="20"> <i class="la la-key"></i>
 									</div>
 									<input class="submit" type="button" onclick="login()" id="loginBtn" value="로그인">
 									<div class="find">
