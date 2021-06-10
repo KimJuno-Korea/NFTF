@@ -8,7 +8,7 @@ public class Board implements Serializable{
 	private String userId;
 	private String title;
 	private String content;
-	private int price;
+	private String price;
 	private char division;
 	private char tradeWay;
 	private char status;
@@ -51,11 +51,11 @@ public class Board implements Serializable{
 		this.content = content;
 	}
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 

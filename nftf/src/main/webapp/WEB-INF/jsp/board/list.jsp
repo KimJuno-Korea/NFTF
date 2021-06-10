@@ -113,7 +113,7 @@
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
-									<c:if test="${list.tradeWay eq 'T' }"><span><i class="la la-map-marker"></i>아산 선문대학교 지점</span></c:if>
+									<span><i class="la la-map-marker"></i>천안지점</span>
 									<c:choose>
 										<c:when test="${list.division eq 'S'}">
 											<span  style="color:#4381ff"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
