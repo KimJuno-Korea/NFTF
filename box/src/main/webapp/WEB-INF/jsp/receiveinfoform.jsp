@@ -15,7 +15,7 @@
     </div>
     <div class="common__center">
          <div class="common__center__column">
-             <p class="regist-info__p">[ '${sessionScope.tradingBoxNo}' ] 번 거래함 물품 수령</p>
+             <p class="regist-info__p">[ ${sessionScope.tradingBoxNo} ] 번 거래함 물품 수령</p>
              <div class="info__center">
                  <img src="${pageContext.request.contextPath}/images/receive_info.png"></img>
              </div>
@@ -23,15 +23,14 @@
     </div>
 </body>
 <script>
-	var tradingBox = {
-			"no" : "${sessionScope.tradingBoxNo}"
-		}
 		$.ajax({
 			url: "http://localhost:8080/box/receivegoods",
 			type: "post",
 			accept: "application/json",
 			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(tradingBox),
+			data: JSON.stringify({
+				"no" : "${sessionScope.tradingBoxNo}"
+			}),
 			dataType: "json",
 		
 			success: function(data) {
