@@ -25,7 +25,8 @@ public class BranchServiceImpl implements BranchService {
 			TradingBox tradingBox = new TradingBox();
 			tradingBox.setBranchCode(branch.getCode());
 			tradingBox.setNo(i + 1);
-			tradingBox.setStatus('Y');
+			// 미사용중
+			tradingBox.setStatus('F');
 			
 			tradingBoxMapper.insert(tradingBox);
 		}
