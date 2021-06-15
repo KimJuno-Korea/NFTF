@@ -14,7 +14,7 @@
     </div>
     <div class="common__center">
          <div class="common__center__column">
-             <h1> 물품 수령 완료 </h1>/
+             <h1> 물품 수령 완료 </h1>
              <h3> ※물품 수령이 정상적으로 처리되었습니다. 이용해 주셔서 감사합니다.</h3>
         </div>
     </div>
