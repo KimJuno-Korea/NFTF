@@ -54,6 +54,7 @@ public class AgentServiceImpl implements AgentService {
 		responseResult = gson.fromJson(response.body().string(), responseResult.getClass());
 
 		if (responseResult.get("result")) {
+			httpSession.invalidate();
 			httpSession.setAttribute("isAuthorized", true);
 			httpSession.setAttribute("id", account.getId());
 			return true;
