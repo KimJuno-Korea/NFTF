@@ -120,6 +120,7 @@ public class AgentController {
 				trading.setBoardNo(board.getNo());
 				// 거래 상태 거래중(M)으로 변경
 				trading.setStatus('M');
+				trading.setPrice(Integer.parseInt(board.getPrice()));
 				trading.setSellerId(board.getUserId());
 				trading.setTradeDate(LocalDate.now());
 				tradingServiceImpl.registTrading(trading);
@@ -140,15 +141,23 @@ public class AgentController {
 		Board board = new Board();
 		Trading trading = new Trading();
 		try {
-			tradingBox.setStatus('F');
-			board.setNo(tradingBox.getBoardNo());
-			board.setStatus('S');
+			// 거래함 사용 가능으로 상태변경
+			tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
 			trading.setStatus('S');
 			trading.setBoardNo(tradingBox.getBoardNo());
-			
-			tradingBoxServiceImpl.editTradingBox(tradingBox);
-			boardServiceImpl.boardEdit(board);
 			tradingServiceImpl.editTrading(trading);
+			
+			board.setNo(tradingBox.getBoardNo());
+			board.setStatus('S');
+			boardServiceImpl.boardEdit(board);
+			
+			tradingBox.setBoardNo(0);
+			tradingBox.setStatus('F');
+			tradingBox.setPrice(0);
+			tradingBoxServiceImpl.editTradingBoxForRegist(tradingBox);
+			
+			//pay 메소드 
+			//paymentServiceImpl.pay(null, board);
 			
 			result.put("result", true);
 		} catch (Exception e) {
