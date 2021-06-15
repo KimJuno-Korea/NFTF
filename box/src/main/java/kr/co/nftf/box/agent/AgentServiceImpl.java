@@ -97,7 +97,6 @@ public class AgentServiceImpl implements AgentService {
 		// 잠금 해제 결과가 true이면 물품 정보 등록 요청을 보낸다.
 		// 물품 정보 등록
 		tradingBox.setBranchCode(branchCode);
-		
 		json = gson.toJson(tradingBox);
 
 		body = RequestBody.create(json, JSON);
@@ -122,26 +121,25 @@ public class AgentServiceImpl implements AgentService {
 		OkHttpClient client = new OkHttpClient.Builder().readTimeout(25, TimeUnit.SECONDS).build();
 
 		Response response;
-		response = client.newCall(request).execute();
-		responseResult = gson.fromJson(response.body().string(), responseResult.getClass());
-
-		while (true) {
-			if (responseResult.get("result")) {
-				request = new Request.Builder().get().url(agentUrl + "/matrix/" + " ").build();
-				client = new OkHttpClient();
-				response = client.newCall(request).execute();
-
-				break;
-			}
-		}
+		/*
+		 * response = client.newCall(request).execute(); responseResult =
+		 * gson.fromJson(response.body().string(), responseResult.getClass());
+		 * 
+		 * while (true) { if (responseResult.get("result")) { request = new
+		 * Request.Builder().get().url(agentUrl + "/matrix/" + " ").build(); client =
+		 * new OkHttpClient(); response = client.newCall(request).execute();
+		 * 
+		 * break; } }
+		 */
 
 		// 잠금 해제 결과가 true이면 물품 정보 등록 요청을 보낸다.
 		// 물품 정보 등록
+		tradingBox.setBranchCode(branchCode);
 		json = gson.toJson(tradingBox);
 
 		body = RequestBody.create(json, JSON);
 		request = new Request.Builder().post(body)
-				// NFTF 웹 서버에 물품 등록 요청을 한다.
+				// NFTF 웹 서버에 물품 수령 요청을 한다.
 				.url(serverUrl + "/receivegoods").build();
 
 		client = new OkHttpClient();
