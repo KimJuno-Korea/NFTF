@@ -8,7 +8,7 @@ public class TradingBox implements Serializable {
 	private int no;
 	private int boardNo;
 	private char status;
-	private String adWord;
+	private int price;
 	private String authKey;
 	private LocalDateTime authKeyDate;
 	
@@ -48,12 +48,12 @@ public class TradingBox implements Serializable {
 		this.status = status;
 	}
 
-	public String getAdWord() {
-		return adWord;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setAdWord(String adWord) {
-		this.adWord = adWord;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getAuthKey() {
