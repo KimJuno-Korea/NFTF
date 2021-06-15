@@ -31,12 +31,16 @@ public class TradingBoxController {
 		mav = new ModelAndView("/tradingbox/list");
 		mav.addObject("tradingBoxList", tradingBoxList);
 		
-		Board board = new Board();
+		
 		List<Board> boardList = new ArrayList<>();
 		
 		for (TradingBox tradingBox : tradingBoxList) {
-			board.setNo(tradingBox.getBoardNo());
-			boardList.add(boardServiceImpl.boardSelect(board));
+			Board board = new Board();
+			if (tradingBox.getBoardNo() != 0) {
+				board.setNo(tradingBox.getBoardNo());
+				boardList.add(boardServiceImpl.boardSelect(board));
+			}
+			boardList.add(board);
 		}
 		
 		mav.addObject("boardList", boardList);
