@@ -14,4 +14,6 @@ public interface TradingBoxService {
 	public void editTradingBox (TradingBox tradingBox) throws Exception;
 	
 	public void deleteTradingBox (TradingBox tradingBox) throws Exception;
+
+	public void editTradingBoxForRegist(TradingBox tradingBox) throws Exception;
 }
