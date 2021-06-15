@@ -23,14 +23,14 @@
         <div class="tradingbox__row">
            <c:forEach var="tradingBox" items="${tradingBoxList}" begin="${counts}" end="${counts + 5}" >
            <c:set var="counts" value="${counts + 1}"/>
-	            	<c:if test="${tradingBox.status eq 'Y'}">
+	            	<c:if test="${tradingBox.status eq 'F'}">
 						<div class="tradingbox">
 	              		<div class="tradingbox__number"></p>${tradingBox.no}</p></div>
 		            	<div class="tradingbox__discript"><div class="tradingbox__available">사용 가능</div></div>
 						<div class="tradingbox__button"><input type="button" value="등록" onclick="location.href='tradingbox/${tradingBox.no}'"/></div>
 					</div>
 	            	</c:if>
-					<c:if test="${tradingBox.status eq 'N'}">
+					<c:if test="${tradingBox.status eq 'T'}">
 						<div class="tradingbox">
 		              		<div class="tradingbox__number"></p>${tradingBox.no}</p></div>
 							<div class="tradingbox__discript"><div class="tradingbox__disable">사용 불가</div></div>
