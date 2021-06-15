@@ -51,8 +51,16 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public boolean editTrading(Trading trading) {
-		// TODO Auto-generated method stub
+		try {
+			if (trading != null) {
+				tradingMapper.update(trading);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
 		return false;
 	}
-
 }
