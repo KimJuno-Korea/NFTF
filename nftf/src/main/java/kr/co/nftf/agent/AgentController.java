@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.co.nftf.board.Board;
 import kr.co.nftf.board.BoardService;
 import kr.co.nftf.branch.Branch;
+import kr.co.nftf.payment.PaymentService;
 import kr.co.nftf.security.SecurityService;
 import kr.co.nftf.trading.Trading;
 import kr.co.nftf.trading.TradingService;
@@ -39,6 +40,9 @@ public class AgentController {
 	
 	@Autowired
 	private SecurityService securityServiceImpl;
+	
+	@Autowired
+	private PaymentService paymentServiceImpl;
 	
 	// 회원 검증
 	@PostMapping(value="/agent/authentication", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -100,6 +104,7 @@ public class AgentController {
 				trading.setBoardNo(tradingBox.getBoardNo());
 				trading.setStatus('T');
 				
+				
 				tradingBoxServiceImpl.editTradingBox(tradingBox);
 				boardServiceImpl.boardEdit(board);
 				tradingServiceImpl.editTrading(trading);
@@ -108,6 +113,7 @@ public class AgentController {
 		} catch (Exception e) {
 				result.put("result", false);
 		}
+		
 		return result;
 	}
 	
@@ -127,6 +133,7 @@ public class AgentController {
 			tradingBoxServiceImpl.editTradingBox(tradingBox);
 			boardServiceImpl.boardEdit(board);
 			tradingServiceImpl.editTrading(trading);
+			
 			result.put("result", true);
 		} catch (Exception e) {
 				result.put("result", false);
