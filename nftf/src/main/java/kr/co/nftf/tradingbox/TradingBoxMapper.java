@@ -14,5 +14,7 @@ public interface TradingBoxMapper {
 	
 	public void update (TradingBox trading) throws Exception;
 	
+	public void registUpdate (TradingBox trading) throws Exception;
+	
 	public void delete (TradingBox trading) throws Exception;
 }
