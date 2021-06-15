@@ -148,7 +148,7 @@ public class AgentController {
 
 	//물품 수령
 	@PostMapping(value="/receivegoods", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public boolean receiveGoods(TradingBox tradingBox) throws JsonSyntaxException, IOException, InterruptedException {
+	public boolean receiveGoods(@RequestBody TradingBox tradingBox) throws JsonSyntaxException, IOException, InterruptedException {
 		agentServiceImpl.receiveGoods(tradingBox);
 		
 		return true;
