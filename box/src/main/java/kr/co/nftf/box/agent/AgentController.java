@@ -27,6 +27,9 @@ public class AgentController {
 	public ModelAndView index() {
 		ModelAndView mav;
 		mav = new ModelAndView("/index");
+		
+		agentServiceImpl.logout();
+		
 		return mav;
 	}
 

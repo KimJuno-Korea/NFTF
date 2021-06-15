@@ -62,8 +62,8 @@ public class AgentServiceImpl implements AgentService {
 	}
 
 	@Override
-	public void logout(HttpSession session) {
-		session.invalidate();
+	public void logout() {
+		httpSession.invalidate();
 	}
 
 	// 물품 등록
