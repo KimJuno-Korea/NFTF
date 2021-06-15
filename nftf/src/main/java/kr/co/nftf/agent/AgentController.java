@@ -109,9 +109,10 @@ public class AgentController {
 				tradingBox.setStatus('T');
 				tradingBoxServiceImpl.editTradingBoxForRegist(tradingBox);
 				
+				// 특정 개시글 거래상태 결제 대기로 변경
 				/*
-				 * // 특정 개시글 거래상태 결제 대기로 변경 board.setNo(tradingBox.getBoardNo());
-				 * board.setStatus('M'); boardServiceImpl.boardEdit(board);
+				 * board.setNo(tradingBox.getBoardNo()); board.setStatus('M');
+				 * boardServiceImpl.boardEdit(board);
 				 */
 				
 				// 거래 정보 등록
