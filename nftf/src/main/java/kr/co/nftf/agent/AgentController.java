@@ -116,11 +116,13 @@ public class AgentController {
 				 */
 				
 				// 거래 정보 등록
-				board = boardServiceImpl.boardSelect(board);
-				trading.setBoardNo(board.getNo());
 				// 거래 상태 거래중(M)으로 변경
+				board.setNo(tradingBox.getBoardNo());
+				board = boardServiceImpl.boardSelect(board);
+				
 				trading.setStatus('M');
-				trading.setPrice(Integer.parseInt(board.getPrice()));
+				trading.setBoardNo(tradingBox.getBoardNo());
+				trading.setPrice(tradingBox.getPrice());
 				trading.setSellerId(board.getUserId());
 				trading.setTradeDate(LocalDate.now());
 				tradingServiceImpl.registTrading(trading);
