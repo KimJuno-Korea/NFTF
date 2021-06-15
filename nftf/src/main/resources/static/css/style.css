@@ -4547,8 +4547,8 @@ section.overlape {
 }
 .pagination li.active a, .pagination li a:hover {
     color: #ffffff;
-    background-color: #579bd4;
-    border-color: #579bd4;
+    background-color: #3aa5ff;
+    border-color: #3aa5ff;
 }
 .pagination li .delimeter {
     display: block;
@@ -5342,9 +5342,9 @@ aside .widget.border:first-child {
 .apply-thisjob {
     float: left;
     width: 100%;
-    border: 2px solid #579bd4;
+    border: 2px solid #3aa5ff;
     text-align: center;
-    color: #579bd4;
+    color: #3aa5ff;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -7724,8 +7724,8 @@ table.alrt-table tbody td > span {
     float: left;
     font-family: Open Sans;
     font-size: 13px;
-    color: #8b91dd;
-    border: 2px solid #8b91dd;
+    color: #0b93e2;
+    border: 2px solid #0b93e2;
     width: 150px;
     height: 40px;
     padding-left: 30px;
@@ -10843,8 +10843,8 @@ header.style5 .post-job-btn:hover {
 }
 .job-head-wide .apply-thisjob:hover {
     background: transparent;
-    border-color: #579bd4;
-    color: #579bd4;
+    border-color: #3aa5ff;
+    color: #3aa5ff;
 }
 
 .apply-thisjob:hover {
@@ -10949,7 +10949,7 @@ header.style5 .post-job-btn:hover {
     color: #ffffff;
 }
 .shortlists > a:hover {
-    background: #8b91dd;
+    background: #0b93e2;
     color: #ffffff;
 }
 .action-inner .download-cv a:hover {

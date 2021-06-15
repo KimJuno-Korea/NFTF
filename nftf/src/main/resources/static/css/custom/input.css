@@ -122,7 +122,7 @@ footer {
 .ajax {
 	float: none;
     width: 100%;
-    background-color: #42d7f5;
+    background-color: #4ba3ff;
     margin: auto;
 	margin-bottom: 30px;
     font-size: 18px;
@@ -143,7 +143,7 @@ footer {
 }
 
 .ajax:hover{
-    background-color: #00c8ff;
+    background-color: #3868bf;
 	-webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
     -ms-transition: all 0.5s ease 0s;

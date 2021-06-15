@@ -33,14 +33,14 @@
 				<div class="account-popup" style="margin-top: 0px;">
 					<form autocomplete="off">
 						<div class="cfield">
-							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="14">
+							<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13">
 					 	</div>
-						 	<input id="receiveKeyBtn" class="ajax" type="button" value="인증번호 전송" onclick="receiveKey()"> <br>
+						 	<input id="responseKeyBtn" class="ajax" type="button" value="인증번호 전송" onclick="receiveKey()" disabled> <br>
 						<div class="cfield">
 							<input id="inputKey" type="text" name="key" placeholder="인증번호" disabled="disabled" maxlength='6'>
 					 	</div>
 					 		<div id="viewCheckKey" class="checkInput"></div>
-							<input id="findIdBtn" class="onclick" type="button" value="찾기" onclick="findId()">
+							<input id="findIdBtn" class="onclick" type="button" value="확인" onclick="findId()">
 					</form>
 				</div>
 			</div>
@@ -49,8 +49,6 @@
 	
 	<jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
-$(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
-
 	function findId() {
 		console.log($('#data').data('checkPhone'));
 		console.log($('#data').data("checkKey"));
@@ -91,9 +89,6 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 		 if ($('#inputPhone').val() == '') {
 			 alert('전화번호를 입력해 주세요.')
 		 } else {
-			 $("#receiveKeyBtn").attr("disabled", true);
-				$("#inputPhone").attr("disabled", true);
-			    $("#inputKey").attr("disabled", false);
 				$.ajax({
 					dataType : 'json',
 					contentType : 'application/json; charset=utf-8;',
@@ -104,6 +99,9 @@ $(document).on("keyup", "#inputPhone", function() { $(this).val( $(this).val().r
 						if (result == 1) {
 							$('#data').data('checkPhone', true);
 							$('#receiveKeyBtn').val('인증키가 전송 되었습니다.');
+							$("#receiveKeyBtn").attr("disabled", true);
+							$("#inputPhone").attr("disabled", true);
+						    $("#inputKey").attr("disabled", false);
 						} else if (result == 0){
 							$('#data').data('checkPhone', false);
 							alert("존재하지 않는 전화번호 입니다.");

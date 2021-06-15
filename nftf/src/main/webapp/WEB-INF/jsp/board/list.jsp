@@ -71,15 +71,7 @@
 					<div class="emply-list-sec style2">
 						<!-- Employe List -->
 						<c:forEach var="list" items="${boardList }" varStatus="board">
-						<c:choose>
-							<c:when test="${list.status eq 'S' }"> <!-- 거래 완료 -->
-								<div class="emply-list" style="background:#f7f5f5;opacity:0.6;">
-							</c:when>
-							<c:otherwise>
-								<div class="emply-list">
-							</c:otherwise>
-						</c:choose>
-						
+							<div class="emply-list" <c:if test="${list.status eq 'S' }">style="background:#f7f5f5;opacity:0.6;"</c:if>>
 								<div class="emply-list-thumb">
 									<img src="<%=request.getContextPath()%>/photo/thumbnail/${list.no}">
 								</div>
@@ -121,6 +113,7 @@
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
+									<span><i class="la la-map-marker"></i>천안지점</span>
 									<c:choose>
 										<c:when test="${list.division eq 'S'}">
 											<span  style="color:#4381ff"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
@@ -132,8 +125,9 @@
 									</c:choose>
 									<p>${list.content }</p>
 								</div>
-							</div>
+								</div>
 						</c:forEach>
+						</div>
 						<!-- Pagination -->
 					</div>
 					
@@ -174,10 +168,8 @@
 						<%@ include file="../board/boardSearch.jsp" %>
 					</div>
 				</div>
-				
 			</div>
 		</div>
-	</div>
 </section>
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />

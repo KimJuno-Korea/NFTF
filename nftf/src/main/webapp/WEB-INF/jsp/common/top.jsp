@@ -161,7 +161,7 @@
 <!-- 				</div> -->
 				<div class="modal-body">
 					<section>
-						<div id="data"></div>
+						<div id="signupData"></div>
 						<div class="container">
 							<div class="row">
 								<div class="account-popup">
@@ -169,44 +169,44 @@
 										<i class="la la-close"></i>
 									</span>
 									<h4>회원 가입</h4>
-									<form id="form" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
+									<form id="signupForm" action="${pageContext.request.contextPath}/user" method="post" autocomplete="off" >
 										<div class="cfield">
-											<input id="inputId" type="text" name="id" placeholder="아이디" maxlength="30" >
+											<input id="signupInputId" type="text" name="id" placeholder="아이디" maxlength="20" >
 											<i class="la la-user"></i>
 									 	</div>
 									 	<div class='row'>
-									 		<p id="viewCheckId" class="checkFont"></p>
+									 		<p id="signupViewCheckId" class="checkFont"></p>
 									 	</div>
 								 		
 										<div class="cfield">
-											<input id="inputPw" type="password" name="pw" placeholder="비밀번호" maxlength="30">
+											<input id="signupInputPw" type="password" name="pw" placeholder="비밀번호" maxlength="20">
 											<i class="la la-key"></i>
 									 	</div>
 									 	
 										<div class="cfield">
-											<input id="inputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="30">
+											<input id="signupInputCheckPw" type="password" placeholder="비밀번호 확인" maxlength="20">
 											<i class="la la-key"></i>
 									 	</div>
 									 	
 									 	<div class="row">
-									 		<p id="viewCheckPw" class="checkFont"></p>
+									 		<p id="signupViewCheckPw" class="checkFont"></p>
 									 	</div>
 									 	
 										<div class="cfield">
-											<input id="inputPhone" type="text" name="phone" placeholder="전화번호" maxlength="13" >
+											<input id="signupInputPhone" type="text" name="phone" placeholder="전화번호 (숫자만 입력)" maxlength="13" >
 											<i class="la la-phone"></i>
 									 	</div>
 									 	
-									 	<input class="ajax" type="button" id="responseKeyBtn" onclick="receiveKey()" value="인증번호 발송" disabled>
+									 	<input class="ajax" type="button" id="signupResponseKeyBtn" onclick="signupReceiveKey()" value="인증번호 발송" disabled>
 									 	
 										<div class="cfield">
-											<input id="inputKey" type="text" placeholder="인증번호" disabled="disabled" maxlength="6" required>
+											<input id="signupInputKey" type="text" placeholder="인증번호" disabled="disabled" maxlength="6" required>
 									 	</div>
 								 		<div class="row">
-										 	<p id="viewCheckKey" class="checkFont"></p>
+										 	<p id="signupViewCheckKey" class="checkFont"></p>
 									 	</div>
 									 	
-									 	<select id="inputBankNo" name="bankNo">
+									 	<select id="signupInputBankNo" name="bankNo">
 											<option value="011" selected="selected">농협은행</option>
 											<option value="012">농협상호금융</option>
 											<option value="002">산업은행</option>
@@ -221,16 +221,16 @@
 										</select>	
 										
 									 	<div class="cfield">
-									 		<input id="inputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)">
+									 		<input id="signupInputAccountNo" type="text" name="accountNo" placeholder="계좌번호 (- 제외)">
 									 	</div>
 									 	
 									 	<div class="row">
-										 	<p id="viewCheckAccountNo" class="checkFont"></p>
+										 	<p id="signupViewCheckAccountNo" class="checkFont"></p>
 									 	</div>
 									 	
-										<input id="inputPinAccount" type="hidden" name="pinAccount">
-										<input id="division" type="hidden" name="division" value="M">
-										<input id="email" type="hidden" name="email" value="">
+										<input id="signupInputPinAccount" type="hidden" name="pinAccount">
+										<input id="signupDivision" type="hidden" name="division" value="M">
+										<input id="signupEmail" type="hidden" name="email" value="">
 										<input id="rgno" type="hidden">
 									 	
 										<input class="submit" type="button" id="signupBtn" onclick="signupSubmit()" value="가입하기"/>
@@ -255,7 +255,6 @@
 <!-- 				</div> -->
 				<div class="modal-body">
 					<section>
-					<div id="data"></div>
 					<div class="row">
 						<div class="col-12">
 							<div class="account-popup">
@@ -265,10 +264,10 @@
 								<h4>로그인</h4>
 								<form id="loginForm" action="/login" method="post" autocomplete="off">
 									<div class="cfield">
-										<input id="loginInputId" type="text" name="id" placeholder="아이디"> <i class="la la-user"></i> 
+										<input id="loginInputId" type="text" name="id" placeholder="아이디" maxlength="20"> <i class="la la-user"></i> 
 								 	</div>
 								 	<div class="cfield">
-								 		<input id="loginInputPw" type="password" name="pw" placeholder="비밀번호"> <i class="la la-key"></i>
+								 		<input id="loginInputPw" type="password" name="pw" placeholder="비밀번호" maxlength="20"> <i class="la la-key"></i>
 									</div>
 									<input class="submit" type="button" onclick="login()" id="loginBtn" value="로그인">
 									<div class="find">

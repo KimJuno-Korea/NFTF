@@ -46,19 +46,22 @@ public class UserController {
 	@Autowired
 	private HttpSession httpSession;
 
-	// 회원가입 폼 **
-	@GetMapping("/user/form")
-	public ModelAndView signupForm() {
-
-		return new ModelAndView("/user/signup");
-	}
+//	// 회원가입 폼 **
+//	@GetMapping("/user/form")
+//	public ModelAndView signupForm() {
+//
+//		return new ModelAndView("/user/signup");
+//	}
 
 	// 회원가입 **
 	@PostMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public boolean signup(@RequestBody User user) {
 		try {
-			return userServiceImpl.registUser(user) ? true
-					: false;
+			
+			if (user != null) {
+				return userServiceImpl.registUser(user) ? true
+						: false;
+			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
@@ -141,6 +144,7 @@ public class UserController {
 	public ModelAndView myPageCheckPwForm(User user,
 			@CookieValue(value = "mypage", required = false) Cookie mypageCookie) {
 		try {
+			
 			if (user != null) {
 
 				if (mypageCookie != null) {
@@ -157,7 +161,7 @@ public class UserController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return CommonController.REDIRECT_LOGIN;
+		return CommonController.REDIRECT_MAIN;
 	}
 
 	// 이게 마이 페이지 메인 화면 가는 메소드 **
@@ -165,6 +169,7 @@ public class UserController {
 	public ModelAndView myPageMain(User user, HttpServletResponse response,
 			@CookieValue(value = "mypage", required = false) Cookie mypageCookie) {
 		try {
+			
 			if (user != null) {
 
 				// 현재 로그인한 유저의 아이디와 마이페이지 조회하는 유저의 아이디가 같을경우 폼이동, 아닌경우 메인으로
@@ -214,7 +219,7 @@ public class UserController {
 		try {
 
 			if (user != null) {
-				return userServiceImpl.editUser(user) ? CommonController.REDIRECT_LOGIN
+				return userServiceImpl.editUser(user) ? CommonController.REDIRECT_MAIN
 						: CommonController.REDIRECT_MAIN;
 			}
 		} catch (Exception exception) {
@@ -242,11 +247,14 @@ public class UserController {
 	@GetMapping("/user/qr/{id}")
 	public void createLoginQR(User user, HttpServletResponse response) {
 		try {
-			user = userServiceImpl.selectUser(user);
-			byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId()+ "/" + user.getPw());
-			if (file != null) {
-				response.setContentType("image/png");
-				response.getOutputStream().write(file);
+			
+			if (user != null) {
+				user = userServiceImpl.selectUser(user);
+				byte[] file = this.securityServiceImpl.createAccountQR("" + user.getId()+ "/" + user.getPw());
+				if (file != null) {
+					response.setContentType("image/png");
+					response.getOutputStream().write(file);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -352,12 +360,15 @@ public class UserController {
 	private void responseKey(User user) {
 		httpSession.setAttribute("key", "");
 		try {
-			StringBuilder key = new StringBuilder();
-			for (int i = 0 ; i < 6 ; i++) {
-				key.append(((int)(Math.random()*10))+"");
-			}
-			System.out.println("인증키 " + key.toString());
-			httpSession.setAttribute("key", key.toString());
+//			StringBuilder key = new StringBuilder();
+//			for (int i = 0 ; i < 6 ; i++) {
+//				key.append(((int)(Math.random()*10))+"");
+//			}
+			String key = userServiceImpl.sendKey(user.getPhone());
+			
+			System.out.println("인증키 " + key);
+			
+			httpSession.setAttribute("key", key);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -430,7 +441,7 @@ public class UserController {
 
 			if (key != null) {
 				key = key.replaceAll("\"", "");
-				System.out.println(key);
+				System.out.println(key + "//" + httpSession.getAttribute("key"));
 				return key.equals(httpSession.getAttribute("key")) ? true : false;
 			}
 		} catch (Exception exception) {

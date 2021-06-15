@@ -116,17 +116,144 @@
 	showLogin2.click(function() {
 		loginModal.modal('show');
 	});
+	///////////////////////////////////////////////////////
 	
-	//검증 , 정규식 사용해야됨
-$(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	var idRegExp = /[^a-z|^0-9|^A-Z]/g;
+	var pwRegExp = /[^a-z|^0-9|^A-Z|^!@#$%^&*()_]/g;
 	
-	if ($(this).val().length >= 13) {
-		 $('#responseKeyBtn').attr('disabled', false);
-		 
-	} else {
-		 $('#responseKeyBtn').attr('disabled', true);
-	}
-});
+	var phoneRegExp = /[^0-9|-]/g;
+	var phoneRegExp2 = /(^02|^0505|^1[0-9]{2}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/;
+	
+	var accountRegExp = /[^0-9]/g;
+	
+	//회원가입-핸드폰번호 입력값 검증
+	$(document).on("keyup", "#signupInputPhone", function() {
+		
+		if (phoneRegExp.test($(this).val())) {
+			alert('숫자만 입력이 가능합니다.')
+		}
+		
+		$(this).val( $(this).val().replace(/[^0-9]/g, "")
+				.replace(phoneRegExp2, "$1-$2-$3")
+				.replace("--", "-"));
+				
+				if ($(this).val().length >= 13) {
+					 $('#signupResponseKeyBtn').attr('disabled', false);
+					 
+				} else {
+					 $('#signupResponseKeyBtn').attr('disabled', true);
+				}
+	});
+		
+	//회원가입-아이디 입력값 검증
+	$(document).on("keyup", "#signupInputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//회원가입-비밀번호 입력값 검증
+	$(document).on("keyup", "#signupInputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	//회원가입-계좌번호 입력값 검증
+	$(document).on("keyup", "#signupInputAccountNo", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	//회원가입-인증키 입력값 검증
+	$(document).on("keyup", "#signupInputKey", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	///////////////////////////////////////////////////////////////
+	
+	//로그인-아이디 입력값 검증
+	$(document).on("keyup", "#loginInputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//로그인-비밀번호 입력값 검증
+	$(document).on("keyup", "#loginInputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	////////////////////////////////////////////////////////////////
+	
+	//공통-아이디 입력값 검증
+	$(document).on("keyup", "#inputId", function() {
+		
+		if (idRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자만 입력이 가능합니다.')
+		}
+		$(this).val( $(this).val().replace(idRegExp, ""));
+	});
+	
+	//공통-비밀번호 입력값 검증
+	$(document).on("keyup", "#inputPw", function() {
+		
+		if (pwRegExp.test($(this).val())) {
+			alert('숫자, 영어 대/소문자, 특수기호!@#$%^&*()_ 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(pwFormat, ""));
+	});
+	
+	//공통-인증키 입력값 검증
+	$(document).on("keyup", "#inputKey", function() {
+		
+		if (accountRegExp.test($(this).val())) {
+			alert('숫자 외 다른 문자열은 입력이 불가능합니다.');
+		}
+		
+		$(this).val( $(this).val().replace(accountRegExp, ""));
+	});
+	
+	//공통-핸드폰번호 입력값 검증
+	$(document).on("keyup", "#inputPhone", function() {
+		
+		if (phoneRegExp.test($(this).val())) {
+			alert('숫자만 입력이 가능합니다.')
+		}
+		
+		$(this).val( $(this).val().replace(/[^0-9]/g, "")
+				.replace(phoneRegExp2, "$1-$2-$3")
+				.replace("--", "-"));
+				
+				if ($(this).val().length >= 13) {
+					 $('#responseKeyBtn').attr('disabled', false);
+					 
+				} else {
+					 $('#responseKeyBtn').attr('disabled', true);
+				}
+	});
 	
 	function getNow() {
 		var now = new Date();
@@ -149,72 +276,97 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 		return year + month + day;
 	}
 	
-	
-	$("#inputCheckPw").on("keyup", function() {
-		if ($('#inputCheckPw').val() != '') {
-			if ($('#inputPw').val() != $(this).val()){
-				$('#viewCheckPw').text('비밀번호가 일치하지 않습니다');
-				$('#viewCheckPw').css('height', '50px');
-				$('#viewCheckPw').css('color', '#ff495a');
-				$('#data').data('checkPw', false);
-			} else {
-				$("#viewCheckPw").text('비밀번호가 일치합니다.');
-				$('#viewCheckPw').css('height', '50px');
-				$('#viewCheckPw').css('color', '#02bb18');
-				$('#data').data('checkPw', true);
-			} 
-		} else {
-			$('#viewCheckPw').css('height', '0px');
-			$('#viewCheckPw').css('color', '#ffffff');
-		}
-	});
-	
-	$('#inputId').blur(function() {
+	$("#signupInputCheckPw").on("keyup", function() {
 		
-		if ($('#inputId').val() != '') {
-			 var id = {
-					 "id" : $("#inputId").val()
-			 }
-			$.ajax({
-				dataType : 'json',
-				contentType : 'application/json; charset=utf-8;',
-				url : '${pageContext.request.contextPath}/user/check',
-				type : 'POST',
-				data : JSON.stringify(id),
-				success : function(result) {
-					if (result == true) {
-						$('#viewCheckId').css('height', '50px');
-						$("#viewCheckId").text('사용할 수 있는 아이디 입니다.');
-						$('#viewCheckId').css('color', '#02bb18');
-						$('#data').data("checkId", true);
-						
-					} else {
-						$('#inputId').val('');
-						$('#viewCheckId').css('height', '50px');
-						$('#viewCheckId').text('사용할 수 없는 아이디 입니다.');
-						$('#viewCheckId').css('color', '#ff495a');
-						$('#data').data("checkId", false);
-					}
-				}, error : function() {
-					console.log("에러");
-				}
-			});
+		if ($('#signupInputCheckPw').val() != '') {
+			
+			if ($('#signupInputCheckPw').val().length >= 7) {
+				
+				if ($('#signupInputPw').val() != $(this).val()){
+					$('#signupViewCheckPw').text('비밀번호가 일치하지 않습니다');
+					$('#signupViewCheckPw').css('height', '50px');
+					$('#signupViewCheckPw').css('color', '#ff495a');
+					$('#signupData').data('signupCheckPw', false);
+					
+				} else {
+					$("#signupViewCheckPw").text('비밀번호가 일치합니다.');
+					$('#signupViewCheckPw').css('height', '50px');
+					$('#signupViewCheckPw').css('color', '#02bb18');
+					$('#signupData').data('signupCheckPw', true);
+				} 
+				
+			} else {
+				$('#signupViewCheckPw').text('비밀번호의 길이는 8자 이상이어야 합니다.');
+				$('#signupViewCheckPw').css('height', '50px');
+				$('#signupViewCheckPw').css('color', '#ff495a');
+				$('#signupData').data('signupCheckPw', false);
+			}
+			
 		} else {
-			$('#viewCheckId').css('height', '0px');
-			$('#viewCheckId').css('color', '#ffffff');
+			$('#signupViewCheckPw').css('height', '0px');
+			$('#signupViewCheckPw').css('color', '#ffffff');
 		}
 	});
 	
-	 function receiveKey() {
-		 var inputPhone = $('#inputPhone').val();
-		 var inputId = $('#inputId').val();
+	//아이디 중복확인
+	$('#signupInputId').blur(function() {
+		
+		if ($('#signupInputId').val() != '') {
+			
+			if ($('#signupInputId').val().length >= 7) {
+				
+				var id = {
+						"id" : $('#signupInputId').val()
+				}
+				
+				$.ajax({
+					dataType : 'json',
+					contentType : 'application/json; charset=utf-8;',
+					url : '${pageContext.request.contextPath}/user/check',
+					type : 'POST',
+					data : JSON.stringify(id),
+					success : function(result) {
+						if (result == true) {
+							$('#signupViewCheckId').css('height', '50px');
+							$("#signupViewCheckId").text('사용할 수 있는 아이디 입니다.');
+							$('#signupViewCheckId').css('color', '#02bb18');
+							$('#signupData').data("signupCheckId", true);
+							
+						} else {
+							$('#signupViewCheckId').css('height', '50px');
+							$('#signupViewCheckId').text('중복된 아이디 입니다.');
+							$('#signupViewCheckId').css('color', '#ff495a');
+							$('#signupData').data("signupCheckId", false);
+						}
+					}, error : function() {
+						console.log("에러");
+					}
+				});
+				
+			} else {
+				$('#signupViewCheckId').css('height', '50px');
+				$('#signupViewCheckId').text('아이디는 최소 8자이상만 가능합니다.');
+				$('#signupViewCheckId').css('color', '#ff495a');
+				$('#signupData').data("signupCheckId", false);
+			}
+			
+		} else {
+			$('#signupViewCheckId').css('height', '0px');
+			$('#signupViewCheckId').css('color', '#ffffff');
+		}
+	});
+	
+	//회원가입-인증키 전송
+	 function signupReceiveKey() {
+		 var signupInputPhone = $('#signupInputPhone').val();
+		 var signupInputId = $('#signupInputId').val();
 		 
-		 if (inputId != '') {
+		 if (signupInputId != '') {
 			 
-			 if (inputPhone != '' && inputPhone.length >= 13) {
+			 if (signupInputPhone != '' && signupInputPhone.length >= 13) {
 				 var phoneData = {
-						 "id" : inputId,
-						 "phone" : inputPhone
+						 "id" : signupInputId,
+						 "phone" : signupInputPhone
 				 }
 				 
 
@@ -226,18 +378,18 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 					data : JSON.stringify(phoneData),
 					success : function(result) {
 						if (result == 1) {
-							$('#data').data('checkPhone', true);
-							$("#responseKeyBtn").attr("disabled", true);
-							$("#inputPhone").attr("disabled", true);
-						    $("#inputKey").attr("disabled", false);
+							$('#signupData').data("signupCheckPhone", true);
+							$("#signupResponseKeyBtn").attr("disabled", true);
+							$("#signupInputPhone").attr("disabled", true);
+						    $("#signupInputKey").attr("disabled", false);
 						} else if (result == 0){
-							$('#data').data('checkPhone', false);
+							$('#signupData').data('signupCheckPhone', false);
 							alert("아이디와 전화번호가 불일치 합니다.");
 						} else if (result == -2) {
-							$('#data').data('checkPhone', false);
+							$('#signupData').data('signupCheckPhone', false);
 							alert("이미 존재하는 전화번호 입니다.");
 						} else {
-							$('#data').data('checkPhone', false);
+							$('#signupData').data('signupCheckPhone', false);
 							alert("알 수 없는 오류");
 						}
 					}, error : function() {
@@ -245,45 +397,46 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 					}
 				});
 			 } else {
-				 alert('전화번호를 입력해 주세요.');
+				 alert('전화번호가 올바르지 않습니다.');
 			 }
 		 } else {
 			alert('아이디를 입력해 주세요.');
 		}
 	} 
 
-	 $("#inputKey").blur(function() {
-		if ($("#inputKey").val() != '') {
-			$("#responseKeyBtn").attr("disabled", true);
-		    $("#inputKey").attr("disabled", false);
+	//회언가입-인증키 인증
+	 $("#signupInputKey").blur(function() {
+		if ($("#signupInputKey").val() != '') {
+			$("#signupResponseKeyBtn").attr("disabled", true);
+		    $("#signupInputKey").attr("disabled", false);
 		    
 			$.ajax({
 				dataType : 'json',
 				contentType : 'application/json; charset=utf-8;',
 				url : '${pageContext.request.contextPath}/user/key/check',
 				type : 'POST',
-				data : JSON.stringify($("#inputKey").val()),
+				data : JSON.stringify($("#signupInputKey").val()),
 				success : function(result) {
 					if (result == true) {
-						$('#viewCheckKey').text('인증번호가 일치합니다.');
-						$('#viewCheckKey').css('height', '50px');
-						$('#viewCheckKey').css('color', '#02bb18');
-						$('#data').data("checkKey", true);
+						$('#signupViewCheckKey').text('인증번호가 일치합니다.');
+						$('#signupViewCheckKey').css('height', '50px');
+						$('#signupViewCheckKey').css('color', '#02bb18');
+						$('#signupData').data("signupCheckKey", true);
 						
 					} else {
-						$('#inputKey').val('');
-						$('#viewCheckKey').text('인증번호가 일치하지 않습니다');
-						$('#viewCheckKey').css('height', '50px');
-						$('#viewCheckKey').css('color', '#ff495a');
-						$('#data').data("checkKey", false);
+						$('#signupInputKey').val('');
+						$('#signupViewCheckKey').text('인증번호가 일치하지 않습니다');
+						$('#signupViewCheckKey').css('height', '50px');
+						$('#signupViewCheckKey').css('color', '#ff495a');
+						$('#signupData').data("signupCheckKey", false);
 					}
 				}, error : function() {
 					console.log("에러");
 				}
 			});
 		} else {
-			$('#viewCheckKey').css('height', '0px');
-			$('#viewCheckKey').css('color', '#ffffff');
+			$('#signupViewCheckKey').css('height', '0px');
+			$('#signupViewCheckKey').css('color', '#ffffff');
 		}
 	});
 	 
@@ -296,7 +449,7 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 	
 	function getPinAccount() {
 		
-		if ($('#inputAccountNo').val() != '') {
+		if ($('#signupInputAccountNo').val() != '') {
 			var data = {
 				    "Header": {
 				        "ApiNm": "OpenFinAccountDirect",
@@ -310,8 +463,8 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 				    },
 				    "DrtrRgyn" : "N",
 				    "BrdtBrno" : "20210520",
-				    "Bncd" : $("#inputBankNo").val(),
-				    "Acno" : $("#inputAccountNo").val()
+				    "Bncd" : $("#signupInputBankNo").val(),
+				    "Acno" : $("#signupInputAccountNo").val()
 				}
 			
 			$.ajax({
@@ -323,30 +476,30 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 				success : function(result) {
 					if (result.Rgno != null) {
 						$("#rgno").text(result.Rgno);
-						$("#viewCheckAccountNo").text('인증성공');
-						$('#viewCheckAccountNo').css('height', '50px');
-						$('#viewCheckAccountNo').css('color', '#02bb18');
-						checkPinAccount();
+						$("#signupViewCheckAccountNo").text('인증성공');
+						$('#signupViewCheckAccountNo').css('height', '50px');
+						$('#signupViewCheckAccountNo').css('color', '#02bb18');
+						signupCheckPinAccount();
 					} else {
-						$("#viewCheckAccountNo").text('계좌 인증실패');
-						$('#viewCheckAccountNo').css('height', '50px');
-						$('#viewCheckAccountNo').css('color', '#ff495a');
+						$("#signupViewCheckAccountNo").text('계좌 인증실패');
+						$('#signupViewCheckAccountNo').css('height', '50px');
+						$('#signupViewCheckAccountNo').css('color', '#ff495a');
 					}
 				}, error : function() {
 					console.log("에러");
-					$("#viewCheckAccountNo").text('계좌 인증실패');
-					$('#viewCheckAccountNo').css('height', '50px');
-					$('#viewCheckAccountNo').css('color', '#ff495a');
+					$("#signupViewCheckAccountNo").text('계좌 인증실패');
+					$('#signupViewCheckAccountNo').css('height', '50px');
+					$('#signupViewCheckAccountNo').css('color', '#ff495a');
 				}
 			});
 		} else {
-			$('#viewCheckAccountNo').css('height', '0px');
-			$('#viewCheckAccountNo').css('color', '#ffffff');
+			$('#signupViewCheckAccountNo').css('height', '0px');
+			$('#signupViewCheckAccountNo').css('color', '#ffffff');
 			alert('계좌번호를 입력해 주세요.');
 		}
 	}
 	
-	function checkPinAccount() {
+	function signupCheckPinAccount() {
 			var data = {
 				    "Header": {
 				        "ApiNm": "CheckOpenFinAccountDirect",
@@ -370,37 +523,37 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 				data : JSON.stringify(data),
 				success : function(result) {
 					if (result.FinAcno != null) {
-						$("#inputPinAccount").val(result.FinAcno);
+						$("#signupInputPinAccount").val(result.FinAcno);
 						signup();
 					} else {
-						$("#viewCheckAccountNo").text('핀 어카운트 발급 실패');
-						$('#viewCheckAccountNo').css('height', '50px');
-						$('#viewCheckAccountNo').css('color', '#ff495a');
+						$("#signupViewCheckAccountNo").text('핀 어카운트 발급 실패');
+						$('#signupViewCheckAccountNo').css('height', '50px');
+						$('#signupViewCheckAccountNo').css('color', '#ff495a');
 						}
 					
 				}, error : function() {
-					$("#viewCheckAccountNo").text('핀 어카운트 발급 실패');
-					$('#viewCheckAccountNo').css('height', '50px');
-					$('#viewCheckAccountNo').css('color', '#ff495a');
+					$("#signupViewCheckAccountNo").text('핀 어카운트 발급 실패');
+					$('#signupViewCheckAccountNo').css('height', '50px');
+					$('#signupViewCheckAccountNo').css('color', '#ff495a');
 				}
 			});
 	}
 	 
 	function signupSubmit() {
-		var phone = $('#data').data('checkPhone');
-		var key = $('#data').data('checkKey');
-		var id = $('#data').data('checkId');
-		var pw = $('#data').data('checkPw');
+		var phone = $('#signupData').data('signupCheckPhone');
+		var key = $('#signupData').data('signupCheckKey');
+		var id = $('#signupData').data('signupCheckId');
+		var pw = $('#signupData').data('signupCheckPw');
 		
-		var no = $('#data').data('checkAccountNo');
-		var pin = $('#data').data('checkPinAccount');
+		var no = $('#signupData').data('signupCheckAccountNo');
+		var pin = $('#signupData').data('signupCheckPinAccount');
 		
 		if (id) {
 			if (pw) {
 				if (phone) {
 					if (key) {
 						/* 완료 누르면 계좌인증하고 핀어카운트받고 다 되면 서브밋 */
-						$("#inputPhone").attr("disabled", false);
+						$("#signupInputPhone").attr("disabled", false);
 						getPinAccount();
 					} else {
 						alert('인증번호를 입력해 주세요.');
@@ -418,12 +571,12 @@ $(document).on("keyup", "#inputPhone", function() {$(this).val( $(this).val().re
 	
 	function signup() {
 		var data = {
-				"id" : $('#inputId').val(),
-				"pw" : $('#inputPw').val(),
-				"phone" : $('#inputPhone').val(),
-				"bankNo" : $('#inputBankNo').val(),
-				"accountNo" : $('#inputAccountNo').val(),
-				"pinAccount" : $('#inputPinAccount').val(),
+				"id" : $('#signupInputId').val(),
+				"pw" : $('#signupInputPw').val(),
+				"phone" : $('#signupInputPhone').val(),
+				"bankNo" : $('#signupInputBankNo').val(),
+				"accountNo" : $('#signupInputAccountNo').val(),
+				"pinAccount" : $('#signupInputPinAccount').val(),
 				"division" : "M",
 				"email" : ""
 		}

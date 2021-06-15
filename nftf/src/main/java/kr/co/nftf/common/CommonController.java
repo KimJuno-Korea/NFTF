@@ -19,7 +19,6 @@ import kr.co.nftf.user.User;
 @RestController
 public class CommonController {
 	public static final ModelAndView REDIRECT_MAIN = new ModelAndView(new RedirectView("/index"));
-	public static final ModelAndView REDIRECT_LOGIN = new ModelAndView(new RedirectView("/login"));
 	public static final ModelAndView REDIRECT_LOGOUT = new ModelAndView(new RedirectView("/logout"));
 	
 	@Autowired
@@ -41,8 +40,10 @@ public class CommonController {
 	@PostMapping(value="/login", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public boolean login(@RequestBody User user) {
 		try {
-			if (commonServiceImpl.login(user)) {
-				return true;
+			if (user != null) {
+				if (commonServiceImpl.login(user)) {
+					return true;
+				}
 			}
 		} catch(Exception exception) {
 			exception.printStackTrace();
@@ -61,5 +62,15 @@ public class CommonController {
 			exception.printStackTrace();
 		}
 		return REDIRECT_MAIN;
+	}
+	
+	//웰컴 페이지
+	@GetMapping("/")
+	public ModelAndView welcome() {
+		try {
+			return REDIRECT_MAIN;
+		} catch(Exception exception) {
+			return REDIRECT_MAIN;
+		}
 	}
 }

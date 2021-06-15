@@ -27,16 +27,19 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<div class="col-lg-10 column">
-				 		<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data">
+				 		<form action="<%=request.getContextPath()%>/board" method="post" enctype="multipart/form-data" name="boardForm"
+				 		data-parsley-validate novalidate>
 				 		<div class="padding-left">
 					 		<div class="manage-jobs-sec">
 						 		<div class="resumeadd-form">
 						 			<div class="row">
 						 				<div class="col-lg-12">
 					 						<span class="pf-title">제목</span>
+					 						<span id="titleValid" style="color: red;"></span>
 					 						<div class="pf-field">
 					 							<input type="text" name="title" placeholder="제목을 입력해주세요" />
 					 						</div>
+					 						
 					 					</div>
 					 					
 					 					<input type="hidden" name="userId" value="${sessionScope.id }" />
@@ -49,6 +52,7 @@
 													<option value="S">판매</option>
 													<option value="B">구매</option>
 												</select>
+												<div id="divisionValid" style="color: red;"></div>
 											</div>
 										</div>
 										
@@ -61,17 +65,20 @@
 													<option value="P">택배</option>
 													<option value="D">직거래</option>
 												</select>
+												<div id="tradeWayValid" style="color: red;"></div>
 											</div>
 					 					</div>
 					 					
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">가격</span>
+					 						<span id="priceValid" style="color: red;"></span>
 					 						<div class="pf-field">
-					 							<input type="text" name="price" placeholder="가격을 입력해주세요.">
+					 							<input type="text" name="price" placeholder="가격을 입력해주세요." numberOnly>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">내용</span>
+					 						<span id="contentValid" style="color: red;"></span>
 					 						<div class="pf-field">
 					 							<textarea name="content" placeholder="내용을 입력해주세요"></textarea>
 					 						</div>
@@ -106,7 +113,7 @@
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
-					 						 <button type="submit">확인</button>
+					 						 <button type="button" onClick="validCheck()">확인</button>
 					 					</div>
 					 				</div>
 						 		</div><!-- resumeadd-form -->
@@ -122,6 +129,64 @@
 </body>
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
+$("input:text[numberOnly]").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^0-9]/g,""));
+});
+function validCheck(){
+	var msg = "";
+	var titleValid = document.getElementById('titleValid');
+	var divisionValid = document.getElementById('divisionValid');
+	var tradeWayValid = document.getElementById('tradeWayValid');
+	var priceValid = document.getElementById('priceValid');
+	var contentValid = document.getElementById('contentValid');
+	
+	if(document.boardForm.title.value==''){
+		msg = "※제목은 필수 입력 항목입니다.";
+		titleValid.innerHTML = msg;
+		return;
+	}else if(document.boardForm.title.value!=''){
+		titleValid.innerHTML = "";
+	}
+	
+	if(document.boardForm.division.value==''){
+		msg = "※거래 구분은 필수 선택 항목입니다.";
+		divisionValid.innerHTML = msg;
+		return;
+	}else if(document.boardForm.division.value!=''){
+		divisionValid.innerHTML = "";
+	}
+	
+	if(document.boardForm.tradeWay.value==''){
+		msg = "※거래 방식은 필수 선택 항목입니다.";
+		tradeWayValid.innerHTML = msg;
+		return;
+	}else if(document.boardForm.tradeWay.value!=''){
+		tradeWayValid.innerHTML = "";
+	}
+	
+	if(document.boardForm.price.value==''){
+		msg = "※가격은 필수 입력 항목입니다.";
+		priceValid.innerHTML = msg;
+		return;
+	}else if(document.boardForm.price.value!=''){
+		priceValid.innerHTML = "";
+	}
+	
+	if(document.boardForm.content.value==''){
+		msg = "※내용은 필수 입력 항목입니다.";
+		contentValid.innerHTML = msg;
+		return;
+	}else if(document.boardForm.content.value!=''){
+		contentValid.innerHTML = "";
+	}
+	
+	if(document.boardForm.file.value==''){
+		alert("사진은 최소 1장을 첨부해야합니다.");
+		return;
+	}
+	
+	document.registForm.submit();
+}
 	$("#upload1").change(
 			function() {
 				if (this.files && this.files[0]) {
