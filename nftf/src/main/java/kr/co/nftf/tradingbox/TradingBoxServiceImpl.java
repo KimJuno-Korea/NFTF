@@ -48,6 +48,12 @@ public class TradingBoxServiceImpl implements TradingBoxService {
 	public void editTradingBox(TradingBox tradingBox) throws Exception {
 		tradingBoxMapper.update(tradingBox);
 	}
+	
+	@Override
+	public void editTradingBoxForRegist(TradingBox tradingBox) throws Exception {
+		tradingBoxMapper.registUpdate(tradingBox);
+	}
+	
 
 	@Override
 	public void deleteTradingBox(TradingBox tradingBox) throws Exception {
