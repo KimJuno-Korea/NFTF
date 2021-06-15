@@ -84,20 +84,19 @@
             <if test="price != null">
                 PRICE = #{price},
             </if>
-            <if test="buyerId != ''">
+            <if test="buyerId != '' and buyerId != null">
                 BUYER_ID = #{buyerId},
             </if>
-            <if test="sellerId != ''">
+            <if test="sellerId != '' and sellerId != null">
                 SELLER_ID = #{sellerId},
             </if>
-            <if test="status != ''">
+            <if test="status != '' and status != null">
                 STATUS = #{status},
             </if>
-            <if test="tradeDate != ''">
+            <if test="tradeDate != '' and tradeDate != null">
                 TRADE_DATE = #{tradeDate},
             </if>
         </set>
-        WHERE
-        	BOARD_ID = #{boardNo}
+        WHERE BOARD_NO = #{boardNo}
     </update>
 </mapper>
