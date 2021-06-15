@@ -84,9 +84,6 @@
             <if test="price != null">
                 PRICE = #{price},
             </if>
-            <if test="price != ''">
-                PRICE = #{price},
-            </if>
             <if test="buyerId != ''">
                 BUYER_ID = #{buyerId},
             </if>
