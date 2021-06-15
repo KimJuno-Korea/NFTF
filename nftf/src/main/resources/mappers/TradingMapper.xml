@@ -61,7 +61,7 @@
     </select>
     
     <insert id="insert" parameterType="kr.co.nftf.trading.Trading">
-    	INSERT INTO user (
+    	INSERT INTO trading (
             BOARD_NO,
             PRICE,
             BUYER_ID,
@@ -79,7 +79,7 @@
     </insert>
     
     <update id="update" parameterType="kr.co.nftf.trading.Trading">
-        UPDATE cat
+        UPDATE trading
         <set>
             <if test="price != null">
                 PRICE = #{price},
