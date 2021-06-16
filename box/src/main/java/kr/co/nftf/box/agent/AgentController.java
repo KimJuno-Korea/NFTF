@@ -1,13 +1,14 @@
 package kr.co.nftf.box.agent;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -164,6 +165,32 @@ public class AgentController {
 		mav = new ModelAndView("/successreceive");
 		
 		return mav;
+	}
+	
+	// 물품 정보 보기
+	@GetMapping("/goodsinfo/form")
+	public ModelAndView goodsInfoForm(TradingBox tradingBox) throws JsonSyntaxException, IOException {
+		ModelAndView mav;
+		mav = new ModelAndView("/goodsinfoform");
+		mav.addObject("tradingBoxList", agentServiceImpl.selectTradingBoxList(tradingBox));
+		
+		return mav;
+	}
+	
+	@GetMapping("/goods/qr/{boardNo}")
+	public void createLoginQR(@PathVariable String boardNo, HttpServletResponse response) {
+		try {
+			
+			if (boardNo != null) {
+				byte[] file = this.agentServiceImpl.createBoardQR(boardNo);
+				if (file != null) {
+					response.setContentType("image/png");
+					response.getOutputStream().write(file);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*

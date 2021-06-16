@@ -1,5 +1,7 @@
 package kr.co.nftf.box.agent;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -37,6 +46,8 @@ public class AgentServiceImpl implements AgentService {
 	private String agentUrl;
 	@Value("${branchCode}")
 	private String branchCode;
+	@Value("${nftfServerBoardUrl}")
+	private String serverBoardUrl;
 
 	// 회원 검증
 	@Override
@@ -212,5 +223,23 @@ public class AgentServiceImpl implements AgentService {
 			return true;
 		}
 		return false;
+	}
+	
+	//게시글 QR 생성
+	@Override
+	public byte[] createBoardQR(String boardNo)	
+				throws WriterException, IOException {
+		StringBuilder boardUrl = new StringBuilder();
+		
+		boardUrl.append(serverBoardUrl)
+				.append("/" + boardNo);
+		
+		BitMatrix bitMatrix = new QRCodeWriter().encode(boardUrl.toString(), BarcodeFormat.QR_CODE, 350, 350); // 텍스트, 바코드 포맷,가로,세로
+		BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0x00000000, 0xFFFFFFFF));
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(qrImage, "png", baos);
+		
+		byte[] file = baos.toByteArray();
+		return file;
 	}
 }
