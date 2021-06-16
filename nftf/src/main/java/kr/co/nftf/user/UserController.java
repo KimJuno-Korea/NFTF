@@ -68,7 +68,7 @@ public class UserController {
 		return false;
 	}
 
-	// 아이디 찾기 폼 **
+	// 아이디 찾기 폼
 	@GetMapping("/id/form")
 	public ModelAndView findIdForm() {
 
@@ -78,7 +78,7 @@ public class UserController {
 		return new ModelAndView("/user/id/find");
 	}
 
-	// 아이디 찾기 **
+	// 아이디 찾기
 	@PostMapping(value = "/id", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User findId(@RequestBody User user) {
 		try {
@@ -93,7 +93,7 @@ public class UserController {
 		return null;
 	}
 
-	// 비밀번호 찾기 폼 **
+	// 비밀번호 찾기 폼
 	@GetMapping("/password/form")
 	public ModelAndView findPasswordForm() {
 
@@ -103,7 +103,7 @@ public class UserController {
 		return new ModelAndView("/user/password/find");
 	}
 
-	// 비밀번호 찾기 **
+	// 비밀번호 찾기
 	@PostMapping("/password")
 	public ModelAndView findPassword(User user) {
 		try {
@@ -319,7 +319,7 @@ public class UserController {
 	 * (Exception exception) { exception.printStackTrace(); } return
 	 * CommonController.REDIRECT_MAIN; }
 	 */
-
+	
 	// 회원 탈퇴
 	@DeleteMapping("/user/{id}")
 	public ModelAndView withdrawal(User user) {
@@ -360,10 +360,6 @@ public class UserController {
 	private void responseKey(User user) {
 		httpSession.setAttribute("key", "");
 		try {
-//			StringBuilder key = new StringBuilder();
-//			for (int i = 0 ; i < 6 ; i++) {
-//				key.append(((int)(Math.random()*10))+"");
-//			}
 			String key = userServiceImpl.sendKey(user.getPhone());
 			
 			System.out.println("인증키 " + key);

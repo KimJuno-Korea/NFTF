@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,9 @@ public class AgentController {
 	
 	@Autowired
 	private PaymentService paymentServiceImpl;
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	// 회원 검증
 	@PostMapping(value="/agent/authentication", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -152,14 +157,19 @@ public class AgentController {
 			board.setNo(tradingBox.getBoardNo());
 			board.setStatus('S');
 			boardServiceImpl.boardEdit(board);
+			board = boardServiceImpl.boardSelect(board);
 			
 			tradingBox.setBoardNo(0);
 			tradingBox.setStatus('F');
 			tradingBox.setPrice(0);
 			tradingBoxServiceImpl.editTradingBoxForRegist(tradingBox);
 			
+			User user = new User();
+			user.setId(httpSession.getId());
+			user = userServiceImpl.selectUser(user);
+			
 			//pay 메소드 
-			//paymentServiceImpl.pay(null, board);
+			paymentServiceImpl.pay(user, board);
 			
 			result.put("result", true);
 		} catch (Exception e) {
