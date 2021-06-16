@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.nftf.branch.Branch;
 import kr.co.nftf.branch.BranchService;
 import kr.co.nftf.photo.Photo;
 import kr.co.nftf.photo.PhotoService;
 import kr.co.nftf.photo.PhotoUtil;
 import kr.co.nftf.reply.Reply;
 import kr.co.nftf.reply.ReplyService;
+import kr.co.nftf.tradingbox.TradingBox;
+import kr.co.nftf.tradingbox.TradingBoxService;
 import kr.co.nftf.user.User;
 import kr.co.nftf.user.UserService;
 
@@ -43,6 +45,12 @@ public class BoardController {
 	private ReplyService replyServiceImpl;
 	
 	@Autowired
+	private TradingBoxService tradingBoxServiceImpl;
+	
+	@Autowired
+	private BranchService branchServiceImpl;
+	
+	@Autowired
 	private HttpSession session;
 	
 	@Value("${photo.path}")
@@ -54,12 +62,9 @@ public class BoardController {
 		List<Board> boardList = new ArrayList<>();
 		Paging paging = new Paging();
 		int count = 0;
-		System.out.println("게시글 목록 조회");
+		
 		try {
 			count = boardServiceImpl.boardCount();
-			/*
-			 * if (num == null) { num = "1"; }
-			 */
 			paging.setNum(Integer.valueOf(num));
 			paging.setCount(boardServiceImpl.boardCount());
 
@@ -289,5 +294,25 @@ public class BoardController {
 		}
 
 		return modelAndView;
+	}
+	
+	@PostMapping("/branchName")
+	public String getBranchNameByBoardNo(Board board) {
+		TradingBox tradingBox = new TradingBox();
+		Branch branch = new Branch();
+		
+		try {
+			tradingBox.setBoardNo(board.getNo());
+			tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
+			branch.setCode(tradingBox.getBranchCode());
+			branch = branchServiceImpl.selectBranch(branch);
+
+		} catch (NullPointerException e) {
+			branch.setName("거래함에 등록되지 않았습니다.");
+		} catch (Exception e) {
+			branch.setName("오류 발생");
+		}
+		
+		return branch.getName();
 	}
 }

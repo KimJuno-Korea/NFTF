@@ -113,7 +113,12 @@
 									<h3>
 										<a href="/board/${list.no}">${list.title }</a>
 									</h3>
-									<span><i class="la la-map-marker"></i>천안지점</span>
+									<c:if test="${list.tradeWay eq 'T' }">
+										<span><i class="la la-map-marker"></i>
+										<a id="findBranchName_${list.no }" onClick="branchInfo(${list.no})"><b>거래함 위치 찾기</b></a>
+											<span id="branchName_${list.no }"></span>
+										</span>
+									</c:if><!-- 거래방식이 거래함일 경우만 표시 -->
 									<c:choose>
 										<c:when test="${list.division eq 'S'}">
 											<span  style="color:#4381ff"><fmt:formatNumber value="${list.price}" pattern="#,###,###"/> ￦</span>
@@ -174,4 +179,18 @@
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 
+<script>
+function branchInfo(boardNo) {
+	var no = boardNo;
+	$.ajax({
+		url :'/branchName',
+		type : 'post',
+		data : {'no':no},
+		success : function(data) {
+			$("#branchName_" + no).html(data);
+			document.getElementById("findBranchName_" + no).style.display="none";
+		}
+	});
+}
+</script>
 </html>
