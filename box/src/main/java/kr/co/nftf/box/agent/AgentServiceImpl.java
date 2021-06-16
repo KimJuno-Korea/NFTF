@@ -92,18 +92,18 @@ public class AgentServiceImpl implements AgentService {
 		OkHttpClient client = new OkHttpClient.Builder().readTimeout(25, TimeUnit.SECONDS).build();
 
 		Response response;
-		/*
-		 * response = client.newCall(request).execute(); responseResult =
-		 * gson.fromJson(response.body().string(), responseResult.getClass());
-		 * 
-		 * 
-		 * while(true) { if (responseResult.get("result")) { request = new
-		 * Request.Builder() .get() .url(agentUrl + "/matrix/" + tradingBox.getPrice())
-		 * .build(); client = new OkHttpClient(); response =
-		 * client.newCall(request).execute();
-		 * 
-		 * break; } }
-		 */
+		
+		  response = client.newCall(request).execute(); responseResult =
+		  gson.fromJson(response.body().string(), responseResult.getClass());
+		  
+		  
+		  while(true) { if (responseResult.get("result")) { request = new
+		  Request.Builder() .get() .url(agentUrl + "/matrix/" + tradingBox.getPrice())
+		  .build(); client = new OkHttpClient(); response =
+		  client.newCall(request).execute();
+		  
+		  break; } }
+		 
 		 
 
 		// 잠금 해제 결과가 true이면 물품 정보 등록 요청을 보낸다.
@@ -133,16 +133,16 @@ public class AgentServiceImpl implements AgentService {
 		OkHttpClient client = new OkHttpClient.Builder().readTimeout(25, TimeUnit.SECONDS).build();
 
 		Response response;
-		/*
-		 * response = client.newCall(request).execute(); responseResult =
-		 * gson.fromJson(response.body().string(), responseResult.getClass());
-		 * 
-		 * while (true) { if (responseResult.get("result")) { request = new
-		 * Request.Builder().get().url(agentUrl + "/matrix/" + " ").build(); client =
-		 * new OkHttpClient(); response = client.newCall(request).execute();
-		 * 
-		 * break; } }
-		 */
+		
+		  response = client.newCall(request).execute(); responseResult =
+		  gson.fromJson(response.body().string(), responseResult.getClass());
+		  
+		  while (true) { if (responseResult.get("result")) { request = new
+		  Request.Builder().get().url(agentUrl + "/matrix/" + " ").build(); client =
+		  new OkHttpClient(); response = client.newCall(request).execute();
+		  
+		  break; } }
+		 
 
 		// 잠금 해제 결과가 true이면 물품 정보 등록 요청을 보낸다.
 		// 물품 정보 등록
