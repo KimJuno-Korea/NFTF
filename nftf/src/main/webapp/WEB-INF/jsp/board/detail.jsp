@@ -206,39 +206,10 @@
 			</div>
 		</div>
 	</section>
-	<!-- <div class="modal login" id="imageModal" 
-			tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-				</div>
-				<div class="modal-body">
-					<section>
-					<div id="data"></div>
-					<div class="row">
-						<div class="col-12">
-							<div class="account-popup">
-								<span class="close-popup"  id="closeImageBtn">
-									<i class="la la-close"></i>
-								</span>
-								<h4>로그인</h4>
-							</div>
-						</div>
-					</div>
-					</section>
-				</div>
-			</div>
-		</div>
-	</div> -->
 
 <jsp:include page="/WEB-INF/jsp/common/bottom.jsp" />
 <script>
 
-	function boardPrice(price){
-		var regexp = /\B(?=(\d{3})+(?!\d))/g;
-		return price.toString().replace(regexp, ',');
-	}
-	
 	function del(formName,boardNo) {
 		var chk = confirm("해당 게시글을 삭제하시겠습니까?");
 		if (chk) {

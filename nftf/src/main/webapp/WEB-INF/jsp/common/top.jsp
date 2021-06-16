@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
  <!-- HTTP에서 HTTPS로 마이그레이션하려는 도메인 example.com에 위의 헤더가 설정되어 있으면 비 탐색적인 안전하지 않은 리소스 요청이 자동으로 업그레이드됩니다 (타사 및 타사 요청). -->
 <meta charset="UTF-8">
 <title>Trading 365</title>  
@@ -16,7 +16,7 @@
 	<meta name="author" content="CreativeLayers">
 
 	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css" />
+	<link rel="stylesheet" type="text/css" href="${request.getContextPath() }/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/icons.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />

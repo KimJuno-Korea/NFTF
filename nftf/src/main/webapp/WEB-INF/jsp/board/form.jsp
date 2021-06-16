@@ -180,12 +180,12 @@ function validCheck(){
 		contentValid.innerHTML = "";
 	}
 	
-	if(document.boardForm.file.value==''){
+	if(document.boardForm.file[0].value==''){
 		alert("사진은 최소 1장을 첨부해야합니다.");
 		return;
 	}
 	
-	document.registForm.submit();
+	document.boardForm.submit();
 }
 	$("#upload1").change(
 			function() {
