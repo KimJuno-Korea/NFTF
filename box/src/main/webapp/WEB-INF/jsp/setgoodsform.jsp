@@ -32,7 +32,7 @@
     		<input id="boardPrice" type="hidden" name="price" />
     		<input id="boardTitle" type="hidden" name="boardTitle" /> 
     		
-            <input type="button" class="button back__button" value="처음으로"/>
+            <input type="button" class="button back__button" onclick="location.href='./index'" value="처음으로"/>
 		 	<input type="submit" class="button confirm__button" value="선택완료" />
 		</form>
 </body>

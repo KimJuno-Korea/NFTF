@@ -9,7 +9,7 @@
 		<result column="NO" property="no" />
 		<result column="BOARD_NO" property="boardNo" />
 		<result column="STATUS" property="status" />
-		<result column="AD_WORD" property="adWord" />
+		<result column="PRICE" property="price" />
 		<result column="AUTH_KEY" property="authKey" />
 		<result column="AUTH_KEY_DATE" property="authKeyDate" />
 	</resultMap>
@@ -28,8 +28,8 @@
 			<if test="status != null and status != ''">
 				AND STATUS = #{status}
 			</if>
-			<if test="adWord != null and adWord != ''">
-				AND AD_WORD = #{adWord}
+			<if test="price != null and price != 0">
+				AND PRICE = #{price}
 			</if>
 			<if test="authKey != null and authKey != ''">
 				AND AUTH_KEY = #{authKey}
@@ -47,7 +47,7 @@
 		#{no},
 		#{boardNo},
 		#{status},
-		#{adWord},
+		#{price},
 		#{authKey},
 		#{authKeyDate}
 		)
@@ -62,8 +62,8 @@
 			<if test="status != null">
 				STATUS = #{status},
 			</if>
-			<if test="adWord != null">
-				AD_WORD = #{adWord},
+			<if test="price != 0">
+				PRICE = #{price},
 			</if>
 			<if test="authKey != null">
 				AUTH_KEY = #{authKey},
@@ -85,13 +85,38 @@
 		</where>
 	</update>
 	
+		<update id="registUpdate" parameterType="kr.co.nftf.tradingbox.TradingBox">
+		UPDATE TRADING_BOX
+		<set>
+				PRICE = #{price},
+				AUTH_KEY = #{authKey},
+			<if test="boardNo != null">
+				BOARD_NO = #{boardNo},
+			</if>
+			<if test="status != null">
+				STATUS = #{status},
+			</if>
+			<if test="authKeyDate != null">
+				AUTH_KEY_DATE = #{authKeyDate},
+			</if>
+		</set>
+		<where>
+			<if test="branchCode != null and branchCode != ''">
+				AND BRANCH_CODE = #{branchCode}
+			</if>
+			<if test="no != 0">
+				AND NO = #{no}
+			</if>
+		</where>
+	</update>
+	
 	<select	id="select" parameterType="kr.co.nftf.tradingbox.TradingBox" resultMap="tradingBoxResultMap">
 		SELECT
 			BRANCH_CODE,
 			NO,
 			BOARD_NO,
 			STATUS,
-			AD_WORD,
+			PRICE,
 			AUTH_KEY,
 			AUTH_KEY_DATE
 		FROM TRADING_BOX
@@ -104,7 +129,7 @@
 			NO,
 			BOARD_NO,
 			STATUS,
-			AD_WORD,
+			PRICE,
 			AUTH_KEY,
 			AUTH_KEY_DATE
 		FROM TRADING_BOX

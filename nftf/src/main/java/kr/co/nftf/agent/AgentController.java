@@ -1,6 +1,7 @@
 package kr.co.nftf.agent;
 
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,14 @@ public class AgentController {
 	// 게시글 목록 조회
 	@GetMapping(value="/agent/{userId}/board")
 	public List<Board> getBoardList (Board board) throws Exception {
+		// 판매중인
+		board.setDivision('S');
+		// 거래방식이 거래함인
+		board.setTradeWay('T');
+		// 거래 중인
+		board.setStatus('M');
 		
+		// 게시글 목록을 조회하여 반환한다.
 		return boardServiceImpl.boardList(board);
 	}
 	
@@ -97,17 +105,28 @@ public class AgentController {
 		Board board = new Board();
 		Trading trading = new Trading();
 		try {	
+				// 거래함 사용중으로 변경
 				tradingBox.setStatus('T');
+				tradingBoxServiceImpl.editTradingBoxForRegist(tradingBox);
+				
+				// 특정 개시글 거래상태 결제 대기로 변경
+				/*
+				 * board.setNo(tradingBox.getBoardNo()); board.setStatus('M');
+				 * boardServiceImpl.boardEdit(board);
+				 */
+				
+				// 거래 정보 등록
+				// 거래 상태 거래중(M)으로 변경
 				board.setNo(tradingBox.getBoardNo());
-				board.setTradeWay('W');
-				board.setStatus('W');
+				board = boardServiceImpl.boardSelect(board);
+				
+				trading.setStatus('M');
 				trading.setBoardNo(tradingBox.getBoardNo());
-				trading.setStatus('T');
+				trading.setPrice(tradingBox.getPrice());
+				trading.setSellerId(board.getUserId());
+				trading.setTradeDate(LocalDate.now());
+				tradingServiceImpl.registTrading(trading);
 				
-				
-				tradingBoxServiceImpl.editTradingBox(tradingBox);
-				boardServiceImpl.boardEdit(board);
-				tradingServiceImpl.editTrading(trading);
 				//tradingBoxServiceImpl
 				result.put("result", true);
 		} catch (Exception e) {
@@ -124,15 +143,23 @@ public class AgentController {
 		Board board = new Board();
 		Trading trading = new Trading();
 		try {
-			tradingBox.setStatus('F');
-			board.setNo(tradingBox.getBoardNo());
-			board.setStatus('S');
+			// 거래함 사용 가능으로 상태변경
+			tradingBox = tradingBoxServiceImpl.selectTradingBox(tradingBox);
 			trading.setStatus('S');
 			trading.setBoardNo(tradingBox.getBoardNo());
-			
-			tradingBoxServiceImpl.editTradingBox(tradingBox);
-			boardServiceImpl.boardEdit(board);
 			tradingServiceImpl.editTrading(trading);
+			
+			board.setNo(tradingBox.getBoardNo());
+			board.setStatus('S');
+			boardServiceImpl.boardEdit(board);
+			
+			tradingBox.setBoardNo(0);
+			tradingBox.setStatus('F');
+			tradingBox.setPrice(0);
+			tradingBoxServiceImpl.editTradingBoxForRegist(tradingBox);
+			
+			//pay 메소드 
+			//paymentServiceImpl.pay(null, board);
 			
 			result.put("result", true);
 		} catch (Exception e) {

@@ -47,12 +47,12 @@
 											<tr>
 												<td><c:out value="${tradingBox.no}" /></td>
 												
-												<td><a href="/board/${tradingBox.boardNo}">${boardList[status.index].title}</a></td>
+												<td><a href="/board/${tradingBox.boardNo}">${boardList.get(status.index).title}</a></td>
 												
-												<c:if test="${tradingBox.status eq 'N'}">
+												<c:if test="${tradingBox.status eq 'F'}">
 													<td style="color:green">미사용중</td>
 												</c:if>
-												<c:if test="${tradingBox.status eq 'Y'}">
+												<c:if test="${tradingBox.status eq 'T'}">
 													<td style="color:red">사용중</td>
 												</c:if>
 											</tr>

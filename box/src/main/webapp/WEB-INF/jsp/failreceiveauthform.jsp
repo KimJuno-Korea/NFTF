@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
     <div class="common__top">
@@ -14,7 +15,7 @@
             <img src="${pageContext.request.contextPath}/images/qr_fail_authkey.png"/>
     </div>
     <div class="common__bottom">
-            <input type="button" class="button back__button" onclick="location.href='../index'" value="처음으로"/>
+            <input type="button" class="button back__button" onclick="location.href='./index'" value="처음으로"/>
     </div>
 </body>
 </html>

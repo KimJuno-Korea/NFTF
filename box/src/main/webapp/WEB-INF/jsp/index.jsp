@@ -19,8 +19,10 @@
 	            <a href="./receiveauth/form"> <p>물품 수령</p> </a>
 	        </div>
 	    </div>
-	    <div class="index__bottom">
-	        <p>※ 서비스를 이용하시려면 업무를 선택해주세요.</p>
-	    </div>
+    <div class="index__bottom">
+        <div  class="goods__info">
+            <a href="./goodsinfo/form"> <p>물품 정보 보기</p></a>
+        </div>
+    </div>
 	</body>
 </html>
