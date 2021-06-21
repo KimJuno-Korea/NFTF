@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService {
 	
 
 	
-	//문자전송 api는 뭘로해야할지 최대싼게 알리고꺼 회의해보자 카카오 알림으로할지
 	@Override
 	public String sendKey(String phone) throws Exception {
 		String apiKey = "NCSJ2KWFKDLXRVBL";

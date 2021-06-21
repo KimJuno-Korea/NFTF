@@ -311,6 +311,7 @@ public class BoardController {
 			branch.setName("거래함에 등록되지 않았습니다.");
 		} catch (Exception e) {
 			branch.setName("오류 발생");
+			e.printStackTrace();
 		}
 		
 		return branch.getName();
